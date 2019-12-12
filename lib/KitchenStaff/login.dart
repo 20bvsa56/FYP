@@ -1,35 +1,30 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
-  Home({Key key}) : super(key: key);
+class Login extends StatefulWidget {
+  Login({Key key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _LoginState createState() => _LoginState();
 }
 
-class _HomeState extends State<Home> {
-
-  // var tables = ['Table No.','Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6'];
-  // var currentTableSelected = 'Table No.';
-  String dropdownValue = 'Table No.';
-
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-  return MaterialApp(
-    home:Scaffold(
-      appBar: AppBar(
-           actions: <Widget>[
+    return MaterialApp(
+      home:Scaffold(
+       appBar: AppBar(
+          actions: <Widget>[
             // action button
             IconButton(
-              icon: Icon(Icons.person_pin),
+              icon: Icon(Icons.kitchen),
               onPressed: () {},
             ),
            ],
           backgroundColor: Colors.black,
-          title: Text('Welcome to Tastyorama'),
+          title: Text('Login to Tastyorama Cookery'),
           centerTitle: true,
-      ),
-      body: Stack(
+       ),
+       body: Stack(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
@@ -74,72 +69,51 @@ class _HomeState extends State<Home> {
                         fontSize: 20.0,
                       ),
                     ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    DropdownButton<String>(
-                        value: dropdownValue,
-                        icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 30,
-                        elevation: 16,
-                        style: TextStyle(
-                          color: Colors.black
-                        ),
-                        underline: Container(
-                          height: 3,
-                          color: Colors.black,
-                        ),
-                        onChanged: (String newValue) {
-                          setState(() {
-                            dropdownValue = newValue;
-                          });
-                        },
-                        items: <String>['Table No.', 'Table 1', 'Table 2', 'Table 3','Table 4', 'Table 5']
-                        //.map iterates through the list of dropdown menu
-                          .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          })
-                          .toList(),
-                    ),
-                  const SizedBox(height: 30),
-                    RaisedButton(
-                      onPressed: () {
-                        // Navigate to the main view screen using a named route '/view'.
-                         Navigator.pushNamed(context, '/view');
-                      },
-                      textColor: Colors.black,
-                      // padding: const EdgeInsets.all(0.0),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color.fromARGB(20,18,65,100),
-                              Color.fromARGB(94,94,103,100),
-                              Color.fromARGB(14,52,60,100),
-                            ],
-                            
-                          ),
-                        ),
-                        padding: const EdgeInsets.all(10.0),
-                        child: const Text(
-                          "Proceed",
-                          style: TextStyle(
-                            fontFamily: 'Rancho-Regular',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
                     
-                    const SizedBox(height: 10),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical:20,horizontal:50),
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          decoration: const InputDecoration(
+                          icon: Icon(Icons.perm_identity, size: 25),
+                          hintText: 'Enter your username',
+                          labelText: 'username',
+                        ),
+                        onSaved: (String value) {
+                        // This optional block of code can be used to run
+                        // code when the user saves the form.
+                        },
+                        validator: (String value) {
+                            return value.contains('@') ? 'Incorrect username. Try again' : null;
+                        },
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                          icon: Icon(Icons.lock_outline, size: 22),
+                          hintText: 'Enter your password',
+                          labelText: 'password',                          
+                        ),
+                        onSaved: (String value) {
+                        // This optional block of code can be used to run
+                        // code when the user saves the form.
+                        },
+                        obscureText: true,
+                        validator: (String value) {
+                            return value.contains('@') ? 'Incorrect password. Try again' : null;
+                        },
+                        ),
+                     ],
+                    )
+                  ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     RaisedButton(
                       onPressed: () {
                         // Navigate to the kitchen staff login screen using a named route '/login'.
-                         Navigator.pushNamed(context, '/login');
+                        //  Navigator.pushNamed(context, '/login');
                     },
                       textColor: Colors.black,
                       // padding: const EdgeInsets.all(0.0),
@@ -172,7 +146,7 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-    ),
+      ),
     );
   }
 }
