@@ -13,6 +13,10 @@ class _RegisterState extends State<Register> {
     return MaterialApp(
       home:Scaffold(
        appBar: AppBar(
+          leading: IconButton(
+            icon:Icon(Icons.chevron_left),
+            onPressed:() => Navigator.pop(context,false),
+          ),
           actions: <Widget>[
             // action button
             IconButton(

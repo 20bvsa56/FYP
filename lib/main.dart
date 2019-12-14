@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       '/login': (context) => Login(),
       //When navigating to the "/login" route, build the View widget.
       '/view': (context) => View(),
-      //When navigating to the "/login" route, build the View widget.
+      //When navigating to the "/register" route, build the Register widget.
       '/register': (context) => Register(),
     },
     );

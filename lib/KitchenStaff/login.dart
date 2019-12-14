@@ -13,6 +13,10 @@ class _LoginState extends State<Login> {
     return MaterialApp(
       home:Scaffold(
        appBar: AppBar(
+          leading: IconButton(
+            icon:Icon(Icons.chevron_left),
+            onPressed:() => Navigator.pop(context,false),
+          ),
           actions: <Widget>[
             // action button
             IconButton(
@@ -36,7 +40,7 @@ class _LoginState extends State<Login> {
             ),
           ),
           Positioned(
-            height: 440,
+            height: 443,
             bottom: 20.0,
             left: 40.0,
             right: 40.0,
