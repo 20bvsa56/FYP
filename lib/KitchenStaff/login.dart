@@ -17,11 +17,12 @@ class _LoginState extends State<Login> {
             // action button
             IconButton(
               icon: Icon(Icons.kitchen),
+              iconSize:25.0,
               onPressed: () {},
             ),
            ],
           backgroundColor: Colors.black,
-          title: Text('Login to Tastyorama Cookery'),
+          title: Text('Login'),
           centerTitle: true,
        ),
        body: Stack(
@@ -35,8 +36,8 @@ class _LoginState extends State<Login> {
             ),
           ),
           Positioned(
-            height: 400,
-            bottom: 60.0,
+            height: 440,
+            bottom: 20.0,
             left: 40.0,
             right: 40.0,
             child: Card(
@@ -69,8 +70,6 @@ class _LoginState extends State<Login> {
                         fontSize: 20.0,
                       ),
                     ),
-                    
-
                   Padding(
                     padding: EdgeInsets.symmetric(vertical:20,horizontal:50),
                     child: Column(
@@ -104,42 +103,71 @@ class _LoginState extends State<Login> {
                             return value.contains('@') ? 'Incorrect password. Try again' : null;
                         },
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                        height:35,
+                        width:100,
+                        child:Material(
+                            borderRadius: BorderRadius.circular(20),
+                            shadowColor: Colors.grey[900],
+                            color: Colors.black,
+                            elevation: 7,
+                            child:GestureDetector(
+                              onTap:(){
+                                
+                              },
+                              child:Center(
+                                  child:Text('Login',
+                                  style: TextStyle(
+                                  color:Colors.white,
+                                  fontFamily: 'Rancho-Regular',
+                                  // fontWeight: FontWeight.bold,
+                                  fontSize: 22.0,
+                                  ),
+                              ),
+                              ),
+                            ),
+                        ),
+                    ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                       Text(
+                            "Not registered?",
+                          style: TextStyle(
+                              color: Colors.teal,
+                              fontStyle: FontStyle.italic,
+                             
+                              fontFamily: 'Rancho-Regular',
+                              fontSize: 15.0,
+                          ),
+                          ),
+                          const SizedBox(
+                          height: 4,
+                        ),
+                        Container(
+                            child: InkWell(
+                              onTap: () {
+                                //Navigate to the main view screen using a named route '/view'.
+                                Navigator.pushNamed(context, '/register');
+                              },
+                                child: Text('Create an account',
+                                  style:TextStyle(
+                                  color: Colors.teal,
+                                  fontStyle: FontStyle.italic,
+                                  decoration: TextDecoration.underline,
+                                   fontWeight: FontWeight.bold,
+                                  fontFamily: 'Rancho-Regular',
+                                  fontSize: 17.0,
+                                ),
+                                ),
+                            ),
+                        ), 
                      ],
                     )
                   ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        // Navigate to the kitchen staff login screen using a named route '/login'.
-                        //  Navigator.pushNamed(context, '/login');
-                    },
-                      textColor: Colors.black,
-                      // padding: const EdgeInsets.all(0.0),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color.fromARGB(20,18,65,100),
-                              Color.fromARGB(94,94,103,100),
-                              Color.fromARGB(14,52,60,100),
-                            ],
-                            
-                          ),
-                        ),
-                        padding: const EdgeInsets.all(10.0),
-                        
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(
-                            fontFamily: 'Rancho-Regular',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
                 ],
               ),
             ),

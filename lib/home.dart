@@ -21,7 +21,8 @@ class _HomeState extends State<Home> {
            actions: <Widget>[
             // action button
             IconButton(
-              icon: Icon(Icons.person_pin),
+              icon: Icon(Icons.wc),
+              iconSize:25.0,
               onPressed: () {},
             ),
            ],
@@ -41,9 +42,10 @@ class _HomeState extends State<Home> {
           ),
           Positioned(
             height: 400,
-            bottom: 60.0,
+            bottom: 20.0,
             left: 40.0,
             right: 40.0,
+            
             child: Card(
               elevation: 30.0,
               borderOnForeground: true,
@@ -104,68 +106,61 @@ class _HomeState extends State<Home> {
                           })
                           .toList(),
                     ),
-                  const SizedBox(height: 30),
-                    RaisedButton(
-                      onPressed: () {
-                        // Navigate to the main view screen using a named route '/view'.
-                         Navigator.pushNamed(context, '/view');
-                      },
-                      textColor: Colors.black,
-                      // padding: const EdgeInsets.all(0.0),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color.fromARGB(20,18,65,100),
-                              Color.fromARGB(94,94,103,100),
-                              Color.fromARGB(14,52,60,100),
-                            ],
-                            
-                          ),
+                    const SizedBox(height: 60),
+                    Container(
+                        height:35,
+                        width:100,
+                        child:Material(
+                            borderRadius: BorderRadius.circular(20),
+                            shadowColor: Colors.grey[900],
+                            color: Colors.black,
+                            elevation: 7,
+                            child:GestureDetector(
+                              onTap:(){
+                                  // Navigate to the main view screen using a named route '/view'.
+                                Navigator.pushNamed(context, '/view');
+                              },
+                              child:Center(
+                                  child:Text('Proceed',
+                                  style: TextStyle(
+                                  color:Colors.white,
+                                  fontFamily: 'Rancho-Regular',
+                                  // fontWeight: FontWeight.bold,
+                                  fontSize: 22.0,
+                                  ),
+                              ),
+                              ),
+                            ),
                         ),
-                        padding: const EdgeInsets.all(10.0),
-                        child: const Text(
-                          "Proceed",
-                          style: TextStyle(
-                            fontFamily: 'Rancho-Regular',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
                     ),
-                    
-                    const SizedBox(height: 10),
-                    RaisedButton(
-                      onPressed: () {
-                        // Navigate to the kitchen staff login screen using a named route '/login'.
-                         Navigator.pushNamed(context, '/login');
-                    },
-                      textColor: Colors.black,
-                      // padding: const EdgeInsets.all(0.0),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color.fromARGB(20,18,65,100),
-                              Color.fromARGB(94,94,103,100),
-                              Color.fromARGB(14,52,60,100),
-                            ],
-                            
-                          ),
+                    const SizedBox(height: 18),
+                    Container(
+                        height:35,
+                        width:100,
+                        child:Material(
+                            borderRadius: BorderRadius.circular(20),
+                            shadowColor: Colors.grey[900],
+                            color: Colors.black,
+                            elevation: 7,
+                            child:GestureDetector(
+                              onTap:(){
+                                  // Navigate to the main view screen using a named route '/view'.
+                                Navigator.pushNamed(context, '/login');
+                              },
+                              child:Center(
+                                  child:Text('Login',
+                                  style: TextStyle(
+                                  color:Colors.white,
+                                  fontFamily: 'Rancho-Regular',
+                                  // fontWeight: FontWeight.bold,
+                                  fontSize: 22.0,
+                                  ),
+                              ),
+                              ),
+                            ),
                         ),
-                        padding: const EdgeInsets.all(10.0),
-                        
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(
-                            fontFamily: 'Rancho-Regular',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
                     ),
+
                 ],
               ),
             ),
