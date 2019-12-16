@@ -23,7 +23,9 @@ class _ViewState extends State<View> {
           ),
           title: Text('Home'),
       ),
-      body: Container(),
+      body: Container(
+        
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
@@ -50,14 +52,8 @@ class _ViewState extends State<View> {
               _currentIndex = index;
             });
         },
-      ),
-      
-
-      
-
-      
-
-      ),
+      ), 
+     ),
     );
   }
 }

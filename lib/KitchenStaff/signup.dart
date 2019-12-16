@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  Login({Key key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  SignUp({Key key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home:Scaffold(
-       appBar: AppBar(
+        appBar: AppBar(
           leading: IconButton(
             icon:Icon(Icons.chevron_left),
             onPressed:() => Navigator.pop(context,false),
@@ -20,28 +20,28 @@ class _LoginState extends State<Login> {
           actions: <Widget>[
             // action button
             IconButton(
-              icon: Icon(Icons.kitchen),
-              iconSize:25.0,
+              icon: Icon(Icons.group_add),
+              iconSize:30.0,
               onPressed: () {},
             ),
            ],
           backgroundColor: Colors.black,
-          title: Text('Login'),
+          title: Text('Register'),
           centerTitle: true,
-       ),
-       body: Stack(
+        ),
+        body: Stack(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('images/bg.jpeg'),
+                image: AssetImage('images/su.jpeg'),
                 fit: BoxFit.fitHeight,
               ),
             ),
           ),
           Positioned(
-            height: 443,
-            bottom: 20.0,
+            height: 430,
+            bottom: 100.0,
             left: 40.0,
             right: 40.0,
             child: Card(
@@ -53,36 +53,14 @@ class _LoginState extends State<Login> {
               ),
               child: Column(
                 children: <Widget>[
-                  Icon(
-                    Icons.restaurant_menu,
-                    color: Colors.black,
-                    size: 70,
-                  ),
-                  Text(
-                      "Tastyorama",
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontFamily: 'Pacifico-Regular',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      "Digitalized Menu, Smart Service",
-                      style: TextStyle(
-                        fontFamily: 'Rancho-Regular',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                      ),
-                    ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical:20,horizontal:50),
                     child: Column(
                       children: <Widget>[
                         TextFormField(
                           decoration: const InputDecoration(
-                          icon: Icon(Icons.perm_identity, size: 25),
-                          hintText: 'Enter your username',
-                          labelText: 'username',
+                          hintText: 'Full Name',
+                          labelText: 'Full Name',
                         ),
                         onSaved: (String value) {
                         // This optional block of code can be used to run
@@ -92,11 +70,41 @@ class _LoginState extends State<Login> {
                             return value.contains('@') ? 'Incorrect username. Try again' : null;
                         },
                         ),
+                        SizedBox(height:15),
                         TextFormField(
                           decoration: const InputDecoration(
-                          icon: Icon(Icons.lock_outline, size: 22),
+                          hintText: 'Username',
+                          labelText: 'Username',                          
+                        ),
+                        onSaved: (String value) {
+                        // This optional block of code can be used to run
+                        // code when the user saves the form.
+                        },
+                        obscureText: true,
+                        validator: (String value) {
+                            return value.contains('@') ? 'Incorrect password. Try again' : null;
+                        },
+                        ),
+                        SizedBox(height:15),
+                        TextFormField(
+                          decoration: const InputDecoration(
                           hintText: '**************',
-                          labelText: 'password',                          
+                          labelText: 'Password',                          
+                        ),
+                        onSaved: (String value) {
+                        // This optional block of code can be used to run
+                        // code when the user saves the form.
+                        },
+                        obscureText: true,
+                        validator: (String value) {
+                            return value.contains('@') ? 'Incorrect password. Try again' : null;
+                        },
+                        ),
+                        SizedBox(height:15),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                          hintText: '**************',
+                          labelText: 'Confirm Password',                          
                         ),
                         onSaved: (String value) {
                         // This optional block of code can be used to run
@@ -108,7 +116,7 @@ class _LoginState extends State<Login> {
                         },
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 30,
                         ),
                         Container(
                         height:35,
@@ -123,7 +131,7 @@ class _LoginState extends State<Login> {
                                 
                               },
                               child:Center(
-                                  child:Text('Login',
+                                  child:Text('Submit',
                                   style: TextStyle(
                                   color:Colors.white,
                                   fontFamily: 'Rancho-Regular',
@@ -138,26 +146,14 @@ class _LoginState extends State<Login> {
                         const SizedBox(
                           height: 12,
                         ),
-                       Text(
-                            "Not registered?",
-                          style: TextStyle(
-                              color: Colors.teal,
-                              fontStyle: FontStyle.italic,
-                             
-                              fontFamily: 'Rancho-Regular',
-                              fontSize: 15.0,
-                          ),
-                          ),
-                          const SizedBox(
-                          height: 4,
-                        ),
+                      
                         Container(
                             child: InkWell(
                               onTap: () {
-                                //Navigate to the main view screen using a named route '/view'.
-                                Navigator.pushNamed(context, '/signup');
+                                //Navigate to the main view screen using a named route '/login'.
+                                Navigator.pushNamed(context, '/login');
                               },
-                                child: Text('Create an account',
+                                child: Text('Login',
                                   style:TextStyle(
                                   color: Colors.teal,
                                   fontStyle: FontStyle.italic,
@@ -177,8 +173,8 @@ class _LoginState extends State<Login> {
             ),
           ),
         ],
-      ),
-      ),
+      ),  
+        ),
     );
   }
 }
