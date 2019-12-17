@@ -3,6 +3,7 @@ import 'home.dart';
 import 'KitchenStaff/Login.dart';
 import 'MenuGroup/view.dart';
 import 'KitchenStaff/signup.dart';
+import 'MenuGroup/special.dart';
 
 
 void main() => runApp(MyApp());

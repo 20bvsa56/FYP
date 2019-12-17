@@ -11,6 +11,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home:Scaffold(
        appBar: AppBar(
           leading: IconButton(
@@ -35,7 +36,7 @@ class _LoginState extends State<Login> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('images/bg.jpeg'),
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -141,11 +142,10 @@ class _LoginState extends State<Login> {
                        Text(
                             "Not registered?",
                           style: TextStyle(
-                              color: Colors.teal,
-                              fontStyle: FontStyle.italic,
+                              color: Colors.black,
                              
                               fontFamily: 'Rancho-Regular',
-                              fontSize: 15.0,
+                              fontSize: 18.0,
                           ),
                           ),
                           const SizedBox(
@@ -159,12 +159,11 @@ class _LoginState extends State<Login> {
                               },
                                 child: Text('Create an account',
                                   style:TextStyle(
-                                  color: Colors.teal,
-                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black,
                                   decoration: TextDecoration.underline,
                                    fontWeight: FontWeight.bold,
                                   fontFamily: 'Rancho-Regular',
-                                  fontSize: 17.0,
+                                  fontSize: 20.0,
                                 ),
                                 ),
                             ),

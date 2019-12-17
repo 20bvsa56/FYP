@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'appbar.dart';
+import 'special.dart';
+import 'receipt.dart';
+import 'menucategory.dart';
 
 class View extends StatefulWidget {
-  View({Key key}) : super(key: key);
-
   @override
-  _ViewState createState() => _ViewState();
+  State<StatefulWidget> createState() {
+    
+    return _ViewState();
+  }
 }
 
 class _ViewState extends State<View> {
-    int _currentIndex=0;  
+    int _selectedPage=0;
+    final _pageOption=[
+      Special(),
+      MenuCategory(),
+      Receipt(),
+    ];  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home:Scaffold(
       appBar: new MyAppBar(
           leading: IconButton(
@@ -23,11 +33,11 @@ class _ViewState extends State<View> {
           ),
           title: Text('Home'),
       ),
-      body: Container(
-        
-      ),
+
+      body: _pageOption[_selectedPage],//displays the selected page in the body 
+
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
+        currentIndex: _selectedPage,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.grey[300],
         selectedFontSize: 17,
@@ -49,7 +59,7 @@ class _ViewState extends State<View> {
         ],
         onTap: (index){
             setState(() {
-              _currentIndex = index;
+              _selectedPage = index;
             });
         },
       ), 

@@ -16,6 +16,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
   return MaterialApp(
+    debugShowCheckedModeBanner: false,
     home:Scaffold(
       appBar: AppBar(
            actions: <Widget>[
@@ -36,7 +37,7 @@ class _HomeState extends State<Home> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('images/bg.jpeg'),
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               ),
             ),
           ),

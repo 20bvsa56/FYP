@@ -11,6 +11,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home:Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -34,13 +35,13 @@ class _SignUpState extends State<SignUp> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('images/su.jpeg'),
-                fit: BoxFit.fitHeight,
+                image: AssetImage('images/signup.jpeg'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
           Positioned(
-            height: 430,
+            height: 450,
             bottom: 100.0,
             left: 40.0,
             right: 40.0,
@@ -155,12 +156,11 @@ class _SignUpState extends State<SignUp> {
                               },
                                 child: Text('Login',
                                   style:TextStyle(
-                                  color: Colors.teal,
-                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black,
                                   decoration: TextDecoration.underline,
                                    fontWeight: FontWeight.bold,
                                   fontFamily: 'Rancho-Regular',
-                                  fontSize: 17.0,
+                                  fontSize: 20.0,
                                 ),
                                 ),
                             ),
