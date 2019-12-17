@@ -16,7 +16,7 @@ class _ReceiptState extends State<Receipt> {
       body:Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('images/su.jpeg'),
+                image: AssetImage('images/bg.jpeg'),
                 fit: BoxFit.cover,
               ),
             ),
