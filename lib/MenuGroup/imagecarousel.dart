@@ -13,13 +13,16 @@ class ImageCarousel extends StatelessWidget {
         child: Carousel(
           boxFit: BoxFit.cover,
           images: [
-            AssetImage('images/pizza.jpeg'),
+            AssetImage('images/pizza.jpg'),
             AssetImage('images/rolls.jpeg'),
             AssetImage('images/burger.jpeg'),
             AssetImage('images/momo.jpeg'),
+            AssetImage('images/pasta.jpeg'),
+            AssetImage('images/salad.jpeg'),
+            AssetImage('images/breakfast.jpeg'),
           ],
           animationCurve: Curves.fastOutSlowIn,
-          animationDuration: Duration(milliseconds: 2000),
+          animationDuration: Duration(milliseconds: 8000),
         ),
       ),
     );

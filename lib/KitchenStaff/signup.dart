@@ -31,6 +31,7 @@ class _SignUpState extends State<SignUp> {
           centerTitle: true,
         ),
         body: Stack(
+          fit: StackFit.expand,
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
@@ -41,8 +42,8 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
           Positioned(
-            height: 450,
-            bottom: 100.0,
+            height: 460,
+            bottom: 30.0,
             left: 40.0,
             right: 40.0,
             child: Card(

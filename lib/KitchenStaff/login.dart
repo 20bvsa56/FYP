@@ -31,6 +31,7 @@ class _LoginState extends State<Login> {
           centerTitle: true,
        ),
        body: Stack(
+         fit: StackFit.expand,
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
@@ -41,8 +42,8 @@ class _LoginState extends State<Login> {
             ),
           ),
           Positioned(
-            height: 443,
-            bottom: 20.0,
+            height: 460,
+            bottom: 30.0,
             left: 40.0,
             right: 40.0,
             child: Card(

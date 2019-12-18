@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'appbar.dart';
-import 'special.dart';
+import 'specialPage.dart';
 import 'receipt.dart';
 import 'menucategory.dart';
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'imagecarousel.dart';
+import 'specialItems.dart';
 
 class Special extends StatefulWidget {
   Special({Key key}) : super(key: key);
@@ -18,9 +19,7 @@ class _SpecialState extends State<Special> {
         body: Column(
           children: <Widget>[
             ImageCarousel(),
-            Container(
-              
-            ),         
+            SpecialItems(),  
           ],
         ),
       ),

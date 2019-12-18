@@ -32,6 +32,7 @@ class _HomeState extends State<Home> {
           centerTitle: true,
       ),
       body: Stack(
+        fit: StackFit.expand,
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
@@ -42,8 +43,8 @@ class _HomeState extends State<Home> {
             ),
           ),
           Positioned(
-            height: 400,
-            bottom: 20.0,
+            height: 420,
+            bottom: 30.0,
             left: 40.0,
             right: 40.0,
             
