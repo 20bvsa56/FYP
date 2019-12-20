@@ -155,7 +155,7 @@ class _LoginState extends State<Login> {
                         Container(
                             child: InkWell(
                               onTap: () {
-                                //Navigate to the main view screen using a named route '/view'.
+                                //Navigate to the main view screen using a named route '/signup'.
                                 Navigator.pushNamed(context, '/signup');
                               },
                                 child: Text('Create an account',
