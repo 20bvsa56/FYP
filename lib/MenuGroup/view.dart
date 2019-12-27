@@ -31,7 +31,7 @@ class _ViewState extends State<View> {
               //To-DO
             ) => Navigator.pop(context,false),
           ),
-          title: Text('Home'),
+          title: Text('Tastyorama'),
       ),
 
       body: _pageOption[_selectedPage],//displays the selected page in the body 
