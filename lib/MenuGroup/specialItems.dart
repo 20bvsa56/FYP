@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:menu_app/MenuGroup/specialFood.dart';
 
 class SpecialItems extends StatefulWidget {
   SpecialItems({Key key}) : super(key: key);
@@ -30,10 +32,6 @@ class _SpecialItemsState extends State<SpecialItems> {
                      Image.asset(foodImage, fit: BoxFit.cover),
 
                      ListTile(
-                       onTap: (){
-                          //Navigate to the main view screen using a named route '/specialList'.
-                          Navigator.pushNamed(context, '/specialList');
-                       },
                        title: Text(foodName,
                        style: TextStyle(
                           fontFamily: 'Rancho-Regular',
@@ -48,6 +46,7 @@ class _SpecialItemsState extends State<SpecialItems> {
                           fontSize: 18.0,     
                        ),
                        ),
+                      
                      ),
                    ],
                  ),
@@ -62,12 +61,32 @@ class _SpecialItemsState extends State<SpecialItems> {
        child: ListView(
          scrollDirection: Axis.horizontal,
           children: <Widget>[
+            new IconButton(
+              icon: new Icon(Icons.view_list),
+              onPressed: () {
+               Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SpecialFood()),
+            );
+              },
+            ),
             specialLists('Beverage Special','images/ValenciaFizz.jpg','Valencia Fizz','Rs.200'),
-            specialLists('Breakfast Special','images/pancake.jpg','White Chocolate & American Blueberry Pancake','Rs.220'),
+            specialLists('Breakfast Special','images/pancake.jpg','Blueberry Pancake','Rs.220'),
             specialLists('Lunch Special','images/bacon_cheese.jpg','Bacon Double Cheeseburger Grilled Cheese Sandwich','Rs.320'),
             specialLists('Dinner Special','images/thakali.jpg','Nepali Thakali Khana Set','Rs.400'),
+            new IconButton(
+              icon: new Icon(Icons.view_list),
+              onPressed: () {
+               Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SpecialFood()),
+            );
+              },
+            ),
           ],
-       ),
+       ), 
     );
+
   }
 }
+

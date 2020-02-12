@@ -6,7 +6,6 @@ import 'KitchenStaff/signup.dart';
 import 'MenuGroup/specialPage.dart';
 
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -28,6 +27,7 @@ class MyApp extends StatelessWidget {
       '/signup': (context) => SignUp(),
        //When navigating to the "/specials" route, build the Special widget.
       '/specials': (context) => Special(),
+     
     },
     );
   }
