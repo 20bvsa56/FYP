@@ -3,7 +3,7 @@ import 'home.dart';
 import 'KitchenStaff/Login.dart';
 import 'MenuGroup/view.dart';
 import 'KitchenStaff/signup.dart';
-import 'MenuGroup/specialPage.dart';
+// import 'Specials/specialPage.dart';
 
 
 void main() => runApp(MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       //When navigating to the "/register" route, build the SignUp widget.
       '/signup': (context) => SignUp(),
        //When navigating to the "/specials" route, build the Special widget.
-      '/specials': (context) => Special(),
+      // '/specials': (context) => Special(),
      
     },
     );

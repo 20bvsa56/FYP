@@ -32,7 +32,9 @@ class FooditemList{
 //single member variable
 List<FoodItem> foodItems;
 
-FooditemList({@required this.foodItems})
+FooditemList({
+  @required this.foodItems
+});
 }
 
 FooditemList fooditemList= FooditemList(foodItems: [

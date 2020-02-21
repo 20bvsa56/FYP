@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'categoryGrid.dart';
+import 'categorygrid.dart';
 
 class MenuCategory extends StatefulWidget {
   MenuCategory({Key key}) : super(key: key);

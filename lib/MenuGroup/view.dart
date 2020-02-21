@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'appbar.dart';
-import 'specialPage.dart';
+import 'package:menu_app/Specials/specialcategory.dart';
 import 'receipt.dart';
 import 'menucategory.dart';
 
@@ -15,7 +15,7 @@ class View extends StatefulWidget {
 class _ViewState extends State<View> {
     int _selectedPage=0;
     final _pageOption=[
-      Special(),
+      SpecialCategory(),
       MenuCategory(),
       Receipt(),
     ];  
