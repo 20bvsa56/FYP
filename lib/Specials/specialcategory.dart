@@ -20,15 +20,25 @@ class _SpecialCategoryState extends State<SpecialCategory> {
           children: <Widget>[
             ImageCarousel(),
             //searchBar(),
-            // categories(),
-            for (var specialFoodItem in sfoodItemList.specialFoodItems)//loop through every food items present in the list
-              SpecialItemContainer(specialFoodItem : specialFoodItem)
-           
+            display(),
           ],
         ),
       ),
     );
   }
+}
+
+Widget display(){
+ return Container(
+    height: 320,
+    child: ListView(
+       scrollDirection: Axis.horizontal,
+       children:<Widget>[
+          for (var specialFoodItem in sfoodItemList.specialFoodItems)//loop through every food items present in the list
+          SpecialItemContainer(specialFoodItem : specialFoodItem)
+       ]
+   ),
+ );
 }
 
 class SpecialItemContainer extends StatelessWidget {
@@ -108,7 +118,7 @@ class SpecialItems extends StatelessWidget {
                  ),
                )
             );
-  }
+}
 } 
 
 Widget searchBar(){
@@ -129,65 +139,4 @@ Widget searchBar(){
     ],
   );
 }
-
-// class CategoryListItem  extends StatelessWidget {
-//   //creating member variables
-//   final String categoryTitle;
-//   final String categoryImage;
-//   final String categoryName;
-//   final String categoryPrice;
- 
-
-//     CategoryListItem({
-//      this.categoryName,
-//      this.categoryImage,
-//      this.categoryPrice,
-//      this.categoryTitle,
-   
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-   
-// }
-
-// Widget categories(){
-//   return Container(
-//     height: 320,
-//     child: ListView(
-//       scrollDirection: Axis.horizontal,
-//       children:<Widget>[
-//         CategoryListItem(//custom widget
-//           categoryTitle: 'Beverage',
-//           categoryName: 'Valencia Fizz', 
-//           categoryPrice: 'Rs. 250',
-//           categoryImage: 'images/ValenciaFizz.jpg',
-//         ),
-//         CategoryListItem(
-//           categoryTitle: 'Breakfast',
-//           categoryName: 'Blueberry Pancake',
-//           categoryPrice: 'Rs. 400',
-//           categoryImage: 'images/pancake.jpg',
-//         ),
-//          CategoryListItem(//custom widget
-//           categoryTitle: 'Lunch',
-//           categoryName: 'Bacon Double Cheeseburger Grilled Cheese Sandwich', 
-//           categoryPrice: 'Rs. 320',
-//           categoryImage: 'images/bacon_cheese.jpg',
-//         ),
-//          CategoryListItem(//custom widget
-//           categoryTitle: 'Dinner',
-//           categoryName: 'Nepali Thakali Khana Set', 
-//           categoryPrice: 'Rs. 400',
-//           categoryImage: 'images/thakali.jpg',
-//         ),
-//       ],
-//     ),
-//   );
-// }
-
-
-
-
-
 
