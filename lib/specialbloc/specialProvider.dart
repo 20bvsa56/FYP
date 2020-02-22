@@ -1,6 +1,6 @@
 import 'package:menu_app/Cart/specialFoodItem.dart';
 
-
+//class created to create a list of food items to be updated and later fed into sink
 class SpecialCartProvider{
   List <SpecialFoodItem> specialFoodItems =[]; //creating list of SpecialFoodItem and initializing with empty list.
   
@@ -15,4 +15,4 @@ class SpecialCartProvider{
     specialFoodItems.remove(specialFoodItem);
     return specialFoodItems;// return newly updated list
   }
-}
+} 

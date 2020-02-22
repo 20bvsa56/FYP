@@ -26,7 +26,7 @@ class _GridviewState extends State<Gridview> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Image.asset('images/beverage.jpeg',
-                  height: 130,
+                  height: 100,
                   width: 200,
                     fit: BoxFit.cover,
                   ),
@@ -59,7 +59,7 @@ class _GridviewState extends State<Gridview> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Image.asset('images/breakfastmenu.jpeg',
-                  height: 130,
+                  height: 100,
                   width: 200,
                     fit: BoxFit.cover,
                   ),
@@ -91,7 +91,7 @@ class _GridviewState extends State<Gridview> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Image.asset('images/lunch.jpeg',
-                  height: 130,
+                  height: 100,
                   width: 200,
                     fit: BoxFit.cover,
                   ),
@@ -124,7 +124,7 @@ class _GridviewState extends State<Gridview> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Image.asset('images/dinner.jpeg',
-                  height: 130,
+                  height: 100,
                   width: 200,
                     fit: BoxFit.cover,
                   ),
@@ -157,7 +157,7 @@ class _GridviewState extends State<Gridview> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Image.asset('images/spaghetti.jpg',
-                  height: 130,
+                  height: 100,
                   width: 200,
                     fit: BoxFit.cover,
                   ),
