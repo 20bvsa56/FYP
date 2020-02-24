@@ -43,6 +43,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  bottom_navigation_badge:
+    dependency: "direct main"
+    description:
+      name: bottom_navigation_badge
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   carousel_pro:
     dependency: "direct main"
     description:

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:menu_app/Cart/cart.dart';
 import 'appbar.dart';
 import 'package:menu_app/Specials/specialcategory.dart';
-import 'receipt.dart';
 import 'menucategory.dart';
+
 
 class View extends StatefulWidget {
   @override
@@ -17,53 +18,60 @@ class _ViewState extends State<View> {
     final _pageOption=[
       SpecialCategory(),
       MenuCategory(),
-      Receipt(),
+      Cart(),
     ];  
+  
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:Scaffold(
-      appBar: new MyAppBar(
-          leading: IconButton(
-            icon:Icon(Icons.chevron_left),
-            onPressed:(
-              //To-DO
-            ) => Navigator.pop(context,false),
-          ),
-          title: Text('Tastyorama'),
-      ),
+  Widget build(BuildContext context) {     
 
-      body: _pageOption[_selectedPage],//displays the selected page in the body 
-
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedPage,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.grey[300],
-        selectedFontSize: 17,
-        unselectedFontSize: 15,
-        selectedItemColor: Colors.orange[600],
-        items: [
-          BottomNavigationBarItem(
-            icon:Icon(Icons.home),
-            title: Text('Home'),
-          ),
-           BottomNavigationBarItem(
-            icon:Icon(Icons.book),
-            title: Text('Menu'),
-          ),
-           BottomNavigationBarItem(
-            icon:Icon(Icons.receipt),
-            title: Text('Total Bill'),
-          ),
-        ],
-        onTap: (index){
-            setState(() {
-              _selectedPage = index;
-            });
-        },
-      ), 
-     ),
-    );
-  }
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  home:Scaffold(
+                  appBar: new MyAppBar(
+                      leading: IconButton(
+                        icon:Icon(Icons.chevron_left),
+                        onPressed:(
+                          //To-DO
+                        ) => Navigator.pop(context,false),
+                      ),
+                      title: Text('Tastyorama'),
+                  ),
+            
+                  body: _pageOption[_selectedPage],//displays the selected page in the body 
+            
+                
+                  
+                  bottomNavigationBar: BottomNavigationBar(
+                    currentIndex: _selectedPage,
+                    type: BottomNavigationBarType.fixed,
+                    backgroundColor: Colors.grey[300],
+                    selectedFontSize: 17,
+                    unselectedFontSize: 15,
+                    selectedItemColor: Colors.orange[600],
+                    items: [
+                      BottomNavigationBarItem(
+                        icon:Icon(Icons.home),
+                        title: Text('Home'),
+                      ),
+                       BottomNavigationBarItem(
+                        icon:Icon(Icons.book),
+                        title: Text('Menu'),
+                      ),
+                       BottomNavigationBarItem(
+                        icon:Icon(Icons.shopping_cart),
+                        title: Text('Food Cart'),
+                      ),
+           ],
+                                      onTap: (index){
+                                          setState(() {
+                                            _selectedPage = index;
+                                          });
+                                      },
+                                    ),
+                                     
+                                   ),
+        );
 }
+                              
+}
+    

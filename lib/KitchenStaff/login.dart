@@ -30,7 +30,7 @@ class _LoginState extends State<Login> {
           title: Text('Login'),
           centerTitle: true,
        ),
-       body: Stack(
+       body: Stack(//stack puts widgets one upon other
          fit: StackFit.expand,
         children: <Widget>[
           Container(

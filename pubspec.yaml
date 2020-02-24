@@ -21,6 +21,7 @@ dependencies:
   flutter:
     sdk: flutter
   animated_text_kit: ^2.0.0
+  bottom_navigation_badge: ^1.0.3
  
 
   # The following adds the Cupertino Icons font to your application.

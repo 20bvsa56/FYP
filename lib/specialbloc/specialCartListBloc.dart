@@ -10,9 +10,10 @@ class SpecialCartListBloc extends BlocBase{
   SpecialCartListBloc();
 
   SpecialCartProvider specialProvider= SpecialCartProvider();//initalizing special cart provider class
-  //Stream/counter controller
-  var _listController = BehaviorSubject<List<SpecialFoodItem>>.seeded([]);//seede is for default starting value for the stream 
-
+  
+  //controller
+  var _listController = BehaviorSubject<List<SpecialFoodItem>>.seeded([]);//seeded is for default starting value for the stream 
+//BehaviorSubject is a special StreamController that captures the latest item that has been added to the controller, and emits that as the first item to any new listener. 
   //output
   Stream<List<SpecialFoodItem>> get listStream => _listController.stream;
 
@@ -39,3 +40,5 @@ void dispose(){
 }
 
 }
+
+// SpecialCartListBloc specialcartlistbloc = SpecialCartListBloc(); //global variable of controller

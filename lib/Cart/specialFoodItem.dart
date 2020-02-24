@@ -5,28 +5,28 @@ SpecialFoodItem(
   sid: 1,
   stitle:'Beverage',
   sname:'Valencia Fizz',
-  sprice:'Rs.250.0',
+  sprice: 250,
   simage:'images/ValenciaFizz.jpg',
 ),
 SpecialFoodItem(
   sid: 2,
   stitle:'Breakfast',
   sname:'Blueberry Pancake',
-  sprice:'Rs.400.0',
+  sprice: 400,
   simage:'images/pancake.jpg',
 ),
 SpecialFoodItem(
   sid: 3,
   stitle:'Lunch',
   sname:'Bacon Double Cheeseburger Grilled Cheese Sandwich',
-  sprice:'Rs.320',
+  sprice: 320,
   simage:'images/bacon_cheese.jpg',
 ),
 SpecialFoodItem(
   sid: 4,
   stitle:'Dinner',
   sname:'Nepali Thakali Khana Set',
-  sprice:'Rs.400',
+  sprice: 400,
   simage:'images/thakali.jpg',
 ),
 ]);
@@ -44,7 +44,7 @@ class SpecialFoodItem{
   int sid;
   String stitle;
   String sname;
-  String sprice;
+  int sprice;
   String simage;
   int squantity;
 

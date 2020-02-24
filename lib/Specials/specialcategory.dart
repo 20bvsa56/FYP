@@ -5,55 +5,6 @@ import 'package:menu_app/MenuGroup/imagecarousel.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:menu_app/specialbloc/specialCartListBloc.dart';
 
-class CustomAppBar extends AppBar {
-  // const CustomAppBar({Key key}) : super(key: key);
-  //CustomAppBar({Key key, Widget title, Widget leading}): super(key:key, title:title,  leading:leading, backgroundColor: Colors.black, centerTitle:true);
-
-  final SpecialCartListBloc sbloc = BlocProvider.getBloc<SpecialCartListBloc>();
-
-  Widget build(BuildContext context) {
-        return Container(
-          margin: EdgeInsets.only(bottom:10),
-          child: Column(
-            children: <Widget>[
-              StreamBuilder(
-                stream: sbloc.listStream,
-                builder: (context, snapshot){
-
-                List<SpecialFoodItem> specialFoodItems = snapshot.data;
-
-                int length = specialFoodItems != null ? specialFoodItems : 0;//if food items var or snapshot not null
-
-                return buildGestureDetector (length, context, specialFoodItems);
-                  
-                },
-          )
-            ]
-          ),
-      );
-  }
-}
-
-GestureDetector buildGestureDetector(int length, BuildContext context, List<SpecialFoodItem> specialFoodItems){
-  return GestureDetector(
-        onTap: (){
-
-        },
-          child: Container(
-              margin: EdgeInsets.only(right:10),
-              child: Text('length.toString()',
-              style: TextStyle(
-                color:Colors.black,
-                fontSize: 20,
-              ) ),
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(50),
-              ),
-        ),
-      );
-}
 
 class SpecialCategory  extends StatelessWidget {
   const SpecialCategory ({Key key}) : super(key: key);
@@ -134,18 +85,19 @@ class SpecialItemContainer extends StatelessWidget {
   addToCart(SpecialFoodItem specialFoodItem){
     sbloc.addToList(specialFoodItem);
   }
-  @override
+  @override 
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
         addToCart(specialFoodItem);
 
+        //snackar gives a message with an optional action which briefly displays at the bottom of the screen
         final snackbar = SnackBar(
-          content: Text("${specialFoodItem.stitle} added to the cart."),
+          content: Text("${specialFoodItem.sname} added to your food cart."),
           duration: Duration(milliseconds: 2000),  
         );
         
-        Scaffold.of(context).showSnackBar(snackbar);
+        Scaffold.of(context).showSnackBar(snackbar);//showing the snackbar
       },
       child: SpecialItems(
         specialTitle: specialFoodItem.stitle,
@@ -170,7 +122,7 @@ class SpecialItems extends StatelessWidget {
   final String specialTitle;
   final String specialName;
   final String specialImage;
-  final String specialPrice;
+  final int specialPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +153,7 @@ class SpecialItems extends StatelessWidget {
                           fontSize: 17.0,
                        ),
                        ),
-                       subtitle: Text(specialPrice,
+                       subtitle: Text('specialPrice',
                        style:TextStyle(
                           fontFamily: 'Rancho-Regular',
                           fontWeight: FontWeight.bold,
@@ -235,4 +187,3 @@ Widget searchBar(){
     ],
   );
 }
-
