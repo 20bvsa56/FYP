@@ -8,10 +8,10 @@ import 'package:menu_app/specialbloc/specialCartListBloc.dart';
 class Cart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final SpecialCartListBloc sbloc = BlocProvider.getBloc<SpecialCartListBloc>();
+    final SpecialCartListBloc cartbloc = BlocProvider.getBloc<SpecialCartListBloc>();
     List<SpecialFoodItem> specialFoodItems;
     return StreamBuilder(
-      stream: sbloc.listStream,
+      stream: cartbloc.listStream,
       builder: (context, snapshot) {
         if (snapshot.data != null) {
           specialFoodItems = snapshot.data;
@@ -43,9 +43,9 @@ class BottomBar extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          totalAmount(specialFoodItems),
+          totalAmount(specialFoodItems),//widget which returns the total amount of foods
           Divider(
-            height: 1,
+            height: 5,
             color: Colors.grey[700],
           ),
           persons(),
@@ -85,7 +85,7 @@ class BottomBar extends StatelessWidget {
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300),
           ),
           Text(
-            "\$${returnTotalAmount(specialFoodItems)}",
+            "\Rs${returnTotalAmount(specialFoodItems)}",
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28),
           ),
         ],
@@ -93,6 +93,7 @@ class BottomBar extends StatelessWidget {
     );
   }
 
+//calculating the total amount of all food items in the cart
   String returnTotalAmount(List<SpecialFoodItem> specialFoodItems) {
     double totalAmount = 0.0;
 
@@ -131,6 +132,7 @@ class BottomBar extends StatelessWidget {
   }
 }
 
+//gives access to increase or decrease the number of persons
 class CustomPersonWidget extends StatefulWidget {
   @override
   _CustomPersonWidgetState createState() => _CustomPersonWidgetState();

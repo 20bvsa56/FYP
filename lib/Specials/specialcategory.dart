@@ -153,7 +153,7 @@ class SpecialItems extends StatelessWidget {
                           fontSize: 17.0,
                        ),
                        ),
-                       subtitle: Text('specialPrice',
+                       subtitle: Text("\Rs$specialPrice",
                        style:TextStyle(
                           fontFamily: 'Rancho-Regular',
                           fontWeight: FontWeight.bold,
