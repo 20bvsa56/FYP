@@ -107,6 +107,9 @@ class SpecialItemContainer extends StatelessWidget {
       ),
     );
   }
+void dispose() {
+    sbloc.dispose();
+  }
 }
 
 class SpecialItems extends StatelessWidget {
@@ -186,4 +189,6 @@ Widget searchBar(){
       ),),SizedBox(width: 50),  
     ],
   );
+  
 }
+

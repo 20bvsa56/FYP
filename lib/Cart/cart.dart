@@ -255,16 +255,9 @@ class CartBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                "My",
+                "Your Food Cart",
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
-                  fontSize: 35,
-                ),
-              ),
-              Text(
-                "Order",
-                style: TextStyle(
-                  fontWeight: FontWeight.w300,
                   fontSize: 35,
                 ),
               ),
@@ -442,16 +435,16 @@ class _DragTargetWidgetState extends State<DragTargetWidget> {
     final ColorBloc colorBloc = BlocProvider.getBloc<ColorBloc>();
 
     return DragTarget<SpecialFoodItem>(
-      onAccept: (SpecialFoodItem foodItem) {
-        currentFoodItem = foodItem;
+      onAccept: (SpecialFoodItem specialfoodItem) {
+        currentFoodItem = specialfoodItem;
         colorBloc.setColor(Colors.white);
         widget.bloc.removeFromList(currentFoodItem);
       },
-      onWillAccept: (SpecialFoodItem foodItem) {
+      onWillAccept: (SpecialFoodItem specialfoodItem) {
         colorBloc.setColor(Colors.red);
         return true;
       },
-      onLeave: (SpecialFoodItem foodItem) {
+      onLeave: (SpecialFoodItem specialfoodItem) {
         colorBloc.setColor(Colors.white);
       },
       
