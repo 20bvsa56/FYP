@@ -3,7 +3,7 @@
 class FoodItems{
     //database stuffs
     private $conn;
-    private $table = 'fooditems';
+    private $table = 'items';
 
     //Table properties
     public $id;
@@ -88,14 +88,14 @@ class FoodItems{
         $this->name = htmlspecialchars(strip_tags($this->name));
         $this->price = htmlspecialchars(strip_tags($this->price));
         $this->image = htmlspecialchars(strip_tags($this->image));
-        $this->categoryId = htmlspecialchars(strip_tags($this->title)); 
+        $this->categoryId = htmlspecialchars(strip_tags($this->categoryId)); 
 
-        //bind dnae to parameters
+        //bind name to parameters
          $stmt->bindParam(':title',$this->title);
          $stmt->bindParam(':name',$this->name);
          $stmt->bindParam(':price',$this->price);
          $stmt->bindParam(':image',$this->image);
-         $stmt->bindParam(':categoryId',$this->title);
+         $stmt->bindParam(':categoryId',$this->categoryId);
  
         //execute query
         if($stmt->execute()){
