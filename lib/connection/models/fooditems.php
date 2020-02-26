@@ -37,5 +37,75 @@ class FoodItems{
 
     }
 
+    // get single food item
+    public function read_single(){
+        //create query
+        $query='SELECT 
+        * 
+        FROM 
+        ' . $this->table .'
+        WHERE id = ? 
+        LIMIT 0,1 ';
+        //to get one record
+
+        //prepare statement
+        $stmt=$this->conn->prepare($query);
+
+        //Bind id to ? above
+        $stmt->bindParam(1,$this->id);
+
+        //execute query
+        $stmt->execute();
+
+        //fetch associative array
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //set properties
+        $this->title = $row['title'];
+        $this->name = $row['name'];
+        $this->price = $row['price'];
+        $this->image = $row['image'];
+        $this->categoryId = $row['categoryId'];
+
+    }
+
+    //create food
+    public function create(){
+        //create query
+        $query = 'INSERT INTO  ' .$this->table. '
+            SET
+                title = :title,
+                name= :name,
+                price= :price,
+                image= :image,
+                categoryId = :categoryId';
+
+        //prepare statement
+        $stmt=$this->conn->prepare($query);
+
+        //clean data or wrapping data with securities
+        $this->title = htmlspecialchars(strip_tags($this->title));
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->price = htmlspecialchars(strip_tags($this->price));
+        $this->image = htmlspecialchars(strip_tags($this->image));
+        $this->categoryId = htmlspecialchars(strip_tags($this->title)); 
+
+        //bind dnae to parameters
+         $stmt->bindParam(':title',$this->title);
+         $stmt->bindParam(':name',$this->name);
+         $stmt->bindParam(':price',$this->price);
+         $stmt->bindParam(':image',$this->image);
+         $stmt->bindParam(':categoryId',$this->title);
+ 
+        //execute query
+        if($stmt->execute()){
+            return true;
+        }else{
+            //print error if sth goes wrong
+            printf("Error: %s.\n, stmt->error");
+            return false;
+        }
+    }
+
 }
 ?>

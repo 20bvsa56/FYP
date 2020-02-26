@@ -435,17 +435,18 @@ class _DragTargetWidgetState extends State<DragTargetWidget> {
     final ColorBloc colorBloc = BlocProvider.getBloc<ColorBloc>();
 
     return DragTarget<SpecialFoodItem>(
-      onAccept: (SpecialFoodItem specialfoodItem) {
-        currentFoodItem = specialfoodItem;
+      onAccept: (SpecialFoodItem specialFoodItem) {
+        currentFoodItem = specialFoodItem;
         colorBloc.setColor(Colors.white);
         widget.bloc.removeFromList(currentFoodItem);
       },
-      onWillAccept: (SpecialFoodItem specialfoodItem) {
+      onWillAccept: (SpecialFoodItem specialFoodItem) {
         colorBloc.setColor(Colors.red);
         return true;
       },
-      onLeave: (SpecialFoodItem specialfoodItem) {
+      onLeave: (SpecialFoodItem specialFoodItem) {
         colorBloc.setColor(Colors.white);
+        
       },
       
       builder: (BuildContext context, List incoming, List rejected) {
