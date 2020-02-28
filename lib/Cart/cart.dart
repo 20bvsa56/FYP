@@ -444,10 +444,10 @@ class _DragTargetWidgetState extends State<DragTargetWidget> {
         colorBloc.setColor(Colors.red);
         return true;
       },
-      onLeave: (SpecialFoodItem specialFoodItem) {
-        colorBloc.setColor(Colors.white);
+      // onLeave: (SpecialFoodItem specialFoodItem) {
+      //   colorBloc.setColor(Colors.white);
         
-      },
+      // },
       
       builder: (BuildContext context, List incoming, List rejected) {
         return Padding(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:menu_app/Cart/specialFoodItem.dart';
-import 'package:menu_app/MenuGroup/imagecarousel.dart';
+import 'package:menu_app/MenuGroup/imageCarousel.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:menu_app/specialbloc/specialCartListBloc.dart';
 
