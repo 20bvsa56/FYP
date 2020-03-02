@@ -10,6 +10,12 @@ class BreakfastItem extends StatefulWidget {
 class _BreakfastItemState extends State<BreakfastItem> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text('Breakfast Items'),
+          centerTitle: true,
+        ),
+    );
   }
 }

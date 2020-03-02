@@ -11,13 +11,12 @@ class _HomeState extends State<Home> {
   // var tables = ['Table No.','Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6'];
   // var currentTableSelected = 'Table No.';
   // String dropdownValue = 'Table No.';
- final _formKey = GlobalKey<FormState>();
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        key: _formKey,
         appBar: AppBar(
           actions: <Widget>[
             // action button
@@ -80,19 +79,18 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: 30,
                     ),
-
                     Padding(
                       padding: EdgeInsets.fromLTRB(100, 10, 100, 0),
                       child: TextFormField(
                         enabled: false,
-                        style: TextStyle(fontSize: 18.0, color: Colors.black),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           labelText: 'Table-1',
                           filled: true,
                           fillColor: Colors.grey,
                           contentPadding: const EdgeInsets.only(
-                              left: 30.0, bottom: 6.0, top: 8.0),
+                              left: 17.0, bottom: 6.0, top: 8.0),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.red),
                             borderRadius: BorderRadius.circular(10.0),
@@ -105,60 +103,51 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     Padding(
-                  padding: EdgeInsets.fromLTRB(95, 40, 90, 0),
-                  child: Container(
-                    height: 40,
-                    width: double.infinity,
-                    child: RaisedButton(
-                      color: Colors.black,
-                      onPressed: () {
-                        // Navigate to the main view screen using a named route '/view'.
-                          Navigator.pushNamed(context, '/view');
-                        // Validate returns true if the form is valid, or false
-                        // otherwise.
-                        if (_formKey.currentState.validate()) {
-                          // If the form is valid, display a Snackbar.
-                          Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text('Proceeding...')));
-                        }
-                      },
-                      child: Text(
-                        'Proceed',
-                        style: TextStyle(color: Colors.white,fontSize: 22,fontFamily: 'Rancho-Regular',)
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.green)),
-                    ),
-                  )),
+                        padding: EdgeInsets.fromLTRB(80, 30, 80, 0),
+                        child: Container(
+                          height: 40,
+                          width: double.infinity,
+                          child: RaisedButton(
+                            color: Colors.black, 
+                            onPressed: () {
+                              // Navigate to the main view screen using a named route '/view'.
+                              Navigator.pushNamed(context, '/view');
 
-                   Padding(
-                  padding: EdgeInsets.fromLTRB(105, 20, 90, 0),
-                  child: Container(
-                    height: 35,
-                    width: 80,
-                    child: RaisedButton(
-                      color: Colors.black,
-                      onPressed: () {
-                        // Navigate to the main login screen using a named route '/login'.
-                          Navigator.pushNamed(context, '/login');
-                        // Validate returns true if the form is valid, or false
-                        // otherwise.
-                        if (_formKey.currentState.validate()) {
-                          // If the form is valid, display a Snackbar.
-                          Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text('Proceeding...')));
-                        }
-                      },
-                      child: Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white,fontSize: 18,fontFamily: 'Rancho-Regular',)
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.green)),
-                    ),
-                  )),
+                            },
+                            child: Text('Proceed',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontFamily: 'Rancho-Regular',
+                                )),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.green)),
+                          ),
+                        )),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(80, 10, 70, 0),
+                        child: Container(
+                          height: 35,
+                          width: 80,
+                          child: RaisedButton(
+                            color: Colors.black,
+                            onPressed: () {
+                              // Navigate to the main login screen using a named route '/login'.
+                              Navigator.pushNamed(context, '/login');
+                            
+                            },
+                            child: Text('Login',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontFamily: 'Rancho-Regular',
+                                )),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.green)),
+                          ),
+                        )),
                   ],
                 ),
               ),

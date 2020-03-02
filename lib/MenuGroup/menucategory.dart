@@ -11,10 +11,18 @@ class MenuCategory extends StatefulWidget {
 class _MenuCategoryState extends State<MenuCategory> {
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
-     debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body:Gridview(),//Call the class named Gridview from categoryGrid.dart
+    return Scaffold(
+      body: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text('Menu Category'),
+          centerTitle: true,
+        ),
+          body:
+              Gridview(), //Call the class named Gridview from categoryGrid.dart
+        ),
       ),
     );
   }

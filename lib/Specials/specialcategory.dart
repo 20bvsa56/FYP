@@ -29,6 +29,11 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar:AppBar(
+          backgroundColor: Colors.black,
+          title: Text('Home'),
+          centerTitle: true,
+        ),
           body: Column(
             children: <Widget>[
               ImageCarousel(),
@@ -191,4 +196,3 @@ Widget searchBar(){
   );
   
 }
-

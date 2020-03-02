@@ -8,7 +8,8 @@ import 'package:menu_app/specialbloc/specialCartListBloc.dart';
 class Cart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final SpecialCartListBloc cartbloc = BlocProvider.getBloc<SpecialCartListBloc>();
+    final SpecialCartListBloc cartbloc =
+        BlocProvider.getBloc<SpecialCartListBloc>();
     List<SpecialFoodItem> specialFoodItems;
     return StreamBuilder(
       stream: cartbloc.listStream,
@@ -16,6 +17,11 @@ class Cart extends StatelessWidget {
         if (snapshot.data != null) {
           specialFoodItems = snapshot.data;
           return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.black,
+              title: Text('Cart List'),
+              centerTitle: true,
+            ),
             body: SafeArea(
               child: CartBody(specialFoodItems),
             ),
@@ -43,7 +49,8 @@ class BottomBar extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          totalAmount(specialFoodItems),//widget which returns the total amount of foods
+          totalAmount(
+              specialFoodItems), //widget which returns the total amount of foods
           Divider(
             height: 5,
             color: Colors.grey[700],
@@ -98,7 +105,8 @@ class BottomBar extends StatelessWidget {
     double totalAmount = 0.0;
 
     for (int i = 0; i < specialFoodItems.length; i++) {
-      totalAmount = totalAmount + specialFoodItems[i].sprice * specialFoodItems[i].squantity;
+      totalAmount = totalAmount +
+          specialFoodItems[i].sprice * specialFoodItems[i].squantity;
     }
     return totalAmount.toStringAsFixed(2);
   }
@@ -215,7 +223,9 @@ class CartBody extends StatelessWidget {
           title(),
           Expanded(
             flex: 1,
-            child: specialFoodItems.length > 0 ? foodItemList() : noItemContainer(),
+            child: specialFoodItems.length > 0
+                ? foodItemList()
+                : noItemContainer(),
           )
         ],
       ),
@@ -277,13 +287,14 @@ class CartListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LongPressDraggable(
-      hapticFeedbackOnStart: false,      
+      hapticFeedbackOnStart: false,
       maxSimultaneousDrags: 1,
       data: specialFoodItem,
       feedback: DraggableChildFeedback(specialFoodItem: specialFoodItem),
       child: DraggableChild(specialFoodItem: specialFoodItem),
-      childWhenDragging: specialFoodItem.squantity > 1 ? DraggableChild(specialFoodItem: specialFoodItem) : Container(),
-      
+      childWhenDragging: specialFoodItem.squantity > 1
+          ? DraggableChild(specialFoodItem: specialFoodItem)
+          : Container(),
     );
   }
 }
@@ -372,9 +383,7 @@ class ItemContent extends StatelessWidget {
                     color: Colors.black,
                     fontWeight: FontWeight.w700),
                 children: [
-                  TextSpan(
-                    text: specialFoodItem.squantity.toString()
-                    ),
+                  TextSpan(text: specialFoodItem.squantity.toString()),
                   TextSpan(text: " x "),
                   TextSpan(
                     text: specialFoodItem.stitle,
@@ -397,7 +406,6 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -446,9 +454,9 @@ class _DragTargetWidgetState extends State<DragTargetWidget> {
       },
       // onLeave: (SpecialFoodItem specialFoodItem) {
       //   colorBloc.setColor(Colors.white);
-        
+
       // },
-      
+
       builder: (BuildContext context, List incoming, List rejected) {
         return Padding(
           padding: const EdgeInsets.all(5.0),

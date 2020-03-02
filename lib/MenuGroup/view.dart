@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menu_app/Cart/cart.dart';
-import 'appbar.dart';
+// import 'appbar.dart';
 import 'package:menu_app/Specials/specialCategory.dart';
 import 'menuCategory.dart';
 
@@ -24,16 +24,7 @@ class _ViewState extends State<View> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: new MyAppBar(
-          leading: IconButton(
-            icon: Icon(Icons.chevron_left),
-            onPressed: (
-                    //To-DO
-                    ) =>
-                Navigator.pop(context, false),
-          ),
-          title: Text('Tastyorama'),
-        ),
+       
 
         body:
             _pageOption[_selectedPage], //displays the selected page in the body
