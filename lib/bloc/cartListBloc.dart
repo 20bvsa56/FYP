@@ -4,6 +4,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:menu_app/bloc/provider.dart';
 import 'package:rxdart/rxdart.dart'; // adds additional capabilities to Dart Streams and StreamControllers.
 
+//here declaring CartListBlos as our bloc
 class CartListBloc extends BlocBase{
   CartListBloc();
 

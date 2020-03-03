@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:menu_app/Regular/beverageItem.dart';
-import 'package:menu_app/Regular/breakfastItem.dart';
+import 'package:menu_app/Regular/beverageItemUI.dart';
+import 'package:menu_app/Regular/breakfastItemUI.dart';
 
 class Gridview extends StatefulWidget {
   Gridview({Key key}) : super(key: key);
