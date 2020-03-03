@@ -17,8 +17,8 @@ class Cart extends StatelessWidget {
         if (snapshot.data != null) {
           specialFoodItems = snapshot.data;
           return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.black,
+            appBar: AppBar(leading: Icon(Icons.receipt),
+              backgroundColor: Colors.brown,
               title: Text('Cart List'),
               centerTitle: true,
             ),

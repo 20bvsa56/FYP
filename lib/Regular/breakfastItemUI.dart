@@ -12,7 +12,7 @@ class _BreakfastItemState extends State<BreakfastItem> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.brown,
           title: Text('Breakfast Items'),
           centerTitle: true,
         ),

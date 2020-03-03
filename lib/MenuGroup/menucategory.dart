@@ -15,8 +15,8 @@ class _MenuCategoryState extends State<MenuCategory> {
       body: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          appBar: AppBar(
-          backgroundColor: Colors.black,
+          appBar: AppBar(leading: Icon(Icons.menu),
+          backgroundColor: Colors.brown,
           title: Text('Menu Category'),
           centerTitle: true,
         ),

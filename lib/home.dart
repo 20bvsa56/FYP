@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
               onPressed: () {},
             ),
           ],
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.brown,
           title: Text('Welcome to Tastyorama'),
           centerTitle: true,
         ),

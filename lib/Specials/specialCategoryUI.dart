@@ -29,8 +29,8 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar:AppBar(
-          backgroundColor: Colors.black,
+       appBar:AppBar(leading: Icon(Icons.home),
+          backgroundColor: Colors.brown,
           title: Text('Home'),
           centerTitle: true,
         ),
@@ -140,6 +140,7 @@ class SpecialItems extends StatelessWidget {
               width: 200.0,
              
                child: Card(
+                 color: Colors.brown[50],
                  child: Wrap(
                    children: <Widget>[ 
                     Center(child:Text(specialTitle,

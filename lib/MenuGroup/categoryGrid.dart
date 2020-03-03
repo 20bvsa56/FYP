@@ -26,6 +26,7 @@ class _GridviewState extends State<Gridview> {
               child: Container(
               margin: EdgeInsets.all(10),
               child: new Card(
+                color: Colors.brown[100],
                 shape: RoundedRectangleBorder(
                    borderRadius: BorderRadius.all(Radius.circular(30)),
                 ),
@@ -66,6 +67,7 @@ class _GridviewState extends State<Gridview> {
               child: Container(
               margin: EdgeInsets.all(10),
               child: new Card(
+                color: Colors.brown[100],
                 shape: RoundedRectangleBorder(
                    borderRadius: BorderRadius.all(Radius.circular(30)),
                 ),
@@ -99,6 +101,7 @@ class _GridviewState extends State<Gridview> {
           Container(
             margin: EdgeInsets.all(10),
             child: new Card(
+              color: Colors.brown[100],
               shape: RoundedRectangleBorder(
                  borderRadius: BorderRadius.all(Radius.circular(30)),
               ),
@@ -132,6 +135,7 @@ class _GridviewState extends State<Gridview> {
           Container(
             margin: EdgeInsets.all(10),
             child: new Card(
+              color: Colors.brown[100],
               shape: RoundedRectangleBorder(
                  borderRadius: BorderRadius.all(Radius.circular(30)),
               ),
@@ -160,11 +164,129 @@ class _GridviewState extends State<Gridview> {
               ),
             ),
           ),
+          InkWell(
+            onTap: (){
+                Navigator.push(context, 
+                MaterialPageRoute(builder: (context)=> BreakfastItem())
+              );  
+            },
+              child: Container(
+              margin: EdgeInsets.all(10),
+              child: new Card(
+                color: Colors.brown[100],
+                shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                elevation: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Image.asset('images/breakfastmenu.jpeg',
+                    height: 100,
+                    width: 200,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Center(
+                        child: Text('BREAKFAST',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Lobster-Regular',
+                          fontSize: 20.0,
+                        ),),
+                      ),                    
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
 
+          InkWell(
+            onTap: (){
+                Navigator.push(context, 
+                MaterialPageRoute(builder: (context)=> BreakfastItem())
+              );  
+            },
+              child: Container(
+              margin: EdgeInsets.all(10),
+              child: new Card(
+                color: Colors.brown[100],
+                shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                elevation: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Image.asset('images/breakfastmenu.jpeg',
+                    height: 100,
+                    width: 200,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Center(
+                        child: Text('BREAKFAST',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Lobster-Regular',
+                          fontSize: 20.0,
+                        ),),
+                      ),                    
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: (){
+                Navigator.push(context, 
+                MaterialPageRoute(builder: (context)=> BreakfastItem())
+              );  
+            },
+              child: Container(
+              margin: EdgeInsets.all(10),
+              child: new Card(
+                color: Colors.brown[100],
+                shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                elevation: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Image.asset('images/breakfastmenu.jpeg',
+                    height: 100,
+                    width: 200,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Center(
+                        child: Text('BREAKFAST',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Lobster-Regular',
+                          fontSize: 20.0,
+                        ),),
+                      ),                    
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
 
           Container(
             margin: EdgeInsets.all(10),
             child: new Card(
+              color: Colors.brown[100],
               shape: RoundedRectangleBorder(
                  borderRadius: BorderRadius.all(Radius.circular(30)),
               ),

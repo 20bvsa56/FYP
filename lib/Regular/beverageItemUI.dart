@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
                 MaterialPageRoute(builder: (context) => MenuCategory()),
               );
             }),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.brown,
         title: Text('Beverage Items'),
         centerTitle: true,
       ),
@@ -59,7 +59,7 @@ Widget displayBeverage() {
     decoration: new BoxDecoration(
         //new Color.fromRGBO(255, 0, 0, 0.0),
         borderRadius: new BorderRadius.all(Radius.circular(20))),
-    height: 500,
+    height: 510,
     child: ListView(scrollDirection: Axis.vertical, children: <Widget>[
       for (var beverageFoodItem in bevfoodItemList
           .beverageFoodItems) //loop through every beverage items present in the list
@@ -138,17 +138,18 @@ class BeverageItems extends StatelessWidget {
                 bottomLeft: const Radius.circular(10.0),
                 bottomRight: const Radius.circular(10.0))),
         child: Card(
+          color: Colors.brown[50],
           margin: EdgeInsets.symmetric(vertical: 12),
           child: Wrap(
             children: <Widget>[
               Text(
-              bevName,
-              style: TextStyle(
-                fontFamily: 'Rancho-Regular',
-                fontWeight: FontWeight.bold,
-                fontSize: 25.0,
+                bevName,
+                style: TextStyle(
+                  fontFamily: 'Rancho-Regular',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                ),
               ),
-            ),
               ListTile(
                 title: Text(
                   bevDescription,
@@ -167,17 +168,14 @@ class BeverageItems extends StatelessWidget {
                   ),
                 ),
                 trailing: Image.asset(bevImage, fit: BoxFit.cover),
-                
               ),
-              
-        RaisedButton(
-          hoverElevation: 0,
-          onPressed: () {},
-          child: const Text(
-            'Add to Cart',
-            style: TextStyle(fontSize: 15)
-          ),
-        ),
+              SizedBox(width: 10),
+              RaisedButton(
+                hoverElevation: 0,
+                onPressed: () {},
+                child:
+                    const Text('Add to Cart', style: TextStyle(fontSize: 15)),
+              ),
             ],
           ),
         ));
