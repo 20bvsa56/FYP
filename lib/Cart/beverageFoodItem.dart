@@ -22,6 +22,48 @@ BeverageFoodItem(
   bevprice:160,
   bevimage:'images/icedtea.jpeg',
 ),
+BeverageFoodItem(
+  bevid: 4,
+  bevname:'Coffee',
+  bevdescription:'Water, Milk, Coffee',
+  bevprice:80,
+  bevimage:'images/coffee.jpeg',
+),
+BeverageFoodItem(
+  bevid: 5,
+  bevname:'Lemonade',
+  bevdescription:'Water, Sugar, Lemon juice',
+  bevprice:120,
+  bevimage:'images/lemonade.jpeg',
+),
+BeverageFoodItem(
+  bevid: 6,
+  bevname:'Iced Tea',
+  bevdescription:'Water, Loose tea, Tea bag',
+  bevprice:160,
+  bevimage:'images/icedtea.jpeg',
+),
+BeverageFoodItem(
+  bevid: 7,
+  bevname:'Coffee',
+  bevdescription:'Water, Milk, Coffee',
+  bevprice:80,
+  bevimage:'images/coffee.jpeg',
+),
+BeverageFoodItem(
+  bevid: 8,
+  bevname:'Lemonade',
+  bevdescription:'Water, Sugar, Lemon juice',
+  bevprice:120,
+  bevimage:'images/lemonade.jpeg',
+),
+BeverageFoodItem(
+  bevid: 9,
+  bevname:'Iced Tea',
+  bevdescription:'Water, Loose tea, Tea bag',
+  bevprice:160,
+  bevimage:'images/icedtea.jpeg',
+),
 ]);
 
 
