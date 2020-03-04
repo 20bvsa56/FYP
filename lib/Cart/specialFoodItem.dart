@@ -27,7 +27,7 @@ SpecialFoodItem(
   stitle:'Dinner',
   sname:'Nepali Thakali Khana Set',
   sprice: 400,
-  simage:'images/thakali.jpg',
+  simage:'images/thakali.jpeg',
 ),
 ]);
 

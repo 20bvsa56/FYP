@@ -38,7 +38,7 @@ class Home extends StatelessWidget {
             children: <Widget>[
               ImageCarousel(),
               maintitle(),
-              SizedBox(height:10),
+              SizedBox(height:5),
               //searchBar(),
               display(),
             ],
@@ -52,7 +52,7 @@ Widget maintitle(){
     child:TyperAnimatedTextKit(
       text: ["Today\'s Special"],
       textStyle: TextStyle(
-        fontSize: 25.0, 
+        fontSize: 20.0, 
         fontWeight: FontWeight.bold,
         decoration: TextDecoration.underline,
         fontFamily: 'Pacifico-Regular',
@@ -68,7 +68,7 @@ Widget maintitle(){
 
 Widget display(){
  return Container(
-    height: 280,
+    height: 310,
     child: ListView(
        scrollDirection: Axis.horizontal,
        children:<Widget>[
@@ -155,6 +155,7 @@ class SpecialItems extends StatelessWidget {
                      Image.asset(specialImage, fit: BoxFit.cover),
 
                      ListTile(
+                       isThreeLine: false,
                        title: Text(specialName,
                        style: TextStyle(
                           fontFamily: 'Rancho-Regular',
@@ -171,6 +172,12 @@ class SpecialItems extends StatelessWidget {
                        ),
                       
                      ),
+                      RaisedButton(
+                hoverElevation: 0,
+                onPressed: () {},
+                child:
+                    const Text('Add to Cart', style: TextStyle(fontSize: 15)),
+              ),
                    ],
                  ),
                )

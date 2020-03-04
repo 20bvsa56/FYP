@@ -9,7 +9,7 @@ class ImageCarousel extends StatelessWidget {
     return Center(
       child: Container(
         padding: EdgeInsets.all(2.0),
-        height:200.0,
+        height:190.0,
         child: Carousel(
           boxFit: BoxFit.cover,
           images: [
