@@ -26,7 +26,7 @@ class _SignUpState extends State<SignUp> {
               onPressed: () {},
             ),
            ],
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.brown,
           title: Text('Register'),
           centerTitle: true,
         ),
@@ -42,21 +42,21 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
           Positioned(
-            height: 460,
+            height: 400,
             bottom: 30.0,
             left: 40.0,
             right: 40.0,
             child: Card(
               elevation: 30.0,
               borderOnForeground: true,
-              color: Colors.grey[200],
+              color: Colors.brown[100],
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical:20,horizontal:50),
+                    padding: EdgeInsets.symmetric(horizontal:40),
                     child: Column(
                       children: <Widget>[
                         TextFormField(
@@ -120,31 +120,29 @@ class _SignUpState extends State<SignUp> {
                         const SizedBox(
                           height: 30,
                         ),
-                        Container(
-                        height:35,
-                        width:100,
-                        child:Material(
-                            borderRadius: BorderRadius.circular(20),
-                            shadowColor: Colors.grey[900],
-                            color: Colors.black,
-                            elevation: 7,
-                            child:GestureDetector(
-                              onTap:(){
-                                
-                              },
-                              child:Center(
-                                  child:Text('Submit',
-                                  style: TextStyle(
-                                  color:Colors.white,
-                                  fontFamily: 'Rancho-Regular',
-                                  // fontWeight: FontWeight.bold,
-                                  fontSize: 22.0,
-                                  ),
-                              ),
-                              ),
-                            ),
-                        ),
-                    ),
+                      Padding(
+                                padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                                child: Container(
+                                    height: 35,
+                                    width: 100,
+                                    child: RaisedButton(
+                                      color: Colors.brown[500],
+                                      onPressed: () {
+                                        // // Navigate to the main login screen using a named route '/login'.
+                                        // Navigator.pushNamed(context, '/login');
+                                      },
+                                      child: Text('Submit',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontFamily: 'Rancho-Regular',
+                                          )),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(18.0),
+                                        side: BorderSide(color: Colors.white70),
+                                      ),
+                                    ))),
                         const SizedBox(
                           height: 12,
                         ),
@@ -157,7 +155,7 @@ class _SignUpState extends State<SignUp> {
                               },
                                 child: Text('Login',
                                   style:TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.grey[500],
                                   decoration: TextDecoration.underline,
                                    fontWeight: FontWeight.bold,
                                   fontFamily: 'Rancho-Regular',
