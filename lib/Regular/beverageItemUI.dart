@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
-import 'package:menu_app/BeverageBloc.dart/beverageCartListBloc.dart';
+import 'package:menu_app/BeverageBloc/beverageCartListBloc.dart';
 import 'package:menu_app/MenuGroup/menuCategory.dart';
 import 'package:menu_app/cart/beverageFoodItem.dart';
 
@@ -77,8 +77,7 @@ class BeverageItemContainer extends StatelessWidget {
 
   BeverageItemContainer({@required this.beverageFoodItem});
 
-  final BeverageCartListBloc bevbloc =
-      BlocProvider.getBloc<BeverageCartListBloc>();
+  final BeverageCartListBloc bevbloc = BlocProvider.getBloc<BeverageCartListBloc>();
 
   addToCart(BeverageFoodItem beverageFoodItem) {
     bevbloc.addToList(beverageFoodItem);

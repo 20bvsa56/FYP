@@ -68,7 +68,7 @@ Widget maintitle(){
 
 Widget display(){
  return Container(
-    height: 310,
+    height: 300,
     child: ListView(
        scrollDirection: Axis.horizontal,
        children:<Widget>[
