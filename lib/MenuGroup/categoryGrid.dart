@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:menu_app/Regular/beverageItemUI.dart';
 import 'package:menu_app/Regular/breakfastItemUI.dart';
+import 'package:menu_app/Regular/burgerItemUI.dart';
+import 'package:menu_app/Regular/dessertItemUI.dart';
 import 'package:menu_app/Regular/dinnerItemUI.dart';
 import 'package:menu_app/Regular/lunchItemUI.dart';
+import 'package:menu_app/Regular/pizzaItemUI.dart';
+import 'package:menu_app/Regular/spaghettiItemUI.dart';
 
 class Gridview extends StatefulWidget {
   Gridview({Key key}) : super(key: key);
@@ -183,10 +187,10 @@ class _GridviewState extends State<Gridview> {
             ),
           ),
           InkWell(
-            // onTap: () {
-            //   Navigator.push(context,
-            //       MaterialPageRoute(builder: (context) => BreakfastItem()));
-            // },
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PizzaItem()));
+            },
             child: Container(
               margin: EdgeInsets.all(10),
               child: new Card(
@@ -224,10 +228,10 @@ class _GridviewState extends State<Gridview> {
             ),
           ),
           InkWell(
-            // onTap: () {
-            //   Navigator.push(context,
-            //       MaterialPageRoute(builder: (context) => BreakfastItem()));
-            // },
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => BurgerItem()));
+            },
             child: Container(
               margin: EdgeInsets.all(10),
               child: new Card(
@@ -264,52 +268,11 @@ class _GridviewState extends State<Gridview> {
               ),
             ),
           ),
-          InkWell(
-            // onTap: () {
-            //   Navigator.push(context,
-            //       MaterialPageRoute(builder: (context) => BreakfastItem()));
-            // },
-            child: Container(
-              margin: EdgeInsets.all(10),
-              child: new Card(
-                color: Colors.brown[100],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                elevation: 10,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Image.asset(
-                      'images/dessert.jpeg',
-                      height: 100,
-                      width: 200,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Center(
-                        child: Text(
-                          'DESSERT',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Lobster-Regular',
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          InkWell(
-            // onTap: () {
-            //   Navigator.push(context,
-            //       MaterialPageRoute(builder: (context) => BreakfastItem()));
-            // },
+            InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SpaghettiItem()));
+            },
             child: Container(
               margin: EdgeInsets.all(10),
               child: new Card(
@@ -333,6 +296,47 @@ class _GridviewState extends State<Gridview> {
                       child: Center(
                         child: Text(
                           'SPAGHETTI',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Lobster-Regular',
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DessertItem()));
+            },
+            child: Container(
+              margin: EdgeInsets.all(10),
+              child: new Card(
+                color: Colors.brown[100],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                elevation: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Image.asset(
+                      'images/dessert.jpeg',
+                      height: 100,
+                      width: 200,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Center(
+                        child: Text(
+                          'DESSERT',
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Lobster-Regular',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
-import 'package:menu_app/LunchBloc/lunchCartListBloc.dart';
 import 'package:menu_app/MenuGroup/menuCategory.dart';
+import 'package:menu_app/bloc/LunchBloc/lunchCartListBloc.dart';
 import 'package:menu_app/cart/lunchFoodItem.dart';
 
 

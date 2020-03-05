@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:menu_app/MenuGroup/menuCategory.dart';
-import 'package:menu_app/bloc/DinnerBloc/dinnerCartListBloc.dart';
-import 'package:menu_app/cart/dinnerFoodItem.dart';
+import 'package:menu_app/bloc/SpaghettiBloc/spaghettiCartListBloc.dart';
+import 'package:menu_app/cart/spaghettiFoodItem.dart';
 
-
-class DinnerItem extends StatelessWidget {
-  const DinnerItem({Key key}) : super(key: key);
+class SpaghettiItem extends StatelessWidget {
+  const SpaghettiItem({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      blocs: [Bloc((i) => DinnerCartListBloc())],
+      blocs: [Bloc((i) => SpaghettiCartListBloc())],
       child: MaterialApp(
         home: Home(),
         debugShowCheckedModeBanner: false,
@@ -41,19 +40,19 @@ class _HomeState extends State<Home> {
               );
             }),
         backgroundColor: Colors.brown,
-        title: Text('Dinner Items'),
+        title: Text('Spaghetti Items'),
         centerTitle: true,
       ),
       body: Column(
         children: <Widget>[
-          displayDinner(),
+          displaySpaghetti(),
         ],
       ),
     );
   }
 }
 
-Widget displayDinner() {
+Widget displaySpaghetti() {
   return Container(
     margin: EdgeInsets.all(10),
     padding: EdgeInsets.all(10),
@@ -62,73 +61,71 @@ Widget displayDinner() {
         borderRadius: new BorderRadius.all(Radius.circular(20))),
     height: 510,
     child: ListView(scrollDirection: Axis.vertical, children: <Widget>[
-      for (var dinnerFoodItem in dinfoodItemList
-          .dinnerFoodItems) //loop through every breakfast items present in the list
-        DinnerItemContainer(
-            dinnerFoodItem:
-                dinnerFoodItem) //passing breakfast to the container
+      for (var spaghettiFoodItem in spafoodItemList
+          .spaghettiFoodItems) //loop through every breakfast items present in the list
+        SpaghettiItemContainer(
+            spaghettiFoodItem:
+                spaghettiFoodItem) //passing breakfast to the container
     ]),
   );
 }
 
-class DinnerItemContainer extends StatelessWidget {
+class SpaghettiItemContainer extends StatelessWidget {
   // const breakfastItemContainer({Key key}) : super(key: key);
 
-  final DinnerFoodItem dinnerFoodItem;
+  final SpaghettiFoodItem spaghettiFoodItem;
 
-  DinnerItemContainer({@required this.dinnerFoodItem});
+  SpaghettiItemContainer({@required this.spaghettiFoodItem});
 
-  final DinnerCartListBloc dinbloc =
-      BlocProvider.getBloc<DinnerCartListBloc>();
+  final SpaghettiCartListBloc spabloc =
+      BlocProvider.getBloc<SpaghettiCartListBloc>();
 
-  addToCart(DinnerFoodItem dinnerFoodItem) {
-    dinbloc.addToList(dinnerFoodItem);
+  addToCart(SpaghettiFoodItem spaghettiFoodItem) {
+    spabloc.addToList(spaghettiFoodItem);
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        addToCart(dinnerFoodItem);
+        addToCart(spaghettiFoodItem);
 
         //snackar gives a message with an optional action which briefly displays at the bottom of the screen
         final snackbar = SnackBar(
-          content: Text("${dinnerFoodItem.dinname} added to your food cart."),
+          content: Text("${spaghettiFoodItem.spaname} added to your food cart."),
           duration: Duration(milliseconds: 2000),
         );
 
         Scaffold.of(context).showSnackBar(snackbar); //showing the snackbar
       },
-
-      
-      child: DinnerItems(
-        dinDescription: dinnerFoodItem.dindescription,
-        dinName: dinnerFoodItem.dinname,
-        dinImage: dinnerFoodItem.dinimage,
-        dinPrice: dinnerFoodItem.dinprice,
+      child: LunchItems(
+        spaDescription: spaghettiFoodItem.spadescription,
+        spaName: spaghettiFoodItem.spaname,
+        spaImage: spaghettiFoodItem.spaimage,
+        spaPrice: spaghettiFoodItem.spaprice,
       ),
     );
   }
 
   void dispose() {
-    dinbloc.dispose();
+    spabloc.dispose();
   }
 }
 
-class DinnerItems extends StatelessWidget {
+class LunchItems extends StatelessWidget {
   //const breakfastItems({Key key}) : super(key: key);
 
-  DinnerItems({
-    @required this.dinImage,
-    @required this.dinName,
-    @required this.dinPrice,
-    @required this.dinDescription,
+  LunchItems({
+    @required this.spaImage,
+    @required this.spaName,
+    @required this.spaPrice,
+    @required this.spaDescription,
   });
 
-  final String dinDescription;
-  final String dinName;
-  final String dinImage;
-  final int dinPrice;
+  final String spaDescription;
+  final String spaName;
+  final String spaImage;
+  final int spaPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +143,7 @@ class DinnerItems extends StatelessWidget {
           child: Wrap(
             children: <Widget>[
               Text(
-                dinName,
+                spaName,
                 style: TextStyle(
                   fontFamily: 'Rancho-Regular',
                   fontWeight: FontWeight.bold,
@@ -155,7 +152,7 @@ class DinnerItems extends StatelessWidget {
               ),
               ListTile(
                 title: Text(
-                  dinDescription,
+                  spaDescription,
                   style: TextStyle(
                     fontFamily: 'Rancho-Regular',
                     fontWeight: FontWeight.bold,
@@ -163,14 +160,14 @@ class DinnerItems extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  "\Rs$dinPrice",
+                  "\Rs$spaPrice",
                   style: TextStyle(
                     fontFamily: 'Rancho-Regular',
                     fontWeight: FontWeight.bold,
                     fontSize: 18.0,
                   ),
                 ),
-                trailing: Image.asset(dinImage, fit: BoxFit.cover),
+                trailing: Image.asset(spaImage, fit: BoxFit.cover),
               ),
               SizedBox(width: 10),
               RaisedButton(

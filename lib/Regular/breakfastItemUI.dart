@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
-import 'package:menu_app/BreakfastBloc/breakfastCartListBloc.dart';
 import 'package:menu_app/MenuGroup/menuCategory.dart';
+import 'package:menu_app/bloc/BreakfastBloc/breakfastCartListBloc.dart';
 import 'package:menu_app/cart/breakfastFoodItem.dart';
 
 class BreakfastItem extends StatelessWidget {

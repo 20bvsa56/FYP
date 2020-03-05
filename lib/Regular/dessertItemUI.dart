@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:menu_app/MenuGroup/menuCategory.dart';
-import 'package:menu_app/bloc/DinnerBloc/dinnerCartListBloc.dart';
-import 'package:menu_app/cart/dinnerFoodItem.dart';
+import 'package:menu_app/bloc/DessertBloc/dessertCartListBloc.dart';
+import 'package:menu_app/cart/dessertFoodItem.dart';
 
-
-class DinnerItem extends StatelessWidget {
-  const DinnerItem({Key key}) : super(key: key);
+class DessertItem extends StatelessWidget {
+  const DessertItem({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      blocs: [Bloc((i) => DinnerCartListBloc())],
+      blocs: [Bloc((i) => DessertCartListBloc())],
       child: MaterialApp(
         home: Home(),
         debugShowCheckedModeBanner: false,
@@ -41,19 +40,19 @@ class _HomeState extends State<Home> {
               );
             }),
         backgroundColor: Colors.brown,
-        title: Text('Dinner Items'),
+        title: Text('Dessert Items'),
         centerTitle: true,
       ),
       body: Column(
         children: <Widget>[
-          displayDinner(),
+          displayDessert(),
         ],
       ),
     );
   }
 }
 
-Widget displayDinner() {
+Widget displayDessert() {
   return Container(
     margin: EdgeInsets.all(10),
     padding: EdgeInsets.all(10),
@@ -62,38 +61,38 @@ Widget displayDinner() {
         borderRadius: new BorderRadius.all(Radius.circular(20))),
     height: 510,
     child: ListView(scrollDirection: Axis.vertical, children: <Widget>[
-      for (var dinnerFoodItem in dinfoodItemList
-          .dinnerFoodItems) //loop through every breakfast items present in the list
-        DinnerItemContainer(
-            dinnerFoodItem:
-                dinnerFoodItem) //passing breakfast to the container
+      for (var dessertFoodItem in desfoodItemList
+          .dessertFoodItems) //loop through every breakfast items present in the list
+        DessertItemContainer(
+            dessertFoodItem:
+                dessertFoodItem) //passing breakfast to the container
     ]),
   );
 }
 
-class DinnerItemContainer extends StatelessWidget {
+class DessertItemContainer extends StatelessWidget {
   // const breakfastItemContainer({Key key}) : super(key: key);
 
-  final DinnerFoodItem dinnerFoodItem;
+  final DessertFoodItem dessertFoodItem;
 
-  DinnerItemContainer({@required this.dinnerFoodItem});
+  DessertItemContainer({@required this.dessertFoodItem});
 
-  final DinnerCartListBloc dinbloc =
-      BlocProvider.getBloc<DinnerCartListBloc>();
+  final DessertCartListBloc desbloc =
+      BlocProvider.getBloc<DessertCartListBloc>();
 
-  addToCart(DinnerFoodItem dinnerFoodItem) {
-    dinbloc.addToList(dinnerFoodItem);
+  addToCart(DessertFoodItem dessertFoodItem) {
+    desbloc.addToList(dessertFoodItem);
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        addToCart(dinnerFoodItem);
+        addToCart(dessertFoodItem);
 
         //snackar gives a message with an optional action which briefly displays at the bottom of the screen
         final snackbar = SnackBar(
-          content: Text("${dinnerFoodItem.dinname} added to your food cart."),
+          content: Text("${dessertFoodItem.desname} added to your food cart."),
           duration: Duration(milliseconds: 2000),
         );
 
@@ -101,34 +100,34 @@ class DinnerItemContainer extends StatelessWidget {
       },
 
       
-      child: DinnerItems(
-        dinDescription: dinnerFoodItem.dindescription,
-        dinName: dinnerFoodItem.dinname,
-        dinImage: dinnerFoodItem.dinimage,
-        dinPrice: dinnerFoodItem.dinprice,
+      child: DessertItems(
+        desDescription: dessertFoodItem.desdescription,
+        desName: dessertFoodItem.desname,
+        desImage: dessertFoodItem.desimage,
+        desPrice: dessertFoodItem.desprice,
       ),
     );
   }
 
   void dispose() {
-    dinbloc.dispose();
+    desbloc.dispose();
   }
 }
 
-class DinnerItems extends StatelessWidget {
+class DessertItems extends StatelessWidget {
   //const breakfastItems({Key key}) : super(key: key);
 
-  DinnerItems({
-    @required this.dinImage,
-    @required this.dinName,
-    @required this.dinPrice,
-    @required this.dinDescription,
+  DessertItems({
+    @required this.desImage,
+    @required this.desName,
+    @required this.desPrice,
+    @required this.desDescription,
   });
 
-  final String dinDescription;
-  final String dinName;
-  final String dinImage;
-  final int dinPrice;
+  final String desDescription;
+  final String desName;
+  final String desImage;
+  final int desPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +145,7 @@ class DinnerItems extends StatelessWidget {
           child: Wrap(
             children: <Widget>[
               Text(
-                dinName,
+                desName,
                 style: TextStyle(
                   fontFamily: 'Rancho-Regular',
                   fontWeight: FontWeight.bold,
@@ -155,7 +154,7 @@ class DinnerItems extends StatelessWidget {
               ),
               ListTile(
                 title: Text(
-                  dinDescription,
+                  desDescription,
                   style: TextStyle(
                     fontFamily: 'Rancho-Regular',
                     fontWeight: FontWeight.bold,
@@ -163,14 +162,14 @@ class DinnerItems extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  "\Rs$dinPrice",
+                  "\Rs$desPrice",
                   style: TextStyle(
                     fontFamily: 'Rancho-Regular',
                     fontWeight: FontWeight.bold,
                     fontSize: 18.0,
                   ),
                 ),
-                trailing: Image.asset(dinImage, fit: BoxFit.cover),
+                trailing: Image.asset(desImage, fit: BoxFit.cover),
               ),
               SizedBox(width: 10),
               RaisedButton(
