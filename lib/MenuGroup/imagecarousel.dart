@@ -21,7 +21,7 @@ class ImageCarousel extends StatelessWidget {
             AssetImage('images/salad.jpeg'),
             AssetImage('images/breakfast.jpeg'),
           ],
-          animationCurve: Curves.fastOutSlowIn,
+          animationCurve: Curves.fastLinearToSlowEaseIn,
           animationDuration: Duration(milliseconds: 8000),
         ),
       ),

@@ -68,7 +68,7 @@ Widget maintitle(){
 
 Widget display(){
  return Container(
-    height: 300,
+    height: 310,
     child: ListView(
        scrollDirection: Axis.horizontal,
        children:<Widget>[
@@ -143,14 +143,17 @@ class SpecialItems extends StatelessWidget {
                  color: Colors.brown[50],
                  child: Wrap(
                    children: <Widget>[ 
-                    Center(child:Text(specialTitle,
-                     style:TextStyle(
-                          fontFamily: 'Lobster-Regular',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,     
+                    Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Center(child:Text(specialTitle,
+                       style:TextStyle(
+                            fontFamily: 'Lobster-Regular',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,     
+                         ),
+                        ),
                        ),
-                      ),
-                     ),
+                    ),
                      
                      Image.asset(specialImage, fit: BoxFit.cover),
 
@@ -172,12 +175,14 @@ class SpecialItems extends StatelessWidget {
                        ),
                       
                      ),
-                      RaisedButton(
+                      Center(
+                        child: RaisedButton(
                 hoverElevation: 0,
                 onPressed: () {},
                 child:
                     const Text('Add to Cart', style: TextStyle(fontSize: 15)),
               ),
+                      ),
                    ],
                  ),
                )
