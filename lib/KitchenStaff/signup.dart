@@ -31,7 +31,7 @@ class _SignUpState extends State<SignUp> {
     String password = passwordController.text;
 
     //server api url
-    var url = 'http://localhost/Tastyorama/lib/connection/api/registration/create.php';
+    var url = 'http://10.0.2.2/Tastyorama/lib/connection/api/registration/create.php';
 
     // Store all data with Param Name.
     var data = {'username': username, 'email': email, 'password': password};
@@ -102,7 +102,7 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             Positioned(
-              height: 400,
+              height: 450,
               bottom: 30.0,
               left: 40.0,
               right: 40.0,
