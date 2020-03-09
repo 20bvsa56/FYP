@@ -5,51 +5,49 @@
     header('Content-Type: application/json');
 
     include_once '../../Database.php';
-    include_once '../../models/fooditems.php';
+    include_once '../../models/registration.php';
 
     //Instantiate database & connect
     $database = new Database();
     $db = $database->connect();
 
     //Instantiate fooditems object
-    $food = new FoodItems($db);
+    $user = new Registration($db);
 
     //query fooditems & calling read method
-    $result= $food->read();
+    $result= $user->read();
     //get row count
     $num = $result->rowCount();
 
-    //check if any fooditems
+    //check if any users
     if($num > 0){
-    //food array
-    $fooditems_arr = array();
-    $fooditems_arr['data']=array();//data will go here
+    //user array
+    $users_arr = array();
+    $users_arr['data']=array();//data will go here
 
     //result will give result from read function so looping thorugh it
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
         extract($row);
 
-        $fooditem = array(
+        $userlist = array(
             'id' => $id,
-            'title' => $title,
-            'name' => $name,
-            'price' => $price,
-            'categoryId' => $categoryId,
-            'image' => $image
+            'username' => $username,
+            'email' => $email,
+            'password' => $password
         );
 
         //push to 'data'
-        array_push($fooditems_arr['data'], $fooditem);
+        array_push($users_arr['data'], $userlist);
     }
 
     //turn to json & output
-    echo json_encode($fooditems_arr);
+    echo json_encode($users_arr);
         
     }
     else{
         //no food items
         echo json_encode(
-            array('message'=> 'No food items found')
+            array('message'=> 'No users found')
         );
     }
     

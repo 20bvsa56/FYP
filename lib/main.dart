@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'KitchenStaff/successsignup.dart';
 import 'home.dart';
 import 'KitchenStaff/login.dart';
 import 'MenuGroup/view.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       '/signup': (context) => SignUp(),
        //When navigating to the "/specials" route, build the Special widget.
       // '/specials': (context) => Special(),
+      '/success':(context) => Success(),
      
     },
     );

@@ -5,20 +5,17 @@ import 'package:menu_app/MenuGroup/imageCarousel.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:menu_app/specialbloc/specialCartListBloc.dart';
 
-
-class SpecialCategory  extends StatelessWidget {
-  const SpecialCategory ({Key key}) : super(key: key);
+class SpecialCategory extends StatelessWidget {
+  const SpecialCategory({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-   return BlocProvider(
-      blocs: [
-        Bloc((i)=>SpecialCartListBloc())
-      ],
-      child:MaterialApp(
-        home:Home(),
+    return BlocProvider(
+      blocs: [Bloc((i) => SpecialCartListBloc())],
+      child: MaterialApp(
+        home: Home(),
         debugShowCheckedModeBanner: false,
-    ), 
+      ),
     );
   }
 }
@@ -29,54 +26,53 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar:AppBar(leading: Icon(Icons.home),
-          backgroundColor: Colors.brown,
-          title: Text('Home'),
-          centerTitle: true,
-        ),
-          body: Column(
-            children: <Widget>[
-              ImageCarousel(),
-              maintitle(),
-              SizedBox(height:5),
-              //searchBar(),
-              display(),
-            ],
-          ),
-        );
+      appBar: AppBar(
+        leading: Icon(Icons.home),
+        backgroundColor: Colors.brown,
+        title: Text('Home'),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: <Widget>[
+          ImageCarousel(),
+          maintitle(),
+          SizedBox(height: 5),
+          //searchBar(),
+          display(),
+        ],
+      ),
+    );
   }
 }
 
-Widget maintitle(){
+Widget maintitle() {
   return Container(
-    child:TyperAnimatedTextKit(
+    child: TyperAnimatedTextKit(
       text: ["Today\'s Special"],
       textStyle: TextStyle(
-        fontSize: 20.0, 
+        fontSize: 20.0,
         fontWeight: FontWeight.bold,
         decoration: TextDecoration.underline,
         fontFamily: 'Pacifico-Regular',
         color: Colors.black,
-          
-        ),
-        
-        speed: Duration(milliseconds: 100),
-        isRepeatingAnimation: false,
-),
-);
+      ),
+      speed: Duration(milliseconds: 100),
+      isRepeatingAnimation: false,
+    ),
+  );
 }
 
-Widget display(){
- return Container(
-    height: 310,
-    child: ListView(
-       scrollDirection: Axis.horizontal,
-       children:<Widget>[
-          for (var specialFoodItem in sfoodItemList.specialFoodItems)//loop through every food items present in the list
-          SpecialItemContainer(specialFoodItem : specialFoodItem)//passing fooditem to the container
-       ]
-   ),
- );
+Widget display() {
+  return Container(
+    height: 300,
+    child: ListView(scrollDirection: Axis.horizontal, children: <Widget>[
+      for (var specialFoodItem in sfoodItemList
+          .specialFoodItems) //loop through every food items present in the list
+        SpecialItemContainer(
+            specialFoodItem:
+                specialFoodItem) //passing fooditem to the container
+    ]),
+  );
 }
 
 class SpecialItemContainer extends StatelessWidget {
@@ -86,23 +82,24 @@ class SpecialItemContainer extends StatelessWidget {
   SpecialItemContainer({@required this.specialFoodItem});
 
   final SpecialCartListBloc sbloc = BlocProvider.getBloc<SpecialCartListBloc>();
-  
-  addToCart(SpecialFoodItem specialFoodItem){
+
+  addToCart(SpecialFoodItem specialFoodItem) {
     sbloc.addToList(specialFoodItem);
   }
-  @override 
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         addToCart(specialFoodItem);
 
         //snackar gives a message with an optional action which briefly displays at the bottom of the screen
         final snackbar = SnackBar(
           content: Text("${specialFoodItem.sname} added to your food cart."),
-          duration: Duration(milliseconds: 2000),  
+          duration: Duration(milliseconds: 2000),
         );
-        
-        Scaffold.of(context).showSnackBar(snackbar);//showing the snackbar
+
+        Scaffold.of(context).showSnackBar(snackbar); //showing the snackbar
       },
       child: SpecialItems(
         specialTitle: specialFoodItem.stitle,
@@ -112,7 +109,8 @@ class SpecialItemContainer extends StatelessWidget {
       ),
     );
   }
-void dispose() {
+
+  void dispose() {
     sbloc.dispose();
   }
 }
@@ -134,78 +132,74 @@ class SpecialItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return Container(
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(5),
-              width: 200.0,
-             
-               child: Card(
-                 color: Colors.brown[50],
-                 child: Wrap(
-                   children: <Widget>[ 
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Center(child:Text(specialTitle,
-                       style:TextStyle(
-                            fontFamily: 'Lobster-Regular',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,     
-                         ),
-                        ),
-                       ),
-                    ),
-                     
-                     Image.asset(specialImage, fit: BoxFit.cover),
-
-                     ListTile(
-                       isThreeLine: false,
-                       title: Text(specialName,
-                       style: TextStyle(
-                          fontFamily: 'Rancho-Regular',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17.0,
-                       ),
-                       ),
-                       subtitle: Text("\Rs$specialPrice",
-                       style:TextStyle(
-                          fontFamily: 'Rancho-Regular',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,     
-                       ),
-                       ),
-                      
-                     ),
-                      Center(
-                        child: RaisedButton(
-                hoverElevation: 0,
-                onPressed: () {},
-                child:
-                    const Text('Add to Cart', style: TextStyle(fontSize: 15)),
+    return Container(
+        margin: EdgeInsets.all(10),
+        padding: EdgeInsets.all(5),
+        width: 200.0,
+        child: Card(
+          color: Colors.brown[50],
+          child: Wrap(
+            children: <Widget>[
+              Center(
+                child: Text(
+                  specialTitle,
+                  style: TextStyle(
+                    fontFamily: 'Lobster-Regular',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
               ),
-                      ),
-                   ],
-                 ),
-               )
-            );
+              Image.asset(specialImage, fit: BoxFit.cover),
+              ListTile(
+                isThreeLine: false,
+                title: Text(
+                  specialName,
+                  style: TextStyle(
+                    fontFamily: 'Rancho-Regular',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17.0,
+                  ),
+                ),
+                subtitle: Text(
+                  "\Rs$specialPrice",
+                  style: TextStyle(
+                    fontFamily: 'Rancho-Regular',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+              Center(
+                child: RaisedButton(
+                  hoverElevation: 0,
+                  onPressed: () {},
+                  child:
+                      const Text('Add to Cart', style: TextStyle(fontSize: 15)),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
 }
-} 
 
-Widget searchBar(){
+Widget searchBar() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
       SizedBox(width: 50),
-      Icon(Icons.search,
-      color: Colors.black38),
+      Icon(Icons.search, color: Colors.black38),
       SizedBox(width: 20),
       Expanded(
         child: TextField(
-        decoration: InputDecoration(
-          hintText: 'Search Special',
-          contentPadding: EdgeInsets.symmetric(vertical: 5),
+          decoration: InputDecoration(
+            hintText: 'Search Special',
+            contentPadding: EdgeInsets.symmetric(vertical: 5),
+          ),
         ),
-      ),),SizedBox(width: 50),  
+      ),
+      SizedBox(width: 50),
     ],
   );
-  
 }

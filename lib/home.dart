@@ -11,6 +11,7 @@ class _HomeState extends State<Home> {
   // var tables = ['Table No.','Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6'];
   // var currentTableSelected = 'Table No.';
   // String dropdownValue = 'Table No.';
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +116,8 @@ class _HomeState extends State<Home> {
                               // Navigate to the main view screen using a named route '/view'.
                               Navigator.pushNamed(context, '/view');
                             },
-                            child: Text('Proceed',
+                            child: Text(
+                              _isLoading ? 'Proceeding..' : 'Proceed',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 24,
@@ -134,6 +136,7 @@ class _HomeState extends State<Home> {
                             child: RaisedButton(
                               color: Colors.brown[500],
                               onPressed: () {
+
                                 // Navigate to the main login screen using a named route '/login'.
                                 Navigator.pushNamed(context, '/login');
                               },
