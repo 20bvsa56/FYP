@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+
 class SignUp extends StatefulWidget {
   SignUp({Key key}) : super(key: key);
 
@@ -31,13 +32,13 @@ class _SignUpState extends State<SignUp> {
     String password = passwordController.text;
 
     //server api url
-    var url = 'http://10.0.2.2/Tastyorama/lib/connection/api/registration/create.php';
+    var url = 'http://localhost/Tastyorama/lib/connection/api/registration/create.php';
 
     // Store all data with Param Name.
     var data = {'username': username, 'email': email, 'password': password};
 
     // Starting  API Call.
-    var response = await http.post(url, body: json.encode(data));
+    var response = await http.post(url, body: json.encode(data), headers:{"Accept":"application/json"});
 
     // Getting Server response into variable.
     var message = jsonDecode(response.body);

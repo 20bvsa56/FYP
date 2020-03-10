@@ -5,12 +5,20 @@ import 'package:menu_app/Cart/specialFoodItem.dart';
 import 'package:menu_app/bloc/colorbloc.dart';
 import 'package:menu_app/specialbloc/specialCartListBloc.dart';
 
-class Cart extends StatelessWidget {
+
+class Cart extends StatefulWidget {
+  Cart({Key key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    final SpecialCartListBloc cartbloc =
+  _CartState createState() => _CartState();
+}
+
+class _CartState extends State<Cart> {
+      final SpecialCartListBloc cartbloc =
         BlocProvider.getBloc<SpecialCartListBloc>();
     List<SpecialFoodItem> specialFoodItems;
+  @override
+  Widget build(BuildContext context) {
     return StreamBuilder(
       stream: cartbloc.listStream,
       builder: (context, snapshot) {

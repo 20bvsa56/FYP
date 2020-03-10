@@ -64,13 +64,14 @@ Widget maintitle() {
 
 Widget display() {
   return Container(
+    key: PageStorageKey('sfoodItemList.sid'),
     height: 300,
     child: ListView(scrollDirection: Axis.horizontal, children: <Widget>[
       for (var specialFoodItem in sfoodItemList
           .specialFoodItems) //loop through every food items present in the list
         SpecialItemContainer(
             specialFoodItem:
-                specialFoodItem) //passing fooditem to the container
+                specialFoodItem), //passing fooditem to the container
     ]),
   );
 }
