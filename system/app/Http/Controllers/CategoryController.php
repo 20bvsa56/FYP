@@ -14,7 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('Categories.index');
+        $categories=Category::latest()->paginate(5);
+        return view('Categories.index',compact('categories'))
+            ->with('i',(request()-> input('page',1)-1)*5);
+        //compact stores vdata in key and value form
     }
 
     /**
@@ -90,6 +93,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('Categories.index')
+            ->with('success','Food category deleted successfully.');
+
     }
 }

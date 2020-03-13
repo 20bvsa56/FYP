@@ -23,5 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/categoryCreate', 'CategoryController@create')->name('catCreate');
 Route::get('/categoryIndex', 'CategoryController@index')->name('catIndex');
 Route::get('/categoryStore', 'CategoryController@store')->name('catStore');
+Route::get('/categoryDelete', 'CategoryController@destroy')->name('catDelete');
+
 
 

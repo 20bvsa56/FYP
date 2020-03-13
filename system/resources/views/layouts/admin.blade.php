@@ -77,7 +77,7 @@
                             <i class="fas fa-list"></i>Dashboard</a>
                     </li>
                     <li>
-                        <a class="js-arrow" href="{{route('catCreate')}}">
+                        <a class="js-arrow" href="{{route('catIndex')}}">
                             <i class="fas fa-cube"></i>Food Category</a>
                     </li>
                     <li>
