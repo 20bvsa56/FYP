@@ -81,11 +81,11 @@
                             <i class="fas fa-cube"></i>Food Category</a>
                     </li>
                     <li>
-                        <a class="js-arrow" href="{{route('itemCreate')}}">
+                        <a class="js-arrow" href="{{route('itemIndex')}}">
                             <i class="fas fa-coffee"></i>Food Item</a>
                     </li>
                     <li>
-                        <a class="js-arrow" href="">
+                        <a class="js-arrow" href="{{route('roleIndex')}}">
                             <i class="fas fa-user"></i>Role</a>
                     </li>
                 </ul>

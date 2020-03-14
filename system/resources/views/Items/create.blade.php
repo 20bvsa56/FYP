@@ -50,7 +50,7 @@
                 <input type="text" class="form-control" name="image" placeholder="Insert food item image">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-        </form>c
+        </form>
     </div>
 
     @if ($message = Session::get('success'))
