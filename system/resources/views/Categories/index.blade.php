@@ -34,7 +34,7 @@
          <td>
             <form action="{{route('catDelete',$category->id)}}" method="POST">
 
-               <a class="btn btn-primary" href="">Edit</a>
+               <a class="btn btn-primary" href="{{route('catEdit',$category->id)}}">Edit</a>
 
                @csrf
                @method('DELETE')

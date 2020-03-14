@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Item extends Model
 {
     protected $primaryKey='id';
-    protected $table = 'categories';
+    protected $table = 'items';
     protected $fillable=[
-        'name','type'
+        'category_id','title','name','price','image'
     ];
     //for security purpose, this data are to be stored in db
+
 }

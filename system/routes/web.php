@@ -20,10 +20,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/categoryCreate', 'CategoryController@create')->name('catCreate');
 Route::get('/categoryIndex', 'CategoryController@index')->name('catIndex');
-Route::get('/categoryStore', 'CategoryController@store')->name('catStore');
-Route::get('/categoryDelete', 'CategoryController@destroy')->name('catDelete');
+Route::post('/categoryStore', 'CategoryController@store')->name('catStore');
+Route::post('/categoryDelete/{id}', 'CategoryController@destroy')->name('catDelete');
+Route::get('/categoryEdit/{id}', 'CategoryController@edit')->name('catEdit');
+Route::post('/categoryUpdate/{id}', 'CategoryController@update')->name('catUpdate');
+
+
+Route::get('/itemCreate', 'ItemController@create')->name('itemCreate');
+Route::get('/itemIndex', 'ItemController@index')->name('itemIndex');
+Route::post('/itemStore', 'ItemController@store')->name('itemStore');
+Route::post('/itemDelete/{id}', 'ItemController@destroy')->name('itemDelete');
+Route::get('/itemEdit/{id}', 'ItemController@edit')->name('itemEdit');
+Route::post('/itemUpdate/{id}', 'ItemController@update')->name('itemUpdate');
 
 
 

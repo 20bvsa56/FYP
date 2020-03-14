@@ -81,7 +81,7 @@
                             <i class="fas fa-cube"></i>Food Category</a>
                     </li>
                     <li>
-                        <a class="js-arrow" href="">
+                        <a class="js-arrow" href="{{route('itemCreate')}}">
                             <i class="fas fa-coffee"></i>Food Item</a>
                     </li>
                     <li>

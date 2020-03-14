@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Item;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +15,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //categories var stores data from the db
-        $categories=Category::latest()->paginate(5);
-        return view('Categories.index',compact('categories'))
+        //items var stores data from the db
+        $items=Item::latest()->paginate(5);
+        return view('Items.index',compact('items'))
             ->with('i',(request()-> input('page',1)-1)*5);
-        //compact stores vdata in key and value form
+        //compact stores data in key and value form
     }
 
     /**
@@ -28,10 +29,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('Categories.create');
+        return view('Items.create');
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -42,23 +41,26 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'category_id'=>'required',
+            'title'=>'required',
             'name' => 'required',
-            'type' => 'required',
+            'price' => 'required',
+            'image'=>'required'
         ]);
 
-        Category::create($request->all());
+        Item::create($request->all());
 
-        return redirect()->route('catIndex')
-            ->with('success','Food category added successfully.');
+        return redirect()->route('itemIndex')
+            ->with('success','Food item added successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Item $item)
     {
         //
     }
@@ -66,46 +68,48 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Item $item)
     {
-        return view('Categories.edit',compact('category'));
+        return view('Items.edit',compact('item'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Item $item)
     {
         $request->validate([
+            'category_id'=>'required',
+            'title'=>'required',
             'name' => 'required',
-            'type' => 'required',
+            'price' => 'required',
+            'image'=>'required'
         ]);
 
-        $category->update($request->all());
+        $item->update($request->all());
 
-        return redirect()->route('catIndex')
-            ->with('success','Food category updated successfully.');
+        return redirect()->route('itemIndex')
+            ->with('success','Food item updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Item $item)
     {
-        /*$category= Category::find($category['id']);*/
-        $category->delete();
+        $item->delete();
 
-        return redirect()->route('catIndex')
-            ->with('success','Food category deleted successfully.');
+        return redirect()->route('itemIndex')
+            ->with('success','Food item deleted successfully.');
     }
 }
