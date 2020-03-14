@@ -40,6 +40,8 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        $item= new Item();
+
         $request->validate([
             'category_id'=>'required',
             'title'=>'required',
@@ -49,6 +51,19 @@ class ItemController extends Controller
         ]);
 
         Item::create($request->all());
+
+        if($request->hasfile('image')){
+            $file=$request->file('image');
+            $extension=$file->getClientOriginalExtension();//getting image extension
+            $filename= time(). '.' . $extension;
+            $file->move('foodItems',$filename);
+            $item->image=$filename;
+        }else{
+            return $request;
+            $item->image='';
+        }
+        $item->save();
+
 
         return redirect()->route('itemIndex')
             ->with('success','Food item added successfully.');

@@ -39,15 +39,17 @@
             <div class="form-group">
                 <label for="Name">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Enter food item name">
-                <small class="form-text text-muted">Ex: Mo:mo, Burger etc.</small>
+                <small class="form-text text-muted">Ex: Mo:mo, wBurger etc.</small>
             </div>
             <div class="form-group">
                 <label for="Price">Price</label>
                 <input type="text" class="form-control" name="price" placeholder="Enter food item price">
             </div>
-            <div class="form-group">
-                <label for="Image">Image</label>
-                <input type="text" class="form-control" name="image" placeholder="Insert food item image">
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="image">
+                    <label class="custom-file-label">Choose food item image</label>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

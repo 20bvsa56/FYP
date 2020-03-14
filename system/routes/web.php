@@ -36,5 +36,12 @@ Route::post('/itemDelete/{id}', 'ItemController@destroy')->name('itemDelete');
 Route::get('/itemEdit/{id}', 'ItemController@edit')->name('itemEdit');
 Route::post('/itemUpdate/{id}', 'ItemController@update')->name('itemUpdate');
 
+Route::get('/roleCreate', 'RoleController@create')->name('roleCreate');
+Route::get('/roleIndex', 'RoleController@index')->name('roleIndex');
+Route::post('/roleStore', 'RoleController@store')->name('roleStore');
+Route::post('/roleDelete/{id}', 'RoleController@destroy')->name('roleDelete');
+Route::get('/roleEdit/{id}', 'RoleController@edit')->name('roleEdit');
+Route::post('/roleUpdate/{id}', 'RoleController@update')->name('roleUpdate');
+
 
 
