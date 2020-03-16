@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Item;
 use Illuminate\Http\Request;
+use DB;
+
 
 class ItemController extends Controller
 {
@@ -29,10 +31,19 @@ class ItemController extends Controller
      */
     public function create()
     {
-       // $catList = Category::pluck('id', 'name');
-        $category = Category::all();
-        return view('Items.create', compact('category'));
+//        $catLists = Category::pluck('name', 'id');
+       // dd($data);
+//
+//        $lists = Category::pluck('name', 'id')->toArray();
+//        return view('Items.create', compact('lists'));
+
+//        $cat_list = DB::table('categories')->groupBy('name')->get();
+//        return view('Items.create')->with('cat_list',$cat_list);
+
+        $catList = DB::table('categories')->pluck('id','name');
+        return view('Items.create')->with('catList',$catList);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -69,23 +80,12 @@ class ItemController extends Controller
             ->with('success','Food item added successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function show(Item $item)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Item $item)
     {
         return view('Items.edit',compact('item'));

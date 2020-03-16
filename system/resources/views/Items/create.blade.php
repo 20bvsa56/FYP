@@ -30,16 +30,9 @@
 
             <div class="form-group">
                 <label for="Category">Category</label>
-                <select name="catID" class="form-control">
-                    @foreach($categories as $category)
-                       <option
-                               value="{{$category->id}}"
-                               @if($category->id === $post->category_id)
-                                   selected
-                               @endif
-                       >
-                           {{$category->name}}
-                       </option>
+                <select class="form-control" id="lists" name="lists" >
+                    @foreach ($catList as $id => $name)
+                        <option value="{{$name}}">{{$id}}</option>
                     @endforeach
                 </select>
             </div>
