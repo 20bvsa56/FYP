@@ -27,7 +27,7 @@
     <div style="alignment: center; margin-left: 100px; margin-right: 100px;">
         <form action="{{route('catUpdate',$category->id)}}" method="POST">
             @csrf
-            @method('PUT')
+
             <div class="form-group">
                 <label for="Name">Name</label>
                 <input type="text" class="form-control" name="name" value="{{$category->name}}" placeholder="Enter food category name">

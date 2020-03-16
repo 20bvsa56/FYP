@@ -28,8 +28,9 @@
         <form action="{{route('itemStore')}}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="catID">Category ID</label>
-                <input type="text" class="form-control" name="catID" placeholder="Insert food item category id">
+                <label for="Category">Category</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter food item category">
+                <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
             </div>
             <div class="form-group">
                 <label for="Title">Title</label>
@@ -39,11 +40,12 @@
             <div class="form-group">
                 <label for="Name">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Enter food item name">
-                <small class="form-text text-muted">Ex: Mo:mo, wBurger etc.</small>
+                <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
             </div>
             <div class="form-group">
-                <label for="Price">Price</label>
-                <input type="text" class="form-control" name="price" placeholder="Enter food item price">
+                <label for="Type">Price</label>
+                <input type="text" class="form-control" name="type" placeholder="Enter food item price">
+                <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>
             <div class="input-group">
                 <div class="custom-file">

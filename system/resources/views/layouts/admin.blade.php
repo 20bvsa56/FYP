@@ -31,48 +31,25 @@
     <link href="{{ asset('vendor/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="css/theme.css" rel="stylesheet" media="all">
+    <link href="{{asset('css/theme.css')}}" rel="stylesheet" media="all">
 
 </head>
 
 <body class="animsition">
 <div class="page-wrapper">
-    <!-- HEADER MOBILE-->
-    <header class="header-mobile d-block d-lg-none">
-        <div class="header-mobile__bar">
-            <div class="container-fluid">
-                <div class="header-mobile-inner">
-{{--                    <a class="logo" href="index.html">--}}
-{{--                        <img src="{{ asset('images/icon/logo.png') }}" alt="CoolAdmin" />--}}
-{{--                    </a>--}}
-                    <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <nav class="navbar-mobile">
-            <div class="container-fluid">
-
-            </div>
-        </nav>
-    </header>
-    <!-- END HEADER MOBILE-->
 
     <!-- MENU SIDEBAR-->
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="#">
-                <img src="{{ asset('images/icon/logo.png') }}" alt="logo" height="40" width="30" />
+                <img src="images/icon/logo.png" alt="logo" height="40" width="30" />
             </a>
             <h2 class="title-1">Tastyorama</h2>
         </div>
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li class="active has-sub">
+                    <li>
                         <a class="js-arrow" href="{{route('home')}}">
                             <i class="fas fa-list"></i>Dashboard</a>
                     </li>
@@ -86,7 +63,7 @@
                     </li>
                     <li>
                         <a class="js-arrow" href="{{route('roleIndex')}}">
-                            <i class="fas fa-user"></i>Role</a>
+                            <i class="far fa-user"></i>Role</a>
                     </li>
                 </ul>
             </nav>
@@ -126,6 +103,11 @@
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                 @csrf
                                             </form>
+
+                                            <a class="dropdown-item" href="{{ route('register') }}"
+                                             >
+                                                {{ __('Register') }}
+                                            </a>
 
                                         </div>
                                     </div>

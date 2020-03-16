@@ -13,4 +13,8 @@ class Item extends Model
     ];
     //for security purpose, this data are to be stored in db
 
+    public function category(){
+        return $this->belongsTo('App\Category');
+    }
+
 }

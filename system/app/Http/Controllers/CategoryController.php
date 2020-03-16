@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+//        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +34,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('Categories.create');
+        return view('categories.create');
     }
 
 
@@ -71,7 +77,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('Categories.edit',compact('category'));
+        //dd($category);
+        return view('categories.edit', compact('category'));
     }
 
     /**

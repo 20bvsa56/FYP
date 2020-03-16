@@ -29,6 +29,8 @@ class ItemController extends Controller
      */
     public function create()
     {
+       // $catList = Category::pluck('id', 'name');
+//        $category = Category::all();
         return view('Items.create');
     }
 
@@ -52,16 +54,14 @@ class ItemController extends Controller
 
         Item::create($request->all());
 
-        if($request->hasfile('image')){
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension();//getting image extension
-            $filename= time(). '.' . $extension;
-            $file->move('foodItems',$filename);
-            $item->image=$filename;
-        }else{
-            return $request;
-            $item->image='';
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $fileName = time() . "." . $image->getClientOriginalExtension();
+            $destination_path = public_path("foodItems/");
+            $image->move($destination_path, $fileName);
+            $item->image = 'foodItems/' . $fileName;
         }
+
         $item->save();
 
 
@@ -105,7 +105,7 @@ class ItemController extends Controller
             'title'=>'required',
             'name' => 'required',
             'price' => 'required',
-            'image'=>'required'
+            'image' => 'required|image|mimes:jpeg|max:2048'
         ]);
 
         $item->update($request->all());

@@ -25,12 +25,12 @@
     @endif
 
     <div style="alignment: center; margin-left: 100px; margin-right: 100px;">
-        <form action="{{route('itemUpdate',$item->id)}}" method="POST">
+        <form action="{{route('itemUpdate','$item->id')}}" method="POST">
             @csrf
-            @method('PUT')
             <div class="form-group">
-                <label for="catID">Category ID</label>
-                <input type="text" class="form-control" name="catID" value="{{$item->catID}}" placeholder="Insert food item category id">
+                <label for="Category">Category</label>
+                <input type="text" class="form-control" name="name" value="{{$item->catID}}" placeholder="Enter food item category">
+                <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
             </div>
             <div class="form-group">
                 <label for="Title">Title</label>
@@ -40,17 +40,20 @@
             <div class="form-group">
                 <label for="Name">Name</label>
                 <input type="text" class="form-control" name="name" value="{{$item->name}}" placeholder="Enter food item name">
-                <small class="form-text text-muted">Ex: Mo:mo, Burger etc.</small>
+                <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
             </div>
             <div class="form-group">
-                <label for="Price">Price</label>
-                <input type="text" class="form-control" name="price" value="{{$item->price}}" placeholder="Enter food item price">
+                <label for="Type">Price</label>
+                <input type="text" class="form-control" name="type" value="{{$item->price}}" placeholder="Enter food item price">
+                <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>
-            <div class="form-group">
-                <label for="Image">Image</label>
-                <input type="text" class="form-control" name="image" value="{{$item->image}}" placeholder="Insert food item image">
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="image" value="{{$item->image}}">
+                    <label class="custom-file-label">Choose food item image</label>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 

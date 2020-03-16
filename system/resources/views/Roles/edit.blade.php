@@ -27,10 +27,10 @@
     <div style="alignment: center; margin-left: 100px; margin-right: 100px;">
         <form action="{{route('roleUpdate',$role->id)}}" method="POST">
             @csrf
-            @method('PUT')
+
             <div class="form-group">
                 <label for="Title">Title</label>
-                <input type="text" class="form-control" name="title" value="{{$role->name}}" placeholder="Enter staff role title">
+                <input type="text" class="form-control" name="title" value="{{$role->title}}" placeholder="Enter staff role title">
                 <small class="form-text text-muted">Ex: Manager, Kitchen staff etc.</small>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>

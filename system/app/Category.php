@@ -12,4 +12,8 @@ class Category extends Model
         'name','type'
     ];
     //for security purpose, this data are to be stored in db
+
+    public function items(){
+        return $this->hasMany('App\Item');
+    }
 }

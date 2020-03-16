@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,6 +17,12 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
+        /*Route::bind('category', function($value){
+            return \App\Category::where('id', $value)->first();
+        });*/
+
+
     }
 
     /**

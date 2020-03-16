@@ -70,6 +70,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        //dd($role);
         return view('Roles.edit',compact('role'));
     }
 
