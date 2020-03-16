@@ -20,7 +20,7 @@ class CategoryAPIController extends Controller
         //get categories
         $categories= Category::paginate(10);
 
-        //return collection of categories as a resource & collection returns a list of items
+        //return collection of categories as a resource . here, collection returns a list of items
         return CategoryResource::collection($categories);
     }
 
@@ -42,18 +42,32 @@ class CategoryAPIController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //checking method, if it is put request we gonna have to include in category_id field
+        $category = $request->isMethod('put') ? Category::findorFail($request -> category_id) : new Category;
+
+        $category->id = $request->input('category_id');
+        $category->name = $request->input('name');
+        $category->type = $request->input('type');
+
+        if($category->save()){
+            return new CategoryResource($category);
+        }
+
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.a
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        //get single category
+        $category= Category::findorFail($id);
+
+        //return single category as resource
+        return new CategoryResource($category);
     }
 
     /**
@@ -87,6 +101,11 @@ class CategoryAPIController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //get single category
+        $category= Category::findorFail($id);
+
+        if($category->delete()) {
+            return new CategoryResource($category);
+        }
     }
 }
