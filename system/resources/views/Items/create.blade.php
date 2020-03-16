@@ -27,10 +27,21 @@
     <div style="alignment: center; margin-left: 100px; margin-right: 100px;">
         <form action="{{route('itemStore')}}" method="POST">
             @csrf
+
             <div class="form-group">
                 <label for="Category">Category</label>
-                <input type="text" class="form-control" name="name" placeholder="Enter food item category">
-                <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
+                <select name="catID" class="form-control">
+                    @foreach($categories as $category)
+                       <option
+                               value="{{$category->id}}"
+                               @if($category->id === $post->category_id)
+                                   selected
+                               @endif
+                       >
+                           {{$category->name}}
+                       </option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="Title">Title</label>
