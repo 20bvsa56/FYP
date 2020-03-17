@@ -32,7 +32,7 @@ class _SignUpState extends State<SignUp> {
     String password = passwordController.text;
 
     //server api url
-    var url = 'http://localhost/Tastyorama/lib/connection/api/registration/create.php';
+    var url = 'http://127.0.0.1:8000/api/add_registry';
 
     // Store all data with Param Name.
     var data = {'username': username, 'email': email, 'password': password};

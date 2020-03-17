@@ -50,19 +50,15 @@ class ItemController extends Controller
             'title'=>'required',
             'name' => 'required',
             'price' => 'required',
-            'image'=>'required',
+            'image'=>'required|max:2048|',
             'lists'=>'required',
         ]);
 
         Item::create($request->all());
 
-       /* if ($request->hasFile('image')) {
-            $image = $request->image;
-            $fileName = time() . "." . $image->getClientOriginalExtension();
-            $destination_path = public_path("foodItems/");
-            $image->move($destination_path, $fileName);
-            $item->image = 'foodItems/' . $fileName;
-        }*/
+        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('foodItems/'), $imageName);
+        $item->image = $imageName;
 
         $item->save();
 

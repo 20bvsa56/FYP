@@ -27,6 +27,15 @@
     <div style="alignment: center; margin-left: 100px; margin-right: 100px;">
         <form action="{{route('itemStore')}}" method="POST">
             @csrf
+
+            <div class="form-group">
+                <label for="Category">Category</label>
+                <select class="form-control" id="lists" name="lists" >
+                    @foreach ($catList as $id => $name)
+                        <option value="{{$name}}" >{{$id}}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="form-group">
                 <label for="Title">Title</label>
                 <input type="text" class="form-control" name="title" placeholder="Enter food item title">
@@ -47,15 +56,6 @@
                     <input type="file" class="custom-file-input" name="image">
                     <label class="custom-file-label">Choose food item image</label>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="Category">Category</label>
-                <select class="form-control" id="lists" name="lists" >
-                    @foreach ($catList as $id => $name)
-                        <option value="{{$name}}" >{{$id}}</option>
-                    @endforeach
-                </select>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

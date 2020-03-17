@@ -30,7 +30,7 @@ Route::post('add_category', 'CategoryAPIController@store');
 //update categories
 Route::put('update_category', 'CategoryAPIController@store');
 
-//delete categories
+//delete categoriesi
 Route::delete('delete_category/{id}', 'CategoryAPIController@destroy');
 
 //list registries

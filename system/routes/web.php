@@ -27,7 +27,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/categoryCreate', 'CategoryController@create')->name('catCreate');
     Route::get('/categoryIndex', 'CategoryController@index')->name('catIndex');
     Route::post('/categoryStore', 'CategoryController@store')->name('catStore');
-    Route::delete('/categoryDelete/{category}', 'CategoryController@destroy')->name('catDelete');
+    Route::post('/categoryDelete/{category}', 'CategoryController@destroy')->name('catDelete');
     Route::get('/categoryEdit/{category}', 'CategoryController@edit')->name('catEdit');
     Route::post('/categoryUpdate/{category}', 'CategoryController@update')->name('catUpdate');
 
