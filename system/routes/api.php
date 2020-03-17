@@ -33,5 +33,20 @@ Route::put('update_category', 'CategoryAPIController@store');
 //delete categories
 Route::delete('delete_category/{id}', 'CategoryAPIController@destroy');
 
+//list registries
+Route::get('view_registries', 'RegistrationAPIController@index');
+
+//list single registries
+Route::get('single_registry/{id}', 'RegistrationAPIController@show');
+
+//create new registry
+Route::post('add_registry', 'RegistrationAPIController@store');
+
+//update registry
+Route::put('update_registry', 'RegistrationAPIController@store');
+
+//delete registry
+Route::delete('delete_registry/{id}', 'RegistrationAPIController@destroy');
+
 
 

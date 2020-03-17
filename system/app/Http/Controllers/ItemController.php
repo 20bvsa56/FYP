@@ -31,15 +31,6 @@ class ItemController extends Controller
      */
     public function create()
     {
-//        $catLists = Category::pluck('name', 'id');
-       // dd($data);
-//
-//        $lists = Category::pluck('name', 'id')->toArray();
-//        return view('Items.create', compact('lists'));
-
-//        $cat_list = DB::table('categories')->groupBy('name')->get();
-//        return view('Items.create')->with('cat_list',$cat_list);
-
         $catList = DB::table('categories')->pluck('id','name');
         return view('Items.create')->with('catList',$catList);
     }
@@ -56,22 +47,22 @@ class ItemController extends Controller
         $item= new Item();
 
         $request->validate([
-            'category_id'=>'required',
             'title'=>'required',
             'name' => 'required',
             'price' => 'required',
-            'image'=>'required'
+            'image'=>'required',
+            'lists'=>'required',
         ]);
 
         Item::create($request->all());
 
-        if ($request->hasFile('image')) {
+       /* if ($request->hasFile('image')) {
             $image = $request->image;
             $fileName = time() . "." . $image->getClientOriginalExtension();
             $destination_path = public_path("foodItems/");
             $image->move($destination_path, $fileName);
             $item->image = 'foodItems/' . $fileName;
-        }
+        }*/
 
         $item->save();
 
