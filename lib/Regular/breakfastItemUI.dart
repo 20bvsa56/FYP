@@ -77,55 +77,48 @@ class BreakfastItemContainer extends StatelessWidget {
 
   BreakfastItemContainer({@required this.breakfastFoodItem});
 
-  final BreakfastCartListBloc brebloc =
-      BlocProvider.getBloc<BreakfastCartListBloc>();
-
-  addToCart(BreakfastFoodItem breakfastFoodItem) {
-    brebloc.addToList(breakfastFoodItem);
-  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        addToCart(breakfastFoodItem);
-
-        //snackar gives a message with an optional action which briefly displays at the bottom of the screen
-        final snackbar = SnackBar(
-          content: Text("${breakfastFoodItem.brename} added to your food cart."),
-          duration: Duration(milliseconds: 2000),
-        );
-
-        Scaffold.of(context).showSnackBar(snackbar); //showing the snackbar
+       //showing the snackbar
       },
       child: BreakfastItems(
         breDescription: breakfastFoodItem.bredescription,
         breName: breakfastFoodItem.brename,
         breImage: breakfastFoodItem.breimage,
-        brePrice: breakfastFoodItem.breprice,
+        brePrice: breakfastFoodItem.breprice, breakfastFoodItem: null,
       ),
     );
   }
-
-  void dispose() {
-    brebloc.dispose();
-  }
 }
+
 
 class BreakfastItems extends StatelessWidget {
   //const breakfastItems({Key key}) : super(key: key);
+    final BreakfastFoodItem breakfastFoodItem;
 
+              final BreakfastCartListBloc brebloc =
+                  BlocProvider.getBloc<BreakfastCartListBloc>();
+
+              addToCart(BreakfastFoodItem breakfastFoodItem) {
+                brebloc.addToList(breakfastFoodItem);
+              }
+        
   BreakfastItems({
     @required this.breImage,
     @required this.breName,
     @required this.brePrice,
     @required this.breDescription,
+    @required this.breakfastFoodItem,
   });
 
   final String breDescription;
   final String breName;
   final String breImage;
   final int brePrice;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -170,14 +163,27 @@ class BreakfastItems extends StatelessWidget {
                 trailing: Image.asset(breImage, fit: BoxFit.cover),
               ),
               SizedBox(width: 10),
-              RaisedButton(
+             RaisedButton(
                 hoverElevation: 0,
-                onPressed: () {},
+                onPressed: () {
+                  addToCart(breakfastFoodItem);
+
+        //snackar gives a message with an optional action which briefly displays at the bottom of the screen
+        final snackbar = SnackBar(
+          content: Text("${breakfastFoodItem.brename} added to your food cart."),
+          duration: Duration(milliseconds: 2000),
+        );
+
+        Scaffold.of(context).showSnackBar(snackbar); 
+                },
                 child:
                     const Text('Add to Cart', style: TextStyle(fontSize: 15)),
               ),
             ],
           ),
-        ));
+        ),
+     );
+      
   }
 }
+    

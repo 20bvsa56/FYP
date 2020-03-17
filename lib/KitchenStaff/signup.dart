@@ -14,7 +14,7 @@ class _SignUpState extends State<SignUp> {
   // Boolean variable for CircularProgressIndicator.
   bool visible = false;
 
-  // Getting value from TextField widget.
+  // Getting entered value from TextField widget.
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -32,13 +32,14 @@ class _SignUpState extends State<SignUp> {
     String password = passwordController.text;
 
     //server api url
-    var url = 'http://127.0.0.1:8000/api/add_registry';
+    var url = 'http://192.168.254.1:8000/api/add_registry';
+    
 
     // Store all data with Param Name.
     var data = {'username': username, 'email': email, 'password': password};
 
     // Starting  API Call.
-    var response = await http.post(url, body: json.encode(data), headers:{"Accept":"application/json"});
+    var response = await http.post(url, body: json.encode(data));
 
     // Getting Server response into variable.
     var message = jsonDecode(response.body);
