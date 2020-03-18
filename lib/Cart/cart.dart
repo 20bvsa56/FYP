@@ -14,8 +14,8 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-      final SpecialCartListBloc cartbloc =
-        BlocProvider.getBloc<SpecialCartListBloc>();
+    final SpecialCartListBloc cartbloc = BlocProvider.getBloc<SpecialCartListBloc>();
+
     List<SpecialFoodItem> specialFoodItems;
   @override
   Widget build(BuildContext context) {

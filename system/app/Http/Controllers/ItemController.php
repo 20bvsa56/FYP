@@ -44,21 +44,27 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        $item= new Item();
+
 
         $request->validate([
             'title'=>'required',
             'name' => 'required',
             'price' => 'required',
-            'image'=>'required|max:2048|',
-            'lists'=>'required',
+
+            'category_id'=>'required',
         ]);
+//        dd($request);
+//        Item::create($request->all());
+        $item= new Item();
+        $item->title=$request->title;
+        $item->name=$request->name;
+        $item->price=$request->price;
+        $item->category_id=$request->category_id;
 
-        Item::create($request->all());
 
-        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('foodItems/'), $imageName);
-        $item->image = $imageName;
+//        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+//        request()->image->move(public_path('foodItems/'), $imageName);
+//        $item->image = $imageName;
 
         $item->save();
 

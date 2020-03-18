@@ -32,7 +32,7 @@
         @foreach($items as $item)
             <tr>
                 <td>{{++$i}}</td>
-                <td>{{$item->catID}}</td>
+                <td>{{$item->category_id}}</td>
                 <td>{{$item->title}}</td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->price}}</td>

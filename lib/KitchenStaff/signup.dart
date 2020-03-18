@@ -32,17 +32,19 @@ class _SignUpState extends State<SignUp> {
     String password = passwordController.text;
 
     //server api url
-    var url = 'http://192.168.254.1:8000/api/add_registry';
+    var url = 'http://192.168.254.1:8000/api/add_registry/';
     
 
     // Store all data with Param Name.
     var data = {'username': username, 'email': email, 'password': password};
 
     // Starting  API Call.
-    var response = await http.post(url, body: json.encode(data));
+    var response = await http.post(url, body: json.encode(data),
+      	           headers: {'Accept':'application/json'});
 
     // Getting Server response into variable.
     var message = jsonDecode(response.body);
+    // print(message.toString());
 
     // If Web call Success than Hide the CircularProgressIndicator.
     if (response.statusCode == 200) {

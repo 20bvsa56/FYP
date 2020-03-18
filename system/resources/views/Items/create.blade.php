@@ -29,14 +29,6 @@
             @csrf
 
             <div class="form-group">
-                <label for="Category">Category</label>
-                <select class="form-control" id="lists" name="lists" >
-                    @foreach ($catList as $id => $name)
-                        <option value="{{$name}}" >{{$id}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
                 <label for="Title">Title</label>
                 <input type="text" class="form-control" name="title" placeholder="Enter food item title">
                 <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
@@ -56,6 +48,14 @@
                     <input type="file" class="custom-file-input" name="image">
                     <label class="custom-file-label">Choose food item image</label>
                 </div>
+            </div>
+            <div class="form-group">
+                <label for="Category">Category</label>
+                <select class="form-control" id="category_id" name="category_id" >
+                    @foreach ($catList as $id => $name)
+                        <option value="{{$name}}" >{{$id}}</option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
