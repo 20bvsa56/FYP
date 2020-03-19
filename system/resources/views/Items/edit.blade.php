@@ -25,13 +25,17 @@
     @endif
 
     <div style="alignment: center; margin-left: 100px; margin-right: 100px;">
-        <form action="{{route('itemUpdate','$item->id')}}" method="POST">
+        <form action="{{route('itemUpdate','$item->id')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
-                <label for="Category">Category</label>
-                <input type="text" class="form-control" name="name" value="{{$item->catID}}" placeholder="Enter food item category">
-                <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="Category">Category</label>--}}
+{{--                <select class="form-control" id="category_id" name="category_id" value="category_id" >--}}
+{{--                    @foreach ($catList as $id => $name)--}}
+{{--                        <option value="{{$name}}" {{}}>{{$id}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--            </div>--}}
+
             <div class="form-group">
                 <label for="Title">Title</label>
                 <input type="text" class="form-control" name="title" value="{{$item->title}}" placeholder="Enter food item title">
@@ -47,11 +51,9 @@
                 <input type="text" class="form-control" name="type" value="{{$item->price}}" placeholder="Enter food item price">
                 <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>
-            <div class="input-group">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="image" value="{{$item->image}}">
-                    <label class="custom-file-label">Choose food item image</label>
-                </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" name="image" id="image" class="form-control" value="{{$item->image}}">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

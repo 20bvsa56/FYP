@@ -44,13 +44,10 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $request->validate([
             'title'=>'required',
             'name' => 'required',
             'price' => 'required',
-
             'category_id'=>'required',
         ]);
 //        dd($request);
@@ -62,9 +59,9 @@ class ItemController extends Controller
         $item->category_id=$request->category_id;
 
 
-//        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-//        request()->image->move(public_path('foodItems/'), $imageName);
-//        $item->image = $imageName;
+        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('foodItems/'), $imageName);
+        $item->image = $imageName;
 
         $item->save();
 
@@ -81,6 +78,7 @@ class ItemController extends Controller
 
     public function edit(Item $item)
     {
+
         return view('Items.edit',compact('item'));
     }
 
@@ -94,14 +92,26 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         $request->validate([
-            'category_id'=>'required',
             'title'=>'required',
             'name' => 'required',
             'price' => 'required',
-            'image' => 'required|image|mimes:jpeg|max:2048'
-        ]);
 
-        $item->update($request->all());
+            'category_id'=>'required',
+        ]);
+//        dd($request);
+//        Item::create($request->all());
+//        $item = Item::find($item);
+
+        $id= $request->item;
+        $item=Item::where("id", $id)->first();
+        $item->create($request->all());
+
+
+        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('foodItems/'), $imageName);
+        $item->image = $imageName;
+
+        $item->update();
 
         return redirect()->route('itemIndex')
             ->with('success','Food item updated successfully.');

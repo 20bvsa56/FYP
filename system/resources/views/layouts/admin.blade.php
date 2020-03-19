@@ -42,7 +42,7 @@
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="#">
-                <img src="images/icon/logo.png" alt="logo" height="40" width="30" />
+                <img src="../images/icon/logo.png" alt="logo" height="40" width="30" />
             </a>
             <h2 class="title-1">Tastyorama</h2>
         </div>

@@ -36,16 +36,15 @@
                 <td>{{$item->title}}</td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->price}}</td>
-                <td>{{$item->image}}</td>
+                <td><img src="{{'foodItems/'.$item->image}}" alt="" style="height:60px;width: 60px;"></td>
+
                 <td>
                     <form action="{{route('itemDelete',$item->id)}}" method="POST">
 
                         <a class="btn btn-primary" href="{{route('itemEdit',$item->id)}}">Edit</a>
 
                         @csrf
-                        @method('DELETE')
-
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger" >Delete</button>
                     </form>
 
 
