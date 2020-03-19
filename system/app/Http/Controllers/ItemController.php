@@ -49,7 +49,7 @@ class ItemController extends Controller
             'title' => 'required',
             'name' => 'required',
             'price' => 'required|numeric',
-            'category_id' => 'required',
+//            'category_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 //        dd($request);
@@ -97,7 +97,7 @@ class ItemController extends Controller
             'title' => 'required',
             'name' => 'required',
             'price' => 'required|numeric',
-            'category_id' => 'required',
+//            'category_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 //        dd($request);

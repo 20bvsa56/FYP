@@ -30,7 +30,7 @@ Route::post('add_category', 'CategoryAPIController@store');
 //update categories
 Route::put('update_category', 'CategoryAPIController@store');
 
-//delete categoriesi
+//delete categories
 Route::delete('delete_category/{id}', 'CategoryAPIController@destroy');
 
 //list registries
@@ -47,6 +47,21 @@ Route::put('update_registry', 'RegistrationAPIController@store');
 
 //delete registry
 Route::delete('delete_registry/{id}', 'RegistrationAPIController@destroy');
+
+//list items
+Route::get('view_items', 'ItemAPIController@index');
+
+//list single items
+Route::get('single_item/{id}', 'ItemAPIController@show');
+
+//create new item
+Route::post('add_item', 'ItemAPIController@store');
+
+//update item
+Route::put('update_item', 'ItemAPIController@store');
+
+//delete item
+Route::delete('delete_item/{id}', 'ItemAPIController@destroy');
 
 
 
