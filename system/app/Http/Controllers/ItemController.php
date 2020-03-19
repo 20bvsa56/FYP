@@ -6,6 +6,7 @@ use App\Category;
 use App\Item;
 use Illuminate\Http\Request;
 use DB;
+use File;
 
 
 class ItemController extends Controller
@@ -18,9 +19,9 @@ class ItemController extends Controller
     public function index()
     {
         //items var stores data from the db
-        $items=Item::latest()->paginate(5);
-        return view('Items.index',compact('items'))
-            ->with('i',(request()-> input('page',1)-1)*5);
+        $items = Item::latest()->paginate(5);
+        return view('Items.index', compact('items'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
         //compact stores data in key and value form
     }
 
@@ -31,32 +32,33 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $catList = DB::table('categories')->pluck('id','name');
-        return view('Items.create')->with('catList',$catList);
+        $catList = DB::table('categories')->pluck('id', 'name');
+        return view('Items.create')->with('catList', $catList);
     }
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
-            'title'=>'required',
+            'title' => 'required',
             'name' => 'required',
             'price' => 'required',
-            'category_id'=>'required',
+            'category_id' => 'required',
+            'image' => 'required',
         ]);
 //        dd($request);
 //        Item::create($request->all());
-        $item= new Item();
-        $item->title=$request->title;
-        $item->name=$request->name;
-        $item->price=$request->price;
-        $item->category_id=$request->category_id;
+        $item = new Item();
+        $item->title = $request->title;
+        $item->name = $request->name;
+        $item->price = $request->price;
+        $item->category_id = $request->category_id;
 
 
         $imageName = time() . '.' . request()->image->getClientOriginalExtension();
@@ -67,7 +69,7 @@ class ItemController extends Controller
 
 
         return redirect()->route('itemIndex')
-            ->with('success','Food item added successfully.');
+            ->with('success', 'Food item added successfully.');
     }
 
     public function show(Item $item)
@@ -78,34 +80,33 @@ class ItemController extends Controller
 
     public function edit(Item $item)
     {
-
-        return view('Items.edit',compact('item'));
+        $catList = DB::table('categories')->pluck('id', 'name');
+        return view('Items.edit', compact('item'))->with('catList', $catList);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Item  $item
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Item $item
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Item $item)
     {
         $request->validate([
-            'title'=>'required',
+            'title' => 'required',
             'name' => 'required',
             'price' => 'required',
-
-            'category_id'=>'required',
+            'category_id' => 'required',
+            'image' => 'required',
         ]);
 //        dd($request);
 //        Item::create($request->all());
-//        $item = Item::find($item);
-
-        $id= $request->item;
-        $item=Item::where("id", $id)->first();
-        $item->create($request->all());
-
+        $item->title = $request->title;
+        $item->name = $request->name;
+        $item->price = $request->price;
+        $item->category_id = $request->category_id;
+        $item->image = $request->image;
 
         $imageName = time() . '.' . request()->image->getClientOriginalExtension();
         request()->image->move(public_path('foodItems/'), $imageName);
@@ -114,8 +115,10 @@ class ItemController extends Controller
         $item->update();
 
         return redirect()->route('itemIndex')
-            ->with('success','Food item updated successfully.');
+            ->with('success', 'Food item updated successfully.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -125,6 +128,11 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
+        $item = Item::find($item->id);
+
+        if ($item->image) {
+            File::delete(public_path('foodItems/'.$item->image));
+        }
         $item->delete();
 
         return redirect()->route('itemIndex')

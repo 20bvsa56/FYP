@@ -25,17 +25,16 @@
     @endif
 
     <div style="alignment: center; margin-left: 100px; margin-right: 100px;">
-        <form action="{{route('itemUpdate','$item->id')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('itemUpdate',$item->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
-{{--            <div class="form-group">--}}
-{{--                <label for="Category">Category</label>--}}
-{{--                <select class="form-control" id="category_id" name="category_id" value="category_id" >--}}
-{{--                    @foreach ($catList as $id => $name)--}}
-{{--                        <option value="{{$name}}" {{}}>{{$id}}</option>--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--            </div>--}}
-
+            <div class="form-group">
+                <label for="Category">Category</label>
+                <select class="form-control" id="category_id" name="category_id" value="category_id" >
+                    @foreach ($catList as $id => $name)
+                        <option value="{{$name}}" {{$name == $item->category_id ? 'selected' : ''}}>{{$id}}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="form-group">
                 <label for="Title">Title</label>
                 <input type="text" class="form-control" name="title" value="{{$item->title}}" placeholder="Enter food item title">
@@ -48,7 +47,7 @@
             </div>
             <div class="form-group">
                 <label for="Type">Price</label>
-                <input type="text" class="form-control" name="type" value="{{$item->price}}" placeholder="Enter food item price">
+                <input type="text" class="form-control" name="price" value="{{$item->price}}" placeholder="Enter food item price">
                 <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>
             <div class="form-group">

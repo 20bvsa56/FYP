@@ -5,6 +5,7 @@
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 <h3>View food item</h3>
+                <br>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{route('itemCreate')}}">Add food item</a>
@@ -18,7 +19,7 @@
         </div>
     @endif
 
-    <table class="table table-bordered" style="margin-left: 80px;">
+    <table class="table table-bordered table-striped">
         <tr>
             <th>S.N.</th>
             <th>Category Id</th>

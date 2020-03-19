@@ -5,6 +5,7 @@
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 <h3>View staff role</h3>
+                <br>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{route('roleCreate')}}">Add staff role</a>
@@ -18,7 +19,7 @@
         </div>
     @endif
 
-    <table class="table table-bordered" style="margin-left: 80px;">
+    <table class="table table-bordered table-striped">
         <tr>
             <th>S.N.</th>
             <th>Title</th>
@@ -35,8 +36,6 @@
                         <a class="btn btn-primary" href="{{route('roleEdit',$role->id)}}">Edit</a>
 
                         @csrf
-                        @method('DELETE')
-
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
 
