@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label for="Category">Category</label>
                 <select class="form-control" id="category_id" name="category_id" >
-                    <option>Select Category</option>
+                    <option>---Select Category---</option>
                     @foreach ($catList as $id => $name)
                         <option value="{{$name}}" >{{$id}}</option>
                     @endforeach

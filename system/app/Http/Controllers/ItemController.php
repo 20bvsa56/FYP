@@ -48,9 +48,9 @@ class ItemController extends Controller
         $request->validate([
             'title' => 'required',
             'name' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'category_id' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 //        dd($request);
 //        Item::create($request->all());
@@ -96,9 +96,9 @@ class ItemController extends Controller
         $request->validate([
             'title' => 'required',
             'name' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'category_id' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 //        dd($request);
 //        Item::create($request->all());

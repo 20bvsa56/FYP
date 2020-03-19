@@ -22,7 +22,7 @@
     <table class="table table-bordered table-striped">
         <tr>
             <th>S.N.</th>
-            <th>Category Id</th>
+            <th>Category</th>
             <th>Title</th>
             <th>Name</th>
             <th>Price</th>
