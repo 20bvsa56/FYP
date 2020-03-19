@@ -16,10 +16,10 @@ class ItemAPIController extends Controller
      */
     public function index()
     {
-        //get categories
-        $items= Item::all();
+        //get items
+        $items = Item::all();
 
-        //return collection of categories as a resource . here, collection returns a list of items
+        //return collection of items as a resource . here, collection returns a list of items
         return ItemResource::collection($items);
     }
 
@@ -32,7 +32,7 @@ class ItemAPIController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -45,6 +45,7 @@ class ItemAPIController extends Controller
         $item->name = $request->input('name');
         $item->price = $request->input('price');
         $item->image = $request->input('image');
+        $item->category_id = $request->input('category_id');
 
         if ($item->save()) {
             return new ItemResource($item);
@@ -54,13 +55,13 @@ class ItemAPIController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //get single item
-        $item= Item::findorFail($id);
+        $item = Item::findorFail($id);
 
         //return single item as resource
         return new ItemResource($item);

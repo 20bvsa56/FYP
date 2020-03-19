@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
             $table->string('name')->nullable();
             $table->double('price');
             $table->string('image');
-            $table->integer('category_id')->unsigned();
+            $table->unsignedInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
