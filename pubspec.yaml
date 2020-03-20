@@ -46,6 +46,7 @@ flutter:
 
   assets:
   - images/
+  - system/public/foodItems/
   
   fonts:
   - family: Pacifico-Regular
