@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'dart:convert'; //to convert http response in json format
+import 'package:http/http.dart' as http; //to handle http request
+import 'dart:async'; //to use async function
 
 
 class SignUp extends StatefulWidget {
