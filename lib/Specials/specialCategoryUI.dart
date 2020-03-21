@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'items.dart';
 import 'itemsDetails.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class SpecialCategory extends StatefulWidget {
   SpecialCategory({Key key}) : super(key: key);
@@ -43,15 +44,14 @@ class _SpecialCategoryState extends State<SpecialCategory> {
             body: Column(
               children: <Widget>[
                 ImageCarousel(),
-                SizedBox(height:40),
+                maintitle(),
                 FutureBuilder(
                   future: specialItems(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.data != null) {
                       return Container(
-                        height: 300,
+                        height: 300,     
                         // width: MediaQuery.of(context).size.width,
-                  
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: snapshot.data.length,
@@ -76,4 +76,21 @@ class _SpecialCategoryState extends State<SpecialCategory> {
               ],
             )));
   }
+}
+
+Widget maintitle() {
+  return Container(
+    child: TyperAnimatedTextKit(
+      text: ["Today\'s Special"],
+      textStyle: TextStyle(
+        fontSize: 23.0,
+        fontWeight: FontWeight.bold,
+        decoration: TextDecoration.underline,
+        fontFamily: 'Pacifico-Regular',
+        color: Colors.black,
+      ),
+      speed: Duration(milliseconds: 100),
+      isRepeatingAnimation: false,
+    ),
+  );
 }
