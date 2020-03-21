@@ -18,29 +18,29 @@ class ItemsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-    padding: const EdgeInsets.all(16.0),
+    padding: const EdgeInsets.all(20.0),
     child: Stack(
       children: <Widget>[
       Container(
-        width: 250.0,
-        height: 270.0,
+        width: 150.0,
+        height: 200.0,
         decoration: new BoxDecoration(
           borderRadius: BorderRadius.circular(24.0),
+          color: Colors.black,
            // image: new AssetImage(system/public/foodItems/image),        
         ),
-        child:Image.asset(image),
+        // child:Image.asset(image,fit: BoxFit.fill),
       ),
       Positioned(
-        left: 140.0,
-        top: 70.0,
+        left: 80.0,
+        top: 100.0,
         child: Material(
             color: Colors.white,
             elevation: 14.0,
             borderRadius: BorderRadius.circular(24.0),
             shadowColor: Color(0x802196F3),
             child: Container(
-              width: 230.0,
-              height: 150.0,
+              
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 10.0),
@@ -66,7 +66,7 @@ class ItemsDetails extends StatelessWidget {
                   ),
                   SizedBox(height: 10.0),
                   Container(
-                      child: Row(
+                    child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text( " Rs." + price,
