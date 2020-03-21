@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class ItemsDetails extends StatelessWidget {
   // const ItemsDetails({Key key}) : super(key: key);
-
   final String title;
   final String name;
   final String price;
@@ -21,17 +20,18 @@ class ItemsDetails extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10, 40, 40, 10),
       child: Stack(children: <Widget>[
         Container(
-          width: 200.0,
-          height: 200.0,
+          width: 180.0,
+          height: 180.0,
           decoration: new BoxDecoration(
             borderRadius: BorderRadius.circular(24.0),
             color: Colors.black,
-            //  image: Image.asset( 'system/public/foodItems/' + image),
+             
           ),
           // child:Image.asset(image,fit: BoxFit.fill),
+          child: Image.asset( "system/public/foodItems/" + image),
         ),
         Positioned(
-          left: 20.0,
+          left: 10.0,
           top: 120.0,
           child: Material(
             color: Colors.brown[50],
@@ -41,7 +41,7 @@ class ItemsDetails extends StatelessWidget {
             child: Container(
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 10.0),
+                  // SizedBox(height: 10.0),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                     child: Container(

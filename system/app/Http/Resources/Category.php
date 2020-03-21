@@ -19,7 +19,7 @@ class Category extends JsonResource
         return [
           'id'=>$this->id,
             'name'=>$this->name,
-            'type'=>$this->type
+            'type'=>$this->image
         ];
     }
 }

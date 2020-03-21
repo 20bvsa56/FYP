@@ -4,11 +4,11 @@
    <div class="row" style="margin-left: 90px; margin-right: 100px;">
       <div class="col-lg-12 margin-tb">
          <div class="pull-left">
-            <h3>View food category</h3>
+            <h3>View menu category</h3>
              <br>
          </div>
          <div class="pull-right">
-            <a class="btn btn-primary" href="{{route('catCreate')}}">Add food category</a>
+            <a class="btn btn-primary" href="{{route('catCreate')}}">Add menu category</a>
          </div>
       </div>
    </div>
@@ -23,7 +23,7 @@
       <tr>
          <th>S.N.</th>
          <th>Name</th>
-         <th>Type</th>
+         <th>Image</th>
          <th width="280px">Action</th>
       </tr>
 
@@ -31,7 +31,7 @@
       <tr>
          <td>{{++$i}}</td>
          <td>{{$category->name}}</td>
-         <td>{{$category->type}}</td>
+          <td><img src="{{'foodItems/'.$category->image}}" alt="" style="height:60px;width: 60px;"></td>
          <td>
             <form action="{{route('catDelete',$category->id)}}" method="POST">
 

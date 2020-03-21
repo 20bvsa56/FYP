@@ -4,7 +4,7 @@
 <div class="row" style="margin-left: 90px; margin-right: 100px;">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h3>Add food category</h3>
+            <h3>Add menu category</h3>
         </div>
     <div class="pull-right">
         <a class="btn btn-primary" href="{{route('catIndex')}}">Back</a>
@@ -25,7 +25,7 @@
 @endif
 
     <div style="alignment: center; margin-left: 100px; margin-right: 100px;">
-    <form action="{{route('catStore')}}" method="POST">
+    <form action="{{route('catStore')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="Name">Name</label>
@@ -33,9 +33,8 @@
             <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
         </div>
         <div class="form-group">
-            <label for="Type">Type</label>
-            <input type="text" class="form-control" name="type" placeholder="Enter food category type">
-            <small class="form-text text-muted">Ex: Special, Regular etc.</small>
+            <label>Image</label>
+            <input type="file" name="image" id="image" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

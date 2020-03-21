@@ -43,7 +43,7 @@ class CategoryAPIController extends Controller
 
         $category->id = $request->input('category_id');
         $category->name = $request->input('name');
-        $category->type = $request->input('type');
+        $category->image = $request->input('image');
 
         if($category->save()){
             return new CategoryResource($category);
@@ -89,7 +89,7 @@ class CategoryAPIController extends Controller
      */
     public function destroy($id)
     {
-        //get single category
+        //delete single category
         $category= Category::findorFail($id);
 
         if($category->delete()) {

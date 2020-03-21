@@ -9,7 +9,7 @@ class Category extends Model
     protected $primaryKey='id';
     protected $table = 'categories';
     protected $fillable=[
-        'name','type'
+        'name','image'
     ];
     //for security purpose, this data are to be stored in db
 

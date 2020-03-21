@@ -55,11 +55,15 @@
                     </li>
                     <li>
                         <a class="js-arrow" href="{{route('catIndex')}}">
-                            <i class="fas fa-cube"></i>Food Category</a>
+                            <i class="fas fa-folder"></i>Menu Category</a>
                     </li>
                     <li>
                         <a class="js-arrow" href="{{route('itemIndex')}}">
-                            <i class="fas fa-coffee"></i>Food Item</a>
+                            <i class="fas fa-coffee"></i>Special Food Item</a>
+                    </li>
+                    <li>
+                        <a class="js-arrow" href="#">
+                            <i class="fas fa-check"></i>Regular Food Item</a>
                     </li>
                     <li>
                         <a class="js-arrow" href="{{route('roleIndex')}}">

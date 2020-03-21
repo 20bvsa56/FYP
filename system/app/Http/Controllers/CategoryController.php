@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use DB;
+use File;
 
 class CategoryController extends Controller
 {
@@ -34,7 +36,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('Categories.create');
     }
 
 
@@ -49,10 +51,19 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'type' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Category::create($request->all());
+        $category = new Category();
+        $category->name = $request->name;
+        $category->image = $request->image;
+
+
+        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('foodItems/'), $imageName);
+        $category->image = $imageName;
+
+        $category->save();
 
         return redirect()->route('catIndex')
             ->with('success','Food category added successfully.');
@@ -78,7 +89,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         //dd($category);
-        return view('categories.edit', compact('category'));
+        return view('Categories.edit', compact('category'));
     }
 
     /**
@@ -92,13 +103,21 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'type' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $category->update($request->all());
+        $category->name = $request->name;
+        $category->image = $request->image;
+
+        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('foodItems/'), $imageName);
+        $category->image = $imageName;
+
+        $category->update();
 
         return redirect()->route('catIndex')
-            ->with('success','Food category updated successfully.');
+            ->with('success','Menu category updated successfully.');
+
     }
 
     /**
@@ -110,9 +129,14 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         /*$category= Category::find($category['id']);*/
+        $category = Category::find($category->id);
+
+        if ($category->image) {
+            File::delete(public_path('foodItems/'.$category->image));
+        }
         $category->delete();
 
         return redirect()->route('catIndex')
-            ->with('success','Food category deleted successfully.');
+            ->with('success','Menu category deleted successfully.');
     }
 }
