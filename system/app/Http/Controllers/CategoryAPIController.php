@@ -18,7 +18,7 @@ class CategoryAPIController extends Controller
     public function index()
     {
         //get categories
-        $categories= Category::paginate(10);
+        $categories = Category::all();
 
         //return collection of categories as a resource . here, collection returns a list of items
         return CategoryResource::collection($categories);

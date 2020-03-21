@@ -4,11 +4,11 @@
     <div class="row" style="margin-left: 90px; margin-right: 100px;">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h3>View food item</h3>
+                <h3>View special food item</h3>
                 <br>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{route('itemCreate')}}">Add food item</a>
+                <a class="btn btn-primary" href="{{route('itemCreate')}}">Add special food item</a>
             </div>
         </div>
     </div>

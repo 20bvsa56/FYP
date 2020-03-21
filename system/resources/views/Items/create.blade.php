@@ -4,7 +4,7 @@
     <div class="row" style="margin-left: 90px; margin-right: 100px;">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h3>Add food item</h3>
+                <h3>Add special food item</h3>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{route('itemIndex')}}">Back</a>

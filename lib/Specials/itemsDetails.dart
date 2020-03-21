@@ -24,11 +24,10 @@ class ItemsDetails extends StatelessWidget {
           height: 180.0,
           decoration: new BoxDecoration(
             borderRadius: BorderRadius.circular(24.0),
-            color: Colors.black,
-             
+            color: Colors.brown[200],
           ),
           // child:Image.asset(image,fit: BoxFit.fill),
-          child: Image.asset( "system/public/foodItems/" + image),
+          child: Image.asset("system/public/foodItems/" + image),
         ),
         Positioned(
           left: 10.0,
@@ -48,7 +47,7 @@ class ItemsDetails extends StatelessWidget {
                       child: Center(
                           child: Text(title,
                               style: TextStyle(
-                                fontFamily: 'Lobster-Regular',
+                                  fontFamily: 'Lobster-Regular',
                                   color: Colors.black,
                                   fontSize: 22.0,
                                   fontWeight: FontWeight.bold))),
@@ -59,7 +58,7 @@ class ItemsDetails extends StatelessWidget {
                     child: Center(
                         child: Text(name,
                             style: TextStyle(
-                              fontFamily: 'Rancho-Regular',
+                                fontFamily: 'Rancho-Regular',
                                 color: Colors.brown,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold))),
@@ -69,8 +68,8 @@ class ItemsDetails extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(" Rs." + price,
-                          style:
-                              TextStyle(color: Colors.brown, 
+                          style: TextStyle(
+                              color: Colors.brown,
                               fontFamily: 'Rancho-Regular',
                               fontSize: 16.0)),
                     ],
@@ -81,8 +80,8 @@ class ItemsDetails extends StatelessWidget {
                         color: Colors.brown[100],
                         elevation: 20,
                         child: const Text('Add to Cart',
-                            style: TextStyle(fontSize: 12,
-                            fontFamily: 'Lobster-Regular')),
+                            style: TextStyle(
+                                fontSize: 12, fontFamily: 'Lobster-Regular')),
                         onPressed: () {},
                       ),
                     ),
