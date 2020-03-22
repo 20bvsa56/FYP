@@ -1,19 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
+namespace App\Http\Controllers\API;
+
+
+use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\Item as ItemResource;
 use App\Item;
+use Illuminate\Http\Request;
 
-class ItemAPIController extends Controller
+class ItemController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //get items
@@ -73,7 +70,7 @@ class ItemAPIController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-        /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

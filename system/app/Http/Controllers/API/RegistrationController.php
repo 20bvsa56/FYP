@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+
+namespace App\Http\Controllers\API;
+
 
 use App\Http\Resources\Registration as RegistrationResource;
-use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Registration;
+use Faker\Provider\Base;
+use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class RegistrationAPIController extends Controller
+class RegistrationController extends BaseController
 {
     public function index()
     {

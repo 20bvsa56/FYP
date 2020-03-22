@@ -40,16 +40,16 @@ class CategoriesDetails extends StatelessWidget {
             
             ),
             // Image.asset("system/public/foodItems/" + image)
-              Container(
-          width: 180.0,
-          height: 180.0,
-          decoration: new BoxDecoration(
-            borderRadius: BorderRadius.circular(24.0),
-            color: Colors.brown[200],
-          ),
-          // child:Image.asset(image,fit: BoxFit.fill),
-          child: Image.asset("system/public/foodItems/" + image),
-        ),
+        //       Container(
+        //   width: 180.0,
+        //   height: 180.0,
+        //   decoration: new BoxDecoration(
+        //     borderRadius: BorderRadius.circular(24.0),
+        //     color: Colors.brown[200],
+        //   ),
+        //   // child:Image.asset(image,fit: BoxFit.fill),
+        //   // child: Image.asset("system/public/foodItems/" + image),
+        // ),
             // ),
           ],
         ),

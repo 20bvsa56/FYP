@@ -18,50 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//list categories
-Route::get('view_categories', 'CategoryAPIController@index');
-
-//list single categories
-Route::get('single_category/{id}', 'CategoryAPIController@show');
-
-//create new category
-Route::post('add_category', 'CategoryAPIController@store');
-
-//update categories
-Route::put('update_category', 'CategoryAPIController@store');
-
-//delete categories
-Route::delete('delete_category/{id}', 'CategoryAPIController@destroy');
-
-//list registries
-Route::get('view_registries', 'RegistrationAPIController@index');
-
-//list single registries
-Route::get('single_registry/{id}', 'RegistrationAPIController@show');
-
-//create new registry
-Route::post('add_registry', 'RegistrationAPIController@store');
-
-//update registry
-Route::put('update_registry', 'RegistrationAPIController@store');
-
-//delete registry
-Route::delete('delete_registry/{id}', 'RegistrationAPIController@destroy');
-
-//list items
-Route::get('view_items', 'ItemAPIController@index');
-
-//list single items
-Route::get('single_item/{id}', 'ItemAPIController@show');
-
-//create new item
-Route::post('add_item', 'ItemAPIController@store');
-
-//update item
-Route::put('update_item', 'ItemAPIController@store');
-
-//delete item
-Route::delete('delete_item/{id}', 'ItemAPIController@destroy');
-
-
-
+Route::resource('category', 'API\CategoryController');
+Route::resource('special_item', 'API\ItemController');
+Route::resource('registration', 'API\RegistrationController');
