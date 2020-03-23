@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class BeverageDetails extends StatelessWidget {
-  // const BeverageDetails({Key key}) : super(key: key);
+class RegularDetails extends StatelessWidget {
+  // const RegularDetails({Key key}) : super(key: key);
   
   final String name;
   final String description;
   final String price;
   final String image;
 
-  BeverageDetails(
+  RegularDetails(
     this.name,
     this.description,
     this.price,

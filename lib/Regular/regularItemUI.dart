@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
-import 'bevItems.dart';
-import 'beverageDetails.dart';
+import 'regularItems.dart';
+import 'regularDetails.dart';
 
 
 class BeverageItem extends StatefulWidget {
@@ -14,19 +14,19 @@ class BeverageItem extends StatefulWidget {
 }
 
 class _BeverageItemState extends State<BeverageItem> {
-    List<BeverageItems> beverageitems = [];
+    List<RegularItems> regularitems = [];
 
-  Future<List<BeverageItems>> beverageItems() async {
-    var data = await http.get("http://192.168.254.1:8000/api/beverage/");
+  Future<List<RegularItems>> regularItems() async {
+    var data = await http.get("http://192.168.254.1:8000/api/regular_item/");
     var jsonData = json.decode(data.body);
 
     //looping thorugh json data and getting details, adding in constructor and then list
-    for (var bevitemval in jsonData) {
-      BeverageItems bevitems = BeverageItems(bevitemval['name'], bevitemval['description'], bevitemval['price'],
-          bevitemval['image']);
-      beverageitems.add(bevitems);
+    for (var regitemval in jsonData) {
+      RegularItems regitems = RegularItems(regitemval['name'], regitemval['description'], regitemval['price'],
+          regitemval['image']);
+      regularitems.add(regitems);
     }
-    return beverageitems;
+    return regularitems;
   }
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _BeverageItemState extends State<BeverageItem> {
               children: <Widget>[
                 title(),
                 FutureBuilder(
-                  future: beverageItems(),
+                  future: regularItems(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.data != null) {
                       return Container(
@@ -53,7 +53,7 @@ class _BeverageItemState extends State<BeverageItem> {
                             scrollDirection: Axis.horizontal,
                             itemCount: snapshot.data.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return BeverageDetails(
+                              return RegularDetails(
                                 snapshot.data[index].name,
                                 snapshot.data[index].description,
                                 snapshot.data[index].price,
