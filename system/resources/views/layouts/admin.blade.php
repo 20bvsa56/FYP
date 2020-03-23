@@ -61,9 +61,20 @@
                         <a class="js-arrow" href="{{route('itemIndex')}}">
                             <i class="fas fa-coffee"></i>Special Food Item</a>
                     </li>
-                    <li>
+                    <li class="has-sub">
                         <a class="js-arrow" href="#">
-                            <i class="fas fa-check"></i>Regular Food Item</a>
+                            <i class="fas fa-copy"></i>Regular Food Item</a>
+                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                            <li>
+                                <a href="{{route('bevIndex')}}">Beverage</a>
+                            </li>
+                            <li>
+                                <a href="#">Breakfast</a>
+                            </li>
+                            <li>
+                                <a href="#">Lunch</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a class="js-arrow" href="{{route('roleIndex')}}">

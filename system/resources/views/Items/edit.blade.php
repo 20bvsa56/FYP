@@ -46,7 +46,7 @@
                 <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
             </div>
             <div class="form-group">
-                <label for="Type">Price</label>
+                <label for="Price">Price</label>
                 <input type="text" class="form-control" name="price" value="{{$item->price}}" placeholder="Enter food item price">
                 <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>

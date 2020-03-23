@@ -38,6 +38,13 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/itemEdit/{item}', 'ItemController@edit')->name('itemEdit');
     Route::post('/itemUpdate/{item}', 'ItemController@update')->name('itemUpdate');
 
+    Route::get('/bevCreate', 'BevController@create')->name('bevCreate');
+    Route::get('/bevIndex', 'BevController@index')->name('bevIndex');
+    Route::post('/bevStore', 'BevController@store')->name('bevStore');
+    Route::post('/bevDelete/{beverage}', 'BevController@destroy')->name('bevDelete');
+    Route::get('/bevEdit/{beverage}', 'BevController@edit')->name('bevEdit');
+    Route::post('/bevUpdate/{beverage}', 'BevController@update')->name('bevUpdate');
+
     Route::get('/roleCreate', 'RoleController@create')->name('roleCreate');
     Route::get('/roleIndex', 'RoleController@index')->name('roleIndex');
     Route::post('/roleStore', 'RoleController@store')->name('roleStore');

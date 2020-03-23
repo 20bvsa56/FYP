@@ -4,10 +4,10 @@
     <div class="row" style="margin-left: 90px; margin-right: 100px;">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h3>Add special food item</h3>
+                <h3>Add bevarage item</h3>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{route('itemIndex')}}">Back</a>
+                <a class="btn btn-primary" href="{{route('bevIndex')}}">Back</a>
             </div>
         </div>
     </div>
@@ -25,30 +25,22 @@
     @endif
 
     <div style="alignment: center; margin-left: 100px; margin-right: 100px;">
-        <form action="{{route('itemStore')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('bevStore')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
-                <label for="Category">Category</label>
-                <select class="form-control" id="category_id" name="category_id" >
-                    <option>---Select Category---</option>
-                    @foreach ($catList as $id => $name)
-                        <option value="{{$name}}" >{{$id}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Title">Title</label>
-                <input type="text" class="form-control" name="title" placeholder="Enter food item title">
-                <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
-            </div>
+
             <div class="form-group">
                 <label for="Name">Name</label>
-                <input type="text" class="form-control" name="name" placeholder="Enter food item name">
-                <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
+                <input type="text" class="form-control" name="name" placeholder="Enter beverage name">
+                <small class="form-text text-muted">Ex: Hot chocolate, Milkshake etc.</small>
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <input type="text" class="form-control" name="description" placeholder="Enter beverage description">
+                <small class="form-text text-muted">Ex: Sugar, Cheese Powder, Onion etc.</small>
             </div>
             <div class="form-group">
                 <label for="Price">Price</label>
-                <input type="text" class="form-control" name="price" placeholder="Enter food item price">
+                <input type="text" class="form-control" name="price" placeholder="Enter beverage price">
                 <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>
             <div class="form-group">
