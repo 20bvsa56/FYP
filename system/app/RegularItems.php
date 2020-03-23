@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class RegularItems extends Model
 {
-    //
-}
-
-class Beverage extends Model
-{
-    //
     protected $primaryKey='id';
-    protected $table = 'beverages';
+    protected $table = 'regular_items';
     protected $fillable=[
-        'title','name','price','image'
+        'name','description','price','image'
     ];
     //for security purpose, this data are to be stored in db
+
+    public function category(){
+        return $this->belongsTo('App\Category');
+    }
 }

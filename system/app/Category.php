@@ -16,4 +16,10 @@ class Category extends Model
     public function items(){
         return $this->hasMany('App\Item');
     }
+
+
+    public function regularitems(){
+        return $this->hasMany('App\RegularItems');
+    }
+
 }

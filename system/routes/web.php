@@ -38,12 +38,12 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/itemEdit/{item}', 'ItemController@edit')->name('itemEdit');
     Route::post('/itemUpdate/{item}', 'ItemController@update')->name('itemUpdate');
 
-    Route::get('/bevCreate', 'BevController@create')->name('bevCreate');
-    Route::get('/bevIndex', 'BevController@index')->name('bevIndex');
-    Route::post('/bevStore', 'BevController@store')->name('bevStore');
-    Route::post('/bevDelete/{beverage}', 'BevController@destroy')->name('bevDelete');
-    Route::get('/bevEdit/{beverage}', 'BevController@edit')->name('bevEdit');
-    Route::post('/bevUpdate/{beverage}', 'BevController@update')->name('bevUpdate');
+    Route::get('/regCreate', 'RegularItemsController@create')->name('regCreate');
+    Route::get('/regIndex', 'RegularItemsController@index')->name('regIndex');
+    Route::post('/regStore', 'RegularItemsController@store')->name('regStore');
+    Route::post('/regDelete/{ritem}', 'RegularItemsController@destroy')->name('regDelete');
+    Route::get('/regEdit/{ritem}', 'RegularItemsController@edit')->name('regEdit');
+    Route::post('/regUpdate/{ritem}', 'RegularItemsController@update')->name('regUpdate');
 
     Route::get('/roleCreate', 'RoleController@create')->name('roleCreate');
     Route::get('/roleIndex', 'RoleController@index')->name('roleIndex');

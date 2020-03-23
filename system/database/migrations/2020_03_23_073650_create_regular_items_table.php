@@ -15,11 +15,13 @@ class CreateRegularItemsTable extends Migration
     {
         Schema::create('regular_items', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->string('description');
             $table->string('price');
             $table->string('image');
+            $table->unsignedInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->timestamps();
         });
     }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menu_app/MenuCategory/menuCategoryUI.dart';
+import 'package:menu_app/Regular/beverageItemUI.dart';
 import 'package:menu_app/Specials/specialCategoryUI.dart';
 import 'package:menu_app/cart/cart.dart';
 // import 'package:menu_app/Cart/cart.dart';

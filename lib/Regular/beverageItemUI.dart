@@ -1,182 +1,87 @@
-// import 'package:flutter/material.dart';
-// import 'package:bloc_pattern/bloc_pattern.dart';
-// import 'package:menu_app/MenuGroup/menuCategory.dart';
-// import 'package:menu_app/bloc/BeverageBloc/beverageCartListBloc.dart';
-// import 'package:menu_app/cart/beverageFoodItem.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
+import 'bevItems.dart';
+import 'beverageDetails.dart';
 
-// class BeverageItem extends StatelessWidget {
-//   const BeverageItem({Key key}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//       blocs: [Bloc((i) => BeverageCartListBloc())],
-//       child: MaterialApp(
-//         home: Home(),
-//         debugShowCheckedModeBanner: false,
-//       ),
-//     );
-//   }
-// }
+class BeverageItem extends StatefulWidget {
+  BeverageItem({Key key}) : super(key: key);
 
-// class Home extends StatefulWidget {
-//   Home({Key key}) : super(key: key);
+  @override
+  _BeverageItemState createState() => _BeverageItemState();
+}
 
-//   @override
-//   _HomeState createState() => _HomeState();
-// }
+class _BeverageItemState extends State<BeverageItem> {
+    List<BeverageItems> beverageitems = [];
 
-// class _HomeState extends State<Home> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         leading: IconButton(
-//             icon: Icon(Icons.chevron_left),
-//             onPressed: () {
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(builder: (context) => MenuCategory()),
-//               );
-//             }),
-//         backgroundColor: Colors.brown,
-//         title: Text('Beverage Items'),
-//         centerTitle: true,
-//       ),
-//       body: Column(
-//         children: <Widget>[
-//           displayBeverage(),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  Future<List<BeverageItems>> beverageItems() async {
+    var data = await http.get("http://192.168.254.1:8000/api/beverage/");
+    var jsonData = json.decode(data.body);
 
-// Widget displayBeverage() {
-//   return Container(
-//     margin: EdgeInsets.all(10),
-//     padding: EdgeInsets.all(10),
-//     decoration: new BoxDecoration(
-//         //new Color.fromRGBO(255, 0, 0, 0.0),
-//         borderRadius: new BorderRadius.all(Radius.circular(20))),
-//     height: 510,
-//     child: ListView(scrollDirection: Axis.vertical, children: <Widget>[
-//       for (var beverageFoodItem in bevfoodItemList
-//           .beverageFoodItems) //loop through every beverage items present in the list
-//         BeverageItemContainer(
-//             beverageFoodItem:
-//                 beverageFoodItem) //passing beverages to the container
-//     ]),
-//   );
-// }
+    //looping thorugh json data and getting details, adding in constructor and then list
+    for (var bevitemval in jsonData) {
+      BeverageItems bevitems = BeverageItems(bevitemval['name'], bevitemval['description'], bevitemval['price'],
+          bevitemval['image']);
+      beverageitems.add(bevitems);
+    }
+    return beverageitems;
+  }
+  @override
+  Widget build(BuildContext context) {
+   return MaterialApp(
+      debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            appBar: AppBar(
+              leading: Icon(Icons.home),
+              backgroundColor: Colors.brown,
+              title: Text('Home'),
+              centerTitle: true,
+            ),
+            body: Column(
+              children: <Widget>[
+                title(),
+                FutureBuilder(
+                  future: beverageItems(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.data != null) {
+                      return Container(
+                        height: 300,     
+                        // width: MediaQuery.of(context).size.width,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return BeverageDetails(
+                                snapshot.data[index].name,
+                                snapshot.data[index].description,
+                                snapshot.data[index].price,
+                                snapshot.data[index].image,
+                              );
+                            }),
+                      );
+                    } else {
+                      return Container(
+                        child: Center(
+                          child: Text("Loading"),
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ],
+            )));
+  }
+}
 
-// class BeverageItemContainer extends StatelessWidget {
-//   // const BeverageItemContainer({Key key}) : super(key: key);
-
-//   final BeverageFoodItem beverageFoodItem;
-
-//   BeverageItemContainer({@required this.beverageFoodItem});
-
-//   final BeverageCartListBloc bevbloc = BlocProvider.getBloc<BeverageCartListBloc>();
-
-//   addToCart(BeverageFoodItem beverageFoodItem) {
-//     bevbloc.addToList(beverageFoodItem);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         addToCart(beverageFoodItem);
-
-//         //snackar gives a message with an optional action which briefly displays at the bottom of the screen
-//         final snackbar = SnackBar(
-//           content: Text("${beverageFoodItem.bevname} added to your food cart."),
-//           duration: Duration(milliseconds: 2000),
-//         );
-
-//         Scaffold.of(context).showSnackBar(snackbar); //showing the snackbar
-//       },
-//       child: BeverageItems(
-//         bevDescription: beverageFoodItem.bevdescription,
-//         bevName: beverageFoodItem.bevname,
-//         bevImage: beverageFoodItem.bevimage,
-//         bevPrice: beverageFoodItem.bevprice,
-//       ),
-//     );
-//   }
-
-//   void dispose() {
-//     bevbloc.dispose();
-//   }
-// }
-
-// class BeverageItems extends StatelessWidget {
-//   //const BeverageItems({Key key}) : super(key: key);
-
-//   BeverageItems({
-//     @required this.bevImage,
-//     @required this.bevName,
-//     @required this.bevPrice,
-//     @required this.bevDescription,
-//   });
-
-//   final String bevDescription;
-//   final String bevName;
-//   final String bevImage;
-//   final int bevPrice;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//         decoration: BoxDecoration(
-//             color: Colors.transparent, //new Color.fromRGBO(255, 0, 0, 0.0),
-//             borderRadius: new BorderRadius.only(
-//                 topLeft: const Radius.circular(15.0),
-//                 topRight: const Radius.circular(15.0),
-//                 bottomLeft: const Radius.circular(10.0),
-//                 bottomRight: const Radius.circular(10.0))),
-//         child: Card(
-//           color: Colors.brown[50],
-//           margin: EdgeInsets.symmetric(vertical: 12),
-//           child: Wrap(
-//             children: <Widget>[
-//               Text(
-//                 bevName,
-//                 style: TextStyle(
-//                   fontFamily: 'Rancho-Regular',
-//                   fontWeight: FontWeight.bold,
-//                   fontSize: 25.0,
-//                 ),
-//               ),
-//               ListTile(
-//                 title: Text(
-//                   bevDescription,
-//                   style: TextStyle(
-//                     fontFamily: 'Rancho-Regular',
-//                     fontWeight: FontWeight.bold,
-//                     fontSize: 20.0,
-//                   ),
-//                 ),
-//                 subtitle: Text(
-//                   "\Rs$bevPrice",
-//                   style: TextStyle(
-//                     fontFamily: 'Rancho-Regular',
-//                     fontWeight: FontWeight.bold,
-//                     fontSize: 18.0,
-//                   ),
-//                 ),
-//                 trailing: Image.asset(bevImage, fit: BoxFit.cover),
-//               ),
-//               SizedBox(width: 10),
-//               RaisedButton(
-//                 hoverElevation: 0,
-//                 onPressed: () {},
-//                 child:
-//                     const Text('Add to Cart', style: TextStyle(fontSize: 15)),
-//               ),
-//             ],
-//           ),
-//         ));
-//   }
-// }
+Widget title() {
+  return Text(
+  "Bevarage",
+  style: TextStyle(
+    fontSize:10,
+    fontFamily: 'Rancho-Regular',
+  ),
+    
+  );
+}
