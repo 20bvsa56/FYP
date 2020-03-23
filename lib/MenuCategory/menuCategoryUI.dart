@@ -48,7 +48,7 @@ class _MenuCategoryState extends State<MenuCategory> {
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.data != null) {
                       return Container(
-                        height: 539,     
+                        height: 540,     
                         // height: MediaQuery.of(context).size.height,
                         child:new GridView.builder(
                             itemCount: snapshot.data.length,

@@ -6,14 +6,14 @@ import 'regularItems.dart';
 import 'regularDetails.dart';
 
 
-class BeverageItem extends StatefulWidget {
-  BeverageItem({Key key}) : super(key: key);
+class RegularCategory extends StatefulWidget {
+  RegularCategory({Key key}) : super(key: key);
 
   @override
-  _BeverageItemState createState() => _BeverageItemState();
+  _RegularCategoryState createState() => _RegularCategoryState();
 }
 
-class _BeverageItemState extends State<BeverageItem> {
+class _RegularCategoryState extends State<RegularCategory> {
     List<RegularItems> regularitems = [];
 
   Future<List<RegularItems>> regularItems() async {
@@ -33,55 +33,57 @@ class _BeverageItemState extends State<BeverageItem> {
    return MaterialApp(
       debugShowCheckedModeBanner: false,
         home: Scaffold(
-            appBar: AppBar(
-              leading: Icon(Icons.home),
-              backgroundColor: Colors.brown,
-              title: Text('Home'),
-              centerTitle: true,
+             appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.chevron_left),
+            onPressed: () => Navigator.pop(context, false),
+          ),
+          actions: <Widget>[
+            // action button
+            IconButton(
+              icon: Icon(Icons.fastfood),
+              iconSize: 30.0,
+              onPressed: () {},
             ),
-            body: Column(
-              children: <Widget>[
-                title(),
-                FutureBuilder(
-                  future: regularItems(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.data != null) {
-                      return Container(
-                        height: 300,     
-                        // width: MediaQuery.of(context).size.width,
-                        child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return RegularDetails(
-                                snapshot.data[index].name,
-                                snapshot.data[index].description,
-                                snapshot.data[index].price,
-                                snapshot.data[index].image,
-                              );
-                            }),
-                      );
-                    } else {
-                      return Container(
-                        child: Center(
-                          child: Text("Loading"),
-                        ),
-                      );
-                    }
-                  },
-                ),
-              ],
+          ],
+          backgroundColor: Colors.brown,
+          title: Text('Food Items'),
+          centerTitle: true,
+        ),
+            body: Center(
+              child: Column(
+                children: <Widget>[
+                  FutureBuilder(
+                    future: regularItems(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.data != null) {
+                        return Container(
+                          height: 540,    
+                         
+                          // height: MediaQuery.of(context).size.height,
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return RegularDetails(
+                                  snapshot.data[index].name,
+                                  snapshot.data[index].description,
+                                  snapshot.data[index].price,
+                                  snapshot.data[index].image,
+                                );
+                              }),
+                        );
+                      } else {
+                        return Container(
+                          child: Center(
+                            child: Text("Loading"),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
             )));
   }
-}
-
-Widget title() {
-  return Text(
-  "Bevarage",
-  style: TextStyle(
-    fontSize:10,
-    fontFamily: 'Rancho-Regular',
-  ),
-    
-  );
 }

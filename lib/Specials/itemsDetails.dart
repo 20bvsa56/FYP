@@ -81,7 +81,7 @@ class ItemsDetails extends StatelessWidget {
                         elevation: 20,
                         child: const Text('Add to Cart',
                             style: TextStyle(
-                                fontSize: 12, fontFamily: 'Lobster-Regular')),
+                                fontSize: 13, fontFamily: 'Lobster-Regular')),
                         onPressed: () {},
                       ),
                     ),

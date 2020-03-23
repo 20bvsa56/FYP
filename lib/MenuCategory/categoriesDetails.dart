@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menu_app/Regular/regularItemUI.dart';
 
 class CategoriesDetails extends StatelessWidget {
   // const CategoriesDetails({Key key}) : super(key: key);
@@ -13,7 +14,11 @@ class CategoriesDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){print('hello');},
+      onTap: (){
+         Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => RegularCategory()),
+  );},
           child: Padding(
         padding: const EdgeInsets.all(20),
         child: Stack(children: <Widget>[

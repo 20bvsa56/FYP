@@ -1,9 +1,9 @@
-class BeverageItems {
+class RegularItems {
  
   final String name;
   final String description;
   final String price;
   final String image;
 
-  BeverageItems(this.name, this.description, this.price, this.image);
+  RegularItems(this.name, this.description, this.price, this.image);
 }
