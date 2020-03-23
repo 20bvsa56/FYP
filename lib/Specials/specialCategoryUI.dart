@@ -18,7 +18,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
   List<Items> specialitems = [];
 
   Future<List<Items>> specialItems() async {
-    var data = await http.get("http://192.168.254.1:8000/api/view_items/");
+    var data = await http.get("http://192.168.254.1:8000/api/special_item/");
     var jsonData = json.decode(data.body);
 
     //looping thorugh json data and getting details, adding in constructor and then list
