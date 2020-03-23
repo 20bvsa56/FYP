@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('category', 'API\CategoryController');
 Route::resource('special_item', 'API\ItemController');
 Route::resource('registration', 'API\RegistrationController');
+Route::resource('beverage', 'API\BevController');
