@@ -33,8 +33,8 @@ class CategoriesDetails extends StatelessWidget {
             child: Image.asset("system/public/foodItems/" + image),
           ),
           Positioned(
-            left: 40.0,
-            top: 120.0,
+            left: 30.0,
+            top: 110.0,
             
               child: Material(
                 color: Colors.brown[50],

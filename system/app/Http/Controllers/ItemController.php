@@ -19,7 +19,11 @@ class ItemController extends Controller
     public function index()
     {
         //items var stores data from the db
-        $items = Item::latest()->paginate(5);
+//        $items = Item::latest()->paginate(5);
+        $items=DB::table('items')
+            ->select('categories.name as catname','items.id','items.title','items.name','items.price','items.image','items.category_id')
+            ->join('categories', 'categories.id', '=', 'items.category_id')
+            ->get();
         return view('Items.index', compact('items'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
         //compact stores data in key and value form

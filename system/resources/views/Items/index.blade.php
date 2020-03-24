@@ -33,7 +33,7 @@
         @foreach($items as $item)
             <tr>
                 <td>{{++$i}}</td>
-                <td>{{$item->category_id}}</td>
+                <td>{{$item->catname}}</td>
                 <td>{{$item->title}}</td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->price}}</td>
@@ -54,6 +54,6 @@
         @endforeach
     </table>
 
-    {!!$items->links()!!}
+{{--    {!!$items->links()!!}--}}
     {{--to show pagination links when in blank page also--}}
 @endsection

@@ -16,7 +16,7 @@ class RoleController extends Controller
     public function index()
     {
         //items var stores data from the db
-        $roles=Role::latest()->paginate(5);
+        $roles=Role::latest()->Paginate(5);
         return view('Roles.index',compact('roles'))
             ->with('i',(request()-> input('page',1)-1)*5);
         //compact stores data in key and value form

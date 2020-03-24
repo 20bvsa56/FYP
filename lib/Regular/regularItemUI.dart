@@ -58,7 +58,7 @@ class _RegularCategoryState extends State<RegularCategory> {
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.data != null) {
                         return Container(
-                          height: 540,    
+                          height: 539,    
                          
                           // height: MediaQuery.of(context).size.height,
                           child: ListView.builder(
