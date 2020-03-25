@@ -36,7 +36,7 @@ class _MenuCategoryState extends State<MenuCategory> {
       debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
-              leading: Icon(Icons.home),
+              leading: Icon(Icons.menu),
               backgroundColor: Colors.brown,
               title: Text('Menu Category'),
               centerTitle: true,

@@ -46,7 +46,9 @@ class _BannerImageState extends State<BannerImage> {
                     width: 400,
                     // height: MediaQuery.of(context).size.height,
                     child: CarouselSlider.builder(
-
+                        enableInfiniteScroll: true,
+                        autoPlayInterval: Duration(seconds: 5),
+                        autoPlay: true,
                         // scrollDirection: Axis.horizontal,
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
