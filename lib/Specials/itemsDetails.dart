@@ -21,7 +21,7 @@ class ItemsDetails extends StatelessWidget {
       child: Stack(children: <Widget>[
         Container(
           width: 180.0,
-          height: 180.0,
+          height: 150.0,
           decoration: new BoxDecoration(
             borderRadius: BorderRadius.circular(24.0),
             color: Colors.brown[200],

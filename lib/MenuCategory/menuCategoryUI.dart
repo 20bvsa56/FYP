@@ -19,7 +19,7 @@ class _MenuCategoryState extends State<MenuCategory> {
   List<Categories> menucategory = [];
 
   Future<List<Categories>> menuCategory() async {
-    var data = await http.get("http://192.168.254.1:8000/api/category/");
+    var data = await http.get("http://192.168.254.2:8000/api/category/");
     var jsonData = json.decode(data.body);
 
     //looping thorugh json data and getting details, adding in constructor and then list

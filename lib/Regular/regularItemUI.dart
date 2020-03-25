@@ -16,8 +16,8 @@ class _RegularCategoryState extends State<RegularCategory> {
     
     List<RegularItems> regularitems = [];
 
-  Future<List<RegularItems>> regularItems(int category_id) async {
-    var data = await http.get("http://192.168.254.1:8000/api/regular_item/");
+  Future<List<RegularItems>> regularItems() async {
+    var data = await http.get("http://192.168.254.2:8000/api/regular_item/");
     var jsonData = json.decode(data.body);
 
     //looping thorugh json data and getting details, adding in constructor and then list
@@ -54,7 +54,7 @@ class _RegularCategoryState extends State<RegularCategory> {
               child: Column(
                 children: <Widget>[
                   FutureBuilder(
-                    future: regularItems(widget.category_id),
+                    future: regularItems(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.data != null) {
                         return Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:menu_app/MenuGroup/imageCarousel.dart';
+//import 'package:menu_app/MenuGroup/imageCarousel.dart';
+import 'package:menu_app/MenuGroup/imageUI.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'items.dart';
@@ -18,7 +19,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
   List<Items> specialitems = [];
 
   Future<List<Items>> specialItems() async {
-    var data = await http.get("http://192.168.254.1:8000/api/special_item/");
+    var data = await http.get("http://192.168.254.2:8000/api/special_item/");
     var jsonData = json.decode(data.body);
 
     //looping thorugh json data and getting details, adding in constructor and then list
@@ -43,14 +44,17 @@ class _SpecialCategoryState extends State<SpecialCategory> {
             ),
             body: Column(
               children: <Widget>[
-                ImageCarousel(),
-                maintitle(),
+                // ImageCarousel(),
+               
+                BannerImage(),
+                 maintitle(),
                 FutureBuilder(
                   future: specialItems(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.data != null) {
                       return Container(
-                        height: 300,     
+                       
+                        height: 320,     
                         // width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
@@ -64,6 +68,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                               );
                             }),
                       );
+                      
                     } else {
                       return Container(
                         child: Center(
