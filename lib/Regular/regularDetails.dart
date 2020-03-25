@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class RegularDetails extends StatelessWidget {
   // const RegularDetails({Key key}) : super(key: key);
 
+  final int category_id;
   final String name;
   final String description;
   final String price;
   final String image;
 
   RegularDetails(
+    this.category_id,
     this.name,
     this.description,
     this.price,

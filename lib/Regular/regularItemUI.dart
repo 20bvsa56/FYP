@@ -7,22 +7,22 @@ import 'regularDetails.dart';
 
 
 class RegularCategory extends StatefulWidget {
-  RegularCategory({Key key}) : super(key: key);
 
   @override
   _RegularCategoryState createState() => _RegularCategoryState();
 }
 
 class _RegularCategoryState extends State<RegularCategory> {
+    
     List<RegularItems> regularitems = [];
 
-  Future<List<RegularItems>> regularItems() async {
+  Future<List<RegularItems>> regularItems(int category_id) async {
     var data = await http.get("http://192.168.254.1:8000/api/regular_item/");
     var jsonData = json.decode(data.body);
 
     //looping thorugh json data and getting details, adding in constructor and then list
     for (var regitemval in jsonData) {
-      RegularItems regitems = RegularItems(regitemval['name'], regitemval['description'], regitemval['price'],
+      RegularItems regitems = RegularItems(regitemval['category_id'], regitemval['name'], regitemval['description'], regitemval['price'],
           regitemval['image']);
       regularitems.add(regitems);
     }
@@ -54,7 +54,7 @@ class _RegularCategoryState extends State<RegularCategory> {
               child: Column(
                 children: <Widget>[
                   FutureBuilder(
-                    future: regularItems(),
+                    future: regularItems(widget.category_id),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.data != null) {
                         return Container(
@@ -66,6 +66,7 @@ class _RegularCategoryState extends State<RegularCategory> {
                               itemCount: snapshot.data.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return RegularDetails(
+                                  snapshot.data[index].category_id,
                                   snapshot.data[index].name,
                                   snapshot.data[index].description,
                                   snapshot.data[index].price,

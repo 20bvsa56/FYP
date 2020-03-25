@@ -66,6 +66,10 @@
                             <i class="fas fa-database"></i>Regular Food Item</a>
                     </li>
                     <li>
+                        <a class="js-arrow" href="{{route('banIndex')}}">
+                            <i class="far fa-image"></i>Banner Image</a>
+                    </li>
+                    <li>
                         <a class="js-arrow" href="{{route('roleIndex')}}">
                             <i class="far fa-user"></i>Role</a>
                     </li>

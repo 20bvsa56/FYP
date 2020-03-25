@@ -24,7 +24,7 @@ class _MenuCategoryState extends State<MenuCategory> {
 
     //looping thorugh json data and getting details, adding in constructor and then list
     for (var catval in jsonData) {
-      Categories categories = Categories( catval['name'], catval['image']);
+      Categories categories = Categories( catval['id'],catval['name'], catval['image']);
       menucategory.add(categories);
     }
     return menucategory;
@@ -55,6 +55,7 @@ class _MenuCategoryState extends State<MenuCategory> {
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                             itemBuilder: (BuildContext context, int index) {
                               return CategoriesDetails(
+                                snapshot.data[index].id,
                                 snapshot.data[index].name,
                                 snapshot.data[index].image,
                               );

@@ -51,6 +51,13 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/roleDelete/{role}', 'RoleController@destroy')->name('roleDelete');
     Route::get('/roleEdit/{role}', 'RoleController@edit')->name('roleEdit');
     Route::post('/roleUpdate/{role}', 'RoleController@update')->name('roleUpdate');
+
+    Route::get('/bannerCreate', 'BannerImageController@create')->name('banCreate');
+    Route::get('/bannerIndex', 'BannerImageController@index')->name('banIndex');
+    Route::post('/bannerStore', 'BannerImageController@store')->name('banStore');
+    Route::post('/bannerDelete/{banner}', 'BannerImageController@destroy')->name('banDelete');
+    Route::get('/bannerEdit/{banner}', 'BannerImageController@edit')->name('banEdit');
+    Route::post('/bannerUpdate/{banner}', 'BannerImageController@update')->name('banUpdate');
 });
 
 
