@@ -45,10 +45,10 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'category_id' => 'required',
+            'type' => 'required',
             'name' => 'required',
             'price' => 'required|numeric',
-//            'category_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 //        dd($request);
@@ -57,6 +57,8 @@ class ItemController extends Controller
         $item->title = $request->title;
         $item->name = $request->name;
         $item->price = $request->price;
+        $item->description = $request->description;
+        $item->type = $request->type;
         $item->category_id = $request->category_id;
 
 
@@ -93,25 +95,26 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         $request->validate([
-            'title' => 'required',
+            'type' => 'required',
             'name' => 'required',
             'price' => 'required|numeric',
-//            'category_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-//        dd($request);
-//        Item::create($request->all());
+
         $item->title = $request->title;
         $item->name = $request->name;
         $item->price = $request->price;
+        $item->description = $request->description;
+        $item->type = $request->type;
         $item->category_id = $request->category_id;
-        $item->image = $request->image;
+
 
         $imageName = time() . '.' . request()->image->getClientOriginalExtension();
         request()->image->move(public_path('foodItems/'), $imageName);
         $item->image = $imageName;
 
         $item->update();
+
 
         return redirect()->route('itemIndex')
             ->with('success', 'Food item updated successfully.');

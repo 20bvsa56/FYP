@@ -4,7 +4,7 @@
     <div class="row" style="margin-left: 90px; margin-right: 100px;">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h3>Add special food item</h3>
+                <h3>Add food item</h3>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{route('itemIndex')}}">Back</a>
@@ -37,7 +37,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="Title">Title</label>
+                <label for="Title">Title <span style="color:blue">(For specials only)</span> </label>
                 <input type="text" class="form-control" name="title" placeholder="Enter food item title">
                 <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
             </div>
@@ -52,9 +52,30 @@
                 <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>
             <div class="form-group">
+                <label for="Description">Description</label>
+                <input type="text" class="form-control" name="description" placeholder="Enter food item description">
+                <small class="form-text text-muted">Ex: Special, Regular etc.</small>
+            </div>
+            <div class="form-group">
                 <label>Image</label>
                 <input type="file" name="image" id="image" class="form-control">
             </div>
+            <label for="Type">Type</label><br>
+            <div class="form-group">
+                <label class="radio-inline">
+                    <input type="radio" id="smt-fld-1-2" value="Special" name="type">Special</label>
+
+                <label class="radio-inline">
+                    <input type="radio" id="smt-fld-1-3" value="Regular" name="type" checked>Regular</label>
+            </div>
+
+            {{--            <div class="form-check">--}}
+{{--                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">--}}
+{{--                <label class="form-check-label" for="exampleRadios2">--}}
+{{--                    Regular--}}
+{{--                </label>--}}
+{{--            </div>--}}
+            <br>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

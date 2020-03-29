@@ -4,11 +4,11 @@
     <div class="row" style="margin-left: 90px; margin-right: 100px;">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h3>View special food item</h3>
+                <h3>View food item</h3>
                 <br>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{route('itemCreate')}}">Add special food item</a>
+                <a class="btn btn-primary" href="{{route('itemCreate')}}">Add food item</a>
             </div>
         </div>
     </div>
@@ -26,6 +26,8 @@
             <th>Title</th>
             <th>Name</th>
             <th>Price</th>
+            <th>Description</th>
+            <th>Type</th>
             <th>Image</th>
             <th width="280px">Action</th>
         </tr>
@@ -37,6 +39,8 @@
                 <td>{{$item->title}}</td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->price}}</td>
+                <td>{{$item->description}}</td>
+                <td>{{$item->type}}</td>
                 <td><img src="{{'foodItems/'.$item->image}}" alt="" style="height:60px;width: 60px;"></td>
 
                 <td>
