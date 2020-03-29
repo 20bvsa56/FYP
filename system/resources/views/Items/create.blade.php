@@ -37,7 +37,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="Title">Title <span style="color:blue">(For specials only)</span> </label>
+                <label for="Title">Title <span style="color:blue">(For special only)</span> </label>
                 <input type="text" class="form-control" name="title" placeholder="Enter food item title">
                 <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
             </div>
@@ -52,7 +52,7 @@
                 <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>
             <div class="form-group">
-                <label for="Description">Description</label>
+                <label for="Description">Description <span style="color:blue">(For regular only)</span></label>
                 <input type="text" class="form-control" name="description" placeholder="Enter food item description">
                 <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>
@@ -68,13 +68,6 @@
                 <label class="radio-inline">
                     <input type="radio" id="smt-fld-1-3" value="Regular" name="type" checked>Regular</label>
             </div>
-
-            {{--            <div class="form-check">--}}
-{{--                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">--}}
-{{--                <label class="form-check-label" for="exampleRadios2">--}}
-{{--                    Regular--}}
-{{--                </label>--}}
-{{--            </div>--}}
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

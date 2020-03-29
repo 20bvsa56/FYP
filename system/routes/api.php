@@ -19,8 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('category', 'API\CategoryController');
-Route::resource('special_item', 'API\ItemController');
+Route::get('special', 'API\ItemController@special');
+Route::get('regular', 'API\ItemController@regular');
 Route::resource('registration', 'API\RegistrationController');
 Route::resource('regular_item', 'API\RegularItemController');
 Route::get('regular_item/{category_id}', 'API\RegularItemController@show');
 Route::resource('banner_image', 'API\BannerImageController');
+
+
+//Route::get('type', 'API\ItemController@special');

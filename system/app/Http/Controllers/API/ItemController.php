@@ -11,12 +11,19 @@ use Illuminate\Http\Request;
 
 class ItemController extends BaseController
 {
-    public function index()
+    public function special()
     {
-        //get items
-        $items = Item::all();
+//        //get items
+//        $items = Item::all();
+//
+//        //return collection of items as a resource . here, collection returns a list of items
+//        return ItemResource::collection($items);
+        $items = Item::select('title','name','price','image')->where('type','Special')->get();
+        return ItemResource::collection($items);
+    }
 
-        //return collection of items as a resource . here, collection returns a list of items
+    public function regular(){
+        $items = Item::select('name','price','description','image')->where('type','Regular')->get();
         return ItemResource::collection($items);
     }
 
@@ -38,9 +45,11 @@ class ItemController extends BaseController
         $item = $request->isMethod('put') ? Item::findorFail($request->item_id) : new Item;
 
         $item->id = $request->input('item_id');
+        $item->type = $request->input('type');
         $item->title = $request->input('title');
         $item->name = $request->input('name');
         $item->price = $request->input('price');
+        $item->description = $request->input('description');
         $item->image = $request->input('image');
         $item->category_id = $request->input('category_id');
 
@@ -48,6 +57,7 @@ class ItemController extends BaseController
             return new ItemResource($item);
         }
     }
+
 
     /**
      * Display the specified resource.

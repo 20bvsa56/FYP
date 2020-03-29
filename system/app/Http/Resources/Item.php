@@ -19,9 +19,12 @@ class Item extends JsonResource
         //return parent::toArray($request);
         return [
             'id'=>$this->id,
+            'category_id'=>$this->category_id,
             'title'=>$this->title,
+            'type'=>$this->type,
             'name'=>$this->name,
             'price'=>$this->price,
+            'description'=>$this->description,
             'image'=>$this->image
         ];
     }

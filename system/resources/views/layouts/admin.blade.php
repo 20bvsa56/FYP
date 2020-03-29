@@ -51,23 +51,19 @@
                 <ul class="list-unstyled navbar__list">
                     <li>
                         <a class="js-arrow" href="{{route('home')}}">
-                            <i class="fas fa-list"></i>Dashboard</a>
-                    </li>
-                    <li>
-                        <a class="js-arrow" href="{{route('catIndex')}}">
-                            <i class="fas fa-folder"></i>Menu Category</a>
-                    </li>
-                    <li>
-                        <a class="js-arrow" href="{{route('itemIndex')}}">
-                            <i class="fas fa-coffee"></i>Special Food Item</a>
-                    </li>
-                    <li>
-                        <a class="js-arrow" href="{{route('regIndex')}}">
-                            <i class="fas fa-database"></i>Regular Food Item</a>
+                            <i class="fas fa-dashboard"></i>Dashboard</a>
                     </li>
                     <li>
                         <a class="js-arrow" href="{{route('banIndex')}}">
                             <i class="far fa-image"></i>Banner Image</a>
+                    </li>
+                    <li>
+                        <a class="js-arrow" href="{{route('catIndex')}}">
+                            <i class="fas fa-list"></i>Menu Category</a>
+                    </li>
+                    <li>
+                        <a class="js-arrow" href="{{route('itemIndex')}}">
+                            <i class="fas fa-coffee"></i>Food Item</a>
                     </li>
                     <li>
                         <a class="js-arrow" href="{{route('roleIndex')}}">

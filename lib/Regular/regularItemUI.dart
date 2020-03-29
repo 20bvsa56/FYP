@@ -18,7 +18,7 @@ class _RegularCategoryState extends State<RegularCategory> {
 
 
   Future<List<RegularItems>> regularItems(value) async {
-    var data = await http.get("http://192.168.254.2:8000/api/regular_item/");
+    var data = await http.get("http://192.168.254.2:8000/api/regular/");
     var jsonData = json.decode(data.body);
 
     //looping thorugh json data and getting details, adding in constructor and then list
