@@ -59,11 +59,7 @@ class _BannerImageState extends State<BannerImage> {
                   ),
                 );
               } else {
-                return Container(
-                  child: Center(
-                    child: Text("Loading"),
-                  ),
-                );
+                return Center(child: CircularProgressIndicator());
               }
             },
           ),

@@ -5,8 +5,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'categories.dart';
 import 'categoriesDetails.dart';
-
-
+import 'package:menu_app/Regular/regularItemUI.dart';
 
 class MenuCategory extends StatefulWidget {
   MenuCategory({Key key}) : super(key: key);
@@ -22,18 +21,24 @@ class _MenuCategoryState extends State<MenuCategory> {
     var data = await http.get("http://192.168.254.2:8000/api/category/");
     var jsonData = json.decode(data.body);
 
-    //looping thorugh json data and getting details, adding in constructor and then list
-    for (var catval in jsonData) {
-      Categories categories = Categories( catval['id'],catval['name'], catval['image']);
-      menucategory.add(categories);
+    for (var i = 0; i < jsonData.length; i++) {
+      final category = Categories.fromJson(jsonData[i]);
+      menucategory.add(category);
     }
     return menucategory;
   }
+  //looping thorugh json data and getting details, adding in constructor and then list
+  //   for (var catval in jsonData) {
+  //     Categories categories = Categories( catval['id'],catval['name'], catval['image']);
+  //     menucategory.add(categories);
+  //   }
+  //   return menucategory;
+  // }
 
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
               leading: Icon(Icons.menu),
@@ -42,36 +47,46 @@ class _MenuCategoryState extends State<MenuCategory> {
               centerTitle: true,
             ),
             body: Column(
-              children: <Widget>[ 
+              children: <Widget>[
                 FutureBuilder(
-                  future: menuCategory(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.data != null) {
-                      return Container(
-                        height: 539,     
-                        // height: MediaQuery.of(context).size.height,
-                        child:new GridView.builder(
-                            itemCount: snapshot.data.length,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                            itemBuilder: (BuildContext context, int index) {
-                              return CategoriesDetails(
-                                snapshot.data[index].id,
-                                snapshot.data[index].name,
-                                snapshot.data[index].image,
-                              );
-                            }),
-                      );
-                    } else {
-                      return Container(
-                        child: Center(
-                          child: Text("Loading"),
-                        ),
-                      );
-                    }
-                  },
-                ),
+                    future: menuCategory(),
+                    builder: (BuildContext context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Container(
+                            height: 539,
+                            child: GridView.builder(
+                                itemCount: snapshot.data.length,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2),
+                                itemBuilder: (BuildContext context, int index) {
+                                  Categories category = snapshot.data[index];
+                                  
+                                  return CategoriesDetails(
+                                    category: category,
+                                    action: () {
+                                      print('${category.id} has been tapped');
+                                      // Navigator.push(context,
+
+                                      //   new MaterialPageRoute(builder: (context) => RegularCategory(),
+                                      // ),
+                                      // );
+                                      
+                                      var route = new MaterialPageRoute(
+                                        
+                                        builder: (BuildContext context) =>
+                                        
+                                            new RegularCategory('value: ${category.id}'),
+                                      );
+                                      Navigator.of(context).push(route);
+                                    },
+                                  );
+                                }));
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    }),
               ],
             )));
   }
-
 }

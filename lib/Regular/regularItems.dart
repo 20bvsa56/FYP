@@ -1,3 +1,5 @@
+//import 'package:menu_app/MenuCategory/categories.dart';
+
 class RegularItems {
  
   final int category_id;
@@ -5,6 +7,8 @@ class RegularItems {
   final String description;
   final String price;
   final String image;
+  
 
   RegularItems(this.category_id, this.name, this.description, this.price, this.image);
+  
 }

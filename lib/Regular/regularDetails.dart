@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:menu_app/MenuCategory/categories.dart';
 
 class RegularDetails extends StatelessWidget {
   // const RegularDetails({Key key}) : super(key: key);
@@ -15,6 +16,7 @@ class RegularDetails extends StatelessWidget {
     this.description,
     this.price,
     this.image,
+    
   );
 
   @override

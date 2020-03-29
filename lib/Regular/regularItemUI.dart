@@ -5,62 +5,69 @@ import 'dart:async';
 import 'regularItems.dart';
 import 'regularDetails.dart';
 
-
 class RegularCategory extends StatefulWidget {
+  final int value;
 
+  RegularCategory(String s, {Key key, this.value}) : super(key: key);
   @override
   _RegularCategoryState createState() => _RegularCategoryState();
 }
 
 class _RegularCategoryState extends State<RegularCategory> {
-    
-    List<RegularItems> regularitems = [];
+  List<RegularItems> regularitems = [];
 
-  Future<List<RegularItems>> regularItems() async {
+
+  Future<List<RegularItems>> regularItems(value) async {
     var data = await http.get("http://192.168.254.2:8000/api/regular_item/");
     var jsonData = json.decode(data.body);
 
     //looping thorugh json data and getting details, adding in constructor and then list
     for (var regitemval in jsonData) {
-      RegularItems regitems = RegularItems(regitemval['category_id'], regitemval['name'], regitemval['description'], regitemval['price'],
+      RegularItems regitems = RegularItems(
+          regitemval['category_id'],
+          regitemval['name'],
+          regitemval['description'],
+          regitemval['price'],
           regitemval['image']);
       regularitems.add(regitems);
     }
     return regularitems;
   }
+
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
-             appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.chevron_left),
-            onPressed: () => Navigator.pop(context, false),
-          ),
-          actions: <Widget>[
-            // action button
-            IconButton(
-              icon: Icon(Icons.fastfood),
-              iconSize: 30.0,
-              onPressed: () {},
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.chevron_left),
+                onPressed: () => Navigator.pop(context, false),
+              ),
+              actions: <Widget>[
+                // action button
+                IconButton(
+                  icon: Icon(Icons.fastfood),
+                  iconSize: 30.0,
+                  onPressed: () {},
+                ),
+              ],
+              backgroundColor: Colors.brown,
+              title: Text('Food Items'),
+              centerTitle: true,
             ),
-          ],
-          backgroundColor: Colors.brown,
-          title: Text('Food Items'),
-          centerTitle: true,
-        ),
             body: Center(
               child: Column(
                 children: <Widget>[
                   FutureBuilder(
-                    future: regularItems(),
+                    future: regularItems('${widget.value}'),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.data != null) {
                         return Container(
-                          height: 539,    
-                         
+                          height: 539,
+
                           // height: MediaQuery.of(context).size.height,
+                      
                           child: ListView.builder(
                               scrollDirection: Axis.vertical,
                               itemCount: snapshot.data.length,
@@ -73,13 +80,15 @@ class _RegularCategoryState extends State<RegularCategory> {
                                   snapshot.data[index].image,
                                 );
                               }),
+
+
+
+
+
                         );
+                        
                       } else {
-                        return Container(
-                          child: Center(
-                            child: Text("Loading"),
-                          ),
-                        );
+                        return Center(child: CircularProgressIndicator());
                       }
                     },
                   ),

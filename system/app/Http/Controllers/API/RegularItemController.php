@@ -55,15 +55,23 @@ class RegularItemController extends BaseController
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+//    public function show($id)
+//    {
+//        //get single regular item
+//        $regular_items = RegularItems::findorFail($id);
+//
+//        //return single regular item as resource
+//        return new RegularItemResource($regular_items);
+//    }
+
+    public function show($category_id)
     {
-        //get single regular item
-        $regular_items = RegularItems::findorFail($id);
+        //get single category item
+        $regular_items = RegularItems::findorFail($category_id);
 
         //return single regular item as resource
         return new RegularItemResource($regular_items);
     }
-
     /**
      * Show the form for editing the specified resource.
      *

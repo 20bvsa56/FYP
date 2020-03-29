@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert'; //to convert http response in json format
 import 'package:http/http.dart' as http; //to handle http request
-import 'dart:async'; //to use async function
+// //to use async function
 
 
 class SignUp extends StatefulWidget {
@@ -22,7 +22,7 @@ class _SignUpState extends State<SignUp> {
 
 //creating a async function
   Future userRegistration() async {
-    // Showing CircularProgressIndicator.
+    // Showing CircularProgressIndicator using state.
     setState(() {
       visible = true;
     });
@@ -33,7 +33,7 @@ class _SignUpState extends State<SignUp> {
     String password = passwordController.text;
 
     //server api url
-    var url = 'http://192.168.254.1:8000/api/add_registry/';
+    var url = 'http://192.168.254.2:8000/api/registration/';
     
 
     // Store all data with Param Name.

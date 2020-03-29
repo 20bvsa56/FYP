@@ -9,7 +9,7 @@ class RegularItems extends Model
     protected $primaryKey='id';
     protected $table = 'regular_items';
     protected $fillable=[
-        'name','description','price','image'
+        'name','description','price','image','category_id'
     ];
     //for security purpose, this data are to be stored in db
 

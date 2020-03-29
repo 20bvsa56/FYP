@@ -15,7 +15,7 @@ class RegistrationController extends BaseController
     public function index()
     {
         //get registries
-        $registries = Registration::paginate(10);
+        $registries = Registration::all();
 
         //return collection of registries as a resource . here, collection returns a list of registries
         return RegistrationResource::collection($registries);

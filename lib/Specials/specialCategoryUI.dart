@@ -70,11 +70,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                       );
                       
                     } else {
-                      return Container(
-                        child: Center(
-                          child: Text("Loading"),
-                        ),
-                      );
+                       return Center(child: CircularProgressIndicator());
                     }
                   },
                 ),

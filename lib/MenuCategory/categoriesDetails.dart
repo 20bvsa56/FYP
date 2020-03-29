@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:menu_app/Regular/regularItemUI.dart';
+import 'package:menu_app/MenuCategory/categories.dart';
+// import 'package:menu_app/Regular/regularItemUI.dart';
 
 class CategoriesDetails extends StatelessWidget {
-  // const CategoriesDetails({Key key}) : super(key: key);
-  final int id;
-  final String name;
-  final String image;
+  // // const CategoriesDetails({Key key}) : super(key: key);
 
-  CategoriesDetails(
-    this.id,
-    this.name,
-    this.image,
-  );
+  final Categories category;
+  final Function action;
+
+  CategoriesDetails({this.category, this.action, Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        var route= new MaterialPageRoute(
-          builder: (BuildContext context) => new RegularCategory(),
-        );
-       Navigator.of(context).push(route);
-      },
+     onTap: action,
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Stack(children: <Widget>[
-          
           Container(
             width: 150.0,
             height: 150.0,
@@ -33,9 +25,8 @@ class CategoriesDetails extends StatelessWidget {
               color: Colors.brown[200],
             ),
             // child:Image.asset(image,fit: BoxFit.fill),
-            child: Image.asset("system/public/foodItems/" + image),
+            child: Image.asset("system/public/foodItems/" + category.image),
           ),
-          
           Positioned(
             left: 30.0,
             top: 110.0,
@@ -53,7 +44,7 @@ class CategoriesDetails extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: Container(
                         child: Center(
-                            child: Text(name,
+                            child: Text(category.name,
                                 style: TextStyle(
                                     fontFamily: 'Rancho-Regular',
                                     color: Colors.black,
@@ -61,7 +52,6 @@ class CategoriesDetails extends StatelessWidget {
                                     fontWeight: FontWeight.bold))),
                       ),
                     )
-                   
                   ],
                 ),
               ),
