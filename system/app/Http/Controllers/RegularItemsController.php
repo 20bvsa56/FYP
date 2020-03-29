@@ -17,16 +17,10 @@ class RegularItemsController extends Controller
      */
     public function index()
     {
-        //items var stores data from the db
-        $regular_items=DB::table('regular_items')
-            ->select('categories.name as catname','regular_items.id','regular_items.name','regular_items.description','regular_items.price','regular_items.image','regular_items.category_id')
-            ->join('categories', 'categories.id', '=', 'regular_items.category_id')
-            ->get();
-        return view('RegularItems.index', compact('regular_items'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
-        //compact stores data in key and value form
+        $regular_items=RegularItems::latest()->Paginate(5);
+        return view('RegularItems.index',compact('regular_items'))
+            ->with('i',(request()-> input('page',1)-1)*5);
 
-//        ->latest()->simplePaginate(5)
     }
 
     /**

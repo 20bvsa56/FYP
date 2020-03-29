@@ -34,7 +34,7 @@ class RegularItemController extends BaseController
     public function store(Request $request)
     {
         //checking method, if it is put request we gonna have to include in regularItem_id field
-        $regular_items = $request->isMethod('put') ? Beverage::findorFail($request->regularItem_id) : new RegularItems();
+        $regular_items = $request->isMethod('put') ? RegularItems::findorFail($request->regularItem_id) : new RegularItems();
 
         $regular_items->id = $request->input('regularItem_id');
         $regular_items->name = $request->input('name');
@@ -61,17 +61,17 @@ class RegularItemController extends BaseController
 //        $regular_items = RegularItems::findorFail($id);
 //
 //        //return single regular item as resource
-//        return new RegularItemResource($regular_items);
+//        return new RegularItemResourapice($regular_items);
 //    }
 
-    public function show($category_id)
-    {
-        //get single category item
-        $regular_items = RegularItems::findorFail($category_id);
-
-        //return single regular item as resource
-        return new RegularItemResource($regular_items);
-    }
+//    public function show($category_id)
+//    {
+//        //get single category item
+//        $regular_items = RegularItems::findorFail($category_id);
+//
+//        //return single regular item as resource
+//        return new RegularItemResource($regular_items);
+//    }
     /**
      * Show the form for editing the specified resource.
      *

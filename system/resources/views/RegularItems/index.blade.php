@@ -33,7 +33,7 @@
         @foreach($regular_items as $ritem)
             <tr>
                 <td>{{++$i}}</td>
-                <td>{{$ritem->catname}}</td>
+                <td>{{$ritem->category->name}}</td>
                 <td>{{$ritem->name}}</td>
                 <td>{{$ritem->price}}</td>
                 <td>{{$ritem->description}}</td>
@@ -54,6 +54,6 @@
         @endforeach
     </table>
 
-{{--    {!!$regular_items->links()!!}--}}
+    {!!$regular_items->links()!!}
     {{--to show pagination links when in blank page also--}}
 @endsection
