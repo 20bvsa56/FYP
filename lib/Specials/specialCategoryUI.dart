@@ -59,6 +59,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                             itemCount: snapshot.data.length,
                             itemBuilder: (BuildContext context, int index) {
                               return ItemsDetails(
+                              //  snapshot.data[index].item,
                                 snapshot.data[index].title,
                                 snapshot.data[index].name,
                                 snapshot.data[index].price,
@@ -67,7 +68,23 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                             }),
                       );
                     } else {
-                      return Center(child: CircularProgressIndicator());
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(100,150,0,0),
+                            child: Container(
+                              
+                              height: 50,
+                              width: 180,
+                              child:  Text('No special item!',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20,
+                                                fontStyle: FontStyle.italic,
+                                                fontFamily: 'Rancho-Regular',
+                                              ),),
+                            ),
+                          ),
+                        );
                     }
                   },
                 ),

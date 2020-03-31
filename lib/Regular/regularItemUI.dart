@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -7,7 +9,9 @@ import 'regularDetails.dart';
 
 class RegularCategory extends StatefulWidget {
 
-  RegularCategory(int id,  {Key key}) : super(key: key);
+  final int id;
+  final String name;
+  RegularCategory({Key key, this.id, this.name}) : super(key: key);
 
   @override
   _RegularCategoryState createState() => _RegularCategoryState();
@@ -16,15 +20,14 @@ class RegularCategory extends StatefulWidget {
 class _RegularCategoryState extends State<RegularCategory> {
   List<RegularItems> regularitems = [];
 
-  Future<List<RegularItems>> regularItems() async {
-    var data = await http.get("http://192.168.254.2:8000/api/item/$widget.id");
+  Future<List<RegularItems>> regularItems(int id) async {
+    var data = await http.get("http://192.168.254.2:8000/api/item/$id");
     var jsonData = json.decode(data.body);
-    print('hello');
-    print('$widget.id');
+   
+    print(id );
     //looping thorugh json data and getting details, adding in constructor and then list
     for (var regitemval in jsonData) {
       RegularItems regitems = RegularItems(
-          regitemval['category_id'],
           regitemval['name'],
           regitemval['description'],
           regitemval['price'],
@@ -53,14 +56,14 @@ class _RegularCategoryState extends State<RegularCategory> {
                 ),
               ],
               backgroundColor: Colors.brown,
-              title: Text('Food Items'),
+              title: Text(widget.name),
               centerTitle: true,
             ),
             body: Center(
               child: Column(
                 children: <Widget>[
                   FutureBuilder(
-                    future: regularItems(),
+                    future: regularItems(widget.id),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.data != null) {
                         return Container(
@@ -73,8 +76,6 @@ class _RegularCategoryState extends State<RegularCategory> {
                               itemCount: snapshot.data.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return RegularDetails(
-                                  
-                                  snapshot.data[index].category_id,
                                   snapshot.data[index].name,
                                   snapshot.data[index].description,
                                   snapshot.data[index].price,
@@ -83,7 +84,30 @@ class _RegularCategoryState extends State<RegularCategory> {
                               }),
                         );
                       } else {
-                        return Center(child: CircularProgressIndicator());
+              
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(100,200,0,0),
+                            child: Container(
+                              
+                              height: 50,
+                              width: 180,
+                              child:  Text('No food item!',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20,
+                                                fontStyle: FontStyle.italic,
+                                                fontFamily: 'Rancho-Regular',
+                                              ),),
+                            ),
+                          ),
+                        );
+                      
+                         
+                            
+                        
+                        
+                        
                       }
                     },
                   ),

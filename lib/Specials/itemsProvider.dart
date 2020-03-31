@@ -2,7 +2,7 @@ import 'items.dart';
 
 //class created to create a list of food items to be updated and later fed into sink
 
-class BeverageCartProvider{
+class SpecialCartProvider{
   List <Items> specialitems =[]; //creating list of SpecialFoodItem and initializing with empty list.
   
   //now adding received food items to the list initalized above.
@@ -16,4 +16,6 @@ class BeverageCartProvider{
     specialitems.remove(items);
     return specialitems;// return newly updated list
   }
-} 
+
+
+}  

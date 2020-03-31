@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 class RegularDetails extends StatelessWidget {
   // const RegularDetails({Key key}) : super(key: skey);
-
-  final int category_id;
   final String name;
   final String description;
   final String price;
@@ -12,7 +10,6 @@ class RegularDetails extends StatelessWidget {
 
   RegularDetails(
     
-    this.category_id,
     this.name,
     this.description,
     this.price,

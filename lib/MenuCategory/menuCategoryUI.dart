@@ -27,14 +27,7 @@ class _MenuCategoryState extends State<MenuCategory> {
     }
     return menucategory;
   }
-  //looping thorugh json data and getting details, adding in constructor and then list
-  //   for (var catval in jsonData) {
-  //     Categories categories = Categories( catval['id'],catval['name'], catval['image']);
-  //     menucategory.add(categories);
-  //   }
-  //   return menucategory;
-  // }
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -66,13 +59,9 @@ class _MenuCategoryState extends State<MenuCategory> {
                                     category: category,
                                     
                                     action: () {
-                                    print('${menucategory[index].id} has been tapped');  
-                                      var route = new MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            RegularCategory(menucategory[index].id),
-                                      );
-
-                                      Navigator.of(context).push(route);
+                                      print(category.id);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegularCategory(id: category.id, name: category.name)),);
+                                    
                                     },
                                   );
                                   
