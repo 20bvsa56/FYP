@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-//import 'package:menu_app/MenuGroup/imageCarousel.dart';
 import 'package:menu_app/MenuGroup/imageUI.dart';
 import 'dart:convert';
 import 'dart:async';
@@ -34,7 +33,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
               leading: Icon(Icons.home),
@@ -45,16 +44,15 @@ class _SpecialCategoryState extends State<SpecialCategory> {
             body: Column(
               children: <Widget>[
                 // ImageCarousel(),
-               
+
                 BannerImage(),
-                 maintitle(),
+                maintitle(),
                 FutureBuilder(
                   future: specialItems(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.data != null) {
                       return Container(
-                       
-                        height: 320,     
+                        height: 320,
                         // width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
@@ -68,9 +66,8 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                               );
                             }),
                       );
-                      
                     } else {
-                       return Center(child: CircularProgressIndicator());
+                      return Center(child: CircularProgressIndicator());
                     }
                   },
                 ),

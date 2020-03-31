@@ -13,18 +13,22 @@ class ItemController extends BaseController
 {
     public function special()
     {
-//        //get items
-//        $items = Item::all();
-//
-//        //return collection of items as a resource . here, collection returns a list of items
-//        return ItemResource::collection($items);
         $items = Item::select('title','name','price','image')->where('type','Special')->get();
         return ItemResource::collection($items);
     }
 
-    public function regular(){
-        $items = Item::select('name','price','description','image')->where('type','Regular')->get();
+    public function regular()
+    {
+        $items = Item::select('name','price','description','image','category_id')->where('type','Regular')->get();
         return ItemResource::collection($items);
+    }
+
+    public function category($category_id)
+    {
+        //get single item with s category id
+        $item= Item::select('name','price','description','image','category_id')->where('category_id', $category_id)->get();
+        return ItemResource::collection($item);
+
     }
 
     /**
@@ -65,14 +69,14 @@ class ItemController extends BaseController
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //get single item
-        $item = Item::findorFail($id);
-
-        //return single item as resource
-        return new ItemResource($item);
-    }
+//    public function show($id)
+//    {
+//        //get single item
+//        $item = Item::findorFail($id);
+//
+//        //return single item as resource
+//        return new ItemResource($item);
+//    }
 
     /**
      * Show the form for editing the specified resource.

@@ -2,6 +2,7 @@
 
 class RegularItems {
  
+  
   final int category_id;
   final String name;
   final String description;

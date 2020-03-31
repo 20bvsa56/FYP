@@ -6,9 +6,9 @@ import 'regularItems.dart';
 import 'regularDetails.dart';
 
 class RegularCategory extends StatefulWidget {
-  final int value;
 
-  RegularCategory(String s, {Key key, this.value}) : super(key: key);
+  RegularCategory(int id,  {Key key}) : super(key: key);
+
   @override
   _RegularCategoryState createState() => _RegularCategoryState();
 }
@@ -16,11 +16,11 @@ class RegularCategory extends StatefulWidget {
 class _RegularCategoryState extends State<RegularCategory> {
   List<RegularItems> regularitems = [];
 
-
-  Future<List<RegularItems>> regularItems(value) async {
-    var data = await http.get("http://192.168.254.2:8000/api/regular/");
+  Future<List<RegularItems>> regularItems() async {
+    var data = await http.get("http://192.168.254.2:8000/api/item/$widget.id");
     var jsonData = json.decode(data.body);
-
+    print('hello');
+    print('$widget.id');
     //looping thorugh json data and getting details, adding in constructor and then list
     for (var regitemval in jsonData) {
       RegularItems regitems = RegularItems(
@@ -60,19 +60,20 @@ class _RegularCategoryState extends State<RegularCategory> {
               child: Column(
                 children: <Widget>[
                   FutureBuilder(
-                    future: regularItems('${widget.value}'),
+                    future: regularItems(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.data != null) {
                         return Container(
                           height: 539,
 
                           // height: MediaQuery.of(context).size.height,
-                      
+
                           child: ListView.builder(
                               scrollDirection: Axis.vertical,
                               itemCount: snapshot.data.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return RegularDetails(
+                                  
                                   snapshot.data[index].category_id,
                                   snapshot.data[index].name,
                                   snapshot.data[index].description,
@@ -80,13 +81,7 @@ class _RegularCategoryState extends State<RegularCategory> {
                                   snapshot.data[index].image,
                                 );
                               }),
-
-
-
-
-
                         );
-                        
                       } else {
                         return Center(child: CircularProgressIndicator());
                       }

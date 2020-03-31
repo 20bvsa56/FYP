@@ -13,7 +13,7 @@ class ItemsDetails extends StatelessWidget {
     this.price,
     this.image,
   );
-
+  
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:menu_app/MenuCategory/categories.dart';
 
 class RegularDetails extends StatelessWidget {
-  // const RegularDetails({Key key}) : super(key: key);
+  // const RegularDetails({Key key}) : super(key: skey);
 
   final int category_id;
   final String name;
@@ -11,6 +11,7 @@ class RegularDetails extends StatelessWidget {
   final String image;
 
   RegularDetails(
+    
     this.category_id,
     this.name,
     this.description,

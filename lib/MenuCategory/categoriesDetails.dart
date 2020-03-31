@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:menu_app/MenuCategory/categories.dart';
-// import 'package:menu_app/Regular/regularItemUI.dart';
 
 class CategoriesDetails extends StatelessWidget {
   // // const CategoriesDetails({Key key}) : super(key: key);
 
   final Categories category;
+
   final Function action;
 
   CategoriesDetails({this.category, this.action, Key key}) : super(key: key);

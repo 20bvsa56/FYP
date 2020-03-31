@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-// import 'package:menu_app/MenuGroup/categoryGrid.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'categories.dart';
-import 'categoriesDetails.dart';
 import 'package:menu_app/Regular/regularItemUI.dart';
+import 'categoriesDetails.dart';
+
 
 class MenuCategory extends StatefulWidget {
   MenuCategory({Key key}) : super(key: key);
@@ -61,27 +61,23 @@ class _MenuCategoryState extends State<MenuCategory> {
                                         crossAxisCount: 2),
                                 itemBuilder: (BuildContext context, int index) {
                                   Categories category = snapshot.data[index];
-                                  
+
                                   return CategoriesDetails(
                                     category: category,
+                                    
                                     action: () {
-                                      print('${category.id} has been tapped');
-                                      // Navigator.push(context,
-
-                                      //   new MaterialPageRoute(builder: (context) => RegularCategory(),
-                                      // ),
-                                      // );
-                                      
+                                    print('${menucategory[index].id} has been tapped');  
                                       var route = new MaterialPageRoute(
-                                        
                                         builder: (BuildContext context) =>
-                                        
-                                            new RegularCategory('value: ${category.id}'),
+                                            RegularCategory(menucategory[index].id),
                                       );
+
                                       Navigator.of(context).push(route);
                                     },
                                   );
-                                }));
+                                  
+                                }
+                                ));
                       } else {
                         return Center(child: CircularProgressIndicator());
                       }
