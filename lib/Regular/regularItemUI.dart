@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -8,7 +6,6 @@ import 'regularItems.dart';
 import 'regularDetails.dart';
 
 class RegularCategory extends StatefulWidget {
-
   final int id;
   final String name;
   RegularCategory({Key key, this.id, this.name}) : super(key: key);
@@ -23,15 +20,12 @@ class _RegularCategoryState extends State<RegularCategory> {
   Future<List<RegularItems>> regularItems(int id) async {
     var data = await http.get("http://192.168.254.2:8000/api/item/$id");
     var jsonData = json.decode(data.body);
-   
-    print(id );
+
+    print(id);
     //looping thorugh json data and getting details, adding in constructor and then list
     for (var regitemval in jsonData) {
-      RegularItems regitems = RegularItems(
-          regitemval['name'],
-          regitemval['description'],
-          regitemval['price'],
-          regitemval['image']);
+      RegularItems regitems = RegularItems(regitemval['name'],
+          regitemval['description'], regitemval['price'], regitemval['image']);
       regularitems.add(regitems);
     }
     return regularitems;
@@ -84,30 +78,24 @@ class _RegularCategoryState extends State<RegularCategory> {
                               }),
                         );
                       } else {
-              
                         return Center(
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(100,200,0,0),
+                            padding: const EdgeInsets.fromLTRB(100, 200, 0, 0),
                             child: Container(
-                              
                               height: 50,
                               width: 180,
-                              child:  Text('No food item!',
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 20,
-                                                fontStyle: FontStyle.italic,
-                                                fontFamily: 'Rancho-Regular',
-                                              ),),
+                              child: Text(
+                                'No food item!',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontStyle: FontStyle.italic,
+                                  fontFamily: 'Rancho-Regular',
+                                ),
+                              ),
                             ),
                           ),
                         );
-                      
-                         
-                            
-                        
-                        
-                        
                       }
                     },
                   ),

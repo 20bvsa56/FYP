@@ -57,6 +57,7 @@ class RegularDetails extends StatelessWidget {
                   fontFamily: 'Rancho-Regular',
                   // fontStyle: FontStyle.italic,
                   fontSize: 20.0,
+                  color: Colors.brown,
                 ),
               ),
               subtitle: Text(
@@ -65,6 +66,7 @@ class RegularDetails extends StatelessWidget {
                   fontFamily: 'Rancho-Regular',
                   // fontStyle: FontStyle.italic,
                   fontSize: 20.0,
+                  color: Colors.brown,
                 ),
               ),
               trailing: Image.asset("system/public/foodItems/" + image),

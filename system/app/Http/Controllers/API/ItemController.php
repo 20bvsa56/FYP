@@ -26,7 +26,7 @@ class ItemController extends BaseController
     public function category($category_id)
     {
         //get single item with s category id
-        $item= Item::select('name','price','description','image','category_id')->where('category_id', $category_id)->get();
+        $item= Item::select('name','price','description','image','category_id')->where('category_id', $category_id)->where('type','Regular')->get();
         return ItemResource::collection($item);
 
     }

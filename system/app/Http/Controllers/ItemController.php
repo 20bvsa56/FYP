@@ -51,7 +51,7 @@ class ItemController extends Controller
             'type' => 'required',
             'name' => 'required',
             'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
         ]);
 //        dd($request);
 //        Item::create($request->all());
