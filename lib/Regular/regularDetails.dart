@@ -14,7 +14,6 @@ class RegularDetails extends StatelessWidget {
     this.description,
     this.price,
     this.image,
-    
   );
 
   @override
