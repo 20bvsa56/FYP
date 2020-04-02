@@ -44,6 +44,7 @@ class _SignUpState extends State<SignUp> {
       	           headers: {'Accept':'application/json'});
 
     // Getting Server response into variable.
+
     var message = jsonDecode(response.body);
     // print(message.toString());
 
@@ -165,6 +166,7 @@ class _SignUpState extends State<SignUp> {
                             ),
                             TextFormField(
                               controller: passwordController,
+                              
                               decoration: const InputDecoration(
                                 hintText: '**************',
                                 labelText: 'Password',

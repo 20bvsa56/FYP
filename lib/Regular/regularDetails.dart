@@ -69,7 +69,7 @@ class RegularDetails extends StatelessWidget {
                   color: Colors.brown,
                 ),
               ),
-              trailing: Image.asset("system/public/foodItems/" + image),
+              trailing: Image.asset('system/public/foodItems/'+image),
             ),
           ),
             

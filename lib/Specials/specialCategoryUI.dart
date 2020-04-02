@@ -6,6 +6,8 @@ import 'dart:async';
 import 'items.dart';
 import 'itemsDetails.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:menu_app/Specials/specialCartListBloc.dart';
+import 'package:bloc_pattern/bloc_pattern.dart';
 
 class SpecialCategory extends StatefulWidget {
   SpecialCategory({Key key}) : super(key: key);
@@ -22,17 +24,24 @@ class _SpecialCategoryState extends State<SpecialCategory> {
     var jsonData = json.decode(data.body);
 
     //looping thorugh json data and getting details, adding in constructor and then list
-    for (var itemval in jsonData) {
-      Items items = Items(itemval['title'], itemval['name'], itemval['price'],
-          itemval['image']);
-      specialitems.add(items);
+  //   for (var itemval in jsonData) {
+  //     Items items = Items(itemval['quantity'],itemval['items'],itemval['title'], itemval['name'], itemval['price'],itemval['image']);
+  //     specialitems.add(items);
+  //   }
+  //   return specialitems;
+  // }
+   for (var i = 0; i < jsonData.length; i++) {
+      final category = Items.fromJson(jsonData[i]);
+      specialitems.add(category);
     }
     return specialitems;
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return BlocProvider(
+      blocs: [Bloc((i) => SpecialCartListBloc())],
+      child:MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
@@ -50,7 +59,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                 FutureBuilder(
                   future: specialItems(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.data != null) {
+                    if (snapshot.hasData) {
                       return Container(
                         height: 320,
                         // width: MediaQuery.of(context).size.width,
@@ -58,12 +67,9 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                             scrollDirection: Axis.horizontal,
                             itemCount: snapshot.data.length,
                             itemBuilder: (BuildContext context, int index) {
+                               Items item = snapshot.data[index];
                               return ItemsDetails(
-                              //  snapshot.data[index].item,
-                                snapshot.data[index].title,
-                                snapshot.data[index].name,
-                                snapshot.data[index].price,
-                                snapshot.data[index].image,
+                               item: item,
                               );
                             }),
                       );
@@ -89,7 +95,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                   },
                 ),
               ],
-            )));
+            ))));
   }
 }
 

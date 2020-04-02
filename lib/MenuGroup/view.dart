@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:menu_app/CartPage/cart.dart';
 import 'package:menu_app/MenuCategory/menuCategoryUI.dart';
 import 'package:menu_app/Specials/specialCategoryUI.dart';
-// import 'package:menu_app/cart/cart.dart';
-// import 'package:menu_app/Cart/cart.dart';
-// // import 'appbar.dart';
-// import 'package:menu_app/Specials/specialCategoryUI.dart';
-// import 'menuCategory.dart';
+
 
 class View extends StatefulWidget {
   @override
@@ -17,13 +14,13 @@ class View extends StatefulWidget {
 class _ViewState extends State<View> {
   final Key keyOne= PageStorageKey('specialPage');
   final Key keyTwo= PageStorageKey('menuPage');
-  // final Key keyThree= PageStorageKey('cartPage');
+  final Key keyThree= PageStorageKey('cartPage');
   
   int currentTab = 0;
 
   SpecialCategory one;
   MenuCategory two;
-  // Cart three;
+  Cart three;
   List<Widget> pages;
   Widget currentPage;
 
@@ -37,11 +34,11 @@ class _ViewState extends State<View> {
     two = MenuCategory(
       key: keyTwo,
     );
-    // three= Cart(
-    //   key: keyThree,
-    // );
+    three= Cart(
+      key: keyThree,
+    );
 
-    pages=[one, two];
+    pages=[one, two, three];
     currentPage=one;
     super.initState();
 

@@ -44,5 +44,6 @@ class AppServiceProvider extends ServiceProvider
         CategoryResource::withoutWrapping();
         ItemResource::withoutWrapping();
         RegistrationResource::withoutWrapping();
+
     }
 }

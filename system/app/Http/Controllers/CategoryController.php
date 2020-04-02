@@ -42,34 +42,6 @@ class CategoryController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
-        ]);
-
-        $category = new Category();
-        $category->name = $request->name;
-        $category->image = $request->image;
-
-
-        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('foodItems/'), $imageName);
-        $category->image = $imageName;
-
-        $category->save();
-
-        return redirect()->route('catIndex')
-            ->with('success','Food category added successfully.');
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Category  $category
@@ -138,5 +110,33 @@ class CategoryController extends Controller
 
         return redirect()->route('catIndex')
             ->with('success','Menu category deleted successfully.');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
+        ]);
+        $category = new Category();
+        $category->name = $request->name;
+        $category->image = $request->image;
+
+
+        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('foodItems/'), $imageName);
+        $category->image = $imageName;
+
+        $category->save();
+
+        return redirect()->route('catIndex')
+            ->with('success','Food category added successfully.');
     }
 }
