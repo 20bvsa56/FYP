@@ -5,7 +5,7 @@ class RegularItems {
   
   final String name;
   final String description;
-  final String price;
+  final int price;
   final String image;
   
 

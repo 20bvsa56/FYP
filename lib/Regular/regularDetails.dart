@@ -60,7 +60,7 @@ class RegularDetails extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                "Rs. " + price,
+                "Rs. " + price.toString(),
                 style: TextStyle(
                   fontFamily: 'Rancho-Regular',
                   // fontStyle: FontStyle.italic,

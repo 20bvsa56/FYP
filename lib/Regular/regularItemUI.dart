@@ -72,7 +72,7 @@ class _RegularCategoryState extends State<RegularCategory> {
                                 return RegularDetails(
                                   snapshot.data[index].name,
                                   snapshot.data[index].description,
-                                  snapshot.data[index].price,
+                                  snapshot.data[index].price.toString(),
                                   snapshot.data[index].image,
                                 );
                               }),

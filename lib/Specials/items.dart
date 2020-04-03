@@ -4,7 +4,7 @@ class Items {
   String title;
   Null type;
   String name;
-  String price;
+  int price;
   Null description;
   String image;
   int quantity;
@@ -18,8 +18,7 @@ class Items {
       this.price,
       this.description,
       this.image,
-      this.quantity=1
-      });
+      this.quantity});
 
   Items.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -30,7 +29,7 @@ class Items {
     price = json['price'];
     description = json['description'];
     image = json['image'];
-    quantity = json['quantity'];
+    quantity = json['quantity']=1;
   }
 
   Map<String, dynamic> toJson() {

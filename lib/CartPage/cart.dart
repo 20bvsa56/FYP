@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:menu_app/Specials/items.dart';
 import 'package:menu_app/Specials/specialCartListBloc.dart';
@@ -23,6 +24,7 @@ class _CartState extends State<Cart> {
           items = snapshot.data;
           return Scaffold(
             body: SafeArea(child: Container(child: CartBody(items))),
+            
           );
         }else{
           return Container();
@@ -61,7 +63,21 @@ class CartBody extends StatelessWidget {
 Container noItemContainer(){
   return Container(
     child: Center(
-      child: Text('No food item in the cart.'),
+      child: Column(
+        children:<Widget>[
+         Text('No food item in the cart.',
+         style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 25,
+                                                  fontStyle: FontStyle.italic,
+                                                  fontFamily: 'Rancho-Regular',
+                                                ),),
+                                                
+        IconButton(icon: Icon(Icons.add), onPressed: null)
+                                                
+                                                ]
+                                                
+      ),
     ),
   );
 }
@@ -97,37 +113,38 @@ class ItemContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        color: Colors.brown[200],
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            // ClipRRect(
-            //   borderRadius: BorderRadius.circular(10),
-            //   child: Image.asset(item.image,fit: BoxFit.cover, height: 50, width: 60),
-            // ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.blue,
-                fontSize:15),
-                children: [
-                  TextSpan(text: item.quantity.toString(), style:TextStyle(fontSize: 18, color: Colors.white)),
-                  TextSpan(text: " x ", style: TextStyle(fontSize: 18, color: Colors.black)),
-                  TextSpan(
-                    text:item.name, style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
-                  TextSpan(text: "  =", style: TextStyle(fontSize: 18, color: Colors.black)),
-                  
-                ]
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+            
+              RichText(
+                text: TextSpan(
+                 
+                  children: [
+                    TextSpan(text: item.quantity.toString(), style:TextStyle(fontSize: 18, color: Colors.brown,fontWeight: FontWeight.bold)),
+                    TextSpan(text: " x ", style: TextStyle(fontSize: 18, color: Colors.black)),
+                    TextSpan(
+                      text:item.name, style: TextStyle(fontSize: 18, color: Colors.brown,fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(text: "  =", style: TextStyle(fontSize: 18, color: Colors.black)),
+                    
+                  ]
+                ),
+                
               ),
-              
-            ),
-            Text("\Rs. item.quantity * item.price",
-            style: TextStyle(color: Colors.black),)
+                            
+              Text("\Rs.${item.quantity * item.price}",
+              style: TextStyle(color: Colors.black),)
 
 
-          ],
+            ],
+            
+          ),
         ),
       ),
     );

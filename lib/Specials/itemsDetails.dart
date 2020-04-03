@@ -70,7 +70,7 @@ class ItemsDetails extends StatelessWidget {
                       child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Text(" Rs." + item.price,
+                      Text(" Rs." + item.price.toString(),
                           style: TextStyle(
                               color: Colors.brown,
                               fontFamily: 'Rancho-Regular',
@@ -87,10 +87,9 @@ class ItemsDetails extends StatelessWidget {
                                 fontSize: 13, fontFamily: 'Lobster-Regular')),
                         onPressed: () {
                           addToCart(item);
-                          print('$item.name');
-
+                          
                           final snackbar = SnackBar(
-                            content: Text('${item.name} Added to cart.'),
+                            content: Text('${item.name} added to cart.'),
                             duration: Duration(milliseconds: 600),
                           );
                           Scaffold.of(context).showSnackBar(snackbar);
