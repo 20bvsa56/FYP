@@ -45,4 +45,14 @@ class Items {
     data['quantity'] = this.quantity;
     return data;
   }
+
+//liberty for customer to increase or decrease quantity
+  void incrementQuantity(){
+    this.quantity = this.quantity + 1;
+  }
+
+    void decrementQuantity(){
+    this.quantity = this.quantity - 1;
+  }
+
 }

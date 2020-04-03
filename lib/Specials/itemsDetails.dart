@@ -89,7 +89,7 @@ class ItemsDetails extends StatelessWidget {
                           addToCart(item);
                           
                           final snackbar = SnackBar(
-                            content: Text('${item.name} added to cart.'),
+                            content: Text('${item.name} added to food cart.'),
                             duration: Duration(milliseconds: 600),
                           );
                           Scaffold.of(context).showSnackBar(snackbar);

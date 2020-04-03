@@ -2,20 +2,45 @@ import 'items.dart';
 
 //class created to create a list of food items to be updated and later fed into sink
 
-class SpecialCartProvider{
-  List <Items> specialitems =[]; //creating list of SpecialFoodItem and initializing with empty list.
-  
-  //now adding received food items to the list initalized above.
-  List <Items> addToList(Items items){ 
-    specialitems.add(items);
-    return specialitems; // return newly updated list
+class SpecialCartProvider {
+  //couterProvider only consists of a counter and a method which is responsible for increasing the value of count
+  List<Items> specialitems = [];
+
+  List<Items> addToList(Items items) {
+    bool isPresent = false;
+
+    if (specialitems.length > 0) {
+      for (int i = 0; i < specialitems.length; i++) {
+        if (specialitems[i].id == items.id) {
+          increaseItemQuantity(items);
+          isPresent = true;
+          break;
+        } else {
+          isPresent = false;
+        }
+      }
+
+      if (!isPresent) {
+        specialitems.add(items);
+      }
+    } else {
+      specialitems.add(items);
+    }
+
+    return specialitems;
   }
 
-  //now removing food items from the list.
-  List <Items> removeFromList(Items items){
-    specialitems.remove(items);
-    return specialitems;// return newly updated list
+  List<Items> removeFromList(Items items) {
+    if (items.quantity > 1) {
+      //only decrease the quantity
+      decreaseItemQuantity(items);
+    } else {
+      //remove it from the list
+      specialitems.remove(items);
+    }
+    return specialitems;
   }
 
-
-}  
+  void increaseItemQuantity(Items items) => items.incrementQuantity();
+  void decreaseItemQuantity(Items items) => items.decrementQuantity();
+}
