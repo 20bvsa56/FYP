@@ -52,6 +52,7 @@ class BottomBar extends StatelessWidget {
           totalAmount(items),
           Divider(
             height: 1,
+            
             color: Colors.grey[700],
           ),
           persons(),
@@ -63,30 +64,30 @@ class BottomBar extends StatelessWidget {
 }
  Container nextButtonBar() {
     return Container(
-      margin: EdgeInsets.only(right: 25),
-      padding: EdgeInsets.all(25),
-      decoration: BoxDecoration(
-          color: Colors.pink, borderRadius: BorderRadius.circular(15)),
-      child: Row(
-        children: <Widget>[
-          Text(
-            "15-25 min",
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
-              fontSize: 14,
-              color: Colors.white10
-            ),
-          ),
-          Spacer(),
-          Text(
-            "Next",
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontSize: 16,
-            ),
-          ),
-        ],
-      ),
+    
+   
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0,10,0,0),
+        child: RaisedButton(
+                                        color: Colors.grey[200],
+                                        elevation: 15,
+                                        onPressed: () {
+                                          // Navigate to the main login screen using a named route '/login'.
+                                          // Navigator.pushNamed(context, '/login');
+                                        },
+                                        child: Text('Place Order',
+                                            style: TextStyle(
+                                              color: Colors.orange,
+                                              fontSize: 25,
+                                              fontFamily: 'Rancho-Regular',
+                                            )),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(6),
+                                          side: BorderSide(color: Colors.black),
+                                        ),
+                                      ),
+      )
     );
   
 }
@@ -126,11 +127,11 @@ class _CustomPersonWidgetState extends State<CustomPersonWidget> {
     return Container(
       margin: EdgeInsets.only(right: 25),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey[300], width: 2),
+        border: Border.all(color: Colors.grey[300], width: 3),
         borderRadius: BorderRadius.circular(10),
       ),
       padding: EdgeInsets.symmetric(vertical: 5),
-      width: 120,
+      width: 100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -221,7 +222,7 @@ class CartBody extends StatelessWidget {
         centerTitle: true,
       ),
       body: Column(children: <Widget>[
-        title(),
+       title(),
         Expanded(
           flex: 1,
           child: items.length > 0 ? foodItemList(items) : noItemContainer(),

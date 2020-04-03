@@ -6,7 +6,6 @@ import 'items.dart';
 class ItemsDetails extends StatelessWidget {
   // const ItemsDetails({Key key}) : super(key: key);
   final Items item;
-  // final Items item;
 
   ItemsDetails({this.item, Key key}) : super(key: key);
 

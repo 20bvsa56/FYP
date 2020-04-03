@@ -26,11 +26,10 @@ class SpecialCartListBloc extends BlocBase {
     listSink.add(specialProvider.addToList(items));
   }
 
-//method to remove food items from the list
   removeFromList(Items items) {
     listSink.add(specialProvider.removeFromList(items));
+    
   }
-
 //dispose will be called automatically by closing its streams
 //dispose is used to prevent from memory leak
   @override

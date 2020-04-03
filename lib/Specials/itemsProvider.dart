@@ -14,13 +14,15 @@ class SpecialCartProvider {
         if (specialitems[i].id == items.id) {
           increaseItemQuantity(items);
           isPresent = true;
-          break;
+        //break;
         } else {
-          isPresent = false;
+          specialitems.add(items);
+         // isPresent = false;
+         // break;
         }
       }
 
-      if (!isPresent) {
+      if (isPresent == false) {
         specialitems.add(items);
       }
     } else {
