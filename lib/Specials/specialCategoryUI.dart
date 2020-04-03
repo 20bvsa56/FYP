@@ -104,13 +104,13 @@ Widget maintitle() {
     child: TyperAnimatedTextKit(
       text: ["Today\'s Special"],
       textStyle: TextStyle(
-        fontSize: 23.0,
+        fontSize: 25.0,
         fontWeight: FontWeight.bold,
         decoration: TextDecoration.underline,
         fontFamily: 'Pacifico-Regular',
-        color: Colors.black,
+        color: Colors.brown,
       ),
-      speed: Duration(milliseconds: 100),
+      speed: Duration(milliseconds: 150),
       isRepeatingAnimation: false,
     ),
   );

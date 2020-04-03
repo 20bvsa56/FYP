@@ -3,6 +3,7 @@ import 'package:menu_app/Specials/items.dart';
 import 'package:menu_app/Specials/specialCartListBloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 
+
 class Cart extends StatefulWidget {
   const Cart({Key key}) : super(key: key);
 
@@ -22,7 +23,10 @@ class _CartState extends State<Cart> {
         if (snapshot.data != null) {
           items = snapshot.data;
           return Scaffold(
-            body: SafeArea(child: Container(child: CartBody(items))),
+            body: SafeArea(child: Container(child: CartBody(items))
+          
+            ),
+            bottomNavigationBar: BottomBar(items) ,
           );
         } else {
           return Container();
@@ -31,6 +35,176 @@ class _CartState extends State<Cart> {
     );
   }
 }
+
+class BottomBar extends StatelessWidget {
+
+  final List<Items> items;
+
+  BottomBar(this.items);
+
+  @override
+  Widget build(BuildContext context) {
+   return Container(
+      margin: EdgeInsets.only(left: 35, bottom: 25),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          totalAmount(items),
+          Divider(
+            height: 1,
+            color: Colors.grey[700],
+          ),
+          persons(),
+          nextButtonBar(),
+        ],
+      ),
+    );
+  }
+}
+ Container nextButtonBar() {
+    return Container(
+      margin: EdgeInsets.only(right: 25),
+      padding: EdgeInsets.all(25),
+      decoration: BoxDecoration(
+          color: Colors.pink, borderRadius: BorderRadius.circular(15)),
+      child: Row(
+        children: <Widget>[
+          Text(
+            "15-25 min",
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 14,
+              color: Colors.white10
+            ),
+          ),
+          Spacer(),
+          Text(
+            "Next",
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ),
+    );
+  
+}
+
+Container persons() {
+    return Container(
+      // margin: EdgeInsets.only(right: 10),
+      padding: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text("Persons",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Colors.brown,
+                // fontFamily: 'Rancho-Regular'
+              )),
+          CustomPersonWidget(),
+        ],
+      ),
+    );
+  }
+
+class CustomPersonWidget extends StatefulWidget {
+  @override
+  _CustomPersonWidgetState createState() => _CustomPersonWidgetState();
+}
+
+class _CustomPersonWidgetState extends State<CustomPersonWidget> {
+  int noOfPersons = 1;
+
+  double _buttonWidth = 30;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 25),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey[300], width: 2),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: EdgeInsets.symmetric(vertical: 5),
+      width: 120,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          SizedBox(
+            width: _buttonWidth,
+            height: _buttonWidth,
+            child: FlatButton(
+              padding: EdgeInsets.all(0),
+              onPressed: () {
+                setState(() {
+                  if (noOfPersons > 1) {
+                    noOfPersons--;
+                  }
+                });
+              },
+              child: Text(
+                "-",
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+              ),
+            ),
+          ),
+          Text(
+            noOfPersons.toString(),
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+          ),
+          SizedBox(
+            width: _buttonWidth,
+            height: _buttonWidth,
+            child: FlatButton(
+              padding: EdgeInsets.all(0),
+              onPressed: () {
+                setState(() {
+                  noOfPersons++;
+                });
+              },
+              child: Text(
+                "+",
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+Container totalAmount(List<Items> items) {
+    return Container(
+      margin: EdgeInsets.only(right: 10),
+      padding: EdgeInsets.all(25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            "Total:",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500,color: Colors.brown),
+          ),
+          Text(
+            "\Rs.${returnTotalAmount(items)}",
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+          ),
+        ],
+      ),
+    );
+  }
+    String returnTotalAmount(List<Items> items) {
+    double totalAmount = 0.0;
+
+    for (int i = 0; i < items.length; i++) {
+      totalAmount = totalAmount + items[i].price * items[i].quantity;
+    }
+    return totalAmount.toStringAsFixed(2);
+  }
+
 
 class CartBody extends StatelessWidget {
   final List<Items> items;
@@ -47,6 +221,7 @@ class CartBody extends StatelessWidget {
         centerTitle: true,
       ),
       body: Column(children: <Widget>[
+        title(),
         Expanded(
           flex: 1,
           child: items.length > 0 ? foodItemList(items) : noItemContainer(),
@@ -54,6 +229,41 @@ class CartBody extends StatelessWidget {
       ]),
     );
   }
+}
+
+Widget title() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Your",
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 30,
+                color: Colors.brown,
+                fontFamily: 'Lobster-Regular',
+              ),
+            ),
+            Text(
+              "        Order",
+              style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  fontSize: 20,
+                  color: Colors.brown,
+                  fontStyle: FontStyle.italic
+                  // fontFamily: 'Pacifico-Regular',
+                  ),
+            ),
+          ],
+        )
+      ],
+    ),
+  );
 }
 
 Container noItemContainer() {
