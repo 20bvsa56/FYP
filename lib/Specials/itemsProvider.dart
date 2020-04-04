@@ -9,28 +9,47 @@ class SpecialCartProvider {
   List<Items> addToList(Items items) {
     bool isPresent = false;
 
-    if (specialitems.length > 0) {
-      for (int i = 0; i < specialitems.length; i++) {
-        if (specialitems[i].id == items.id) {
-          increaseItemQuantity(items);
-          isPresent = true;
-        //break;
-        } else {
-          specialitems.add(items);
-         // isPresent = false;
-         // break;
-        }
-      }
-
-      if (isPresent == false) {
-        specialitems.add(items);
-      }
-    } else {
+    if(!isPresent){
       specialitems.add(items);
+      isPresent = false;
+      
+    }else{
+      if(specialitems.length > 0){
+         for(int i = 0; i < specialitems.length; i++){
+            if(specialitems[i].id == items.id){
+                increaseItemQuantity(items);
+                isPresent = true;
+                break;
+            }else{
+              specialitems.add(items);
+            }
+         }
+
+      }
     }
+
+    // if(specialitems.length > 0){
+    //   for(int i = 0; i < specialitems.length; i++){
+    //     if(specialitems[i].id == items.id){
+    //         increaseItemQuantity(items);
+    //         isPresent = true;
+    //         break;
+    //     }else{
+    //       isPresent = false;
+    //     }
+    //   }
+    //   if(!isPresent){
+    //     specialitems.add(items);
+    //   }
+    // }else{
+    //   specialitems.add(items);
+    // }
 
     return specialitems;
   }
+
+  void increaseItemQuantity(Items items) => items.incrementQuantity();
+  void decreaseItemQuantity(Items items) => items.decrementQuantity();
 
   List<Items> removeFromList(Items items) {
     if (items.quantity > 1) {
@@ -43,6 +62,4 @@ class SpecialCartProvider {
     return specialitems;
   }
 
-  void increaseItemQuantity(Items items) => items.incrementQuantity();
-  void decreaseItemQuantity(Items items) => items.decrementQuantity();
 }
