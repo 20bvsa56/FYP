@@ -71,25 +71,28 @@ class RegularDetails extends StatelessWidget {
               trailing: Image.asset('system/public/foodItems/' + ritem.image),
             ),
           ),
-          InkWell(
-            child: RaisedButton(
+          
+           RaisedButton(
               color: Colors.brown[100],
               elevation: 20,
               child: const Text('Add to Cart',
                   style:
                       TextStyle(fontSize: 13, fontFamily: 'Lobster-Regular')),
               onPressed: () {
-                addToCart(ritem);
+                  addToCart(ritem);
+                  print(ritem.price);
 
-                final snackBar = SnackBar(
+                 final snackBar = SnackBar(
                   content: Text('${ritem.name} added to food cart.'),
                   duration: Duration(milliseconds: 550),
                 );
 
                 Scaffold.of(context).showSnackBar(snackBar);
+
+               
               },
             ),
-          ),
+          
         ]),
       ),
     );

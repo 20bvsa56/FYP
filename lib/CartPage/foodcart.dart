@@ -196,7 +196,7 @@ String returnTotalAmount(List<RegularItems> ritems) {
   double totalAmount = 0.0;
 
   for (int i = 0; i < ritems.length; i++) {
-    totalAmount = totalAmount + ritems[i].price * ritems[i].quantity;
+    totalAmount = totalAmount + ritems[i].price*ritems[i].quantity;
   }
   return totalAmount.toStringAsFixed(2);
 }
@@ -346,7 +346,7 @@ class ItemContent extends StatelessWidget {
                           fontFamily: 'Rancho-Regular')),
                 ]),
               ),
-              Text("\Rs.  ${ritem.quantity * ritem.price}",
+              Text("\Rs.  ${ritem.quantity*ritem.price}",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,

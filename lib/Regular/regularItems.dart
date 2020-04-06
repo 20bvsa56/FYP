@@ -18,7 +18,7 @@ class RegularItems {
       this.price,
       this.description,
       this.image,
-      this.quantity=1});
+      this.quantity});
 
   RegularItems.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -29,7 +29,7 @@ class RegularItems {
     price = json['price'];
     description = json['description'];
     image = json['image'];
-    quantity = json['quantity'];
+    quantity = json['quantity']=1;
   }
 
   Map<String, dynamic> toJson() {
