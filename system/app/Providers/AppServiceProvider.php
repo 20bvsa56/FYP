@@ -4,12 +4,14 @@ namespace App\Providers;
 
 use App\Http\Resources\Category;
 use App\Http\Resources\Item;
+use App\Http\Resources\Order;
 use App\Http\Resources\Registration as RegistrationResource;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Resources\Item as ItemResource;
 use App\Http\Resources\Category as CategoryResource;
+use App\Http\Resources\Order as OrderResource;
 //use Illuminate\Http\Resources\Json\Resource;
 
 
@@ -44,6 +46,6 @@ class AppServiceProvider extends ServiceProvider
         CategoryResource::withoutWrapping();
         ItemResource::withoutWrapping();
         RegistrationResource::withoutWrapping();
-
+        OrderResource::withoutWrapping();
     }
 }
