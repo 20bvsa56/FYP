@@ -16,9 +16,9 @@ class _SignUpState extends State<SignUp> {
   bool visible = false;
 
   // Getting entered value from TextField widget.
-  final usernameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
 //creating a async function
   Future userRegistration() async {

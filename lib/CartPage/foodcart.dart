@@ -3,6 +3,8 @@ import 'package:menu_app/Regular/regularItems.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'cartListBloc.dart';
 import 'dart:math';
+import 'dart:convert'; //to convert http response in json format
+import 'package:http/http.dart' as http; //to handle http request
 
 class FoodCart extends StatefulWidget {
   const FoodCart({Key key}) : super(key: key);
@@ -12,6 +14,66 @@ class FoodCart extends StatefulWidget {
 }
 
 class _FoodCartState extends State<FoodCart> {
+  // Boolean variable for CircularProgressIndicator.
+  bool visible = false;
+
+  // Getting entered value from TextField widget.
+  final orderNumController = TextEditingController();
+  final totalAmountController = TextEditingController();
+ 
+//creating a async function
+  Future orderPlacement() async {
+    // Showing CircularProgressIndicator using state.
+    setState(() {
+      visible = true;
+    });
+
+    // Getting value from Controller
+    String orderNum = totalAmountController.text;
+    String totalAmount = totalAmountController.text;
+
+    //server api url
+    var url = 'http://192.168.254.2:8000/api/order/';
+    
+
+    // Store all data with Param Name.
+    var data = {'orderNum': orderNum, 'totalAmount': totalAmount};
+
+    // Starting  API Call.
+    var response = await http.post(url, body: json.encode(data),
+      	           headers: {'Accept':'application/json'});
+
+    // Getting Server response into variable.
+
+    var message = jsonDecode(response.body);
+    // print(message.toString());
+
+    // If Web call Success than Hide the CircularProgressIndicator.
+    if (response.statusCode == 200) {
+      setState(() {
+        visible = false;
+      });
+    }
+
+      // Showing Alert Dialog with Response JSON Message.
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text(message),
+            actions: <Widget>[
+              FlatButton(
+                child: new Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+  }
+
   final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
 
   @override
@@ -207,6 +269,7 @@ Container totalAmount(List<RegularItems> ritems) {
         Text(
           "\Rs.${returnTotalAmount(ritems)}",
           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+          
         ),
       ],
     ),
@@ -215,11 +278,12 @@ Container totalAmount(List<RegularItems> ritems) {
 
 String returnTotalAmount(List<RegularItems> ritems) {
   double totalAmount = 0.0;
-
+  
   for (int i = 0; i < ritems.length; i++) {
     totalAmount = totalAmount + ritems[i].price * ritems[i].quantity;
   }
   return totalAmount.toStringAsFixed(2);
+  
 }
 
 class CartBody extends StatelessWidget {
