@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menu_app/Regular/regularItems.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'cartListBloc.dart';
+import 'dart:math';
 
 class FoodCart extends StatefulWidget {
   const FoodCart({Key key}) : super(key: key);
@@ -52,37 +53,57 @@ class BottomBar extends StatelessWidget {
             color: Colors.grey[700],
           ),
           persons(),
-          nextButtonBar(),
+          PlaceOrder(),
         ],
       ),
     );
   }
 }
 
-Container nextButtonBar() {
-  return Container(
-      child: Padding(
-    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-    child: RaisedButton(
-      color: Colors.grey[200],
-      elevation: 15,
-      onPressed: () {
-        // Navigate to the main login screen using a named route '/login'.
-        // Navigator.pushNamed(context, '/login');
-      },
-      child: Text('Place Order',
-          style: TextStyle(
-            color: Colors.orange,
-            fontSize: 25,
-            fontFamily: 'Rancho-Regular',
-          )),
-      shape: RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(6),
-        side: BorderSide(color: Colors.black),
+class PlaceOrder extends StatelessWidget {
+  
+  const PlaceOrder({Key key}) : super(key: key);
+
+  void orderNum() {
+    var random = new Random();
+    // Printing Random Number between 1 to 10000 on Terminal Window.
+    print(random.nextInt(10000));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Padding(
+      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+      child: RaisedButton(
+        color: Colors.grey[200],
+        elevation: 15,
+        onPressed: (){
+          orderNum();
+            final snackBar = SnackBar(
+                  content: Text('Your order has been placed.'),
+                  duration: Duration(milliseconds: 2000),
+                );
+
+                Scaffold.of(context).showSnackBar(snackBar);
+               
+        },
+        child: Text('Place Order',
+            style: TextStyle(
+              color: Colors.orange,
+              fontSize: 25,
+              fontFamily: 'Rancho-Regular',
+            )),
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(6),
+          side: BorderSide(color: Colors.black),
+        ),
       ),
-    ),
-  ));
+    ));
+  }
 }
+// returnTotalAmount
+// =>ticketNum()
 
 Container persons() {
   return Container(
@@ -196,7 +217,7 @@ String returnTotalAmount(List<RegularItems> ritems) {
   double totalAmount = 0.0;
 
   for (int i = 0; i < ritems.length; i++) {
-    totalAmount = totalAmount + ritems[i].price*ritems[i].quantity;
+    totalAmount = totalAmount + ritems[i].price * ritems[i].quantity;
   }
   return totalAmount.toStringAsFixed(2);
 }
@@ -346,7 +367,7 @@ class ItemContent extends StatelessWidget {
                           fontFamily: 'Rancho-Regular')),
                 ]),
               ),
-              Text("\Rs.  ${ritem.quantity*ritem.price}",
+              Text("\Rs.  ${ritem.quantity * ritem.price}",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
