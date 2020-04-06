@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-// import 'package:menu_app/MenuCategory/categories.dart';
+import 'package:menu_app/CartPage/cartListBloc.dart';
+import 'package:menu_app/Regular/regularItems.dart';
+import 'package:bloc_pattern/bloc_pattern.dart';
 
 class RegularDetails extends StatelessWidget {
   // const RegularDetails({Key key}) : super(key: skey);
-  final String name;
-  final String description;
-  final String price;
-  final String image;
+  // final RegularItems item;
+  final RegularItems ritem;
 
-  RegularDetails(
-    
-    this.name,
-    this.description,
-    this.price,
-    this.image,
-  );
+  RegularDetails({this.ritem, key}) : super(key: key);
+
+  final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
+
+  addToCart(RegularItems ritems) {
+    bloc.addToList(ritems);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class RegularDetails extends StatelessWidget {
         ),
         child: Column(children: <Widget>[
           Text(
-            name,
+            ritem.name,
             style: TextStyle(
               fontFamily: 'Lobster-Regular',
               fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class RegularDetails extends StatelessWidget {
             child: ListTile(
               isThreeLine: true,
               title: Text(
-                description,
+                ritem.description,
                 style: TextStyle(
                   fontFamily: 'Rancho-Regular',
                   // fontStyle: FontStyle.italic,
@@ -60,7 +60,7 @@ class RegularDetails extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                "Rs. " + price.toString(),
+                "Rs. " + ritem.price.toString(),
                 style: TextStyle(
                   fontFamily: 'Rancho-Regular',
                   // fontStyle: FontStyle.italic,
@@ -68,21 +68,28 @@ class RegularDetails extends StatelessWidget {
                   color: Colors.brown,
                 ),
               ),
-              trailing: Image.asset('system/public/foodItems/'+image),
+              trailing: Image.asset('system/public/foodItems/' + ritem.image),
             ),
           ),
-            
-                  InkWell(
-                      child: RaisedButton(
-                        color: Colors.brown[100],
-                        elevation: 20,
-                        child: const Text('Add to Cart',
-                            style: TextStyle(
-                                fontSize: 13, fontFamily: 'Lobster-Regular')),
-                        onPressed: () {},
-                      ),
-                    ),
-            
+          InkWell(
+            child: RaisedButton(
+              color: Colors.brown[100],
+              elevation: 20,
+              child: const Text('Add to Cart',
+                  style:
+                      TextStyle(fontSize: 13, fontFamily: 'Lobster-Regular')),
+              onPressed: () {
+                addToCart(ritem);
+
+                final snackBar = SnackBar(
+                  content: Text('${ritem.name} added to food cart.'),
+                  duration: Duration(milliseconds: 550),
+                );
+
+                Scaffold.of(context).showSnackBar(snackBar);
+              },
+            ),
+          ),
         ]),
       ),
     );

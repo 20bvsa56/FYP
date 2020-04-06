@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:menu_app/CartPage/cart.dart';
+import 'package:menu_app/CartPage/foodcart.dart';
 import 'package:menu_app/MenuCategory/menuCategoryUI.dart';
 import 'package:menu_app/Specials/specialCategoryUI.dart';
 
@@ -20,7 +20,7 @@ class _ViewState extends State<View> {
 
   SpecialCategory one;
   MenuCategory two;
-  Cart three;
+  FoodCart three;
   List<Widget> pages;
   Widget currentPage;
 
@@ -34,7 +34,7 @@ class _ViewState extends State<View> {
     two = MenuCategory(
       key: keyTwo,
     );
-    three= Cart(
+    three= FoodCart(
       key: keyThree,
     );
 

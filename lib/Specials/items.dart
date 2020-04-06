@@ -7,7 +7,7 @@ class Items {
   int price;
   Null description;
   String image;
-  int quantity;
+  
 
   Items(
       {this.id,
@@ -18,7 +18,7 @@ class Items {
       this.price,
       this.description,
       this.image,
-      this.quantity});
+      });
 
   Items.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -29,7 +29,6 @@ class Items {
     price = json['price'];
     description = json['description'];
     image = json['image'];
-    quantity = json['quantity']=1;
   }
 
   Map<String, dynamic> toJson() {
@@ -42,17 +41,7 @@ class Items {
     data['price'] = this.price;
     data['description'] = this.description;
     data['image'] = this.image;
-    data['quantity'] = this.quantity;
     return data;
-  }
-
-//liberty for customer to increase or decrease quantity
-  void incrementQuantity(){
-    this.quantity = this.quantity + 1;
-  }
-
-    void decrementQuantity(){
-    this.quantity = this.quantity - 1;
-  }
+  } 
 
 }

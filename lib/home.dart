@@ -18,19 +18,7 @@ class _HomeState extends State<Home> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // appBar: AppBar(
-        //   actions: <Widget>[
-        //     // action button
-        //     IconButton(
-        //       icon: Icon(Icons.wc),
-        //       iconSize: 25.0,
-        //       onPressed: () {},
-        //     ),
-        //   ],
-        //   backgroundColor: Colors.brown,
-        //   title: Text('Welcome to Tastyorama'),
-        //   centerTitle: true,
-        // ),
+     
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[

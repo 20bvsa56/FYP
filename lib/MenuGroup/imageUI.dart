@@ -42,8 +42,8 @@ class _BannerImageState extends State<BannerImage> {
                       borderRadius: BorderRadius.circular(10.0),
                       color: Colors.brown[100],
                     ),
-                    height: 150,
-                    width: 400,
+                    height: 170,
+                    width: 500,
                     // height: MediaQuery.of(context).size.height,
                     child: CarouselSlider.builder(
                         enableInfiniteScroll: true,

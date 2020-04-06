@@ -6,8 +6,8 @@ import 'dart:async';
 import 'items.dart';
 import 'itemsDetails.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:menu_app/Specials/specialCartListBloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:menu_app/CartPage/cartListBloc.dart';
 
 class SpecialCategory extends StatefulWidget {
   SpecialCategory({Key key}) : super(key: key);
@@ -23,13 +23,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
     var data = await http.get("http://192.168.254.2:8000/api/special/");
     var jsonData = json.decode(data.body);
 
-    //looping thorugh json data and getting details, adding in constructor and then list
-  //   for (var itemval in jsonData) {
-  //     Items items = Items(itemval['quantity'],itemval['items'],itemval['title'], itemval['name'], itemval['price'],itemval['image']);
-  //     specialitems.add(items);
-  //   }
-  //   return specialitems;
-  // }
+  
    for (var i = 0; i < jsonData.length; i++) {
       final category = Items.fromJson(jsonData[i]);
       specialitems.add(category);
@@ -40,8 +34,8 @@ class _SpecialCategoryState extends State<SpecialCategory> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      blocs: [Bloc((i) => SpecialCartListBloc())],
-      child:MaterialApp(
+        blocs: [Bloc((i) => CartListBloc())],
+    child:MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
@@ -61,7 +55,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       return Container(
-                        height: 320,
+                        height: 309,
                         // width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,

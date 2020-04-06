@@ -25,7 +25,7 @@ class CategoriesDetails extends StatelessWidget {
               color: Colors.brown[200],
             ),
             // child:Image.asset(image,fit: BoxFit.fill),
-            child: Image.asset('system/public/foodItems/'+category.image),
+            child: Image.asset('system/public/foodItems/'+ category.image),
             
           ),
           Positioned(

@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:menu_app/Specials/items.dart';
-import 'package:menu_app/Specials/specialCartListBloc.dart';
+import 'package:menu_app/Regular/regularItems.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'cartListBloc.dart';
 
-
-class Cart extends StatefulWidget {
-  const Cart({Key key}) : super(key: key);
+class FoodCart extends StatefulWidget {
+  const FoodCart({Key key}) : super(key: key);
 
   @override
-  _CartState createState() => _CartState();
+  _FoodCartState createState() => _FoodCartState();
 }
 
-class _CartState extends State<Cart> {
-  final SpecialCartListBloc bloc = BlocProvider.getBloc<SpecialCartListBloc>();
+class _FoodCartState extends State<FoodCart> {
+  final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
 
   @override
   Widget build(BuildContext context) {
-    List<Items> items;
+    List<RegularItems> ritems;
+
     return StreamBuilder(
       stream: bloc.listStream,
       builder: (context, snapshot) {
         if (snapshot.data != null) {
-          items = snapshot.data;
+          ritems = snapshot.data;
           return Scaffold(
-            body: SafeArea(child: Container(child: CartBody(items))
-          
-            ),
-            bottomNavigationBar: BottomBar(items) ,
+            body: SafeArea(child: Container(child: CartBody(ritems))),
+            bottomNavigationBar: BottomBar(ritems),
           );
         } else {
           return Container();
@@ -37,22 +35,20 @@ class _CartState extends State<Cart> {
 }
 
 class BottomBar extends StatelessWidget {
+  final List<RegularItems> ritems;
 
-  final List<Items> items;
-
-  BottomBar(this.items);
+  BottomBar(this.ritems);
 
   @override
   Widget build(BuildContext context) {
-   return Container(
+    return Container(
       margin: EdgeInsets.only(left: 35, bottom: 25),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          totalAmount(items),
+          totalAmount(ritems),
           Divider(
             height: 1,
-            
             color: Colors.grey[700],
           ),
           persons(),
@@ -62,55 +58,51 @@ class BottomBar extends StatelessWidget {
     );
   }
 }
- Container nextButtonBar() {
-    return Container(
-    
-   
+
+Container nextButtonBar() {
+  return Container(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(0,10,0,0),
-        child: RaisedButton(
-                                        color: Colors.grey[200],
-                                        elevation: 15,
-                                        onPressed: () {
-                                          // Navigate to the main login screen using a named route '/login'.
-                                          // Navigator.pushNamed(context, '/login');
-                                        },
-                                        child: Text('Place Order',
-                                            style: TextStyle(
-                                              color: Colors.orange,
-                                              fontSize: 25,
-                                              fontFamily: 'Rancho-Regular',
-                                            )),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              new BorderRadius.circular(6),
-                                          side: BorderSide(color: Colors.black),
-                                        ),
-                                      ),
-      )
-    );
-  
+    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+    child: RaisedButton(
+      color: Colors.grey[200],
+      elevation: 15,
+      onPressed: () {
+        // Navigate to the main login screen using a named route '/login'.
+        // Navigator.pushNamed(context, '/login');
+      },
+      child: Text('Place Order',
+          style: TextStyle(
+            color: Colors.orange,
+            fontSize: 25,
+            fontFamily: 'Rancho-Regular',
+          )),
+      shape: RoundedRectangleBorder(
+        borderRadius: new BorderRadius.circular(6),
+        side: BorderSide(color: Colors.black),
+      ),
+    ),
+  ));
 }
 
 Container persons() {
-    return Container(
-      // margin: EdgeInsets.only(right: 10),
-      padding: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text("Persons",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: Colors.brown,
-                // fontFamily: 'Rancho-Regular'
-              )),
-          CustomPersonWidget(),
-        ],
-      ),
-    );
-  }
+  return Container(
+    // margin: EdgeInsets.only(right: 10),
+    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text("Persons",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: Colors.brown,
+              // fontFamily: 'Rancho-Regular'
+            )),
+        CustomPersonWidget(),
+      ],
+    ),
+  );
+}
 
 class CustomPersonWidget extends StatefulWidget {
   @override
@@ -178,39 +170,41 @@ class _CustomPersonWidgetState extends State<CustomPersonWidget> {
     );
   }
 }
-Container totalAmount(List<Items> items) {
-    return Container(
-      margin: EdgeInsets.only(right: 10),
-      padding: EdgeInsets.all(25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            "Total:",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500,color: Colors.brown),
-          ),
-          Text(
-            "\Rs.${returnTotalAmount(items)}",
-            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-          ),
-        ],
-      ),
-    );
-  }
-    String returnTotalAmount(List<Items> items) {
-    double totalAmount = 0.0;
 
-    for (int i = 0; i < items.length; i++) {
-      totalAmount = totalAmount + items[i].price * items[i].quantity;
-    }
-    return totalAmount.toStringAsFixed(2);
-  }
+Container totalAmount(List<RegularItems> ritems) {
+  return Container(
+    margin: EdgeInsets.only(right: 10),
+    padding: EdgeInsets.all(25),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text(
+          "Total:",
+          style: TextStyle(
+              fontSize: 22, fontWeight: FontWeight.w500, color: Colors.brown),
+        ),
+        Text(
+          "\Rs.${returnTotalAmount(ritems)}",
+          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+        ),
+      ],
+    ),
+  );
+}
 
+String returnTotalAmount(List<RegularItems> ritems) {
+  double totalAmount = 0.0;
+
+  for (int i = 0; i < ritems.length; i++) {
+    totalAmount = totalAmount + ritems[i].price * ritems[i].quantity;
+  }
+  return totalAmount.toStringAsFixed(2);
+}
 
 class CartBody extends StatelessWidget {
-  final List<Items> items;
+  final List<RegularItems> ritems;
 
-  const CartBody(this.items);
+  const CartBody(this.ritems);
 
   @override
   Widget build(BuildContext context) {
@@ -222,10 +216,10 @@ class CartBody extends StatelessWidget {
         centerTitle: true,
       ),
       body: Column(children: <Widget>[
-       title(),
+        title(),
         Expanded(
           flex: 1,
-          child: items.length > 0 ? foodItemList(items) : noItemContainer(),
+          child: ritems.length > 0 ? foodItemList(ritems) : noItemContainer(),
         ),
       ]),
     );
@@ -283,33 +277,33 @@ Container noItemContainer() {
   );
 }
 
-ListView foodItemList(items) {
+ListView foodItemList(ritems) {
   return ListView.builder(
-    itemCount: items.length,
+    itemCount: ritems.length,
     itemBuilder: (builder, index) {
       return CartListItem(
-        item: items[index],
+        ritem: ritems[index],
       );
     },
   );
 }
 
 class CartListItem extends StatelessWidget {
-  final Items item;
-  const CartListItem({Key key, this.item}) : super(key: key);
+  final RegularItems ritem;
+  const CartListItem({Key key, this.ritem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(5),
-      child: ItemContent(item: item),
+      child: ItemContent(ritem: ritem),
     );
   }
 }
 
 class ItemContent extends StatelessWidget {
-  final Items item;
-  const ItemContent({Key key, this.item}) : super(key: key);
+  final RegularItems ritem;
+  const ItemContent({Key key, this.ritem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -324,7 +318,7 @@ class ItemContent extends StatelessWidget {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: item.quantity.toString(),
+                      text: ritem.quantity.toString(),
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.brown,
@@ -335,7 +329,7 @@ class ItemContent extends StatelessWidget {
                       text: " x ",
                       style: TextStyle(fontSize: 18, color: Colors.black)),
                   TextSpan(
-                    text: item.name,
+                    text: ritem.name,
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.brown,
@@ -352,7 +346,7 @@ class ItemContent extends StatelessWidget {
                           fontFamily: 'Rancho-Regular')),
                 ]),
               ),
-              Text("\Rs.  ${item.quantity * item.price}",
+              Text("\Rs.  ${ritem.quantity * ritem.price}",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,

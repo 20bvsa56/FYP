@@ -5,6 +5,8 @@ import 'dart:async';
 import 'categories.dart';
 import 'package:menu_app/Regular/regularItemUI.dart';
 import 'categoriesDetails.dart';
+import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:menu_app/CartPage/cartListBloc.dart';
 
 
 class MenuCategory extends StatefulWidget {
@@ -30,7 +32,9 @@ class _MenuCategoryState extends State<MenuCategory> {
   
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return BlocProvider(
+        blocs: [Bloc((i) => CartListBloc())],
+    child:MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
@@ -60,6 +64,7 @@ class _MenuCategoryState extends State<MenuCategory> {
                                     
                                     action: () {
                                       print(category.id);
+                                      print(category.name);
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => RegularCategory(id: category.id, name: category.name)),);
                                     
                                     },
@@ -72,7 +77,7 @@ class _MenuCategoryState extends State<MenuCategory> {
                       }
                     }),
               ],
-            )));
+            ))));
             
   }
 }
