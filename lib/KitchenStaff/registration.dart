@@ -104,6 +104,10 @@ class _SnackBarPageState extends State<SnackBarPage> {
 
   final TextEditingController passwordController = new TextEditingController();
 
+  //  _formKey and _autoValidate
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _autoValidate = false;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -118,7 +122,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
           ),
         ),
         Positioned(
-          height: 450,
+          height: 400,
           bottom: 30.0,
           left: 40.0,
           right: 40.0,
@@ -129,143 +133,139 @@ class _SnackBarPageState extends State<SnackBarPage> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50.0),
             ),
-            child: Column(
-              children: <Widget>[
-                Icon(
-                  Icons.restaurant_menu,
-                  color: Colors.brown[400],
-                  size: 85,
-                ),
-                Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
-                    child: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          controller: usernameController,
-                          decoration: const InputDecoration(
-                            hintText: 'Username',
-                            labelText: 'Username',
-                          ),
-                          onSaved: (String value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
-                          obscureText: false,
-                          validator: (String value) {
-                            return value.contains('@')
-                                ? 'Incorrect password. Try again'
-                                : null;
-                          },
-                        ),
-                        TextFormField(
-                          controller: emailController,
-                          decoration: const InputDecoration(
-                            hintText: 'Email',
-                            labelText: 'Email',
-                          ),
-                          onSaved: (String value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
-                          obscureText: false,
-                          validator: (String value) {
-                            return value.contains('@')
-                                ? 'Incorrect password. Try again'
-                                : null;
-                          },
-                        ),
-                        TextFormField(
-                          controller: passwordController,
-                          decoration: const InputDecoration(
-                            hintText: '**************',
-                            labelText: 'Password',
-                          ),
-                          onSaved: (String value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
-                          obscureText: true,
-                          validator: (String value) {
-                            return value.contains('@')
-                                ? 'Incorrect password. Try again'
-                                : null;
-                          },
-                        ),
-                        SizedBox(height: 15),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Padding(
-                            padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
-                            child: Container(
-                                height: 35,
-                                width: 100,
-                                child: RaisedButton(
-                                  color: Colors.brown[500],
-                                  onPressed: () async {
-                                    Model newModel = new Model(
-                                        username: usernameController.text,
-                                        email: emailController.text,
-                                        password: passwordController.text);
-                                    Model p = await userRegistration(
-                                        SnackBarPage.url,
-                                        body: newModel.toMap());
-                                    print(p.username);
-                                    usernameController.clear();
-                                    emailController.clear();
-                                    passwordController.clear();
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.restaurant_menu,
+                    color: Colors.brown[400],
+                    size: 85,
+                  ),
+                  Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: new Form(
+                        key: _formKey,
+                        autovalidate: _autoValidate,
+                        child: Column(
+                          children: <Widget>[
+                            TextFormField(
+                              keyboardType: TextInputType.text,
+                              controller: usernameController,
+                              decoration: const InputDecoration(
+                                hintText: 'Username',
+                                labelText: 'Username',
+                              ),
+                              validator: validateUsername,
+                            ),
+                            TextFormField(
+                              controller: emailController,
+                              decoration: const InputDecoration(
+                                hintText: 'Email',
+                                labelText: 'Email',
+                              ),
+                              validator: validateEmail,
+                            ),
+                            TextFormField(
+                              controller: passwordController,
+                              decoration: const InputDecoration(
+                                hintText: '**************',
+                                labelText: 'Password',
+                              ),
+                              obscureText: true,
+                              validator: validatePassword,
+                            ),
+                            SizedBox(height: 15),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Padding(
+                                padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                                child: Container(
+                                    height: 35,
+                                    width: 100,
+                                    child: RaisedButton(
+                                      color: Colors.brown[500],
+                                      onPressed: () async {
+                                        // _validateInputs();
 
-                                    final snackBar = SnackBar(
-                                        content: Text('User ' +
-                                            p.username +
-                                            ' registered successfully.'));
+                                        if (_formKey.currentState.validate()) {
+                                          Model newModel = new Model(
+                                              username: usernameController.text,
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text);
+                                          Model p = await userRegistration(
+                                              SnackBarPage.url,
+                                              body: newModel.toMap());
+
+                                          usernameController.clear();
+                                          emailController.clear();
+                                          passwordController.clear();
+
+                                          final snackBar = SnackBar(
+                                              content: Text('User ' +
+                                                  '"' +
+                                                  p.username +
+                                                  '"' +
+                                                  ' registered successfully.'));
 
 // Find the Scaffold in the widget tree and use it to show a SnackBar.
-                                    Scaffold.of(context).showSnackBar(snackBar);
-                                  },
-                                  child: Text('Create',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontFamily: 'Rancho-Regular',
-                                      )),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(18.0),
-                                    side: BorderSide(color: Colors.white70),
-                                  ),
-                                ))),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Container(
-                          child: InkWell(
-                            onTap: () {
-                              //Navigate to the main view screen using a named route '/login'.
-                              Navigator.pushNamed(context, '/login');
-                            },
-                            child: Text(
-                              'Login',
-                              style: TextStyle(
-                                color: Colors.grey[500],
-                                decoration: TextDecoration.underline,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Rancho-Regular',
-                                fontSize: 20.0,
-                              ),
+                                          Scaffold.of(context)
+                                              .showSnackBar(snackBar);
+                                        }
+                                      },
+                                      child: Text('Create',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontFamily: 'Rancho-Regular',
+                                          )),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(18.0),
+                                        side: BorderSide(color: Colors.white70),
+                                      ),
+                                    ))),
+                            const SizedBox(
+                              height: 12,
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    )),
-                Visibility(
-                    visible: visible,
-                    child: Container(child: CircularProgressIndicator())),
-              ],
+                      )),
+                  Visibility(
+                      visible: visible,
+                      child: Container(child: CircularProgressIndicator())),
+                ],
+              ),
             ),
           ),
         ),
       ],
     );
   }
+
+}
+
+String validateUsername(String value) {
+  if (value.length < 3 || value.length == 0)
+    return 'Enter username with more than 3 character.';
+  else
+    return null;
+}
+
+String validateEmail(String value) {
+  Pattern pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  RegExp regex = new RegExp(pattern);
+  if (!regex.hasMatch(value) || value.length == 0)
+    return 'Enter valid email';
+  else
+    return null;
+}
+
+String validatePassword(String value) {
+  if (value.length < 6 || value.length == 0)
+    return 'Enter password with more than 5 character.';
+  else
+    return null;
 }
