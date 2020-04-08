@@ -44,7 +44,7 @@
             <div class="form-group">
                 <label for="Name">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Enter food item name" value="{{$item->name}}">
-                <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
+                <small class="form-text text-muted">Ex: Pancake, Omelete, Pasta etc.</small>
             </div>
             <div class="form-group">
                 <label for="Price">Price</label>

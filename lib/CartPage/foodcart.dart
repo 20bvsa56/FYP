@@ -18,7 +18,10 @@ class _FoodCartState extends State<FoodCart> {
   bool visible = false;
 
   // Getting entered value from TextField widget.
+  final tableController = TextEditingController();
   final orderNumController = TextEditingController();
+  final itemController = TextEditingController();
+  final quantityController = TextEditingController();
   final totalAmountController = TextEditingController();
  
 //creating a async function
@@ -105,7 +108,7 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 35, bottom: 25),
+      margin: EdgeInsets.only(left: 0, bottom: 15),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -114,7 +117,7 @@ class BottomBar extends StatelessWidget {
             height: 1,
             color: Colors.grey[700],
           ),
-          persons(),
+          //persons(),
           PlaceOrder(),
         ],
       ),
@@ -136,10 +139,10 @@ class PlaceOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Padding(
-      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 10, 5, 0),
       child: RaisedButton(
-        color: Colors.grey[200],
-        elevation: 15,
+        color: Colors.grey[400],
+        elevation: 18,
         onPressed: (){
           orderNum();
             final snackBar = SnackBar(
@@ -152,105 +155,17 @@ class PlaceOrder extends StatelessWidget {
         },
         child: Text('Place Order',
             style: TextStyle(
-              color: Colors.orange,
-              fontSize: 25,
+              color: Colors.brown,
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
               fontFamily: 'Rancho-Regular',
             )),
         shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(6),
-          side: BorderSide(color: Colors.black),
+          borderRadius: new BorderRadius.circular(15),
+          side: BorderSide(color: Colors.brown, width: 2),
         ),
       ),
     ));
-  }
-}
-// returnTotalAmount
-// =>ticketNum()
-
-Container persons() {
-  return Container(
-    // margin: EdgeInsets.only(right: 10),
-    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Text("Persons",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: Colors.brown,
-              // fontFamily: 'Rancho-Regular'
-            )),
-        CustomPersonWidget(),
-      ],
-    ),
-  );
-}
-
-class CustomPersonWidget extends StatefulWidget {
-  @override
-  _CustomPersonWidgetState createState() => _CustomPersonWidgetState();
-}
-
-class _CustomPersonWidgetState extends State<CustomPersonWidget> {
-  int noOfPersons = 1;
-
-  double _buttonWidth = 30;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 25),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey[300], width: 3),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      padding: EdgeInsets.symmetric(vertical: 5),
-      width: 100,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          SizedBox(
-            width: _buttonWidth,
-            height: _buttonWidth,
-            child: FlatButton(
-              padding: EdgeInsets.all(0),
-              onPressed: () {
-                setState(() {
-                  if (noOfPersons > 1) {
-                    noOfPersons--;
-                  }
-                });
-              },
-              child: Text(
-                "-",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
-              ),
-            ),
-          ),
-          Text(
-            noOfPersons.toString(),
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
-          ),
-          SizedBox(
-            width: _buttonWidth,
-            height: _buttonWidth,
-            child: FlatButton(
-              padding: EdgeInsets.all(0),
-              onPressed: () {
-                setState(() {
-                  noOfPersons++;
-                });
-              },
-              child: Text(
-                "+",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }
 

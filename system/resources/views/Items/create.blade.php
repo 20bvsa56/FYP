@@ -37,14 +37,14 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="Title">Title <span style="color:blue">(For special only)</span> </label>
+                <label for="Title">Title</label>
                 <input type="text" class="form-control" name="title" placeholder="Enter food item title">
                 <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
             </div>
             <div class="form-group">
                 <label for="Name">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Enter food item name">
-                <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
+                <small class="form-text text-muted">Ex: Pancake, Omelete, Pasta etc.</small>
             </div>
             <div class="form-group">
                 <label for="Price">Price</label>
@@ -52,7 +52,7 @@
                 <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>
             <div class="form-group">
-                <label for="Description">Description <span style="color:blue">(For regular only)</span></label>
+                <label for="Description">Description</label>
                 <input type="text" class="form-control" name="description" placeholder="Enter food item description">
                 <small class="form-text text-muted">Ex: Special, Regular etc.</small>
             </div>
