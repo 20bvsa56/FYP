@@ -9,6 +9,6 @@ class Order extends Model
     protected $primaryKey='id';
     protected $table = 'orders';
     protected $fillable=[
-        'orderNum', 'totalAmount'
+        'table','orderNum','item','quantity','totalAmount'
     ];
 }

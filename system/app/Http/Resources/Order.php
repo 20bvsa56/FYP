@@ -19,6 +19,9 @@ class Order extends JsonResource
         //toArray-> returns the array of attributes that should be converted to JSON when sending the response
         //return parent::toArray($request);
         return [
+            'table'=>$this->table,
+            'item'=>$this->item,
+            'quantity'=>$this->quantity,
             'orderNum'=>$this->orderNum,
             'totalAmount'=>$this->totalAmount
         ];

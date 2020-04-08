@@ -25,7 +25,10 @@ class OrderController extends BaseController
         $order = $request->isMethod('put') ? Order::findorFail($request->order_id) : new Order();
 
         $order->id = $request->input('order_id');
+        $order->table = $request->input('table');
         $order->orderNum = $request->input('orderNum');
+        $order->item = $request->input('item');
+        $order->quantity = $request->input('quantity');
         $order->totalAmount = $request->input('totalAmount');
 
         if ($order->save()) {

@@ -33,12 +33,17 @@ class CartProvider {
     return fooditems;
   }
 
-  void increaseItemQuantity(RegularItems ritems) => ritems.incrementQuantity();
-  void decreaseItemQuantity(RegularItems ritems) => ritems.decrementQuantity();
-
   List<RegularItems> removeFromList(RegularItems ritems) {
-    fooditems.remove(ritems);
+     if (ritems.quantity > 1) {
+      //only decrease the quantity
+      decreaseItemQuantity(ritems);
+    } else {
+      //remove it from the list
+      ritems.remove(ritems);
+    }
     return fooditems;
   }
 
+  void increaseItemQuantity(RegularItems ritems) => ritems.incrementQuantity();
+  void decreaseItemQuantity(RegularItems ritems) => ritems.decrementQuantity();
 }

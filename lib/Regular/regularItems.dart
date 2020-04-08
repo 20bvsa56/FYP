@@ -54,4 +54,6 @@ class RegularItems {
     void decrementQuantity(){
     this.quantity = this.quantity - 1;
   }
+
+  void remove(RegularItems ritems) {}
 }

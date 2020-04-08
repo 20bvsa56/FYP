@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'KitchenStaff/successsignup.dart';
+import 'KitchenStaff/registration.dart';
 import 'home.dart';
 import 'KitchenStaff/login.dart';
 import 'MenuGroup/view.dart';
-import 'KitchenStaff/signup.dart';
-// import 'Specials/specialPage.dart';
 
 
 void main() => runApp(MyApp());
@@ -24,11 +22,9 @@ class MyApp extends StatelessWidget {
       '/login': (context) => Login(),
       //When navigating to the "/login" route, build the View widget.
       '/view': (context) => View(),
-      //When navigating to the "/register" route, build the SignUp widget.
-      '/signup': (context) => SignUp(),
-       //When navigating to the "/specials" route, build the Special widget.
-      // '/specials': (context) => Special(),
-      '/success':(context) => Success(),
+      //When navigating to the "/register" route, build the Registration widget.
+      '/register': (context) => Registration(),
+
      
     },
     );

@@ -143,7 +143,7 @@ class _LoginState extends State<Login> {
                               child: InkWell(
                                 onTap: () {
                                   //Navigate to the main view screen using a named route '/signup'.
-                                  Navigator.pushNamed(context, '/signup');
+                                  Navigator.pushNamed(context, '/register');
                                 },
                                 child: Text(
                                   'Create an account',
