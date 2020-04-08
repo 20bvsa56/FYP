@@ -243,7 +243,6 @@ class _SnackBarPageState extends State<SnackBarPage> {
       ],
     );
   }
-
 }
 
 String validateUsername(String value) {

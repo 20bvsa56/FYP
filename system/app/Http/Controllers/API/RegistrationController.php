@@ -9,6 +9,7 @@ use App\Registration;
 use Faker\Provider\Base;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
+use Illuminate\Support\Facades\Hash;
 
 class RegistrationController extends BaseController
 {
@@ -41,7 +42,7 @@ class RegistrationController extends BaseController
         $registry->id = $request->input('registry_id');
         $registry->username = $request->input('username');
         $registry->email = $request->input('email');
-        $registry->password = $request->input('password');
+        $registry->password = Hash::make($request->input('password'));
 
         if ($registry->save()) {
             return new RegistrationResource($registry);

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Hash;
 
 class Registration extends JsonResource
 {
@@ -22,7 +23,7 @@ class Registration extends JsonResource
             'id'=>$this->id,
             'username'=>$this->username,
             'email'=>$this->email,
-            'password'=>$this->password
+            'password'=>Hash::make($this->password)
         ];
     }
 }
