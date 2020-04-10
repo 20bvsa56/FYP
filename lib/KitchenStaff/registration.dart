@@ -2,26 +2,27 @@ import 'package:flutter/material.dart';
 import 'dart:convert'; //to convert http response in json format
 import 'package:http/http.dart' as http; //to handle http request
 // //to use async function
+import 'login.dart';
 
 class Model {
   int id;
-  String username;
+  String name;
   String email;
   String password;
 
-  Model({this.id, this.username, this.email, this.password});
+  Model({this.id, this.name, this.email, this.password});
 
   factory Model.fromJson(Map<String, dynamic> json) {
     return Model(
         id: json['id'],
-        username: json['username'],
+        name: json['name'],
         email: json['email'],
         password: json['password']);
   }
 
   Map toMap() {
     var map = new Map<String, dynamic>();
-    map["username"] = username;
+    map["name"] = name;
     map["email"] = email;
     map["password"] = password;
 
@@ -98,7 +99,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
     });
   }
 
-  final TextEditingController usernameController = new TextEditingController();
+  final TextEditingController nameController = new TextEditingController();
 
   final TextEditingController emailController = new TextEditingController();
 
@@ -150,16 +151,18 @@ class _SnackBarPageState extends State<SnackBarPage> {
                           children: <Widget>[
                             TextFormField(
                               keyboardType: TextInputType.text,
-                              controller: usernameController,
+                              controller: nameController,
                               decoration: const InputDecoration(
-                                hintText: 'Username',
-                                labelText: 'Username',
+                                icon: Icon(Icons.person, size: 25),
+                                hintText: 'name',
+                                labelText: 'name',
                               ),
-                              validator: validateUsername,
+                              validator: validatename,
                             ),
                             TextFormField(
                               controller: emailController,
                               decoration: const InputDecoration(
+                                icon: Icon(Icons.email, size: 25),
                                 hintText: 'Email',
                                 labelText: 'Email',
                               ),
@@ -168,6 +171,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
                             TextFormField(
                               controller: passwordController,
                               decoration: const InputDecoration(
+                                icon: Icon(Icons.lock, size: 25),
                                 hintText: '**************',
                                 labelText: 'Password',
                               ),
@@ -190,15 +194,15 @@ class _SnackBarPageState extends State<SnackBarPage> {
 
                                         if (_formKey.currentState.validate()) {
                                           Model newModel = new Model(
-                                              username: usernameController.text,
+                                              name: nameController.text,
                                               email: emailController.text,
                                               password:
                                                   passwordController.text);
                                           Model p = await userRegistration(
                                               SnackBarPage.url,
                                               body: newModel.toMap());
-
-                                          usernameController.clear();
+                                          print(p.name);
+                                          nameController.clear();
                                           emailController.clear();
                                           passwordController.clear();
 
@@ -229,6 +233,26 @@ class _SnackBarPageState extends State<SnackBarPage> {
                             const SizedBox(
                               height: 12,
                             ),
+                             Container(
+                              child: InkWell(
+                                onTap: () {
+                                   Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Login()),
+  );
+                                },
+                                child: Text(
+                                  'Return to login',
+                                  style: TextStyle(
+                                    color: Colors.grey[500],
+                                    decoration: TextDecoration.underline,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Rancho-Regular',
+                                    fontSize: 22.0,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       )),
@@ -245,9 +269,9 @@ class _SnackBarPageState extends State<SnackBarPage> {
   }
 }
 
-String validateUsername(String value) {
+String validatename(String value) {
   if (value.length < 3 || value.length == 0)
-    return 'Enter username with more than 3 character.';
+    return 'Enter name with more than 3 character.';
   else
     return null;
 }

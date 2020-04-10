@@ -42,8 +42,14 @@ return [
         ],
 
         'api' => [
-            'driver' => 'passport',
+            'driver' => 'token',
             'provider' => 'users',
+            'hash' => false,
+        ],
+
+        'staff' => [
+            'driver' => 'token',
+            'provider' => 'staff',
             'hash' => false,
         ],
     ],
@@ -71,10 +77,10 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'staff' => [
+             'driver' => 'eloquent',
+             'table' => \App\Staff::class,
+         ],
     ],
 
     /*

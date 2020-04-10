@@ -5,24 +5,35 @@ import 'order.dart'; //to handle http request
 import 'registration.dart';
 
 class Model {
-  int id;
-  String username;
+  String email;
   String password;
 
-  Model({this.id, this.username, this.password});
+  Model({this.email, this.password});
 
   factory Model.fromJson(Map<String, dynamic> json) {
-    return Model(
-        id: json['id'], username: json['username'], password: json['password']);
+    return Model(email: json['email'], password: json['password']);
   }
 
   Map toMap() {
     var map = new Map<String, dynamic>();
-    map["username"] = username;
+    map["email"] = email;
     map["password"] = password;
 
     return map;
   }
+  // Model.fromJson(Map<String, dynamic> json) {
+
+  //   email = json['email'];
+  //   password = json['password'];
+  // }
+
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['password'] = this.password;
+  //   data['email'] = this.email;
+
+  //   return data;
+  // }
 }
 
 class Login extends StatefulWidget {
@@ -46,13 +57,13 @@ class _LoginState extends State<Login> {
           actions: <Widget>[
             // action button
             IconButton(
-              icon: Icon(Icons.kitchen),
-              iconSize: 25.0,
+              icon: Icon(Icons.group_add),
+              iconSize: 30.0,
               onPressed: () {},
             ),
           ],
           backgroundColor: Colors.brown,
-          title: Text('Login'),
+          title: Text('Register'),
           centerTitle: true,
         ),
         body: SnackBarPage(),
@@ -62,8 +73,9 @@ class _LoginState extends State<Login> {
 }
 
 class SnackBarPage extends StatefulWidget {
-  const SnackBarPage({Key key}) : super(key: key);
+  // const SnackBarPage({Key key}) : super(key: key);
 
+  // Boolean variable for CircularProgressIndicator.
   static final url = 'http://192.168.254.2:8000/api/login/';
 
   @override
@@ -93,7 +105,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
     });
   }
 
-  final TextEditingController usernameController = new TextEditingController();
+  final TextEditingController emailController = new TextEditingController();
 
   final TextEditingController passwordController = new TextEditingController();
 
@@ -104,19 +116,18 @@ class _SnackBarPageState extends State<SnackBarPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      //stack puts widgets one upon other
       fit: StackFit.expand,
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('images/login.jpeg'),
+              image: AssetImage('images/signup.jpeg'),
               fit: BoxFit.cover,
             ),
           ),
         ),
         Positioned(
-          height: 420,
+          height: 400,
           bottom: 30.0,
           left: 40.0,
           right: 40.0,
@@ -136,55 +147,77 @@ class _SnackBarPageState extends State<SnackBarPage> {
                     size: 85,
                   ),
                   Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-                      child: Form(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: new Form(
                         key: _formKey,
                         autovalidate: _autoValidate,
                         child: Column(
                           children: <Widget>[
                             TextFormField(
-                              controller: usernameController,
+                              controller: emailController,
                               decoration: const InputDecoration(
-                                icon: Icon(Icons.perm_identity, size: 25),
-                                hintText: 'Enter username',
-                                labelText: 'Username',
+                                icon: Icon(Icons.email, size: 25),
+                                hintText: 'Email',
+                                labelText: 'Email',
                               ),
+                              validator: validateEmail,
                             ),
                             TextFormField(
                               controller: passwordController,
                               decoration: const InputDecoration(
-                                icon: Icon(Icons.lock_outline, size: 22),
+                                icon: Icon(Icons.lock, size: 25),
                                 hintText: '**************',
                                 labelText: 'Password',
                               ),
                               obscureText: true,
+                              validator: validatePassword,
                             ),
+                            SizedBox(height: 15),
                             const SizedBox(
-                              height: 25,
+                              height: 30,
                             ),
                             Padding(
-                                padding: EdgeInsets.fromLTRB(50, 0, 40, 0),
+                                padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                                 child: Container(
                                     height: 35,
                                     width: 100,
                                     child: RaisedButton(
                                       color: Colors.brown[500],
                                       onPressed: () async {
-                                        Model newModel = new Model(
-                                            username: usernameController.text,
-                                            password: passwordController.text);
-                                        Model p = await userLogin(
-                                            SnackBarPage.url,
-                                            body: newModel.toMap());
-                                        print(p.username);
+                                        // _validateInputs();
 
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Order()));
+                                    
+                                          Model newModel = new Model(
+                                              
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text);
+                                          Model p = await userLogin(
+                                              SnackBarPage.url,
+                                              body: newModel.toMap());
+                                          print(p.email);
+                                          // Navigate to Profile Screen & Sending Email to Next Screen.
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Order()));
+                                       
+
+                                          final snackBar = SnackBar(
+                                              content:
+                                                  Text(' Login Successful.'));
+
+// Find the Scaffold in the widget tree and use it to show a SnackBar.
+                                          Scaffold.of(context)
+                                              .showSnackBar(snackBar);
+                                        
+                                        setState(() {
+                                          visible = false;
+                                        });
                                       },
-                                      child: Text('Login',
+                                      
+                                      child: Text('Create',
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
@@ -197,26 +230,16 @@ class _SnackBarPageState extends State<SnackBarPage> {
                                       ),
                                     ))),
                             const SizedBox(
-                              height: 30,
-                            ),
-                            Text(
-                              "Not registered?",
-                              style: TextStyle(
-                                color: Colors.brown,
-                                fontFamily: 'Rancho-Regular',
-                                fontSize: 20.0,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 4,
+                              height: 12,
                             ),
                             Container(
                               child: InkWell(
                                 onTap: () {
-                                   Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => Registration()),
-  );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Registration()),
+                                  );
                                 },
                                 child: Text(
                                   'Create an account',
@@ -246,9 +269,26 @@ class _SnackBarPageState extends State<SnackBarPage> {
   }
 }
 
-// String validateUsername(String value) {
-//   if (username == usernameController)
-//     return 'Enter username with more than 3 character.';
+// String validatename(String value) {
+//   if (value.length < 3 || value.length == 0)
+//     return 'Enter name with more than 3 character.';
+//   else
+//     return null;
+// }
+
+// String validateEmail(String value) {
+//   Pattern pattern =
+//       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+//   RegExp regex = new RegExp(pattern);
+//   if (!regex.hasMatch(value) || value.length == 0)
+//     return 'Enter valid email';
+//   else
+//     return null;
+// }
+
+// String validatePassword(String value) {
+//   if (value.length < 6 || value.length == 0)
+//     return 'Enter password with more than 5 character.';
 //   else
 //     return null;
 // }

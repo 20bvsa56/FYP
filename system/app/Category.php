@@ -18,8 +18,6 @@ class Category extends Model
     }
 
 
-    public function regularitems(){
-        return $this->hasMany('App\RegularItems');
-    }
+
 
 }

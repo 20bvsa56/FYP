@@ -12,4 +12,7 @@ class Role extends Model
         'title'
     ];
     //for security purpose, this data are to be stored in db
+
 }
+
+
