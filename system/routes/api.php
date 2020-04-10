@@ -14,16 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::resource('category', 'API\CategoryController');
 Route::get('special', 'API\ItemController@special');
 Route::get('regular', 'API\ItemController@regular');
 Route::get('item/{category_id}', 'API\ItemController@category');
-Route::resource('registration', 'API\RegistrationController');
 Route::resource('banner_image', 'API\BannerImageController');
 Route::resource('order', 'API\OrderController');
-Route::resource('login', 'API\LoginController');
+
+
+Route::post('register', 'API\AuthController@register');
+
+Route::post('login', 'API\RegistrationController@login');
 

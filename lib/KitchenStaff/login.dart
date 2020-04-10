@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert'; //to convert http response in json format
-import 'package:http/http.dart' as http; //to handle http request
+import 'package:http/http.dart' as http;
+import 'order.dart'; //to handle http request
+import 'registration.dart';
 
 class Model {
   int id;
@@ -62,7 +64,7 @@ class _LoginState extends State<Login> {
 class SnackBarPage extends StatefulWidget {
   const SnackBarPage({Key key}) : super(key: key);
 
-  static final url = 'http://192.168.254.2:8000/api/registration/';
+  static final url = 'http://192.168.254.2:8000/api/login/';
 
   @override
   _SnackBarPageState createState() => _SnackBarPageState();
@@ -114,7 +116,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
           ),
         ),
         Positioned(
-          height: 400,
+          height: 420,
           bottom: 30.0,
           left: 40.0,
           right: 40.0,
@@ -125,102 +127,117 @@ class _SnackBarPageState extends State<SnackBarPage> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50.0),
             ),
-            child: Column(
-              children: <Widget>[
-                Icon(
-                  Icons.restaurant_menu,
-                  color: Colors.brown[400],
-                  size: 85,
-                ),
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-                    child: Form(
-                      key: _formKey,
-                      autovalidate: _autoValidate,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              icon: Icon(Icons.perm_identity, size: 25),
-                              hintText: 'Enter username',
-                              labelText: 'Username',
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.restaurant_menu,
+                    color: Colors.brown[400],
+                    size: 85,
+                  ),
+                  Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+                      child: Form(
+                        key: _formKey,
+                        autovalidate: _autoValidate,
+                        child: Column(
+                          children: <Widget>[
+                            TextFormField(
+                              controller: usernameController,
+                              decoration: const InputDecoration(
+                                icon: Icon(Icons.perm_identity, size: 25),
+                                hintText: 'Enter username',
+                                labelText: 'Username',
+                              ),
                             ),
-                            
-                          ),
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              icon: Icon(Icons.lock_outline, size: 22),
-                              hintText: '**************',
-                              labelText: 'Password',
+                            TextFormField(
+                              controller: passwordController,
+                              decoration: const InputDecoration(
+                                icon: Icon(Icons.lock_outline, size: 22),
+                                hintText: '**************',
+                                labelText: 'Password',
+                              ),
+                              obscureText: true,
                             ),
-                            obscureText: true,
-                           
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          Padding(
-                              padding: EdgeInsets.fromLTRB(50, 0, 40, 0),
-                              child: Container(
-                                  height: 35,
-                                  width: 100,
-                                  child: RaisedButton(
-                                    color: Colors.brown[500],
-                                    onPressed: () {
-                                      // Navigate to the main login screen using a named route '/login'.
-                                      // Navigator.pushNamed(context, '/login');
-                                    },
-                                    child: Text('Login',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: 'Rancho-Regular',
-                                        )),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.white70),
-                                    ),
-                                  ))),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Text(
-                            "Not registered?",
-                            style: TextStyle(
-                              color: Colors.brown,
-                              fontFamily: 'Rancho-Regular',
-                              fontSize: 20.0,
+                            const SizedBox(
+                              height: 25,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Container(
-                            child: InkWell(
-                              onTap: () {
-                                //Navigate to the main view screen using a named route '/signup'.
-                                Navigator.pushNamed(context, '/register');
-                              },
-                              child: Text(
-                                'Create an account',
-                                style: TextStyle(
-                                  color: Colors.grey[500],
-                                  decoration: TextDecoration.underline,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Rancho-Regular',
-                                  fontSize: 22.0,
+                            Padding(
+                                padding: EdgeInsets.fromLTRB(50, 0, 40, 0),
+                                child: Container(
+                                    height: 35,
+                                    width: 100,
+                                    child: RaisedButton(
+                                      color: Colors.brown[500],
+                                      onPressed: () async {
+                                        Model newModel = new Model(
+                                            username: usernameController.text,
+                                            password: passwordController.text);
+                                        Model p = await userLogin(
+                                            SnackBarPage.url,
+                                            body: newModel.toMap());
+                                        print(p.username);
+
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Order()));
+                                      },
+                                      child: Text('Login',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontFamily: 'Rancho-Regular',
+                                          )),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(18.0),
+                                        side: BorderSide(color: Colors.white70),
+                                      ),
+                                    ))),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Text(
+                              "Not registered?",
+                              style: TextStyle(
+                                color: Colors.brown,
+                                fontFamily: 'Rancho-Regular',
+                                fontSize: 20.0,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Container(
+                              child: InkWell(
+                                onTap: () {
+                                   Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Registration()),
+  );
+                                },
+                                child: Text(
+                                  'Create an account',
+                                  style: TextStyle(
+                                    color: Colors.grey[500],
+                                    decoration: TextDecoration.underline,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Rancho-Regular',
+                                    fontSize: 22.0,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Visibility(
-                    visible: visible,
-                    child: Container(child: CircularProgressIndicator())),
-              ],
+                          ],
+                        ),
+                      )),
+                  Visibility(
+                      visible: visible,
+                      child: Container(child: CircularProgressIndicator())),
+                ],
+              ),
             ),
           ),
         ),

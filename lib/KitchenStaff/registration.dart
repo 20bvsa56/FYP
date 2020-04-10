@@ -69,7 +69,7 @@ class SnackBarPage extends StatefulWidget {
   // const SnackBarPage({Key key}) : super(key: key);
 
   // Boolean variable for CircularProgressIndicator.
-  static final url = 'http://192.168.254.2:8000/api/registration/';
+  static final url = 'http://192.168.254.2:8000/api/register/';
 
   @override
   _SnackBarPageState createState() => _SnackBarPageState();
@@ -203,16 +203,16 @@ class _SnackBarPageState extends State<SnackBarPage> {
                                           passwordController.clear();
 
                                           final snackBar = SnackBar(
-                                              content: Text('User ' +
-                                                  '"' +
-                                                  p.username +
-                                                  '"' +
-                                                  ' registered successfully.'));
+                                              content: Text(
+                                                  ' Registration Successful.'));
 
 // Find the Scaffold in the widget tree and use it to show a SnackBar.
                                           Scaffold.of(context)
                                               .showSnackBar(snackBar);
                                         }
+                                        setState(() {
+                                          visible = false;
+                                        });
                                       },
                                       child: Text('Create',
                                           style: TextStyle(
