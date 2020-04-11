@@ -10,8 +10,28 @@ class Order extends StatefulWidget {
 class _OrderState extends State<Order> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('data'),
-    );
+   return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.chevron_left),
+            onPressed: () => Navigator.pop(context, false),
+          ),
+          actions: <Widget>[
+            // action button
+            IconButton(
+              icon: Icon(Icons.fastfood),
+              iconSize: 30.0,
+              onPressed: () {},
+            ),
+          ],
+          backgroundColor: Colors.brown,
+          title: Text('Food Order'),
+          centerTitle: true,
+        ),
+      )
+   );
+    
   }
 }

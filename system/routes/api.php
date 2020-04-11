@@ -25,6 +25,10 @@ Route::get('regular', 'API\ItemController@regular');
 Route::get('item/{category_id}', 'API\ItemController@category');
 Route::resource('banner_image', 'API\BannerImageController');
 Route::resource('order', 'API\OrderController');
-Route::post('register', 'API\AuthController@register');
-Route::post('login', 'API\AuthController@login');
+//Route::post('register', 'API\AuthController@register');
+//Route::post('login', 'API\AuthController@login');
+
+Route::post('register', 'Auth\RegisterController@createStaff');
+Route::post('login', 'Auth\LoginController@staffLogin');
+
 

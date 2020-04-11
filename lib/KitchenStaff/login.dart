@@ -206,7 +206,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
 
                                           final snackBar = SnackBar(
                                               content:
-                                                  Text(' Login Successful.'));
+                                                  Text('Invalid login credential.'));
 
 // Find the Scaffold in the widget tree and use it to show a SnackBar.
                                           Scaffold.of(context)
