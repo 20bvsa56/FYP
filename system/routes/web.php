@@ -38,13 +38,6 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/itemEdit/{item}', 'ItemController@edit')->name('itemEdit');
     Route::post('/itemUpdate/{item}', 'ItemController@update')->name('itemUpdate');
 
-    Route::get('/regCreate', 'RegularItemsController@create')->name('regCreate');
-    Route::get('/regIndex', 'RegularItemsController@index')->name('regIndex');
-    Route::post('/regStore', 'RegularItemsController@store')->name('regStore');
-    Route::post('/regDelete/{ritem}', 'RegularItemsController@destroy')->name('regDelete');
-    Route::get('/regEdit/{ritem}', 'RegularItemsController@edit')->name('regEdit');
-    Route::post('/regUpdate/{ritem}', 'RegularItemsController@update')->name('regUpdate');
-
     Route::get('/roleCreate', 'RoleController@create')->name('roleCreate');
     Route::get('/roleIndex', 'RoleController@index')->name('roleIndex');
     Route::post('/roleStore', 'RoleController@store')->name('roleStore');

@@ -41,7 +41,6 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->middleware('guest:staff-api');
     }
 
     /**
@@ -77,14 +76,4 @@ class RegisterController extends Controller
 
     }
 
-
-    protected function createStaff(Request $request)
-    {
-        $staff = User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-        ]);
-        return response($staff);
-    }
 }

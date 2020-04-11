@@ -15,7 +15,7 @@ class Staff extends Authenticatable
      *
      * @var array
      */
-
+    protected $table = 'staffs';
     protected  $guard = 'staff-api';
 
     protected $fillable = [

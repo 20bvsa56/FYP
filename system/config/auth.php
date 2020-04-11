@@ -53,12 +53,6 @@ return [
 
         ],
 
-        'staff-api' => [
-            'driver' => 'token',
-            'provider' => 'staffs',
-            'hash' => false,
-        ],
-
 
     ],
 
