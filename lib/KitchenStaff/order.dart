@@ -30,7 +30,12 @@ class _OrderState extends State<Order> {
           title: Text('Food Order'),
           centerTitle: true,
         ),
-        body: Container(color: Colors.blueGrey),
+        body: Center(
+          child: Container(
+            color: Colors.black12,
+            child: Text('Hello'),
+            ),
+        ),
       )
    );
     

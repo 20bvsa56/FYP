@@ -22,7 +22,6 @@ class ItemController extends Controller
         return view('Items.index',compact('items'))
             ->with('i',(request()-> input('page',1)-1)*5);
 
-
     }
 
 

@@ -17,6 +17,11 @@ class AuthController extends Controller
         $this->middleware('guest:staff')->except('logout');
     }
 
+    public function index()
+    {
+        return view('RegisterStaffs.create');
+
+    }
     public function register(Request $request){
         $validatedData = $request->validate([
             'name'=>'required|max:20',
@@ -27,8 +32,11 @@ class AuthController extends Controller
         $validatedData['password'] = bcrypt($request->password);
 
         $staff = Staff::create($validatedData);
+        $staff->save();
 
-       return response(['staff'=>$staff]);
+        return redirect()->route('staffIndex')
+            ->with('success','Staff registered successfully.');
+
     }
 
     public function login()
@@ -39,7 +47,6 @@ class AuthController extends Controller
         }
         return response(['data' => $log]);
         return response(['Login Successful.']);
-
 
     }
 }

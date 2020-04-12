@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert'; //to convert http response in json format
 import 'package:http/http.dart' as http;
 import 'order.dart'; //to handle http request
-import 'registration.dart';
+// import 'registration.dart';
 
 class Model {
   String email;
@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
             ),
           ],
           backgroundColor: Colors.brown,
-          title: Text('Register'),
+          title: Text('Login'),
           centerTitle: true,
         ),
         body: SnackBarPage(),
@@ -146,6 +146,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
                     color: Colors.brown[400],
                     size: 85,
                   ),
+                  SizedBox(height:30),
                   Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: new Form(
@@ -185,38 +186,31 @@ class _SnackBarPageState extends State<SnackBarPage> {
                                       color: Colors.brown[500],
                                       onPressed: () async {
                                         // _validateInputs();
+                                        Model newModel = new Model(
+                                            email: emailController.text,
+                                            password: passwordController.text);
+                                        Model p = await userLogin(
+                                            SnackBarPage.url,
+                                            body: newModel.toMap());
+                                        print(p.email);
+                                        // Navigate to Profile Screen & Sending Email to Next Screen.
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Order()));
 
-                                    
-                                          Model newModel = new Model(
-                                              
-                                              email: emailController.text,
-                                              password:
-                                                  passwordController.text);
-                                          Model p = await userLogin(
-                                              SnackBarPage.url,
-                                              body: newModel.toMap());
-                                          print(p.email);
-                                          // Navigate to Profile Screen & Sending Email to Next Screen.
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Order()));
-                                       
-
-                                          final snackBar = SnackBar(
-                                              content:
-                                                  Text('Invalid login credential.'));
+                                        final snackBar = SnackBar(
+                                            content: Text(
+                                                'Invalid login credential.'));
 
 // Find the Scaffold in the widget tree and use it to show a SnackBar.
-                                          Scaffold.of(context)
-                                              .showSnackBar(snackBar);
-                                        
+                                        Scaffold.of(context)
+                                            .showSnackBar(snackBar);
+
                                         setState(() {
                                           visible = false;
                                         });
                                       },
-                                      
                                       child: Text('Create',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -231,27 +225,6 @@ class _SnackBarPageState extends State<SnackBarPage> {
                                     ))),
                             const SizedBox(
                               height: 12,
-                            ),
-                            Container(
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Registration()),
-                                  );
-                                },
-                                child: Text(
-                                  'Create an account',
-                                  style: TextStyle(
-                                    color: Colors.grey[500],
-                                    decoration: TextDecoration.underline,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Rancho-Regular',
-                                    fontSize: 22.0,
-                                  ),
-                                ),
-                              ),
                             ),
                           ],
                         ),
@@ -269,26 +242,19 @@ class _SnackBarPageState extends State<SnackBarPage> {
   }
 }
 
-// String validatename(String value) {
-//   if (value.length < 3 || value.length == 0)
-//     return 'Enter name with more than 3 character.';
-//   else
-//     return null;
-// }
+String validateEmail(String value) {
+  Pattern pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  RegExp regex = new RegExp(pattern);
+  if (!regex.hasMatch(value) || value.length == 0)
+    return 'Enter valid email';
+  else
+    return null;
+}
 
-// String validateEmail(String value) {
-//   Pattern pattern =
-//       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-//   RegExp regex = new RegExp(pattern);
-//   if (!regex.hasMatch(value) || value.length == 0)
-//     return 'Enter valid email';
-//   else
-//     return null;
-// }
-
-// String validatePassword(String value) {
-//   if (value.length < 6 || value.length == 0)
-//     return 'Enter password with more than 5 character.';
-//   else
-//     return null;
-// }
+String validatePassword(String value) {
+  if (value.length < 6 || value.length == 0)
+    return 'Enter password with more than 5 character.';
+  else
+    return null;
+}

@@ -39,7 +39,7 @@
 <div class="animsition">
 <div class="page-wrapper">
     <!-- HEADER DESKTOP-->
-    <header class="header-desktop3 d-none d-lg-block" >
+    <header class="header-desktop3 d-none d-lg-block" style="background: grey;">
         <div class="section__content section__content--p35">
             <div class="header3-wrap">
                 <div class="header__logo">
@@ -50,27 +50,26 @@
 
                 </div>
                 <div class="header__navbar">
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled" >
                         <li>
-                            <a class="js-arrow" href="{{route('home')}}">
+                            <a class="js-arrow" href="{{route('home')}}" style="color: whitesmoke">
                                 <i class="fas fa-book"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a class="js-arrow" href="{{route('banIndex')}}">
+                            <a class="js-arrow" href="{{route('banIndex')}}" style="color: whitesmoke">
                                 <i class="far fa-image"></i>Banner Image</a>
                         </li>
                         <li>
-                            <a class="js-arrow" href="{{route('catIndex')}}">
+                            <a class="js-arrow" href="{{route('catIndex')}}" style="color: whitesmoke">
                                 <i class="fas fa-list-ol"></i>Menu Category</a>
                         </li>
-
                         <li>
-                            <a class="js-arrow" href="{{route('itemIndex')}}">
+                            <a class="js-arrow" href="{{route('itemIndex')}}" style="color: whitesmoke">
                                 <i class="fas fa-coffee"></i>Food Item</a>
                         </li>
                         <li>
-                            <a class="js-arrow" href="{{route('roleIndex')}}">
-                                <i class="far fa-user"></i>Role</a>
+                            <a class="js-arrow" href="{{route('staffIndex')}}" style="color: whitesmoke">
+                                <i class="far fa-user"></i>Register Staff</a>
                         </li>
                     </ul>
                 </div>

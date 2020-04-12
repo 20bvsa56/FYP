@@ -13,7 +13,7 @@ class ItemController extends BaseController
 {
     public function special()
     {
-        $items = Item::select('title','name','price','image')->where('type','Special')->get();
+        $items = Item::select('title','name','price','image','category_id')->where('type','Special')->get();
         return ItemResource::collection($items);
     }
 

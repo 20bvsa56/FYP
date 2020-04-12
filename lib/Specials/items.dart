@@ -1,6 +1,6 @@
 class Items {
   Null id;
-  Null categoryId;
+  int categoryId;
   String title;
   Null type;
   String name;

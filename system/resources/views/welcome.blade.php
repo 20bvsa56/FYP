@@ -54,11 +54,10 @@
         .m-b-md {
             margin-bottom: 30px;
         }
-
-
-
     </style>
+
 </head>
+
 <body>
 <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
@@ -75,15 +74,14 @@
         </div>
     @endif
 
-
     <div class="content">
-        <div class="title m-b-md">
+        <div class="title m-b-md" style="font-weight: bold">
             Tastyorama
         </div>
-        <p style="font-style: italic; font-size: 20px">Digitalized Menu, Smart Service</p>
-
-
+        <p style="font-style: italic;font-size: 20px">Digitalized Menu, Smart Service</p>
+        <p style="font-style: italic; font-size: 20px">Admin Panel</p>
     </div>
+
 </div>
 </body>
 </html>

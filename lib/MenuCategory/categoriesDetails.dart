@@ -29,7 +29,7 @@ class CategoriesDetails extends StatelessWidget {
             
           ),
           Positioned(
-            left: 30.0,
+            left: 20.0,
             top: 110.0,
             child: Material(
               color: Colors.brown[50],

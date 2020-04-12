@@ -37,7 +37,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="Title">Title <span style="color:blue">(For specials only)</span> </label>
+                <label for="Title">Title</label>
                 <input type="text" class="form-control" name="title" placeholder="Enter food item title" value="{{$item->title}}">
                 <small class="form-text text-muted">Ex: Beverage, Breakfast etc.</small>
             </div>

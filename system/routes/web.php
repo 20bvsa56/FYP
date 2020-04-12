@@ -22,8 +22,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::group(['middleware'=>'auth'], function(){
+    Route::get('/staffIndex', 'API\AuthController@index')->name('staffIndex');
+    Route::post('/registration', 'API\AuthController@register')->name('registerStaff');
+
     Route::get('/categoryCreate', 'CategoryController@create')->name('catCreate');
     Route::get('/categoryIndex', 'CategoryController@index')->name('catIndex');
     Route::post('/categoryStore', 'CategoryController@store')->name('catStore');
@@ -37,13 +39,6 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/itemDelete/{item}', 'ItemController@destroy')->name('itemDelete');
     Route::get('/itemEdit/{item}', 'ItemController@edit')->name('itemEdit');
     Route::post('/itemUpdate/{item}', 'ItemController@update')->name('itemUpdate');
-
-    Route::get('/roleCreate', 'RoleController@create')->name('roleCreate');
-    Route::get('/roleIndex', 'RoleController@index')->name('roleIndex');
-    Route::post('/roleStore', 'RoleController@store')->name('roleStore');
-    Route::post('/roleDelete/{role}', 'RoleController@destroy')->name('roleDelete');
-    Route::get('/roleEdit/{role}', 'RoleController@edit')->name('roleEdit');
-    Route::post('/roleUpdate/{role}', 'RoleController@update')->name('roleUpdate');
 
     Route::get('/bannerCreate', 'BannerImageController@create')->name('banCreate');
     Route::get('/bannerIndex', 'BannerImageController@index')->name('banIndex');
