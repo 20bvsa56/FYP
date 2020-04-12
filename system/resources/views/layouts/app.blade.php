@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
+<head >
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,10 +19,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+<body style="background: grey;">
+    <div id="app" >
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" >
+            <div class="container" style="background: whitesmoke;" >
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Tastyorama') }}
                 </a>
@@ -37,7 +37,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" >
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

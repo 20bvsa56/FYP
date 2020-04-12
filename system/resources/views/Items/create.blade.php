@@ -68,7 +68,6 @@
                 <label class="radio-inline">
                     <input type="radio" id="smt-fld-1-3" value="Regular" name="type" checked>Regular</label>
             </div>
-            <br>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

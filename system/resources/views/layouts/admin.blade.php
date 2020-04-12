@@ -35,70 +35,59 @@
 
 </head>
 
-<body class="animsition">
+<body>
+<div class="animsition">
 <div class="page-wrapper">
+    <!-- HEADER DESKTOP-->
+    <header class="header-desktop3 d-none d-lg-block" >
+        <div class="section__content section__content--p35">
+            <div class="header3-wrap">
+                <div class="header__logo">
+                    <a class="js-arrow"  href="#">
+                        <img src="images/icon/burger.png" height="40" width="30" />
+                        <h2 class="title-1">Tastyorama</h2>
+                    </a>
 
-    <!-- MENU SIDEBAR-->
-    <aside class="menu-sidebar d-none d-lg-block">
-        <div class="logo">
-            <a href="#">
-                <img src="../images/icon/logo.png" alt="logo" height="40" width="30" />
-            </a>
-            <h2 class="title-1">Tastyorama</h2>
-        </div>
-        <div class="menu-sidebar__content js-scrollbar1">
-            <nav class="navbar-sidebar">
-                <ul class="list-unstyled navbar__list">
-                    <li>
-                        <a class="js-arrow" href="{{route('home')}}">
-                            <i class="fas fa-dashboard"></i>Dashboard</a>
-                    </li>
-                    <li>
-                        <a class="js-arrow" href="{{route('banIndex')}}">
-                            <i class="far fa-image"></i>Banner Image</a>
-                    </li>
-                    <li>
-                        <a class="js-arrow" href="{{route('catIndex')}}">
-                            <i class="fas fa-list"></i>Menu Category</a>
-                    </li>
-                    <li>
-                        <a class="js-arrow" href="{{route('itemIndex')}}">
-                            <i class="fas fa-coffee"></i>Food Item</a>
-                    </li>
-                    <li>
-                        <a class="js-arrow" href="{{route('roleIndex')}}">
-                            <i class="far fa-user"></i>Role</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </aside>
-    <!-- END MENU SIDEBAR-->
+                </div>
+                <div class="header__navbar">
+                    <ul class="list-unstyled">
+                        <li>
+                            <a class="js-arrow" href="{{route('home')}}">
+                                <i class="fas fa-book"></i>Dashboard</a>
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="{{route('banIndex')}}">
+                                <i class="far fa-image"></i>Banner Image</a>
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="{{route('catIndex')}}">
+                                <i class="fas fa-list-ol"></i>Menu Category</a>
+                        </li>
 
-    <!-- PAGE CONTAINER-->
-    <div class="page-container">
-        <!-- HEADER DESKTOP-->
-        <header class="header-desktop">
-            <div class="section__content section__content--p30">
-                <div class="container-fluid">
-                    <div class="header-wrap">
-                        <p>Dashboard</p>
-                        <div class="header-button">
+                        <li>
+                            <a class="js-arrow" href="{{route('itemIndex')}}">
+                                <i class="fas fa-coffee"></i>Food Item</a>
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="{{route('roleIndex')}}">
+                                <i class="far fa-user"></i>Role</a>
+                        </li>
+                    </ul>
+                </div>
 
-                            <div class="account-wrap">
-                                <div class="account-item clearfix js-item-menu">
-                                    <div class="image">
-                                        <img src="{{ asset('images/icon/settings.png') }}" alt="logo" height="20" width="20" />
-                                    </div>
-                                    <div class="content">
-                                        <a class="js-acc-btn" href="#">Account</a>
-                                    </div>
-                                    <div class="account-dropdown js-dropdown">
 
-                                        <div class="account-dropdown__body">
+                        <div class="account-wrap">
+                            <div class="account-item clearfix js-item-menu">
+                                                                <div class="content">
+                                    <a class="title-1" href="#" style="color: white; ">Account</a>
+                                </div>
+                                <div class="account-dropdown js-dropdown">
+
+                                    <div class="account-dropdown__body">
 
                                         <div class="account-dropdown__footer">
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
+
+                                            <a class="zmdi zmdi-power" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                 {{ __('Logout') }}
@@ -108,31 +97,53 @@
                                                 @csrf
                                             </form>
 
-                                            <a class="dropdown-item" href="{{ route('register') }}"
-                                             >
+                                            <a class="zmdi zmdi-account" href="{{ route('register') }}"
+                                               onclick="event.preventDefault();
+                                                     document.getElementById('register-form').submit();">
+
+
                                                 {{ __('Register') }}
                                             </a>
 
+                                            <form id="logout-form" action="{{ route('register') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
-        </header>
-        <!-- HEADER DESKTOP-->
 
-        <!-- MAIN CONTENT-->
-        <div class="main-content">
-            @yield('content')
-        </div>
-        <!-- END MAIN CONTENT-->
-        <!-- END PAGE CONTAINER-->
+    </header>
+
+
+    <!-- END HEADER DESKTOP-->
+    <!-- MAIN CONTENT-->
+    <div class="main-content">
+        @yield('content')
     </div>
+    <!-- END MAIN CONTENT-->
+</div>
 
 </div>
+            <!-- COPYRIGHT-->
+        <section >
+
+
+
+                        <div class="copyright">
+                            <p>Copyright © 2020 Tastyorama. All rights reserved.</p>
+                        </div>
+
+
+        </section>
+        <!-- END COPYRIGHT-->
+
+
 
 <!-- Jquery JS-->
 <script src="{{ asset('vendor/jquery-3.2.1.min.js') }}"></script>

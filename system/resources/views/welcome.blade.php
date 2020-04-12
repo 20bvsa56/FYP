@@ -13,8 +13,8 @@
     <!-- Styles -->
     <style>
         html, body {
-            background-color: #fff;
-            color: #636b6f;
+            background-color: grey;
+            color: blanchedalmond;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
             height: 100vh;
@@ -40,20 +40,23 @@
             text-align: center;
         }
         .title {
-            font-size: 84px;
+            font-size: 80px;
         }
         .links > a {
-            color: #636b6f;
+            color: blanchedalmond;
             padding: 0 25px;
-            font-size: 13px;
+            font-size: 20px;
             font-weight: 600;
             letter-spacing: .1rem;
-            text-decoration: none;
+            text-decoration: underline;
             text-transform: uppercase;
         }
         .m-b-md {
             margin-bottom: 30px;
         }
+
+
+
     </style>
 </head>
 <body>
@@ -72,6 +75,7 @@
         </div>
     @endif
 
+
     <div class="content">
         <div class="title m-b-md">
             Tastyorama
@@ -82,4 +86,4 @@
     </div>
 </div>
 </body>
-</html> w
+</html>

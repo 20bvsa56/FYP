@@ -164,6 +164,7 @@ strong {
     text-transform: capitalize;
     font-weight: 400;
     font-size: 30px;
+    color: white;
 }
 
 .title-2 {
@@ -316,8 +317,9 @@ section {
 }
 
 .main-content {
-    padding-top: 116px;
-    min-height: 100vh;
+    padding-top: 40px;
+    min-height: 80vh;
+    background: white;
 }
 
 @media (max-width: 991px) {
@@ -4746,8 +4748,8 @@ section {
 }
 
 .copyright p {
-    font-size: 14px;
-    color: #666;
+    font-size: 16px;
+    color: blue;
     line-height: -webkit-calc(24/14);
     line-height: -moz-calc(24/14);
     line-height: calc(24/14);
