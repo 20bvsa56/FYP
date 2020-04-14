@@ -39,7 +39,7 @@ class _RegularCategoryState extends State<RegularCategory> {
   Widget build(BuildContext context) {
     return BlocProvider(
         blocs: [Bloc((i) => CartListBloc()),
-                Bloc((i) => ColorBloc()),
+                Bloc((i) => ColorBloc())
          ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

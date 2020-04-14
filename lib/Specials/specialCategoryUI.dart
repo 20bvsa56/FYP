@@ -10,7 +10,9 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:menu_app/CartPage/cartListBloc.dart';
 
+
 class SpecialCategory extends StatefulWidget {
+  
   SpecialCategory({Key key}) : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
   Widget build(BuildContext context) {
     return BlocProvider(
         blocs: [Bloc((i) => CartListBloc()),
-                Bloc((i) => ColorBloc()),
+                Bloc((i) => ColorBloc())
          ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

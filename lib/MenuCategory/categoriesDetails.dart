@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:menu_app/CartPage/cartListBloc.dart';
+import 'package:menu_app/CartPage/listTileColorBloc.dart';
 import 'package:menu_app/MenuCategory/categories.dart';
+import 'package:bloc_pattern/bloc_pattern.dart';
 
 class CategoriesDetails extends StatelessWidget {
   // // const CategoriesDetails({Key key}) : super(key: key);
@@ -12,7 +15,10 @@ class CategoriesDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return BlocProvider(
+         blocs: [Bloc((i) => CartListBloc()),
+                Bloc((i) => ColorBloc())
+         ],child:InkWell(
      onTap: action,
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -60,6 +66,7 @@ class CategoriesDetails extends StatelessWidget {
           ),
         ]),
       ),
+    )
     );
   }
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:menu_app/CartPage/cartListBloc.dart';
+import 'package:menu_app/CartPage/listTileColorBloc.dart';
 import 'package:menu_app/MenuCategory/menuCategoryUI.dart';
 import 'items.dart';
+import 'package:bloc_pattern/bloc_pattern.dart';
 
 class ItemsDetails extends StatelessWidget {
   // const ItemsDetails({Key key}) : super(key: key);
@@ -11,7 +14,10 @@ class ItemsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //BlocProvider takes list of blocs which returns SpecialCartListBloc.
-    return InkWell(
+    return  BlocProvider(
+        blocs: [Bloc((i) => CartListBloc()),
+                Bloc((i) => ColorBloc())
+         ],child:InkWell(
       onTap: null,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 40, 40, 10),
@@ -98,6 +104,7 @@ class ItemsDetails extends StatelessWidget {
           )
         ]),
       ),
+    )
     );
   }
 }

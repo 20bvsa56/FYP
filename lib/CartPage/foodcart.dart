@@ -5,19 +5,28 @@ import 'package:menu_app/Regular/regularItems.dart';
 import 'cartListBloc.dart';
 import 'listTileColorBloc.dart';
 
-class FoodCart extends StatelessWidget {
+class FoodCart extends StatefulWidget {
   const FoodCart({Key key}) : super(key: key);
 
   @override
+  _FoodCartState createState() => _FoodCartState();
+}
+
+class _FoodCartState extends State<FoodCart> {
+  @override
   Widget build(BuildContext context) {
     final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
-
     List<RegularItems> ritems;
-    return StreamBuilder(
+
+    return BlocProvider(
+         blocs: [Bloc((i) => CartListBloc()), Bloc((i) => ColorBloc()) 
+                
+         ],
+         child:StreamBuilder(
       //streambuilder to change UI reactively without needing to call setState()
       stream: bloc.listStream,
       builder: (context, snapshot) {
-        if (snapshot.data != null) {
+        if (snapshot.hasData) {
           ritems = snapshot.data;
           return Scaffold(
             appBar: AppBar(
@@ -35,6 +44,7 @@ class FoodCart extends StatelessWidget {
           return Container();
         }
       },
+    )
     );
   }
 }
@@ -326,7 +336,7 @@ class _CustomBarState extends State<CustomBar> {
                 ),
               ),
               Text(
-                "        Order                                   ",
+                "        Order                         ",
                 style: TextStyle(
                   color: Colors.brown,
                   fontWeight: FontWeight.w300,
@@ -334,7 +344,7 @@ class _CustomBarState extends State<CustomBar> {
                   fontFamily: 'Lobster-Regular'
                 ),
               ),
-              SizedBox(height: 20),
+              
             ],
             
           ),
@@ -363,11 +373,11 @@ class _DragTargetWidgetState extends State<DragTargetWidget> {
     final ColorBloc colorBloc = BlocProvider.getBloc<ColorBloc>();
 
     return BlocProvider(
-        blocs: [Bloc((i) => ColorBloc())],
+        blocs: [Bloc((i) => ColorBloc()), Bloc((i) => CartListBloc())],
         child: DragTarget<RegularItems>(
           onAccept: (RegularItems ritem) {
             currentFoodItem = ritem;
-            colorBloc.setColor(Colors.white);
+            colorBloc.setColor(Colors.green);
             widget.bloc.removeFromList(currentFoodItem);
           },
           onWillAccept: (RegularItems ritem) {

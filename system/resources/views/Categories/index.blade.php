@@ -31,7 +31,7 @@
       <tr>
          <td>{{++$i}}</td>
          <td>{{$category->name}}</td>
-          <td><img src="{{'foodItems/'.$category->image}}" alt="" style="height:60px;width: 60px;"></td>
+          <td><img src="{{'categories/'.$category->image}}" alt="" style="height:60px;width: 60px;"></td>
          <td>
             <form action="{{route('catDelete',$category->id)}}" method="POST">
 
