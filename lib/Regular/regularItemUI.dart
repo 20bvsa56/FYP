@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:menu_app/CartPage/cartListBloc.dart';
+import 'package:menu_app/CartPage/listTileColorBloc.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'regularItems.dart';
@@ -37,7 +38,9 @@ class _RegularCategoryState extends State<RegularCategory> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        blocs: [Bloc((i) => CartListBloc())],
+        blocs: [Bloc((i) => CartListBloc()),
+                Bloc((i) => ColorBloc()),
+         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(

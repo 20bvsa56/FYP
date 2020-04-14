@@ -8,16 +8,14 @@ class ItemsDetails extends StatelessWidget {
 
   ItemsDetails({this.item, Key key}) : super(key: key);
 
-  
   @override
   Widget build(BuildContext context) {
     //BlocProvider takes list of blocs which returns SpecialCartListBloc.
     return InkWell(
       onTap: null,
-          child: Padding(
+      child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 40, 40, 10),
         child: Stack(children: <Widget>[
-          
           Container(
             width: 160.0,
             height: 160.0,
@@ -25,7 +23,7 @@ class ItemsDetails extends StatelessWidget {
               borderRadius: BorderRadius.circular(24.0),
               color: Colors.brown[200],
             ),
-            
+
             // child:Image.asset(image,fit: BoxFit.fill),
             child: Image.asset('system/public/foodItems/' + item.image),
           ),
@@ -74,32 +72,32 @@ class ItemsDetails extends StatelessWidget {
                                 fontSize: 16.0)),
                       ],
                     )),
-                    SizedBox(height:10),
+                    SizedBox(height: 10),
                     InkWell(
-                      onTap: (){
-         Navigator.push(context, MaterialPageRoute(builder: (context) => MenuCategory()));
-      },
-                                          child: Text('View',
-                       style: TextStyle(
-                                   color: Colors.pinkAccent,
-                                     fontSize: 15, fontFamily: 'Lobster-Regular',
-                                     fontStyle: FontStyle.italic,
-                                     decoration: TextDecoration.underline,
-                                      ),),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MenuCategory()));
+                      },
+                      child: Text(
+                        'View',
+                        style: TextStyle(
+                          color: Colors.pinkAccent,
+                          fontSize: 15,
+                          fontFamily: 'Lobster-Regular',
+                          fontStyle: FontStyle.italic,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
                     ),
-                   
-
-                    
-              
                   ],
-                                   
                 ),
               ),
             ),
           )
         ]),
       ),
-         
     );
   }
 }

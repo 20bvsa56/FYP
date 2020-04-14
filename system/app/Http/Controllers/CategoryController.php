@@ -131,7 +131,7 @@ class CategoryController extends Controller
 
 
         $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-        request()->image->move(public_path('foodItems/'), $imageName);
+        request()->image->move(public_path('categories/'), $imageName);
         $category->image = $imageName;
 
         $category->save();

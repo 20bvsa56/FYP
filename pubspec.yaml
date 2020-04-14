@@ -50,6 +50,7 @@ flutter:
     - images/
     - system/public/foodItems/
     - system/public/bannerImage/
+    - system/public/categories/
   
   fonts:
   - family: Pacifico-Regular

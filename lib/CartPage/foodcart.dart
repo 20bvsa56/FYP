@@ -5,19 +5,16 @@ import 'package:menu_app/Regular/regularItems.dart';
 import 'cartListBloc.dart';
 import 'listTileColorBloc.dart';
 
-class FoodCart extends StatefulWidget {
+class FoodCart extends StatelessWidget {
   const FoodCart({Key key}) : super(key: key);
-  @override
-  _FoodCartState createState() => _FoodCartState();
-}
 
-class _FoodCartState extends State<FoodCart> {
   @override
   Widget build(BuildContext context) {
     final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
 
     List<RegularItems> ritems;
     return StreamBuilder(
+      //streambuilder to change UI reactively without needing to call setState()
       stream: bloc.listStream,
       builder: (context, snapshot) {
         if (snapshot.data != null) {
@@ -121,7 +118,7 @@ Container totalAmount(List<RegularItems> ritems) {
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300),
         ),
         Text(
-          "\$${returnTotalAmount(ritems)}",
+          "\Rs.${returnTotalAmount(ritems)}",
           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28),
         ),
       ],
@@ -145,18 +142,19 @@ class CartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(
+    return BlocProvider(
         blocs: [Bloc((i) => CartListBloc())],
-        child:ListView(
-      children: <Widget>[
-        CustomBar(),
-        Expanded(
-          flex: 1,
-          child: ritems.length > 0 ? foodItemList() : noItemContainer(),
-        )
-      ],
-    ));
+        child: Column(
+          children: <Widget>[
+            CustomBar(),
+            Expanded(
+              flex: 1,
+              child: ritems.length > 0 ? foodItemList() : noItemContainer(),
+            )
+          ],
+        ));
   }
+  
 
   Container noItemContainer() {
     return Container(
@@ -181,6 +179,7 @@ class CartBody extends StatelessWidget {
     );
   }
 }
+
 
 class CartListItem extends StatelessWidget {
   final RegularItems ritem;
@@ -269,33 +268,26 @@ class ItemContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: Image.asset(
-              ritem.image,
-              fit: BoxFit.fitHeight,
-              height: 55,
-              width: 80,
-            ),
-          ),
+        
           RichText(
             text: TextSpan(
                 style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
+                    fontSize: 23,
+                    color: Colors.brown,
+                    fontFamily: 'Rancho-regular',
                     fontWeight: FontWeight.w700),
                 children: [
                   TextSpan(text: ritem.quantity.toString()),
-                  TextSpan(text: " x "),
+                  TextSpan(text: " x ", style: TextStyle(color: Colors.black)),
                   TextSpan(
-                    text: ritem.title,
+                    text: ritem.name,
                   ),
                 ]),
           ),
           Text(
-            "\$${ritem.quantity * ritem.price}",
+            "\Rs.${ritem.quantity * ritem.price}",
             style:
-                TextStyle(color: Colors.grey[500], fontWeight: FontWeight.w400),
+                TextStyle(color: Colors.black, fontWeight: FontWeight.w400,fontSize: 23,fontFamily: 'Rancho-regular',),
           ),
         ],
       ),
@@ -303,16 +295,55 @@ class ItemContent extends StatelessWidget {
   }
 }
 
-class CustomBar extends StatelessWidget {
+class CustomBar extends StatefulWidget {
+  @override
+  _CustomBarState createState() => _CustomBarState();
+}
+
+class _CustomBarState extends State<CustomBar> {
   @override
   Widget build(BuildContext context) {
     final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
     // final ColorBloc colorBloc = BlocProvider.getBloc<ColorBloc>();
-    
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: DragTargetWidget(bloc),
-    );
+
+    return BlocProvider(
+        blocs: [
+          Bloc((i) => CartListBloc()),
+          Bloc((i) => ColorBloc()),
+        ],
+        child:Row(
+          children: <Widget>[
+            Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "  Your",
+                style: TextStyle(
+                  color: Colors.brown,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 35,
+                  fontFamily: 'Lobster-Regular'
+                ),
+              ),
+              Text(
+                "        Order                                   ",
+                style: TextStyle(
+                  color: Colors.brown,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 30,
+                  fontFamily: 'Lobster-Regular'
+                ),
+              ),
+              SizedBox(height: 20),
+            ],
+            
+          ),
+              DragTargetWidget(bloc),
+              
+          ],
+        ),
+          
+        );
   }
 }
 
@@ -331,29 +362,31 @@ class _DragTargetWidgetState extends State<DragTargetWidget> {
     RegularItems currentFoodItem;
     final ColorBloc colorBloc = BlocProvider.getBloc<ColorBloc>();
 
-    return DragTarget<RegularItems>(
-      onAccept: (RegularItems ritem) {
-        currentFoodItem = ritem;
-        colorBloc.setColor(Colors.white);
-        widget.bloc.removeFromList(currentFoodItem);
-      },
-      onWillAccept: (RegularItems ritem) {
-        colorBloc.setColor(Colors.red);
-        return true;
-      },
-      // onLeave: (RegularItems ritem) {
-      //   colorBloc.setColor(Colors.white);
-      // },
+    return BlocProvider(
+        blocs: [Bloc((i) => ColorBloc())],
+        child: DragTarget<RegularItems>(
+          onAccept: (RegularItems ritem) {
+            currentFoodItem = ritem;
+            colorBloc.setColor(Colors.white);
+            widget.bloc.removeFromList(currentFoodItem);
+          },
+          onWillAccept: (RegularItems ritem) {
+            colorBloc.setColor(Colors.red);
+            return true;
+          },
+          // onLeave: (RegularItems ritem) {
+          //   colorBloc.setColor(Colors.white);
+          // },
 
-      builder: (BuildContext context, List incoming, List rejected) {
-        return Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Icon(
-            CupertinoIcons.delete,
-            size: 35,
-          ),
-        );
-      },
-    );
+          builder: (BuildContext context, List incoming, List rejected) {
+            return Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Icon(
+                CupertinoIcons.delete,
+                size: 35,
+              ),
+            );
+          },
+        ));
   }
 }
