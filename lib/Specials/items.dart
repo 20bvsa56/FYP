@@ -5,7 +5,7 @@ class Items {
   Null type;
   String name;
   int price;
-  Null description;
+  String description;
   String image;
   
 

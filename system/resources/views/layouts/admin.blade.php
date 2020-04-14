@@ -44,7 +44,7 @@
             <div class="header3-wrap">
                 <div class="header__logo">
                     <a class="js-arrow"  href="#">
-                        <img src="images/icon/burger.png" height="40" width="30" />
+                        <img src="{{asset('images/icon/burger.png')}}" height="40" width="30" />
                         <h2 class="title-1">Tastyorama</h2>
                     </a>
 
@@ -96,17 +96,17 @@
                                                 @csrf
                                             </form>
 
-                                            <a class="zmdi zmdi-account" href="{{ route('register') }}"
-                                               onclick="event.preventDefault();
-                                                     document.getElementById('register-form').submit();">
+{{--                                            <a class="zmdi zmdi-account" href="{{ route('register') }}"--}}
+{{--                                               onclick="event.preventDefault();--}}
+{{--                                                     document.getElementById('register-form').submit();">--}}
 
 
-                                                {{ __('Register') }}
-                                            </a>
+{{--                                                {{ __('Register') }}--}}
+{{--                                            </a>--}}
 
-                                            <form id="logout-form" action="{{ route('register') }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
+{{--                                            <form id="logout-form" action="{{ route('register') }}" method="POST" style="display: none;">--}}
+{{--                                                @csrf--}}
+{{--                                            </form>--}}
 
                                         </div>
 

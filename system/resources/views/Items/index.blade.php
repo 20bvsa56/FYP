@@ -23,7 +23,6 @@
         <tr>
             <th>S.N.</th>
             <th>Category</th>
-            <th>Title</th>
             <th>Name</th>
             <th>Price</th>
             <th>Description</th>
@@ -36,7 +35,6 @@
             <tr>
                 <td>{{++$i}}</td>
                 <td>{{$item->category->name}}</td>
-                <td>{{$item->title}}</td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->price}}</td>
                 <td>{{$item->description}}</td>

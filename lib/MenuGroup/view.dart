@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:menu_app/CartPage/foodcart.dart';
+import 'package:menu_app/CartPage/cart.dart';
 import 'package:menu_app/MenuCategory/menuCategoryUI.dart';
 import 'package:menu_app/Specials/specialCategoryUI.dart';
 
@@ -16,7 +16,7 @@ class _ViewState extends State<View> {
     MenuCategory(
       key: PageStorageKey('Page2'),
     ),
-    FoodCart(
+    Cart(
       key: PageStorageKey('Page3'),
     ),
   ];

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:menu_app/CartPage/cartListBloc.dart';
-import 'package:menu_app/CartPage/listTileColorBloc.dart';
 import 'package:menu_app/Regular/regularItems.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 
@@ -19,10 +18,7 @@ class RegularDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(
-        blocs: [Bloc((i) => CartListBloc()),
-                Bloc((i) => ColorBloc())
-         ],child:Padding(
+    return Padding(
       padding: const EdgeInsets.only(left: 30.0, right: 30, top: 20),
       child: Container(
         decoration: BoxDecoration(
@@ -99,6 +95,6 @@ class RegularDetails extends StatelessWidget {
           
         ]),
       ),
-    ));
+    );
   }
 }
