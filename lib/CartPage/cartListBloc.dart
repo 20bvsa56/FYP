@@ -10,24 +10,24 @@ class CartListBloc extends BlocBase {
   CartProvider itemProvider =
       CartProvider(); //initalizing special cart provider class
   //controller
-  var _listController = BehaviorSubject<List<RegularItems>>.seeded(
+  var _listController = BehaviorSubject<List<FoodItem>>.seeded(
       []); //seeded is for default starting value for the stream
 //BehaviorSubject is a special StreamController that captures the latest item that has been added to the controller, and emits that as the first item to any new listener.
   //output
-  Stream<List<RegularItems>> get listStream => _listController.stream;
+  Stream<List<FoodItem>> get listStream => _listController.stream;
 
   //input
-  Sink<List<RegularItems>> get listSink => _listController.sink;
+  Sink<List<FoodItem>> get listSink => _listController.sink;
 
   //below defining business logic below or methods
 //method to add food items to the list
 //updated list of food items will come
-  addToList(RegularItems ritems) {
-    listSink.add(itemProvider.addToList(ritems));
+  addToList(FoodItem foodItem) {
+    listSink.add(itemProvider.addToList(foodItem));
   }
 
-  removeFromList(RegularItems ritems) {
-    listSink.add(itemProvider.removeFromList(ritems));
+  removeFromList(FoodItem foodItem) {
+    listSink.add(itemProvider.removeFromList(foodItem));
   }
 
 //dispose will be called automatically by closing its streams
@@ -38,3 +38,4 @@ class CartListBloc extends BlocBase {
     super.dispose();
   }
 }
+

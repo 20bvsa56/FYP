@@ -4,6 +4,7 @@ import 'package:menu_app/MenuCategory/menuCategoryUI.dart';
 import 'package:menu_app/Specials/specialCategoryUI.dart';
 
 class View extends StatefulWidget {
+  
   @override
   _ViewState createState() => _ViewState();
 }

@@ -6,14 +6,18 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 class RegularDetails extends StatelessWidget {
   // const RegularDetails({Key key}) : super(key: skey);
   // final RegularItems item;
-  final RegularItems ritem;
+  final FoodItem foodItem;
 
-  RegularDetails({this.ritem, key}) : super(key: key);
+  RegularDetails({this.foodItem, key}) : super(key: key);
 
   final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
 
-  addToCart(RegularItems ritems) {
-    bloc.addToList(ritems);
+  addToCart(FoodItem foodItems) {
+    bloc.addToList(foodItems);
+  }
+
+  removeFromList(FoodItem foodItems) {
+    bloc.removeFromList(foodItems);
   }
 
   @override
@@ -39,7 +43,7 @@ class RegularDetails extends StatelessWidget {
         ),
         child: Column(children: <Widget>[
           Text(
-            ritem.name,
+            foodItem.name,
             style: TextStyle(
               fontFamily: 'Lobster-Regular',
               fontWeight: FontWeight.bold,
@@ -51,7 +55,7 @@ class RegularDetails extends StatelessWidget {
             child: ListTile(
               isThreeLine: true,
               title: Text(
-                ritem.description,
+                foodItem.description,
                 style: TextStyle(
                   fontFamily: 'Rancho-Regular',
                   // fontStyle: FontStyle.italic,
@@ -60,7 +64,7 @@ class RegularDetails extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                "Rs. " + ritem.price.toString(),
+                "Rs. " + foodItem.price.toString(),
                 style: TextStyle(
                   fontFamily: 'Rancho-Regular',
                   // fontStyle: FontStyle.italic,
@@ -68,7 +72,7 @@ class RegularDetails extends StatelessWidget {
                   color: Colors.brown,
                 ),
               ),
-              trailing: Image.asset('system/public/foodItems/' + ritem.image),
+              trailing: Image.asset('system/public/foodItems/' + foodItem.image),
             ),
           ),
           
@@ -79,11 +83,10 @@ class RegularDetails extends StatelessWidget {
                   style:
                       TextStyle(fontSize: 13, fontFamily: 'Lobster-Regular')),
               onPressed: () {
-                  addToCart(ritem);
-                  print(ritem.price);
-
+                  addToCart(foodItem);
+                 
                  final snackBar = SnackBar(
-                  content: Text('${ritem.name} added to food cart.'),
+                  content: Text('${foodItem.name} added to food cart.'),
                   duration: Duration(milliseconds: 550),
                 );
 

@@ -12,13 +12,13 @@ class _HomeState extends State<Home> {
   // var currentTableSelected = 'Table No.';
   // String dropdownValue = 'Table No.';
   bool _isLoading = false;
+  var tableController = TextEditingController(text: 'Table-1');
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-     
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
@@ -73,11 +73,13 @@ class _HomeState extends State<Home> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(100, 10, 100, 0),
                       child: TextFormField(
+                        controller: tableController,
                         enabled: false,
                         style: TextStyle(fontSize: 15, color: Colors.black),
                         decoration: InputDecoration(
+                          
                           border: OutlineInputBorder(),
-                          labelText: 'Table-1',
+                          
                           filled: true,
                           fillColor: Colors.white60,
                           contentPadding: const EdgeInsets.only(
@@ -102,10 +104,10 @@ class _HomeState extends State<Home> {
                             color: Colors.brown[500],
                             onPressed: () {
                               // Navigate to the main view screen using a named route '/view'.
-                              Navigator.pushNamed(context, '/view');
+                             Navigator.pushNamed(context, '/view');
+                                                                                    
                             },
-                            child: Text(
-                              _isLoading ? 'Proceeding..' : 'Proceed',
+                            child: Text(_isLoading ? 'Proceeding..' : 'Proceed',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 24,
@@ -124,7 +126,6 @@ class _HomeState extends State<Home> {
                             child: RaisedButton(
                               color: Colors.brown[500],
                               onPressed: () {
-
                                 // Navigate to the main login screen using a named route '/login'.
                                 Navigator.pushNamed(context, '/login');
                               },

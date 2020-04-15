@@ -5,47 +5,51 @@ import 'package:menu_app/Regular/regularItems.dart';
 import 'cartListBloc.dart';
 import 'listTileColorBloc.dart';
 
-
 class Cart extends StatelessWidget {
   const Cart({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
-    List<RegularItems> ritems;
+    List<FoodItem> foodItems;
     return BlocProvider(
-         blocs: [Bloc((i) => CartListBloc()),
-                Bloc((i) => ColorBloc())
-         ],child:StreamBuilder(
-      stream: bloc.listStream,
-      builder: (context, snapshot) {
-        if (snapshot.data != null) {
-          ritems = snapshot.data;
-          return Scaffold(
-             appBar: AppBar(
-              leading: Icon(Icons.add_shopping_cart),
-              backgroundColor: Colors.brown,
-              title: Text('Food Cart'),
-              centerTitle: true,
-            ),
-            body: SafeArea(
-              child: CartBody(ritems),
-            ),
-            bottomNavigationBar: BottomBar(ritems),
-          );
-        } else {
-          return Container(
-            child: Text("Loading"),
-          );
-        }
-      },
-    ));
+        blocs: [Bloc((i) => CartListBloc()), Bloc((i) => ColorBloc())],
+        child: StreamBuilder(
+          stream: bloc.listStream,
+          builder: (context, snapshot) {
+            if (snapshot.data != null) {
+              foodItems = snapshot.data;
+              return Scaffold(
+                appBar: AppBar(
+                  leading: Icon(Icons.add_shopping_cart),
+                  backgroundColor: Colors.brown,
+                  title: Text('Food Cart'),
+                  centerTitle: true,
+                ),
+                body: SafeArea(
+                  child: CartBody(foodItems),
+                ),
+                bottomNavigationBar: BottomBar(foodItems),
+              );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(30, 250, 0, 0),
+                child: Container(
+                    child: Center(
+                  child: Column(
+                    children: <Widget>[Text('Loading')],
+                  ),
+                )),
+              );
+            }
+          },
+        ));
   }
 }
 
 class BottomBar extends StatelessWidget {
-  final List<RegularItems> ritems;
+  final List<FoodItem> foodItems;
 
-  BottomBar(this.ritems);
+  BottomBar(this.foodItems);
 
   @override
   Widget build(BuildContext context) {
@@ -54,18 +58,19 @@ class BottomBar extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          totalAmount(ritems),
+          totalAmount(foodItems),
           Divider(
             height: 1,
             color: Colors.grey[700],
           ),
+          Table(),
           PlaceOrder(),
         ],
       ),
     );
   }
 
-  Container totalAmount(List<RegularItems> ritems) {
+  Container totalAmount(List<FoodItem> foodItems) {
     return Container(
       margin: EdgeInsets.only(right: 10),
       padding: EdgeInsets.all(25),
@@ -77,7 +82,7 @@ class BottomBar extends StatelessWidget {
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300),
           ),
           Text(
-            "\Rs ${returnTotalAmount(ritems)}",
+            "\Rs ${returnTotalAmount(foodItems)}",
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28),
           ),
         ],
@@ -85,60 +90,20 @@ class BottomBar extends StatelessWidget {
     );
   }
 
-  String returnTotalAmount(List<RegularItems> ritems) {
+  String returnTotalAmount(List<FoodItem> foodItems) {
     double totalAmount = 0.0;
 
-    for (int i = 0; i < ritems.length; i++) {
-      totalAmount = totalAmount + ritems[i].price * ritems[i].quantity;
+    for (int i = 0; i < foodItems.length; i++) {
+      totalAmount = totalAmount + foodItems[i].price * foodItems[i].quantity;
     }
     return totalAmount.toStringAsFixed(2);
   }
-
 }
-
-class PlaceOrder extends StatelessWidget {
-  const PlaceOrder({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: Padding(
-      padding: const EdgeInsets.fromLTRB(0, 10, 5, 0),
-      child: RaisedButton(
-        color: Colors.grey[400],
-        elevation: 18,
-        onPressed: () {
-          //orderNum();
-          final snackBar = SnackBar(
-            content: Text('Your order has been placed.'),
-            duration: Duration(milliseconds: 2500),
-          );
-
-          Scaffold.of(context).showSnackBar(snackBar);
-        },
-        child: Text('Place Order',
-            style: TextStyle(
-              color: Colors.brown,
-              fontWeight: FontWeight.bold,
-              fontSize: 22,
-              fontFamily: 'Rancho-Regular',
-            )),
-        shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(15),
-          side: BorderSide(color: Colors.brown, width: 2),
-        ),
-      ),
-    ));
-  }
-}
-
 
 class CartBody extends StatelessWidget {
-  final List<RegularItems> ritems;
+  final List<FoodItem> foodItems;
 
-  CartBody(this.ritems);
+  CartBody(this.foodItems);
 
   @override
   Widget build(BuildContext context) {
@@ -147,17 +112,19 @@ class CartBody extends StatelessWidget {
       child: Column(
         children: <Widget>[
           CustomBar(),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           Expanded(
             flex: 1,
-            child: ritems.length > 0 ? foodItemList() : noItemContainer(),
+            child: foodItems.length > 0 ? foodItemList() : noItemContainer(),
           )
         ],
       ),
     );
   }
 
-   Container noItemContainer() {
+  Container noItemContainer() {
     return Container(
         child: Center(
             child: Text(
@@ -171,33 +138,32 @@ class CartBody extends StatelessWidget {
     )));
   }
 
-
   ListView foodItemList() {
     return ListView.builder(
-      itemCount: ritems.length,
+      itemCount: foodItems.length,
       itemBuilder: (context, index) {
-        return CartListItem(ritem: ritems[index]);
+        return CartListItem(foodItem: foodItems[index]);
       },
     );
   }
-
 }
 
 class CartListItem extends StatelessWidget {
-  final RegularItems ritem;
+  final FoodItem foodItem;
 
-  CartListItem({@required this.ritem});
+  CartListItem({@required this.foodItem});
 
   @override
   Widget build(BuildContext context) {
     return LongPressDraggable(
-      hapticFeedbackOnStart: false,      
+      hapticFeedbackOnStart: false,
       maxSimultaneousDrags: 1,
-      data: ritem,
-      feedback: DraggableChildFeedback(ritem: ritem),
-      child: DraggableChild(ritem: ritem),
-      childWhenDragging: ritem.quantity > 1 ? DraggableChild(ritem: ritem) : Container(),
-      
+      data: foodItem,
+      feedback: DraggableChildFeedback(foodItem: foodItem),
+      child: DraggableChild(foodItem: foodItem),
+      childWhenDragging: foodItem.quantity > 1
+          ? DraggableChild(foodItem: foodItem)
+          : Container(),
     );
   }
 }
@@ -205,17 +171,17 @@ class CartListItem extends StatelessWidget {
 class DraggableChild extends StatelessWidget {
   const DraggableChild({
     Key key,
-    @required this.ritem,
+    @required this.foodItem,
   }) : super(key: key);
 
-  final RegularItems ritem;
+  final FoodItem foodItem;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 25),
       child: ItemContent(
-        ritem: ritem,
+        foodItem: foodItem,
       ),
     );
   }
@@ -224,10 +190,10 @@ class DraggableChild extends StatelessWidget {
 class DraggableChildFeedback extends StatelessWidget {
   const DraggableChildFeedback({
     Key key,
-    @required this.ritem,
+    @required this.foodItem,
   }) : super(key: key);
 
-  final RegularItems ritem;
+  final FoodItem foodItem;
 
   @override
   Widget build(BuildContext context) {
@@ -246,7 +212,7 @@ class DraggableChildFeedback extends StatelessWidget {
               ),
               padding: EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width * 0.95,
-              child: ItemContent(ritem: ritem),
+              child: ItemContent(foodItem: foodItem),
             );
           },
         ),
@@ -258,10 +224,10 @@ class DraggableChildFeedback extends StatelessWidget {
 class ItemContent extends StatelessWidget {
   const ItemContent({
     Key key,
-    @required this.ritem,
+    @required this.foodItem,
   }) : super(key: key);
 
-  final RegularItems ritem;
+  final FoodItem foodItem;
 
   @override
   Widget build(BuildContext context) {
@@ -278,20 +244,19 @@ class ItemContent extends StatelessWidget {
                     color: Colors.brown,
                     fontWeight: FontWeight.w700),
                 children: [
-                  TextSpan(
-                    text: ritem.quantity.toString()
-                    ),
+                  TextSpan(text: foodItem.quantity.toString()),
                   TextSpan(text: " x ", style: TextStyle(color: Colors.black)),
                   TextSpan(
-                    text: ritem.name,
+                    text: foodItem.name,
                   ),
                 ]),
           ),
-          Text(
-            "\Rs ${ritem.quantity * ritem.price}",
-            style:
-                TextStyle(color: Colors.black, fontWeight: FontWeight.w400,fontFamily: 'Rancho-regular',fontSize: 23)
-          ),
+          Text("\Rs ${foodItem.quantity * foodItem.price}",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Rancho-regular',
+                  fontSize: 23)),
         ],
       ),
     );
@@ -310,39 +275,31 @@ class _CustomBarState extends State<CustomBar> {
     // final ColorBloc colorBloc = BlocProvider.getBloc<ColorBloc>();
 
     return Row(
+      children: <Widget>[
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                "  Your",
-                style: TextStyle(
+            Text(
+              "  Your",
+              style: TextStyle(
                   color: Colors.brown,
                   fontWeight: FontWeight.w700,
                   fontSize: 35,
-                  fontFamily: 'Lobster-Regular'
-                ),
-              ),
-              Text(
-                "        Order                         ",
-                style: TextStyle(
+                  fontFamily: 'Lobster-Regular'),
+            ),
+            Text(
+              "        Order                         ",
+              style: TextStyle(
                   color: Colors.brown,
                   fontWeight: FontWeight.w300,
                   fontSize: 30,
-                  fontFamily: 'Lobster-Regular'
-                ),
-              ),
-              
-            ],
-            
-          ),
-          
-              DragTargetWidget(bloc),
-              
+                  fontFamily: 'Lobster-Regular'),
+            ),
           ],
-        
-          
-        );
+        ),
+        DragTargetWidget(bloc),
+      ],
+    );
   }
 }
 
@@ -358,24 +315,23 @@ class DragTargetWidget extends StatefulWidget {
 class _DragTargetWidgetState extends State<DragTargetWidget> {
   @override
   Widget build(BuildContext context) {
-    RegularItems currentFoodItem;
+    FoodItem currentFoodItem;
     final ColorBloc colorBloc = BlocProvider.getBloc<ColorBloc>();
 
-    return DragTarget<RegularItems>(
-      onAccept: (RegularItems ritem) {
-        currentFoodItem = ritem;
+    return DragTarget<FoodItem>(
+      onAccept: (FoodItem foodItem) {
+        currentFoodItem = foodItem;
         colorBloc.setColor(Colors.white);
         widget.bloc.removeFromList(currentFoodItem);
       },
-      onWillAccept: (RegularItems foodItem) {
+      onWillAccept: (FoodItem foodItem) {
         colorBloc.setColor(Colors.red);
         return true;
       },
-      // onLeave: (RegularItems ritem) {
+      // onLeave: (FoodItem foodItem) {
       //   colorBloc.setColor(Colors.white);
       //    return true;
       // },
-      
       builder: (BuildContext context, List incoming, List rejected) {
         return Padding(
           padding: const EdgeInsets.all(5.0),
@@ -383,10 +339,114 @@ class _DragTargetWidgetState extends State<DragTargetWidget> {
             CupertinoIcons.delete,
             size: 40,
             color: Colors.red,
-            
           ),
         );
       },
+    );
+  }
+}
+
+class Table extends StatelessWidget {
+  const Table({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var tableController = TextEditingController(text: '         Table-1');
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(120, 0, 120, 0),
+        child: TextFormField(
+          controller: tableController,
+          enabled: false,
+          style: TextStyle(
+              color: Colors.brown,
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
+              fontFamily: 'Rancho-Regular'),
+        ),
+      ),
+    );
+  }
+}
+
+class PlaceOrder extends StatefulWidget {
+  const PlaceOrder({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _PlaceOrderState createState() => _PlaceOrderState();
+}
+
+class _PlaceOrderState extends State<PlaceOrder> {
+  Future<void> confirmation() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Order placement confirmation.',
+              style: TextStyle(fontFamily: 'Lobster-regular', fontSize: 22)),
+          content: Text('Do you wish to place order?',
+              style: TextStyle(fontFamily: 'Lobster-regular')),
+          actions: <Widget>[
+            FlatButton(
+                onPressed: () {
+                  final snackBar = SnackBar(
+                    content: Text(
+                      'Your order has been placed.',
+                    ),
+                    duration: Duration(milliseconds: 2500),
+                  );
+
+                  Scaffold.of(context).showSnackBar(snackBar);
+                },
+                child: Text('Yes',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Lobster-regular',
+                        fontSize: 20))),
+            FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('No',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Lobster-regular',
+                        fontSize: 20))),
+          ],
+          elevation: 24,
+          backgroundColor: Colors.white,
+          
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(40.0))),
+          //shape: CircleBorder(),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+      child: RaisedButton(
+        color: Colors.grey[400],
+        elevation: 18,
+        onPressed: confirmation,
+        child: Text('Place Order',
+            style: TextStyle(
+              color: Colors.brown,
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
+              fontFamily: 'Rancho-Regular',
+            )),
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(15),
+          side: BorderSide(color: Colors.brown, width: 2),
+        ),
+      ),
     );
   }
 }

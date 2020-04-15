@@ -1,19 +1,18 @@
 import 'package:menu_app/Regular/regularItems.dart';
 
-
 //class created to create a list of food items to be updated and later fed into sink
 
 class CartProvider {
   //couterProvider only consists of a counter and a method which is responsible for increasing the value of count
- List<RegularItems> fooditems = [];
+ List<FoodItem> foodItems  = [];
 
-  List<RegularItems> addToList(RegularItems ritems) {
+  List<FoodItem> addToList(FoodItem foodItem) {
     bool isPresent = false;  
 
-    if(fooditems.length > 0){
-      for(int i = 0; i < fooditems.length; i++){
-        if(fooditems[i].id == ritems.id){
-            increaseItemQuantity(ritems);
+    if(foodItems.length > 0){
+      for(int i = 0; i < foodItems.length; i++){
+        if(foodItems[i].id == foodItem.id){
+            increaseItemQuantity(foodItem);
             isPresent = true;
             break;
             
@@ -22,28 +21,28 @@ class CartProvider {
         }
       }
       if(!isPresent){
-        fooditems.add(ritems);
+        foodItems.add(foodItem);
       }
     }
     
     else{
-      fooditems.add(ritems);
+      foodItems.add(foodItem);
     }
 
-    return fooditems;
+    return foodItems;
   }
 
-  List<RegularItems> removeFromList(RegularItems ritems) {
-     if (ritems.quantity > 1) {
+  List<FoodItem> removeFromList(FoodItem foodItem) {
+     if (foodItem.quantity > 1) {
       //only decrease the quantity
-      decreaseItemQuantity(ritems);
+      decreaseItemQuantity(foodItem);
     } else {
       //remove it from the list
-      ritems.remove(ritems);
+      foodItems.remove(foodItem);
     }
-    return fooditems;
+    return foodItems;
   }
 
-  void increaseItemQuantity(RegularItems ritems) => ritems.incrementQuantity();
-  void decreaseItemQuantity(RegularItems ritems) => ritems.decrementQuantity();
+  void increaseItemQuantity(FoodItem foodItem) => foodItem.incrementQuantity();
+  void decreaseItemQuantity(FoodItem foodItem) => foodItem.decrementQuantity();
 }

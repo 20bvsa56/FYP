@@ -1,4 +1,4 @@
-class RegularItems {
+class FoodItem {
   Null id;
   int categoryId;
   Null title;
@@ -9,7 +9,7 @@ class RegularItems {
   String image;
   int quantity;
 
-  RegularItems(
+  FoodItem(
       {this.id,
       this.categoryId,
       this.title,
@@ -20,7 +20,7 @@ class RegularItems {
       this.image,
       this.quantity});
 
-  RegularItems.fromJson(Map<String, dynamic> json) {
+  FoodItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     categoryId = json['category_id'];
     title = json['title'];
@@ -55,5 +55,4 @@ class RegularItems {
     this.quantity = this.quantity - 1;
   }
 
-  void remove(RegularItems ritems) {}
 }

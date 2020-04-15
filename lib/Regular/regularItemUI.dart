@@ -18,19 +18,19 @@ class RegularCategory extends StatefulWidget {
 }
 
 class _RegularCategoryState extends State<RegularCategory> {
-  List<RegularItems> fooditems = [];
+  List<FoodItem> foodItems = [];
 
-  Future<List<RegularItems>> regularItems(int id) async {
+  Future<List<FoodItem>> foods(int id) async {
     var data = await http.get("http://192.168.254.2:8000/api/item/$id");
     var jsonData = json.decode(data.body);
 
     print(id);
 
     for (var i = 0; i < jsonData.length; i++) {
-      final category = RegularItems.fromJson(jsonData[i]);
-      fooditems.add(category);
+      final category = FoodItem.fromJson(jsonData[i]);
+      foodItems.add(category);
     }
-    return fooditems;
+    return foodItems;
   }
 
   @override
@@ -60,7 +60,7 @@ class _RegularCategoryState extends State<RegularCategory> {
                   child: Column(
                     children: <Widget>[
                       FutureBuilder(
-                        future: regularItems(widget.id),
+                        future: foods(widget.id),
                         builder:
                             (BuildContext context, AsyncSnapshot snapshot) {
                           if (snapshot.data != null) {
@@ -74,10 +74,10 @@ class _RegularCategoryState extends State<RegularCategory> {
                                   itemCount: snapshot.data.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    RegularItems ritem = snapshot.data[index];
+                                    FoodItem foodItem = snapshot.data[index];
 
                                     return RegularDetails(
-                                      ritem: ritem,
+                                      foodItem: foodItem,
                                     );
                                   }),
                             );
