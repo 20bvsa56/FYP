@@ -351,7 +351,7 @@ class Table extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tableController = TextEditingController(text: '         Table-1');
+    var tableController = TextEditingController(text: '    Table-1');
     return Container(
       child: Padding(
         padding: EdgeInsets.fromLTRB(120, 0, 120, 0),
@@ -386,9 +386,10 @@ class _PlaceOrderState extends State<PlaceOrder> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Order placement confirmation.',
-              style: TextStyle(fontFamily: 'Lobster-regular', fontSize: 22)),
+              style: TextStyle(fontFamily: 'Lobster-regular', fontSize: 18,)),
+          
           content: Text('Do you wish to place order?',
-              style: TextStyle(fontFamily: 'Lobster-regular')),
+              style: TextStyle(fontFamily: 'Lobster-regular',fontSize: 14)),
           actions: <Widget>[
             FlatButton(
                 onPressed: () {

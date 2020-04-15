@@ -17,8 +17,8 @@ class ItemsDetails extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(10, 40, 40, 10),
         child: Stack(children: <Widget>[
           Container(
-            width: 160.0,
-            height: 200.0,
+            width: 170.0,
+            height: 180.0,
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
               color: Colors.brown[200],
@@ -29,7 +29,7 @@ class ItemsDetails extends StatelessWidget {
           ),
           Positioned(
             left: 10.0,
-            top: 180.0,
+            top: 170.0,
             child: Material(
               color: Colors.brown[50],
               elevation: 12.0,

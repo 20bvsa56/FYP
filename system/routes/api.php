@@ -25,4 +25,5 @@ Route::get('regular', 'API\ItemController@regular');
 Route::get('item/{category_id}', 'API\ItemController@category');
 Route::resource('banner_image', 'API\BannerImageController');
 Route::resource('order', 'API\OrderController');
+Route::resource('payment', 'API\PaymentController');
 Route::post('login', 'API\AuthController@login');

@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Payment extends Model
 {
     protected $primaryKey='id';
-    protected $table = 'orders';
+    protected $table = 'payments';
     protected $fillable=[
-        'tableNo','item','quantity','status'
+        'order_id','tableNo','totalAmount'
     ];
 }
