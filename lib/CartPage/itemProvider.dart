@@ -43,6 +43,6 @@ class CartProvider {
     return foodItems;
   }
 
-  void increaseItemQuantity(FoodItem foodItem) => foodItem.incrementQuantity();
-  void decreaseItemQuantity(FoodItem foodItem) => foodItem.decrementQuantity();
+    increaseItemQuantity(FoodItem foodItem) => foodItem.incrementQuantity();
+    decreaseItemQuantity(FoodItem foodItem) => foodItem.decrementQuantity();
 }

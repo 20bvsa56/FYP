@@ -29,7 +29,7 @@ class FoodItem {
     price = json['price'];
     description = json['description'];
     image = json['image'];
-    quantity = json['quantity']=1;
+    quantity = json['quantity'] = 1;
   }
 
   Map<String, dynamic> toJson() {
@@ -47,12 +47,11 @@ class FoodItem {
   }
 
   //liberty for customer to increase or decrease quantity
-  void incrementQuantity(){
+  void incrementQuantity() {
     this.quantity = this.quantity + 1;
   }
 
-    void decrementQuantity(){
+  void decrementQuantity() {
     this.quantity = this.quantity - 1;
   }
-
 }

@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:menu_app/Regular/regularItems.dart';
 import 'cartListBloc.dart';
 import 'listTileColorBloc.dart';
+import 'orderModel.dart';
+import 'dart:convert'; //to convert http response in json format
+import 'package:http/http.dart' as http;
+import 'itemProvider.dart';
 
 class Cart extends StatelessWidget {
   const Cart({Key key}) : super(key: key);
@@ -31,15 +35,7 @@ class Cart extends StatelessWidget {
                 bottomNavigationBar: BottomBar(foodItems),
               );
             } else {
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(30, 250, 0, 0),
-                child: Container(
-                    child: Center(
-                  child: Column(
-                    children: <Widget>[Text('Loading')],
-                  ),
-                )),
-              );
+              return Container();
             }
           },
         ));
@@ -54,7 +50,7 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 35, bottom: 25),
+      margin: EdgeInsets.only(left: 0, bottom: 15),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -63,7 +59,6 @@ class BottomBar extends StatelessWidget {
             height: 1,
             color: Colors.grey[700],
           ),
-          Table(),
           PlaceOrder(),
         ],
       ),
@@ -108,18 +103,21 @@ class CartBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(5, 10, 0, 0),
-      child: Column(
-        children: <Widget>[
-          CustomBar(),
-          SizedBox(
-            height: 30,
-          ),
-          Expanded(
-            flex: 1,
-            child: foodItems.length > 0 ? foodItemList() : noItemContainer(),
-          )
-        ],
+      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            Table(),
+            //CustomBar(),
+            SizedBox(
+              height: 30,
+            ),
+            Expanded(
+              flex: 1,
+              child: foodItems.length > 0 ? foodItemList() : noItemContainer(),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -142,81 +140,8 @@ class CartBody extends StatelessWidget {
     return ListView.builder(
       itemCount: foodItems.length,
       itemBuilder: (context, index) {
-        return CartListItem(foodItem: foodItems[index]);
+        return ItemContent(foodItem: foodItems[index]);
       },
-    );
-  }
-}
-
-class CartListItem extends StatelessWidget {
-  final FoodItem foodItem;
-
-  CartListItem({@required this.foodItem});
-
-  @override
-  Widget build(BuildContext context) {
-    return LongPressDraggable(
-      hapticFeedbackOnStart: false,
-      maxSimultaneousDrags: 1,
-      data: foodItem,
-      feedback: DraggableChildFeedback(foodItem: foodItem),
-      child: DraggableChild(foodItem: foodItem),
-      childWhenDragging: foodItem.quantity > 1
-          ? DraggableChild(foodItem: foodItem)
-          : Container(),
-    );
-  }
-}
-
-class DraggableChild extends StatelessWidget {
-  const DraggableChild({
-    Key key,
-    @required this.foodItem,
-  }) : super(key: key);
-
-  final FoodItem foodItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 25),
-      child: ItemContent(
-        foodItem: foodItem,
-      ),
-    );
-  }
-}
-
-class DraggableChildFeedback extends StatelessWidget {
-  const DraggableChildFeedback({
-    Key key,
-    @required this.foodItem,
-  }) : super(key: key);
-
-  final FoodItem foodItem;
-
-  @override
-  Widget build(BuildContext context) {
-    final ColorBloc colorBloc = BlocProvider.getBloc<ColorBloc>();
-
-    return Opacity(
-      opacity: 0.7,
-      child: Material(
-        child: StreamBuilder(
-          stream: colorBloc.colorStream,
-          builder: (context, snapshot) {
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: snapshot.data != null ? snapshot.data : Colors.white,
-              ),
-              padding: EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width * 0.95,
-              child: ItemContent(foodItem: foodItem),
-            );
-          },
-        ),
-      ),
     );
   }
 }
@@ -228,6 +153,7 @@ class ItemContent extends StatelessWidget {
   }) : super(key: key);
 
   final FoodItem foodItem;
+
 
   @override
   Widget build(BuildContext context) {
@@ -251,6 +177,7 @@ class ItemContent extends StatelessWidget {
                   ),
                 ]),
           ),
+          CustomQuantity(foodItem),
           Text("\Rs ${foodItem.quantity * foodItem.price}",
               style: TextStyle(
                   color: Colors.black,
@@ -263,87 +190,61 @@ class ItemContent extends StatelessWidget {
   }
 }
 
-class CustomBar extends StatefulWidget {
-  @override
-  _CustomBarState createState() => _CustomBarState();
-}
 
-class _CustomBarState extends State<CustomBar> {
+
+class CustomQuantity extends StatelessWidget {
+  final CartProvider provider;
+   
+  final double _buttonWidth = 28;
+
+
   @override
   Widget build(BuildContext context) {
-    final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
-    // final ColorBloc colorBloc = BlocProvider.getBloc<ColorBloc>();
-
-    return Row(
-      children: <Widget>[
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "  Your",
-              style: TextStyle(
-                  color: Colors.brown,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 35,
-                  fontFamily: 'Lobster-Regular'),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: 2),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: EdgeInsets.all(5),
+      width: 80,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          SizedBox(
+            width: _buttonWidth,
+            height: _buttonWidth,
+            child: FlatButton(
+              padding: EdgeInsets.all(0),
+              onPressed: decreaseItemQuantity(foodItem),
+              child: Text(
+                "-",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 35,
+                    color: Colors.brown),
+              ),
             ),
-            Text(
-              "        Order                         ",
-              style: TextStyle(
-                  color: Colors.brown,
-                  fontWeight: FontWeight.w300,
-                  fontSize: 30,
-                  fontFamily: 'Lobster-Regular'),
-            ),
-          ],
-        ),
-        DragTargetWidget(bloc),
-      ],
-    );
-  }
-}
-
-class DragTargetWidget extends StatefulWidget {
-  final CartListBloc bloc;
-
-  DragTargetWidget(this.bloc);
-
-  @override
-  _DragTargetWidgetState createState() => _DragTargetWidgetState();
-}
-
-class _DragTargetWidgetState extends State<DragTargetWidget> {
-  @override
-  Widget build(BuildContext context) {
-    FoodItem currentFoodItem;
-    final ColorBloc colorBloc = BlocProvider.getBloc<ColorBloc>();
-
-    return DragTarget<FoodItem>(
-      onAccept: (FoodItem foodItem) {
-        currentFoodItem = foodItem;
-        colorBloc.setColor(Colors.white);
-        widget.bloc.removeFromList(currentFoodItem);
-      },
-      onWillAccept: (FoodItem foodItem) {
-        colorBloc.setColor(Colors.red);
-        return true;
-      },
-      // onLeave: (FoodItem foodItem) {
-      //   colorBloc.setColor(Colors.white);
-      //    return true;
-      // },
-      builder: (BuildContext context, List incoming, List rejected) {
-        return Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Icon(
-            CupertinoIcons.delete,
-            size: 40,
-            color: Colors.red,
           ),
-        );
-      },
-    );
-  }
+          SizedBox(
+            width: _buttonWidth,
+            height: _buttonWidth,
+            child: FlatButton(
+              padding: EdgeInsets.all(0),
+              onPressed: increaseItemQuantity(foodItem),
+                            child: Text(
+                              "+",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 30,
+                                  color: Colors.brown),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              
 }
 
 class Table extends StatelessWidget {
@@ -354,7 +255,7 @@ class Table extends StatelessWidget {
     var tableController = TextEditingController(text: '    Table-1');
     return Container(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(120, 0, 120, 0),
+        padding: EdgeInsets.fromLTRB(130, 0, 130, 0),
         child: TextFormField(
           controller: tableController,
           enabled: false,
@@ -370,15 +271,45 @@ class Table extends StatelessWidget {
 }
 
 class PlaceOrder extends StatefulWidget {
-  const PlaceOrder({
-    Key key,
-  }) : super(key: key);
+  final FoodItem foodItem;
+
+  const PlaceOrder({Key key, this.foodItem}) : super(key: key);
+
+  static final url = 'http://192.168.254.2:8000/api/order/';
 
   @override
   _PlaceOrderState createState() => _PlaceOrderState();
 }
 
 class _PlaceOrderState extends State<PlaceOrder> {
+  bool visible = false;
+
+  Future<OrderModel> placeOrder(String url, {Map body}) async {
+    // Showing CircularProgressIndicator using state.
+    setState(() {
+      visible = true;
+    });
+
+    return http.post(url, body: body).then((http.Response response) {
+      final int statusCode = response.statusCode;
+
+      if (statusCode == 201) {
+        setState(() {
+          visible = false;
+        });
+        // throw new Exception("Error while fetching data");
+      }
+
+      return OrderModel.fromJson(json.decode(response.body));
+    });
+  }
+
+  final TextEditingController tableController = new TextEditingController();
+  final TextEditingController nameController =
+      new TextEditingController(text: 'foodItem.name');
+  final TextEditingController quantityController =
+      new TextEditingController(text: 'foodItem.quantity');
+
   Future<void> confirmation() async {
     return showDialog<void>(
       context: context,
@@ -386,27 +317,35 @@ class _PlaceOrderState extends State<PlaceOrder> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Order placement confirmation.',
-              style: TextStyle(fontFamily: 'Lobster-regular', fontSize: 18,)),
-          
+              style: TextStyle(
+                fontFamily: 'Lobster-regular',
+                fontSize: 18,
+              )),
+
           content: Text('Do you wish to place order?',
-              style: TextStyle(fontFamily: 'Lobster-regular',fontSize: 14)),
+              style: TextStyle(fontFamily: 'Lobster-regular', fontSize: 14)),
           actions: <Widget>[
             FlatButton(
-                onPressed: () {
-                  final snackBar = SnackBar(
-                    content: Text(
-                      'Your order has been placed.',
-                    ),
-                    duration: Duration(milliseconds: 2500),
-                  );
+              onPressed: () async {
+                // _validateInputs();
+                OrderModel newOrderModel = new OrderModel(
+                    tableNo: tableController.text,
+                    item: nameController.text,
+                    quantity: quantityController.text);
+                OrderModel p =
+                    await placeOrder('url', body: newOrderModel.toMap());
+                print(p.tableNo);
 
-                  Scaffold.of(context).showSnackBar(snackBar);
-                },
-                child: Text('Yes',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Lobster-regular',
-                        fontSize: 20))),
+                setState(() {
+                  visible = false;
+                });
+              },
+              child: Text('Yes',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Lobster-regular',
+                      fontSize: 20)),
+            ),
             FlatButton(
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -419,7 +358,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
           ],
           elevation: 24,
           backgroundColor: Colors.white,
-          
+
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(40.0))),
           //shape: CircleBorder(),
@@ -430,24 +369,31 @@ class _PlaceOrderState extends State<PlaceOrder> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-      child: RaisedButton(
-        color: Colors.grey[400],
-        elevation: 18,
-        onPressed: confirmation,
-        child: Text('Place Order',
-            style: TextStyle(
-              color: Colors.brown,
-              fontWeight: FontWeight.bold,
-              fontSize: 22,
-              fontFamily: 'Rancho-Regular',
-            )),
-        shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(15),
-          side: BorderSide(color: Colors.brown, width: 2),
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 15, 0),
+          child: RaisedButton(
+            color: Colors.grey[400],
+            elevation: 18,
+            onPressed: confirmation,
+            child: Text('Place Order',
+                style: TextStyle(
+                  color: Colors.brown,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                  fontFamily: 'Rancho-Regular',
+                )),
+            shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(15),
+              side: BorderSide(color: Colors.brown, width: 2),
+            ),
+          ),
         ),
-      ),
+        Visibility(
+            visible: visible,
+            child: Container(child: CircularProgressIndicator())),
+      ],
     );
   }
 }
