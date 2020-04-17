@@ -1,5 +1,5 @@
 class FoodItem {
-  Null id;
+  int id;
   int categoryId;
   Null title;
   Null type;
@@ -55,3 +55,4 @@ class FoodItem {
     this.quantity = this.quantity - 1;
   }
 }
+

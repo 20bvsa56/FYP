@@ -16,9 +16,6 @@ class RegularDetails extends StatelessWidget {
     bloc.addToList(foodItems);
   }
 
-  removeFromList(FoodItem foodItems) {
-    bloc.removeFromList(foodItems);
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,6 @@ import 'cartListBloc.dart';
 import 'orderModel.dart';
 import 'dart:convert'; //to convert http response in json format
 import 'package:http/http.dart' as http;
-import 'itemProvider.dart';
 
 class Cart extends StatelessWidget {
   const Cart({Key key}) : super(key: key);
@@ -92,6 +91,7 @@ class BottomBar extends StatelessWidget {
       totalAmount = totalAmount + foodItems[i].price * foodItems[i].quantity;
     }
     return totalAmount.toStringAsFixed(2);
+    
   }
 }
 
@@ -156,12 +156,16 @@ class CustomQuantity extends StatefulWidget {
 }
 
 class _CustomQuantityState extends State<CustomQuantity> {
- final double _buttonWidth = 28;
+  final double _buttonWidth = 28;
+
+  final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
+  removeFromList(FoodItem foodItems) {
+    bloc.removeFromList(foodItems);
+  }
 
   @override
   Widget build(BuildContext context) {
-   CartProvider itemProvider =
-      CartProvider();
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 2),
@@ -177,18 +181,18 @@ class _CustomQuantityState extends State<CustomQuantity> {
             height: _buttonWidth,
             child: FlatButton(
               padding: EdgeInsets.all(0),
-              onPressed: (){
-                 setState(() {
-                   if(widget.foodItem.quantity > 1){
-                   widget.foodItem.quantity--;
-                   print(widget.foodItem.quantity);
-                   }else{
-                     itemProvider.removeFromList(widget.foodItem);
-                   }
+              onPressed: () {
+                setState(() {
+                  if (widget.foodItem.quantity > 1) {
+                    widget.foodItem.quantity--;
+                    print(widget.foodItem.quantity);
+                  } else {
+                    removeFromList(widget.foodItem);
+                    print('remove');
+                  }
                 });
-               
               },
-                          child: Text(
+              child: Text(
                 "-",
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -198,23 +202,20 @@ class _CustomQuantityState extends State<CustomQuantity> {
             ),
           ),
           Text(
-                widget.foodItem.quantity.toString(),
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    color: Colors.brown),
-              ),
+            widget.foodItem.quantity.toString(),
+            style: TextStyle(
+                fontWeight: FontWeight.w600, fontSize: 20, color: Colors.brown),
+          ),
           SizedBox(
             width: _buttonWidth,
             height: _buttonWidth,
             child: FlatButton(
               padding: EdgeInsets.all(0),
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   widget.foodItem.quantity++;
-                   print(widget.foodItem.quantity);
+                  print(widget.foodItem.quantity);
                 });
-               
               },
               child: Text(
                 "+",
@@ -241,12 +242,13 @@ class ItemContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CustomQuantity qty = CustomQuantity(foodItem);
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-           ClipRRect(
+          ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: Image.asset(
               'system/public/foodItems/' + foodItem.image,
@@ -263,15 +265,13 @@ class ItemContent extends StatelessWidget {
                     color: Colors.brown,
                     fontWeight: FontWeight.w700),
                 children: [
-                  // TextSpan(text: foodItem.quantity.toString()),
-                  // TextSpan(text: " x ", style: TextStyle(color: Colors.black)),
                   TextSpan(
                     text: foodItem.name,
                   ),
                 ]),
           ),
           CustomQuantity(foodItem),
-          Text("\Rs ${foodItem.quantity * foodItem.price}",
+          Text("\Rs ${qty.foodItem.quantity * foodItem.price}",
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w400,
@@ -282,9 +282,6 @@ class ItemContent extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class Table extends StatelessWidget {
   const Table({Key key}) : super(key: key);

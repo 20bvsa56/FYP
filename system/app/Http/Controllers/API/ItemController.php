@@ -17,16 +17,10 @@ class ItemController extends BaseController
         return ItemResource::collection($items);
     }
 
-    public function regular()
-    {
-        $items = Item::select('name','price','description','image','category_id')->where('type','Regular')->get();
-        return ItemResource::collection($items);
-    }
-
     public function category($category_id)
     {
         //get single item with category id
-        $item= Item::select('name','price','description','image','category_id')->where('category_id', $category_id)->get();
+        $item= Item::select('id','name','price','description','image','category_id')->where('category_id', $category_id)->get();
         return ItemResource::collection($item);
 
     }
