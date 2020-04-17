@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:menu_app/CartPage/listTileColorBloc.dart';
 import 'package:menu_app/MenuGroup/imageUI.dart';
 import 'dart:convert';
 import 'dart:async';
@@ -37,7 +36,7 @@ class _SpecialCategoryState extends State<SpecialCategory> {
   Widget build(BuildContext context) {
     return BlocProvider(
         blocs: [Bloc((i) => CartListBloc()),
-                Bloc((i) => ColorBloc())
+               
          ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

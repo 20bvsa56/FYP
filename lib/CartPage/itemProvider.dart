@@ -4,9 +4,12 @@ import 'package:menu_app/Regular/regularItems.dart';
 
 class CartProvider {
   //couterProvider only consists of a counter and a method which is responsible for increasing the value of count
- List<FoodItem> foodItems  = [];
+  List<FoodItem> foodItems  = [];
 
   List<FoodItem> addToList(FoodItem foodItem) {
+
+   // foodItems.add(foodItem);
+
     bool isPresent = false;  
 
     if(foodItems.length > 0){
@@ -15,7 +18,6 @@ class CartProvider {
             increaseItemQuantity(foodItem);
             isPresent = true;
             break;
-            
         }else{
           isPresent = false;
         }
@@ -24,12 +26,12 @@ class CartProvider {
         foodItems.add(foodItem);
       }
     }
-    
     else{
       foodItems.add(foodItem);
     }
-
+    
     return foodItems;
+    
   }
 
   List<FoodItem> removeFromList(FoodItem foodItem) {
@@ -43,6 +45,7 @@ class CartProvider {
     return foodItems;
   }
 
-    increaseItemQuantity(FoodItem foodItem) => foodItem.incrementQuantity();
-    decreaseItemQuantity(FoodItem foodItem) => foodItem.decrementQuantity();
+    void increaseItemQuantity(FoodItem foodItem) => foodItem.incrementQuantity();
+    void decreaseItemQuantity(FoodItem foodItem) => foodItem.decrementQuantity();
+
 }

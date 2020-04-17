@@ -1,9 +1,9 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:menu_app/Regular/regularItems.dart';
 import 'cartListBloc.dart';
-import 'listTileColorBloc.dart';
 import 'orderModel.dart';
 import 'dart:convert'; //to convert http response in json format
 import 'package:http/http.dart' as http;
@@ -16,7 +16,7 @@ class Cart extends StatelessWidget {
     final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
     List<FoodItem> foodItems;
     return BlocProvider(
-        blocs: [Bloc((i) => CartListBloc()), Bloc((i) => ColorBloc())],
+        blocs: [Bloc((i) => CartListBloc())],
         child: StreamBuilder(
           stream: bloc.listStream,
           builder: (context, snapshot) {
@@ -146,6 +146,91 @@ class CartBody extends StatelessWidget {
   }
 }
 
+class CustomQuantity extends StatefulWidget {
+  final FoodItem foodItem;
+
+  CustomQuantity(this.foodItem);
+
+  @override
+  _CustomQuantityState createState() => _CustomQuantityState();
+}
+
+class _CustomQuantityState extends State<CustomQuantity> {
+ final double _buttonWidth = 28;
+
+  @override
+  Widget build(BuildContext context) {
+   CartProvider itemProvider =
+      CartProvider();
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: 2),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: EdgeInsets.all(5),
+      width: 100,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          SizedBox(
+            width: _buttonWidth,
+            height: _buttonWidth,
+            child: FlatButton(
+              padding: EdgeInsets.all(0),
+              onPressed: (){
+                 setState(() {
+                   if(widget.foodItem.quantity > 1){
+                   widget.foodItem.quantity--;
+                   print(widget.foodItem.quantity);
+                   }else{
+                     itemProvider.removeFromList(widget.foodItem);
+                   }
+                });
+               
+              },
+                          child: Text(
+                "-",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 35,
+                    color: Colors.brown),
+              ),
+            ),
+          ),
+          Text(
+                widget.foodItem.quantity.toString(),
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    color: Colors.brown),
+              ),
+          SizedBox(
+            width: _buttonWidth,
+            height: _buttonWidth,
+            child: FlatButton(
+              padding: EdgeInsets.all(0),
+              onPressed: (){
+                setState(() {
+                  widget.foodItem.quantity++;
+                   print(widget.foodItem.quantity);
+                });
+               
+              },
+              child: Text(
+                "+",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 30,
+                    color: Colors.brown),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class ItemContent extends StatelessWidget {
   const ItemContent({
     Key key,
@@ -154,7 +239,6 @@ class ItemContent extends StatelessWidget {
 
   final FoodItem foodItem;
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -162,6 +246,15 @@ class ItemContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
+           ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: Image.asset(
+              'system/public/foodItems/' + foodItem.image,
+              fit: BoxFit.fitHeight,
+              height: 55,
+              width: 80,
+            ),
+          ),
           RichText(
             text: TextSpan(
                 style: TextStyle(
@@ -170,8 +263,8 @@ class ItemContent extends StatelessWidget {
                     color: Colors.brown,
                     fontWeight: FontWeight.w700),
                 children: [
-                  TextSpan(text: foodItem.quantity.toString()),
-                  TextSpan(text: " x ", style: TextStyle(color: Colors.black)),
+                  // TextSpan(text: foodItem.quantity.toString()),
+                  // TextSpan(text: " x ", style: TextStyle(color: Colors.black)),
                   TextSpan(
                     text: foodItem.name,
                   ),
@@ -192,60 +285,6 @@ class ItemContent extends StatelessWidget {
 
 
 
-class CustomQuantity extends StatelessWidget {
-  final CartProvider provider;
-   
-  final double _buttonWidth = 28;
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 2),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      padding: EdgeInsets.all(5),
-      width: 80,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          SizedBox(
-            width: _buttonWidth,
-            height: _buttonWidth,
-            child: FlatButton(
-              padding: EdgeInsets.all(0),
-              onPressed: decreaseItemQuantity(foodItem),
-              child: Text(
-                "-",
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 35,
-                    color: Colors.brown),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: _buttonWidth,
-            height: _buttonWidth,
-            child: FlatButton(
-              padding: EdgeInsets.all(0),
-              onPressed: increaseItemQuantity(foodItem),
-                            child: Text(
-                              "+",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 30,
-                                  color: Colors.brown),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-              
-}
 
 class Table extends StatelessWidget {
   const Table({Key key}) : super(key: key);
