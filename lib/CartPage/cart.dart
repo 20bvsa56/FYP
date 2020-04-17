@@ -55,8 +55,8 @@ class BottomBar extends StatelessWidget {
         children: <Widget>[
           totalAmount(foodItems),
           Divider(
-            height: 1,
-            color: Colors.grey[700],
+            height: 5,
+            color: Colors.brown,
           ),
           PlaceOrder(),
         ],
@@ -77,7 +77,7 @@ class BottomBar extends StatelessWidget {
           ),
           Text(
             "\Rs ${returnTotalAmount(foodItems)}",
-            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 28),
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
           ),
         ],
       ),
@@ -243,41 +243,44 @@ class ItemContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CustomQuantity qty = CustomQuantity(foodItem);
-    return Container(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: Image.asset(
-              'system/public/foodItems/' + foodItem.image,
-              fit: BoxFit.fitHeight,
-              height: 55,
-              width: 80,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(
+                'system/public/foodItems/' + foodItem.image,
+                fit: BoxFit.fitHeight,
+                height: 55,
+                width: 80,
+              ),
             ),
-          ),
-          RichText(
-            text: TextSpan(
+            RichText(
+              text: TextSpan(
+                  style: TextStyle(
+                      fontSize: 23,
+                      fontFamily: 'Rancho-regular',
+                      color: Colors.brown,
+                      fontWeight: FontWeight.w700),
+                  children: [
+                    TextSpan(
+                      text: foodItem.name,
+                    ),
+                  ]),
+            ),
+            CustomQuantity(foodItem),
+            Text("\Rs ${qty.foodItem.quantity * foodItem.price}",
                 style: TextStyle(
-                    fontSize: 23,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
                     fontFamily: 'Rancho-regular',
-                    color: Colors.brown,
-                    fontWeight: FontWeight.w700),
-                children: [
-                  TextSpan(
-                    text: foodItem.name,
-                  ),
-                ]),
-          ),
-          CustomQuantity(foodItem),
-          Text("\Rs ${qty.foodItem.quantity * foodItem.price}",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Rancho-regular',
-                  fontSize: 23)),
-        ],
+                    fontSize: 23)),
+          ],
+        ),
       ),
     );
   }

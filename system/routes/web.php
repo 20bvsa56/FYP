@@ -32,6 +32,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/categoryDelete/{category}', 'CategoryController@destroy')->name('catDelete');
     Route::get('/categoryEdit/{category}', 'CategoryController@edit')->name('catEdit');
     Route::post('/categoryUpdate/{category}', 'CategoryController@update')->name('catUpdate');
+    Route::get('/search', 'CategoryController@search');
 
     Route::get('/itemCreate', 'ItemController@create')->name('itemCreate');
     Route::get('/itemIndex', 'ItemController@index')->name('itemIndex');
@@ -46,6 +47,9 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/bannerDelete/{banner}', 'BannerImageController@destroy')->name('banDelete');
     Route::get('/bannerEdit/{banner}', 'BannerImageController@edit')->name('banEdit');
     Route::post('/bannerUpdate/{banner}', 'BannerImageController@update')->name('banUpdate');
+
+
+
 });
 
 

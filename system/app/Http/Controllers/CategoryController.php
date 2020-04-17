@@ -23,10 +23,16 @@ class CategoryController extends Controller
     public function index()
     {
         //categories var stores data from the db
-        $categories=Category::latest()->Paginate(5);
+        $categories=Category::all();
         return view('Categories.index',compact('categories'))
             ->with('i',(request()-> input('page',1)-1)*5);
         //compact stores vdata in key and value form
+    }
+
+    public  function search(Request $request){
+        $search = $request->get('search');
+        $categories = DB::table('categories')->where('name', 'like', '%'. $search . '%')->get();
+        return view('Categories.index',['categories' => $categories]);
     }
 
     /**
