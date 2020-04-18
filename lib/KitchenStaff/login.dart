@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
 import 'dart:convert'; //to convert http response in json format
 import 'package:http/http.dart' as http;
-import 'order.dart'; //to handle http request
+import 'staffHome.dart'; //to handle http request
 // import 'registration.dart';
 
 class Model {
-  String email;
+  String name;
   String password;
 
-  Model({this.email, this.password});
+  Model({this.name, this.password});
 
   factory Model.fromJson(Map<String, dynamic> json) {
-    return Model(email: json['email'], password: json['password']);
+    return Model(name: json['name'], password: json['password']);
   }
 
   Map toMap() {
     var map = new Map<String, dynamic>();
-    map["email"] = email;
+    map["name"] = name;
     map["password"] = password;
 
     return map;
   }
   // Model.fromJson(Map<String, dynamic> json) {
 
-  //   email = json['email'];
+  //   name = json['name'];
   //   password = json['password'];
   // }
 
   // Map<String, dynamic> toJson() {
   //   final Map<String, dynamic> data = new Map<String, dynamic>();
   //   data['password'] = this.password;
-  //   data['email'] = this.email;
+  //   data['name'] = this.name;
 
   //   return data;
   // }
@@ -107,7 +107,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
     });
   }
 
-  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController nameController = new TextEditingController();
 
   final TextEditingController passwordController = new TextEditingController();
 
@@ -157,13 +157,13 @@ class _SnackBarPageState extends State<SnackBarPage> {
                         child: Column(
                           children: <Widget>[
                             TextFormField(
-                              controller: emailController,
+                              controller: nameController,
                               decoration: const InputDecoration(
-                                icon: Icon(Icons.email, size: 25),
-                                hintText: 'Email',
-                                labelText: 'Email',
+                                icon: Icon(Icons.supervised_user_circle, size: 25),
+                                hintText: 'Username',
+                                labelText: 'Username',
                               ),
-                              validator: validateEmail,
+                              validator: validatename,
                             ),
                             TextFormField(
                               controller: passwordController,
@@ -189,25 +189,25 @@ class _SnackBarPageState extends State<SnackBarPage> {
                                       onPressed: () async {
                                         // _validateInputs();
                                         Model newModel = new Model(
-                                            email: emailController.text,
+                                            name: nameController.text,
                                             password: passwordController.text);
                                         Model p = await userLogin(
                                             SnackBarPage.url,
                                             body: newModel.toMap());
-                                        print(p.email);
-                                        // Navigate to Profile Screen & Sending Email to Next Screen.
+                                        print(p.name);
+                                        // Navigate to Profile Screen & Sending name to Next Screen.
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => Order()));
+                                                builder: (context) => StaffHome(username: nameController.text)));
 
-                                        final snackBar = SnackBar(
-                                            content: Text(
-                                                'Invalid login credential.'));
+//                                         final snackBar = SnackBar(
+//                                             content: Text(
+//                                                 'Invalid login credential.'));
 
-// Find the Scaffold in the widget tree and use it to show a SnackBar.
-                                        Scaffold.of(context)
-                                            .showSnackBar(snackBar);
+// // Find the Scaffold in the widget tree and use it to show a SnackBar.
+//                                         Scaffold.of(context)
+//                                             .showSnackBar(snackBar);
 
                                         setState(() {
                                           visible = false;
@@ -244,12 +244,12 @@ class _SnackBarPageState extends State<SnackBarPage> {
   }
 }
 
-String validateEmail(String value) {
+String validatename(String value) {
   Pattern pattern =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex = new RegExp(pattern);
   if (!regex.hasMatch(value) || value.length == 0)
-    return 'Enter valid email';
+    return 'Enter valid name';
   else
     return null;
 }

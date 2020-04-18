@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'KitchenStaff/order.dart';
 import 'home.dart';
 import 'KitchenStaff/login.dart';
 import 'MenuGroup/view.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       '/view': (context) => View(),
       // //When navigating to the "/register" route, build the Registration widget.
       // '/register': (context) => Registration(),
-
+      '/order': (context) => Order(),
      
     },
     );

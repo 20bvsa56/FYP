@@ -41,8 +41,8 @@ class AuthController extends Controller
 
     public function login()
     {
-        $log = request(['email', 'password']);
-        if (Auth::guard('staff')->attempt(request(['email', 'password'])) == false) {
+        $log = request(['name', 'password']);
+        if (Auth::guard('staff')->attempt(request(['name', 'password'])) == false) {
             return response(['Invalid Credentials.']);
         }
         return response(['data' => $log]);
