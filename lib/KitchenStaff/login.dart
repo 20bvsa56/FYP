@@ -188,6 +188,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
                                       color: Colors.brown[500],
                                       onPressed: () async {
                                         // _validateInputs();
+                                   
                                         Model newModel = new Model(
                                             name: nameController.text,
                                             password: passwordController.text);
@@ -213,7 +214,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
                                           visible = false;
                                         });
                                       },
-                                      child: Text('Create',
+                                      child: Text('Login',
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,

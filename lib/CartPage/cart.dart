@@ -91,7 +91,6 @@ class BottomBar extends StatelessWidget {
       totalAmount = totalAmount + foodItems[i].price * foodItems[i].quantity;
     }
     return totalAmount.toStringAsFixed(2);
-    
   }
 }
 
@@ -165,14 +164,13 @@ class _CustomQuantityState extends State<CustomQuantity> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: EdgeInsets.all(5),
-      width: 100,
+      padding: EdgeInsets.all(4),
+      width: 90,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -255,14 +253,14 @@ class ItemContent extends StatelessWidget {
               child: Image.asset(
                 'system/public/foodItems/' + foodItem.image,
                 fit: BoxFit.fitHeight,
-                height: 55,
-                width: 80,
+                height: 50,
+                width: 70,
               ),
             ),
             RichText(
               text: TextSpan(
                   style: TextStyle(
-                      fontSize: 23,
+                      fontSize: 21,
                       fontFamily: 'Rancho-regular',
                       color: Colors.brown,
                       fontWeight: FontWeight.w700),
@@ -278,7 +276,7 @@ class ItemContent extends StatelessWidget {
                     color: Colors.black,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Rancho-regular',
-                    fontSize: 23)),
+                    fontSize: 21)),
           ],
         ),
       ),

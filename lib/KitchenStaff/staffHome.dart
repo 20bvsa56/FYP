@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'login.dart';
 import 'order.dart';
 
 class StaffHome extends StatelessWidget {
@@ -16,51 +18,69 @@ class StaffHome extends StatelessWidget {
               centerTitle: true,
             ),
             drawer: Drawer(
-              child: ListView(
-                // Important: Remove any padding from the ListView.
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  DrawerHeader(
-                    padding: EdgeInsets.zero,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage('images/drawer.jpg'))),
-                    child: Stack(children: <Widget>[
-                      Positioned(
-                          bottom: 0.0,
-                          left: 90.0,
-                          child: Text("Tastyorama",
-                              style: TextStyle(
-                                fontSize: 25.0,
-                                fontFamily: 'Pacifico-Regular',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.brown,
-                              ))),
-                    ]),
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.fastfood,
-                      color: Colors.brown[300],
+              child: Container(
+                color: Colors.brown[500],
+                child: ListView(
+                  // Important: Remove any padding from the ListView.
+                  padding: EdgeInsets.zero,
+                  children: <Widget>[
+                    DrawerHeader(
+                      padding: EdgeInsets.zero,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage('images/drawer.jpg'))),
+                      child: Stack(children: <Widget>[
+                        Positioned(
+                            bottom: 0.0,
+                            left: 90.0,
+                            child: Text("Tastyorama",
+                                style: TextStyle(
+                                  fontSize: 26.0,
+                                  fontFamily: 'Pacifico-Regular',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.brown[400],
+                                ))),
+                      ]),
                     ),
-                    title: Text('Food Order',
-                        style: TextStyle(fontSize: 18, color: Colors.brown)),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Order()));
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.lock,
-                      color: Colors.brown[300],
+                    Divider(
+                      height: 1,
+                      color: Colors.brown[100],
                     ),
-                    title: Text('Logout',
-                        style: TextStyle(fontSize: 18, color: Colors.brown)),
-                    onTap: () {},
-                  ),
-                ],
+                    ListTile(
+                      leading: Icon(
+                        Icons.fastfood,
+                        color: Colors.white,
+                      ),
+                      title: Text('Food Order',
+                          style: TextStyle(fontSize: 18, color: Colors.white)),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Order()));
+                      },
+                    ),
+                    Divider(
+                      height: 1,
+                      color: Colors.brown[100],
+                    ),
+                    ListTile(
+                      leading: Icon(
+                        Icons.exit_to_app,
+                        color: Colors.white,
+                      ),
+                      title: Text('Logout',
+                          style: TextStyle(fontSize: 18, color: Colors.white)),
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                            CupertinoPageRoute(builder: (context) => Login()));
+                      },
+                    ),
+                    Divider(
+                      height: 1,
+                      color: Colors.brown[100],
+                    ),
+                  ],
+                ),
               ),
             ),
             body: Stack(
@@ -87,7 +107,13 @@ class StaffHome extends StatelessWidget {
                           SizedBox(
                             height: 8,
                           ),
-                          Text("Welcome " + username, style: TextStyle(fontSize: 19,fontFamily: 'Lobster-Regular',),),
+                          Text(
+                            "Welcome " + username,
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontFamily: 'Lobster-Regular',
+                            ),
+                          ),
                           InkWell(
                               child: RaisedButton(
                             color: Colors.brown[500],
