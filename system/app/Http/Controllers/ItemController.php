@@ -8,43 +8,37 @@ use Illuminate\Http\Request;
 use DB;
 use File;
 
-
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $items=Item::latest()->Paginate(5);
+        $catList = DB::table('categories')->pluck('id', 'name');
         return view('Items.index',compact('items'))
-            ->with('i',(request()-> input('page',1)-1)*5);
+            ->with('i',(request()-> input('page',1)-1)*5)->with('catList', $catList);
 
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $catList = DB::table('categories')->pluck('id', 'name');
         return view('Items.create')->with('catList', $catList);
     }
 
+    public function sort(Request $request){
+        $sort = $request->category_id;
+        $items = DB::table('items')->where('category_id', '=' , $sort)->get();
+        return view('Items.index',['items' => $items])->render();
+    }
 
+    public  function search(Request $request){
+        $search = $request->get('search');
+        $items = Item::with('category')->where('name', 'like', '%'.$search.'%')->Paginate(5);
+       //$items = DB::table('items')->where('items.name', 'like', '%'. $search . '%')->Paginate(5);
+        return view('Items.index',['items' => $items]);
+    }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -57,7 +51,6 @@ class ItemController extends Controller
 //        dd($request);
 //        Item::create($request->all());
         $item = new Item();
-        $item->title = $request->title;
         $item->name = $request->name;
         $item->price = $request->price;
         $item->description = $request->description;
@@ -76,25 +69,12 @@ class ItemController extends Controller
             ->with('success', 'Food item added successfully.');
     }
 
-    public function show(Item $item)
-    {
-        //
-    }
-
-
     public function edit(Item $item)
     {
         $catList = DB::table('categories')->pluck('id', 'name');
         return view('Items.edit', compact('item'))->with('catList', $catList);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Item $item
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Item $item)
     {
         $request->validate([
@@ -104,7 +84,6 @@ class ItemController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $item->title = $request->title;
         $item->name = $request->name;
         $item->price = $request->price;
         $item->description = $request->description;
@@ -123,14 +102,6 @@ class ItemController extends Controller
             ->with('success', 'Food item updated successfully.');
     }
 
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Item $item)
     {
         $item = Item::find($item->id);

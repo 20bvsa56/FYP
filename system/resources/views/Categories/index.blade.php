@@ -25,7 +25,7 @@
    @endif
    <div class="col-md-6" style="margin-left: 480px;width: 350px">
 
-       <form action="/search" method="get">
+       <form action="/categorySearch" method="get">
            <div class="input-group" >
                <input type="search" class="form-control" name="search" placeholder="----Search Category----">
                <span class="input-group-prepend">
@@ -67,6 +67,6 @@
          @endforeach
    </table>
 
-{{--   {!!$categories->links()!!}--}}
+   {!!$categories->links()!!}
    {{--to show pagination links when in blank page also--}}
 @endsection

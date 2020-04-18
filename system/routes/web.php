@@ -13,7 +13,6 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -32,7 +31,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/categoryDelete/{category}', 'CategoryController@destroy')->name('catDelete');
     Route::get('/categoryEdit/{category}', 'CategoryController@edit')->name('catEdit');
     Route::post('/categoryUpdate/{category}', 'CategoryController@update')->name('catUpdate');
-    Route::get('/search', 'CategoryController@search');
+    Route::get('/categorySearch', 'CategoryController@search');
 
     Route::get('/itemCreate', 'ItemController@create')->name('itemCreate');
     Route::get('/itemIndex', 'ItemController@index')->name('itemIndex');
@@ -40,6 +39,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/itemDelete/{item}', 'ItemController@destroy')->name('itemDelete');
     Route::get('/itemEdit/{item}', 'ItemController@edit')->name('itemEdit');
     Route::post('/itemUpdate/{item}', 'ItemController@update')->name('itemUpdate');
+    Route::get('/itemSearch', 'ItemController@search');
 
     Route::get('/bannerCreate', 'BannerImageController@create')->name('banCreate');
     Route::get('/bannerIndex', 'BannerImageController@index')->name('banIndex');
@@ -47,8 +47,6 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/bannerDelete/{banner}', 'BannerImageController@destroy')->name('banDelete');
     Route::get('/bannerEdit/{banner}', 'BannerImageController@edit')->name('banEdit');
     Route::post('/bannerUpdate/{banner}', 'BannerImageController@update')->name('banUpdate');
-
-
 
 });
 
