@@ -24,10 +24,10 @@ class OrderController extends BaseController
         //checking method, if it is put request we gonna have to include in registry_id field
         $order = $request->isMethod('put') ? Order::findorFail($request->order_id) : new Order();
 
+
         $order->id = $request->input('order_id');
         $order->tableNo = $request->input('tableNo');
-        $order->item = $request->input('item');
-        $order->quantity = $request->input('quantity');
+        $order->cart = $request->input('cart');
         $order->status = $request->input('status');
 
         if ($order->save()) {

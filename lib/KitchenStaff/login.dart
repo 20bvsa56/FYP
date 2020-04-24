@@ -37,8 +37,6 @@ class Model {
 }
 
 class Login extends StatefulWidget {
-
-
   Login({Key key}) : super(key: key);
 
   @override
@@ -87,6 +85,8 @@ class SnackBarPage extends StatefulWidget {
 class _SnackBarPageState extends State<SnackBarPage> {
   bool visible = false;
 
+  get statusCode => null;
+
   Future<Model> userLogin(String url, {Map body}) async {
     // Showing CircularProgressIndicator using state.
     setState(() {
@@ -101,7 +101,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
           visible = false;
         });
         // throw new Exception("Error while fetching data");
-      }
+      } 
 
       return Model.fromJson(json.decode(response.body));
     });
@@ -148,7 +148,7 @@ class _SnackBarPageState extends State<SnackBarPage> {
                     color: Colors.brown[400],
                     size: 85,
                   ),
-                  SizedBox(height:30),
+                  SizedBox(height: 30),
                   Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: new Form(
@@ -159,7 +159,8 @@ class _SnackBarPageState extends State<SnackBarPage> {
                             TextFormField(
                               controller: nameController,
                               decoration: const InputDecoration(
-                                icon: Icon(Icons.supervised_user_circle, size: 25),
+                                icon: Icon(Icons.supervised_user_circle,
+                                    size: 25),
                                 hintText: 'Username',
                                 labelText: 'Username',
                               ),
@@ -200,7 +201,10 @@ class _SnackBarPageState extends State<SnackBarPage> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => StaffHome(username: nameController.text)));
+                                                builder: (context) => StaffHome(
+                                                    username:
+                                                        nameController.text)));
+                                      
 
 //                                         final snackBar = SnackBar(
 //                                             content: Text(
@@ -210,9 +214,9 @@ class _SnackBarPageState extends State<SnackBarPage> {
 //                                         Scaffold.of(context)
 //                                             .showSnackBar(snackBar);
 
-                                        setState(() {
-                                          visible = false;
-                                        });
+//                                         setState(() {
+//                                           visible = false;
+//                                         });
                                       },
                                       child: Text('Login',
                                           style: TextStyle(

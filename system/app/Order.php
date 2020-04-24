@@ -9,6 +9,10 @@ class Order extends Model
     protected $primaryKey='id';
     protected $table = 'orders';
     protected $fillable=[
-        'tableNo','item','quantity','status'
+        'tableNo','cart','status'
     ];
+
+    public function items(){
+        return $this->hasMany('App\Item');
+    }
 }

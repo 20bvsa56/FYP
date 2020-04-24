@@ -56,6 +56,7 @@ class CategoryController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        $category->id = $request->id;
         $category->name = $request->name;
         $category->image = $request->image;
 
@@ -93,6 +94,7 @@ class CategoryController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
         ]);
         $category = new Category();
+        $category->id = $request->id;
         $category->name = $request->name;
         $category->image = $request->image;
 
@@ -104,6 +106,6 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect()->route('catIndex')
-            ->with('success','Food category added successfully.');
+            ->with('success','Menu category added successfully.');
     }
 }

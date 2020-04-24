@@ -40,6 +40,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/itemEdit/{item}', 'ItemController@edit')->name('itemEdit');
     Route::post('/itemUpdate/{item}', 'ItemController@update')->name('itemUpdate');
     Route::get('/itemSearch', 'ItemController@search');
+    Route::get('/itemSort', 'ItemController@sort');
 
     Route::get('/bannerCreate', 'BannerImageController@create')->name('banCreate');
     Route::get('/bannerIndex', 'BannerImageController@index')->name('banIndex');

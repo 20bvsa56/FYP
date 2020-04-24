@@ -23,7 +23,7 @@
          <p>{{$message}}</p>
       </div>
    @endif
-   <div class="col-md-6" style="margin-left: 480px;width: 350px">
+   <div class="col-md-6" style="margin-left: 490px;width: 340px">
 
        <form action="/categorySearch" method="get">
            <div class="input-group" >
@@ -50,7 +50,7 @@
 {{--         <td>{{++$i}}</td>--}}
           <td>{{$category->id}}</td>
          <td>{{$category->name}}</td>
-          <td><img src="{{'categories/'.$category->image}}" alt="" style="height:60px;width: 60px;"></td>
+          <td><img src="{{'categories/'.$category->image}}" alt="" style="height:80px;width: 80px;"></td>
          <td>
             <form action="{{route('catDelete',$category->id)}}" method="POST">
 

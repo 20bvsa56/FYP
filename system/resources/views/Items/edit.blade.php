@@ -31,8 +31,8 @@
                 <label for="Category">Category</label>
                 <select class="form-control" id="category_id" name="category_id" value="category_id">
                     <option>---Select Category---</option>
-                    @foreach ($catList as $id => $name)
-                        <option value="{{$name}}" >{{$id}}</option>
+                    @foreach ($catList as $name => $id)
+                        <option value="{{$id}}" >{{$name}}</option>
                     @endforeach
                 </select>
             </div>

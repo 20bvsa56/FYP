@@ -19,7 +19,7 @@ class StaffHome extends StatelessWidget {
             ),
             drawer: Drawer(
               child: Container(
-                color: Colors.brown[500],
+                color: Colors.brown[300],
                 child: ListView(
                   // Important: Remove any padding from the ListView.
                   padding: EdgeInsets.zero,

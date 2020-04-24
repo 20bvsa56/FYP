@@ -29,7 +29,7 @@
         @foreach($banners as $banner)
             <tr>
                 <td>{{++$i}}</td>
-                <td><img src="{{'bannerImage/'.$banner->image}}" alt="" style="height:60px;width: 60px;"></td>
+                <td><img src="{{'bannerImage/'.$banner->image}}" alt="" style="height:80px;width: 80px;"></td>
                 <td>
                     <form action="{{route('banDelete',$banner->id)}}" method="POST">
 

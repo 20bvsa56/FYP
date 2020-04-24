@@ -20,30 +20,36 @@
         </div>
     @endif
 
+    <div class="row" >
+        <div class="pull-left">
+            <form action="/itemSort" method="get" style="margin-left: 380px;">
+                <div class="input-group">
+                    <select class="form-control" id="" name="category" >
+                        <option value="0" selected="selected">Sort By Category</option>
+                        @foreach ($catList as $name => $id)
+                            <option value="{{$id}}">{{$name}}</option>
+                        @endforeach
+                    </select>
+                    <span class="input-group-prepend">
+                  <button type="submit" class="btn btn-primary">Sort</button>
+              </span>
+                </div>
+            </form>
+        </div>
 
-{{--    <form action="/sort" method="get" style="margin-left: 250px;width: 300px">--}}
-{{--        <div class="input-group">--}}
-{{--            <select class="form-control" id="category_id" name="category_id" >--}}
-{{--                <option>Sort By Category</option>--}}
-{{--                @foreach ($catList as $id => $name)--}}
-{{--                    <option value="{{$name}}" >{{$id}}</option>--}}
-{{--                @endforeach--}}
-{{--            </select>--}}
-{{--            <span class="input-group-prepend">--}}
-{{--                  <button type="submit" class="btn btn-primary">Search</button>--}}
-{{--              </span>--}}
-{{--        </div>--}}
-{{--    </form>--}}
-
-    <form action="/itemSearch" method="get" style="margin-left: 500px;width: 280px">
-        <div class="input-group" >
-            <input type="search" class="form-control" name="search" placeholder="----Search Item----">
-            <span class="input-group-prepend">
+        <div class="pull-right">
+            <form action="/itemSearch" method="get" style="margin-left: 30px; width: 280px">
+                <div class="input-group" >
+                    <input type="search" class="form-control" name="search" placeholder="----Search Item----">
+                    <span class="input-group-prepend">
                   <button type="submit" class="btn btn-primary">Search</button>
               </span>
+                </div>
+            </form>
         </div>
-    </form>
-<br>
+    </div>
+
+    <br>
 
     <table class="table table-bordered table-striped">
         <tr>
@@ -59,14 +65,14 @@
 
         @foreach($items as $item)
             <tr>
-{{--                <td>{{++$i}}</td>--}}
+                {{--                <td>{{++$i}}</td>--}}
                 <td>{{$item->id}}</td>
                 <td>{{$item->category->name}}</td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->price}}</td>
                 <td>{{$item->description}}</td>
                 <td>{{$item->type}}</td>
-                <td><img src="{{'foodItems/'.$item->image}}" alt="" style="height:60px;width: 60px;"></td>
+                <td><img src="{{'foodItems/'.$item->image}}" alt="" style="height:80px;width: 80px;"></td>
 
                 <td>
                     <form action="{{route('itemDelete',$item->id)}}" method="POST">

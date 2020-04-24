@@ -21,8 +21,7 @@ class Order extends JsonResource
         return [
             'id'=>$this->id,
             'tableNo'=>$this->tableNo,
-            'item'=>$this->item,
-            'quantity'=>$this->quantity,
+            'cart'=>$this->cart,
             'status'=>$this->status
         ];
     }

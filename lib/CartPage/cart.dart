@@ -8,19 +8,29 @@ import 'orderModel.dart';
 import 'dart:convert'; //to convert http response in json format
 import 'package:http/http.dart' as http;
 
-class Cart extends StatelessWidget {
+class Cart extends StatefulWidget {
   const Cart({Key key}) : super(key: key);
+
+  @override
+  _CartState createState() => _CartState();
+}
+
+class _CartState extends State<Cart> {
+  List<FoodItem> foodItems = new List<FoodItem>();
+  var listUpdate = false;
   @override
   Widget build(BuildContext context) {
     final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
-    List<FoodItem> foodItems;
+
     return BlocProvider(
         blocs: [Bloc((i) => CartListBloc())],
         child: StreamBuilder(
           stream: bloc.listStream,
           builder: (context, snapshot) {
             if (snapshot.data != null) {
-              foodItems = snapshot.data;
+              if (!listUpdate) {
+                foodItems = snapshot.data;
+              }
               return Scaffold(
                 appBar: AppBar(
                   leading: Icon(Icons.add_shopping_cart),
@@ -29,9 +39,9 @@ class Cart extends StatelessWidget {
                   centerTitle: true,
                 ),
                 body: SafeArea(
-                  child: CartBody(foodItems),
+                  child: CartBody(foodItems, updateList),
                 ),
-                bottomNavigationBar: BottomBar(foodItems),
+                bottomNavigationBar: BottomBar(foodItems, updateList),
               );
             } else {
               return Container();
@@ -39,12 +49,20 @@ class Cart extends StatelessWidget {
           },
         ));
   }
+
+  void updateList(List<FoodItem> list) {
+    setState(() {
+      listUpdate = true;
+      foodItems = list;
+    });
+  }
 }
 
 class BottomBar extends StatelessWidget {
+  // final List<FoodItem> foodItems;
   final List<FoodItem> foodItems;
-
-  BottomBar(this.foodItems);
+  final Function updateList;
+  BottomBar(this.foodItems, this.updateList);
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +113,9 @@ class BottomBar extends StatelessWidget {
 }
 
 class CartBody extends StatelessWidget {
+  CartBody(this.foodItems, this.updateList);
   final List<FoodItem> foodItems;
-
-  CartBody(this.foodItems);
+  final Function updateList;
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +157,11 @@ class CartBody extends StatelessWidget {
     return ListView.builder(
       itemCount: foodItems.length,
       itemBuilder: (context, index) {
-        return ItemContent(foodItem: foodItems[index]);
+        return ItemContent(
+            foodItem: foodItems[index],
+            foodItems: foodItems,
+            updateList: updateList,
+            index: index);
       },
     );
   }
@@ -147,8 +169,11 @@ class CartBody extends StatelessWidget {
 
 class CustomQuantity extends StatefulWidget {
   final FoodItem foodItem;
+  final List<FoodItem> foodItems;
+  final Function updateList;
+  final int index;
 
-  CustomQuantity(this.foodItem);
+  CustomQuantity(this.foodItem, this.foodItems, this.updateList, this.index);
 
   @override
   _CustomQuantityState createState() => _CustomQuantityState();
@@ -180,15 +205,19 @@ class _CustomQuantityState extends State<CustomQuantity> {
             child: FlatButton(
               padding: EdgeInsets.all(0),
               onPressed: () {
-                setState(() {
-                  if (widget.foodItem.quantity > 1) {
-                    widget.foodItem.quantity--;
-                    print(widget.foodItem.quantity);
-                  } else {
-                    removeFromList(widget.foodItem);
-                    print('remove');
-                  }
-                });
+                //  setState(() {});
+
+                if (widget.foodItems[widget.index].quantity > 1) {
+                  widget.foodItems[widget.index].quantity--;
+                  print(widget.foodItems[widget.index].quantity);
+                  print(widget.foodItem.quantity * widget.foodItem.price);
+                } else {
+                  removeFromList(widget.foodItems[widget.index]);
+                  print('remove');
+                }
+
+                widget.updateList(widget.foodItems);
+                //   return widget.cart.foodItems[widget.index].quantity;
               },
               child: Text(
                 "-",
@@ -200,7 +229,7 @@ class _CustomQuantityState extends State<CustomQuantity> {
             ),
           ),
           Text(
-            widget.foodItem.quantity.toString(),
+            widget.foodItems[widget.index].quantity.toString(),
             style: TextStyle(
                 fontWeight: FontWeight.w600, fontSize: 20, color: Colors.brown),
           ),
@@ -210,10 +239,14 @@ class _CustomQuantityState extends State<CustomQuantity> {
             child: FlatButton(
               padding: EdgeInsets.all(0),
               onPressed: () {
-                setState(() {
-                  widget.foodItem.quantity++;
-                  print(widget.foodItem.quantity);
-                });
+                // setState(() {
+
+                //   print(widget.foodItem.quantity);
+                //   print(widget.foodItem.quantity * widget.foodItem.price);
+                // });
+                widget.foodItems[widget.index].quantity++;
+                widget.updateList(widget.foodItems);
+                //    return widget.cart.foodItems[widget.index].quantity;
               },
               child: Text(
                 "+",
@@ -231,16 +264,22 @@ class _CustomQuantityState extends State<CustomQuantity> {
 }
 
 class ItemContent extends StatelessWidget {
-  const ItemContent({
-    Key key,
-    @required this.foodItem,
-  }) : super(key: key);
+  const ItemContent(
+      {Key key,
+      @required this.foodItem,
+      this.foodItems,
+      this.updateList,
+      this.index})
+      : super(key: key);
 
   final FoodItem foodItem;
+  final List<FoodItem> foodItems;
+  final int index;
+  final Function updateList;
 
   @override
   Widget build(BuildContext context) {
-    CustomQuantity qty = CustomQuantity(foodItem);
+    var customQuantity = CustomQuantity(foodItem, foodItems, updateList, index);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -270,8 +309,8 @@ class ItemContent extends StatelessWidget {
                     ),
                   ]),
             ),
-            CustomQuantity(foodItem),
-            Text("\Rs ${qty.foodItem.quantity * foodItem.price}",
+            CustomQuantity(foodItem, foodItems, updateList, index),
+            Text("\Rs ${foodItem.price * customQuantity.foodItem.quantity}",
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w400,
@@ -343,9 +382,16 @@ class _PlaceOrderState extends State<PlaceOrder> {
 
   final TextEditingController tableController = new TextEditingController();
   final TextEditingController nameController =
-      new TextEditingController(text: 'foodItem.name');
+      new TextEditingController(text: 'foodItem.name.id');
   final TextEditingController quantityController =
       new TextEditingController(text: 'foodItem.quantity');
+
+  // store(List<FoodItem> foodItems){
+
+  // for (int i = 0; i < foodItems.length; i++) {
+
+  // }
+  // }
 
   Future<void> confirmation() async {
     return showDialog<void>(
