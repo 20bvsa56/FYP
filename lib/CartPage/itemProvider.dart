@@ -33,7 +33,6 @@ class CartProvider {
     
   }
 
-
   List<FoodItem> removeFromList(FoodItem foodItem) {
     //remove it from the list
     foodItems.remove(foodItem);
@@ -52,4 +51,4 @@ class CartProvider {
 //       //remove it from the list
 //       foodItems.remove(foodItem);
 //     }
-//     return foodItems;
+//     return foodItems;n 

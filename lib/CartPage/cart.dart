@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:menu_app/Regular/regularItems.dart';
 import 'cartListBloc.dart';
-import 'orderModel.dart';
 import 'dart:convert'; //to convert http response in json format
 import 'package:http/http.dart' as http;
 
@@ -60,8 +59,8 @@ class _CartState extends State<Cart> {
 
 class BottomBar extends StatelessWidget {
   // final List<FoodItem> foodItems;
-  final List<FoodItem> foodItems;
-  final Function updateList;
+  List<FoodItem> foodItems;
+  Function updateList;
   BottomBar(this.foodItems, this.updateList);
 
   @override
@@ -115,7 +114,7 @@ class BottomBar extends StatelessWidget {
 class CartBody extends StatelessWidget {
   CartBody(this.foodItems, this.updateList);
   final List<FoodItem> foodItems;
-  final Function updateList;
+  Function updateList;
 
   @override
   Widget build(BuildContext context) {
@@ -169,9 +168,9 @@ class CartBody extends StatelessWidget {
 
 class CustomQuantity extends StatefulWidget {
   final FoodItem foodItem;
-  final List<FoodItem> foodItems;
-  final Function updateList;
-  final int index;
+  List<FoodItem> foodItems;
+  Function updateList;
+  int index;
 
   CustomQuantity(this.foodItem, this.foodItems, this.updateList, this.index);
 
@@ -349,24 +348,28 @@ class Table extends StatelessWidget {
 class PlaceOrder extends StatefulWidget {
   final FoodItem foodItem;
 
-  const PlaceOrder({Key key, this.foodItem}) : super(key: key);
-
   static final url = 'http://192.168.254.2:8000/api/order/';
+  const PlaceOrder({Key key, this.foodItem}) : super(key: key);
 
   @override
   _PlaceOrderState createState() => _PlaceOrderState();
 }
 
 class _PlaceOrderState extends State<PlaceOrder> {
+   List<FoodItem> foodItems = List<FoodItem>();
+    //List<FoodItem> foodItems = [];
+  var tableController = TextEditingController(text: '    Table-1');
+
   bool visible = false;
 
-  Future<OrderModel> placeOrder(String url, {Map body}) async {
+  Future<FoodItem> requestOrder(String url, {Map body}) async {
     // Showing CircularProgressIndicator using state.
     setState(() {
       visible = true;
     });
 
-    return http.post(url, body: body).then((http.Response response) {
+    return http.post(url, headers: {"Content-Type": "application/json"}, body: body ).then((http.Response response) {
+      print(foodItems);
       final int statusCode = response.statusCode;
 
       if (statusCode == 201) {
@@ -376,22 +379,36 @@ class _PlaceOrderState extends State<PlaceOrder> {
         // throw new Exception("Error while fetching data");
       }
 
-      return OrderModel.fromJson(json.decode(response.body));
+      return FoodItem.fromJson(json.decode(response.body));
     });
   }
 
-  final TextEditingController tableController = new TextEditingController();
-  final TextEditingController nameController =
-      new TextEditingController(text: 'foodItem.name.id');
-  final TextEditingController quantityController =
-      new TextEditingController(text: 'foodItem.quantity');
-
-  // store(List<FoodItem> foodItems){
-
-  // for (int i = 0; i < foodItems.length; i++) {
-
+  // Future<List<FoodItem>> requestOrder() async{
+  //   final response = await http.post('http://192.168.254.2:8000/api/order/',
+  //   headers: {'Content-Type':'application/json'},
+  //   body: jsonEncode({
+  //      'tableNo':tableController.text,
+  //      'status': 0,
+  //      'cart': foodItems,
+  //   }),
+  //   );
+  //   print(foodItems);
+  //   print('statuscode = ' + response.statusCode.toString());
+  //   return foodItems;
   // }
-  // }
+
+// Future<List<FoodItem>> requestOrder() async{
+//   var data = await http.post('http://192.168.254.2:8000/api/order/',headers: {'Content-Type':'application/json; charset=UTF-8'});
+//   var jsonData = jsonDecode(data.body);
+//   List<FoodItem> foodItems = FoodItems.fromJson(jsonData).foodItems;
+//   FoodItem newFoodItem = FoodItem(tableNo: tableController.text, status: 0, cart: foodItems );
+//   foodItems.add(newFoodItem);
+//   String encode = jsonEncode(foodItems);
+
+//   print(encode);
+//   return foodItems;
+
+// }
 
   Future<void> confirmation() async {
     return showDialog<void>(
@@ -408,21 +425,40 @@ class _PlaceOrderState extends State<PlaceOrder> {
           content: Text('Do you wish to place order?',
               style: TextStyle(fontFamily: 'Lobster-regular', fontSize: 14)),
           actions: <Widget>[
+            Visibility(
+                visible: visible,
+                child: Container(child: CircularProgressIndicator())),
             FlatButton(
               onPressed: () async {
                 // _validateInputs();
-                OrderModel newOrderModel = new OrderModel(
-                    tableNo: tableController.text,
-                    item: nameController.text,
-                    quantity: quantityController.text);
-                OrderModel p =
-                    await placeOrder('url', body: newOrderModel.toMap());
-                print(p.tableNo);
+
+                FoodItem newFoodItem = new FoodItem(
+                    tableNo: tableController.text, 
+                    status: 0, 
+                    cart: foodItems
+                    );
+                FoodItem p = await requestOrder(PlaceOrder.url,
+                    body: newFoodItem.toMap() );
+                print(p.cart);
+                // Navigate to Profile Screen & Sending name to Next Screen.
+
+                final snackBar =
+                    SnackBar(content: Text('Order Placed Successfully.'));
+
+// Find the Scaffold in the widget tree and use it to show a SnackBar.
+                Scaffold.of(context).showSnackBar(snackBar);
 
                 setState(() {
                   visible = false;
                 });
               },
+              // onPressed: () async {
+              //   FoodItem items = new FoodItem(
+              //     tableNo: tableController.text,
+              //   );
+              //   FoodItem p = await requestOrder(PlaceOrder.url,
+              //       body: items.toMap());
+              // },
               child: Text('Yes',
                   style: TextStyle(
                       color: Colors.black,
@@ -473,9 +509,9 @@ class _PlaceOrderState extends State<PlaceOrder> {
             ),
           ),
         ),
-        Visibility(
-            visible: visible,
-            child: Container(child: CircularProgressIndicator())),
+        // Visibility(
+        //     visible: visible,
+        //     child: Container(child: CircularProgressIndicator())),
       ],
     );
   }

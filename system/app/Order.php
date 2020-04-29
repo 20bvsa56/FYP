@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $primaryKey='id';
+    protected $casts = [
+        'cart' => 'array'
+    ];//takes an array and turns into json string while saving in database.
     protected $table = 'orders';
     protected $fillable=[
-        'tableNo','cart','status'
+        'id','tableNo','cart','status'
     ];
 
     public function items(){

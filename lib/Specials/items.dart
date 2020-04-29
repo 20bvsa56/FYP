@@ -20,6 +20,7 @@ class Items {
       this.image,
       });
 
+//parses json object into items object.
   Items.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     categoryId = json['category_id'];
