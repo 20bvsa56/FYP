@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:menu_app/Regular/regularItems.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
+import 'orderDetails.dart';
 
 class Order extends StatefulWidget {
   const Order({Key key}) : super(key: key);
@@ -8,36 +13,88 @@ class Order extends StatefulWidget {
 }
 
 class _OrderState extends State<Order> {
+  List<FoodItem> orders = [];
+
+  Future<List<FoodItem>> orderList() async {
+    var data = await http.get("http://192.168.254.2:8000/api/order/");
+    var jsonData = json.decode(data.body);
+
+    for (var i = 0; i < jsonData.length; i++) {
+      final order = FoodItem.fromJson(jsonData[i]);
+      orders.add(order);
+    }
+    return orders;
+  }
+
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.chevron_left),
-            onPressed: () => Navigator.pop(context, false),
-          ),
-          actions: <Widget>[
-            // action button
-            IconButton(
-              icon: Icon(Icons.fastfood),
-              iconSize: 30.0,
-              onPressed: () {},
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.chevron_left),
+                onPressed: () => Navigator.pop(context, false),
+              ),
+              actions: <Widget>[
+                // action button
+                IconButton(
+                  icon: Icon(Icons.fastfood),
+                  iconSize: 30.0,
+                  onPressed: () {},
+                ),
+              ],
+              backgroundColor: Colors.brown,
+              title: Text('Food Order'),
+              centerTitle: true,
             ),
-          ],
-          backgroundColor: Colors.brown,
-          title: Text('Food Order'),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Container(
-            color: Colors.black12,
-            child: Text('Hello'),
-            ),
-        ),
-      )
-   );
-    
+            body: Center(
+              child: Column(
+                children: <Widget>[
+                  FutureBuilder(
+                    future: orderList(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.data != null) {
+                        return Container(
+                          height: 539,
+
+                          // height: MediaQuery.of(context).size.height,
+
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                FoodItem orderItem = snapshot.data[index];
+
+                                return OrderDetails(
+                                  orderItem: orderItem,
+                                );
+                              }),
+                        );
+                      } else {
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(100, 200, 0, 0),
+                            child: Container(
+                              height: 50,
+                              width: 180,
+                              child: Text(
+                                'No orders yet!',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontStyle: FontStyle.italic,
+                                  fontFamily: 'Rancho-Regular',
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
+            )));
   }
 }

@@ -65,23 +65,37 @@
 //   }
 // }
 
-class FoodItems{
-  List<FoodItem> foodItems;
+import 'dart:convert';
 
-  FoodItems({this.foodItems});
+// class FoodItems{
+//   List<FoodItem> foodItems;
 
-  factory FoodItems.fromJson(List<dynamic> parsedJson){
+//   FoodItems({this.foodItems});
 
-    List<FoodItem> foodItems = List<FoodItem>();
-    foodItems = parsedJson.map((i)=>FoodItem.fromJson(i)).toList();
-    //var foodItems = jsonEncode(foodItems.map((e) => e.toJson()).toList());
+//   factory FoodItems.fromJson(List<dynamic> parsedJson){
+
+//     List<FoodItem> foodItems = List<FoodItem>();
+//     foodItems = parsedJson.map((i)=>FoodItem.fromJson(i)).toList();
+
+//     return FoodItems(
+//       foodItems: foodItems,
+//     );
+//   }
+
+//   factory FoodItems.toJson(List<FoodItem> foodItems){
     
+//     List<FoodItem> foodItems = List<FoodItem>();
+//     //var json = jsonEncode(foodItems, toEncodable: (e) => e.toJson());
 
-    return FoodItems(
-      foodItems: foodItems,
-    );
-  }
-}
+//   //converting each item of list into JSON object individually
+//    var json = jsonEncode(foodItems.map((e) => e.toJson()).toList());
+//     print(json);
+//    // foodItems = parsedJson.map((i)=>FoodItem.toJson(i)).toList();
+//     //var foodItems = jsonEncode(foodItems.map((e) => e.toJson()).toList());
+    
+//    return FoodItems(foodItems: foodItems);
+//   }
+// }
 
 class FoodItem {
   int id;
@@ -124,28 +138,48 @@ class FoodItem {
         title: json['title'],
         quantity: json['quantity'] = 1,
         tableNo: json['tableNo'],
-        status: json['status'],
+        status: json['status'] = 0,
         cart: json['cart']
         );
   }
-
   //returns JSON object that has key/value pairs
-  Map<String, dynamic> toJson(jsonData) {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['category_id'] = this.categoryId;
-    data['title'] = this.title;
-    data['type'] = this.type;
-    data['name'] = this.name;
-    data['price'] = this.price;
-    data['description'] = this.description;
-    data['image'] = this.image;
-    data['quantity'] = this.quantity;
-    data['tableNo'] = this.tableNo;
-    data['status'] = this.status;
-    data['cart'] = this.cart;
-    return data;
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['name'] = this.name;
+  //   data['image'] = this.image;
+  //   data['quantity'] = this.quantity;
+  //   return data;
+  // }
+
+  // factory FoodItem.toJson(List<FoodItem> foodItems){
+    
+  //   List<FoodItem> foodItems = List<FoodItem>();
+  //   //var json = jsonEncode(foodItems, toEncodable: (e) => e.toJson());
+
+  // //converting each item of list into JSON object individually
+  //  var json = jsonEncode(foodItems.map((e) => e.toJson()).toList());
+  //   print(json);
+  //  // foodItems = parsedJson.map((i)=>FoodItem.toJson(i)).toList();
+  //   //var foodItems = jsonEncode(foodItems.map((e) => e.toJson()).toList());
+    
+  //  return FoodItem();
+  // }
+
+Map<String,dynamic> toJson(){
+    return {
+      "name": this.name,
+      "image": this.image,
+      "quantity": this.quantity
+    };
   }
+
+ static List encondeToJson(List<FoodItem> foodItems){
+    List jsonList = List();
+    foodItems.map((item)=>
+      jsonList.add(item.toJson())
+    ).toList();
+    return jsonList;
+}
 
   Map toMap() {
     var map = new Map<String, dynamic>();
@@ -172,13 +206,3 @@ class FoodItem {
     this.quantity = this.quantity - 1;
   }
 }
-
-// class FoodItemList {
-// FoodItemList(this.foodItems);
-
-// List<FoodItem> foodItems;
-
-// Map<String, dynamic> toJson() => <String, dynamic>{
-//     'foodItems': foodItems,
-//   };
-// }

@@ -21,19 +21,6 @@ class Model {
 
     return map;
   }
-  // Model.fromJson(Map<String, dynamic> json) {
-
-  //   name = json['name'];
-  //   password = json['password'];
-  // }
-
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = new Map<String, dynamic>();
-  //   data['password'] = this.password;
-  //   data['name'] = this.name;
-
-  //   return data;
-  // }
 }
 
 class Login extends StatefulWidget {

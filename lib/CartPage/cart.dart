@@ -345,6 +345,7 @@ class Table extends StatelessWidget {
   }
 }
 
+
 class PlaceOrder extends StatefulWidget {
   final FoodItem foodItem;
 
@@ -356,46 +357,55 @@ class PlaceOrder extends StatefulWidget {
 }
 
 class _PlaceOrderState extends State<PlaceOrder> {
-   List<FoodItem> foodItems = List<FoodItem>();
+  
+  // var json = jsonDecode('url');
+  // List<FoodItem> players = FoodItems.fromJson(json).foodItems;
+   var foodItems= [FoodItem(name: 'Stuffed Omelete',quantity: 1)];
+
+   
     //List<FoodItem> foodItems = [];
-  var tableController = TextEditingController(text: '    Table-1');
+
+  //List<FoodItem> foodItems = FoodItem.encondeToJson();
+  var tableController = TextEditingController(text: 'Table-1');
+  
 
   bool visible = false;
 
-  Future<FoodItem> requestOrder(String url, {Map body}) async {
-    // Showing CircularProgressIndicator using state.
-    setState(() {
-      visible = true;
-    });
+  // Future<FoodItem> requestOrder(String url, {Map body}) async {
+  //   // Showing CircularProgressIndicator using state.
+  //   setState(() {
+  //     visible = true;
+  //   });
 
-    return http.post(url, headers: {"Content-Type": "application/json"}, body: body ).then((http.Response response) {
-      print(foodItems);
-      final int statusCode = response.statusCode;
+  //   return http.post(url, headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: body ).then((http.Response response) {
+  //     print(foodItems);
+  //     final int statusCode = response.statusCode;
 
-      if (statusCode == 201) {
-        setState(() {
-          visible = false;
-        });
-        // throw new Exception("Error while fetching data");
-      }
+  //     if (statusCode == 201) {
+  //       setState(() {
+  //         visible = false;
+  //       });
+  //       // throw new Exception("Error while fetching data");
+  //     }
 
-      return FoodItem.fromJson(json.decode(response.body));
-    });
-  }
-
-  // Future<List<FoodItem>> requestOrder() async{
-  //   final response = await http.post('http://192.168.254.2:8000/api/order/',
-  //   headers: {'Content-Type':'application/json'},
-  //   body: jsonEncode({
-  //      'tableNo':tableController.text,
-  //      'status': 0,
-  //      'cart': foodItems,
-  //   }),
-  //   );
-  //   print(foodItems);
-  //   print('statuscode = ' + response.statusCode.toString());
-  //   return foodItems;
+  //     return FoodItem.fromJson(json.decode(response.body));
+  //   });
   // }
+
+  Future<List<FoodItem>> requestOrder() async{
+        final response = await http.post('http://192.168.254.2:8000/api/order/',
+        headers: {'Content-Type':'application/json',},
+        body: jsonEncode({
+           'tableNo':tableController.text,
+           'status': 0,
+           'cart': foodItems,
+    }),
+    );
+    print(foodItems);
+    print(foodItems.length);
+    print('statuscode = ' + response.statusCode.toString());
+    return foodItems;
+  }
 
 // Future<List<FoodItem>> requestOrder() async{
 //   var data = await http.post('http://192.168.254.2:8000/api/order/',headers: {'Content-Type':'application/json; charset=UTF-8'});
@@ -429,29 +439,30 @@ class _PlaceOrderState extends State<PlaceOrder> {
                 visible: visible,
                 child: Container(child: CircularProgressIndicator())),
             FlatButton(
-              onPressed: () async {
-                // _validateInputs();
+              onPressed: requestOrder,
+//               onPressed: () async {
+//                 // _validateInputs();
 
-                FoodItem newFoodItem = new FoodItem(
-                    tableNo: tableController.text, 
-                    status: 0, 
-                    cart: foodItems
-                    );
-                FoodItem p = await requestOrder(PlaceOrder.url,
-                    body: newFoodItem.toMap() );
-                print(p.cart);
-                // Navigate to Profile Screen & Sending name to Next Screen.
+//                 FoodItem newFoodItem = new FoodItem(
+//                     tableNo: tableController.text, 
+//                     status: 0, 
+//                     cart: ['Pancake',1]
+//                     );
+//                 FoodItem p = await requestOrder(PlaceOrder.url,
+//                     body: newFoodItem.toMap() );
+//                 print(p.cart);
+//                 // Navigate to Profile Screen & Sending name to Next Screen.
 
-                final snackBar =
-                    SnackBar(content: Text('Order Placed Successfully.'));
+//                 final snackBar =
+//                     SnackBar(content: Text('Order Placed Successfully.'));
 
-// Find the Scaffold in the widget tree and use it to show a SnackBar.
-                Scaffold.of(context).showSnackBar(snackBar);
+// // Find the Scaffold in the widget tree and use it to show a SnackBar.
+//                 Scaffold.of(context).showSnackBar(snackBar);
 
-                setState(() {
-                  visible = false;
-                });
-              },
+//                 setState(() {
+//                   visible = false;
+//                 });
+//               },
               // onPressed: () async {
               //   FoodItem items = new FoodItem(
               //     tableNo: tableController.text,
