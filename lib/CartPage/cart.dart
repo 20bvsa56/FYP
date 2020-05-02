@@ -105,7 +105,7 @@ class BottomBar extends StatelessWidget {
     double totalAmount = 0.0;
 
     for (int i = 0; i < foodItems.length; i++) {
-      totalAmount = totalAmount + foodItems[i].price * foodItems[i].quantity;
+      totalAmount = totalAmount + foodItems[i].price * foodItems[i].Quantity;
     }
     return totalAmount.toStringAsFixed(2);
   }
@@ -206,10 +206,10 @@ class _CustomQuantityState extends State<CustomQuantity> {
               onPressed: () {
                 //  setState(() {});
 
-                if (widget.foodItems[widget.index].quantity > 1) {
-                  widget.foodItems[widget.index].quantity--;
-                  print(widget.foodItems[widget.index].quantity);
-                  print(widget.foodItem.quantity * widget.foodItem.price);
+                if (widget.foodItems[widget.index].Quantity > 1) {
+                  widget.foodItems[widget.index].Quantity--;
+                  print(widget.foodItems[widget.index].Quantity);
+                  print(widget.foodItem.Quantity * widget.foodItem.price);
                 } else {
                   removeFromList(widget.foodItems[widget.index]);
                   print('remove');
@@ -228,7 +228,7 @@ class _CustomQuantityState extends State<CustomQuantity> {
             ),
           ),
           Text(
-            widget.foodItems[widget.index].quantity.toString(),
+            widget.foodItems[widget.index].Quantity.toString(),
             style: TextStyle(
                 fontWeight: FontWeight.w600, fontSize: 20, color: Colors.brown),
           ),
@@ -243,7 +243,7 @@ class _CustomQuantityState extends State<CustomQuantity> {
                 //   print(widget.foodItem.quantity);
                 //   print(widget.foodItem.quantity * widget.foodItem.price);
                 // });
-                widget.foodItems[widget.index].quantity++;
+                widget.foodItems[widget.index].Quantity++;
                 widget.updateList(widget.foodItems);
                 //    return widget.cart.foodItems[widget.index].quantity;
               },
@@ -304,12 +304,12 @@ class ItemContent extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                   children: [
                     TextSpan(
-                      text: foodItem.name,
+                      text: foodItem.Name,
                     ),
                   ]),
             ),
             CustomQuantity(foodItem, foodItems, updateList, index),
-            Text("\Rs ${foodItem.price * customQuantity.foodItem.quantity}",
+            Text("\Rs ${foodItem.price * customQuantity.foodItem.Quantity}",
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w400,
@@ -360,7 +360,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
   
   // var json = jsonDecode('url');
   // List<FoodItem> players = FoodItems.fromJson(json).foodItems;
-   var foodItems= [FoodItem(name: 'Stuffed Omelete',quantity: 1)];
+   var foodItems= [FoodItem(Name: 'Chicken Spaghetti',Quantity: 1),FoodItem(Name: 'Onion Rings',Quantity: 1)];
 
    
     //List<FoodItem> foodItems = [];

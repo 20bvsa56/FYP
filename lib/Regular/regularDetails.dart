@@ -40,7 +40,7 @@ class RegularDetails extends StatelessWidget {
         ),
         child: Column(children: <Widget>[
           Text(
-            foodItem.name,
+            foodItem.Name,
             style: TextStyle(
               fontFamily: 'Lobster-Regular',
               fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class RegularDetails extends StatelessWidget {
                   addToCart(foodItem);
                  
                  final snackBar = SnackBar(
-                  content: Text('${foodItem.name} added to food cart.'),
+                  content: Text('${foodItem.Name} added to food cart.'),
                   duration: Duration(milliseconds: 550),
                 );
 

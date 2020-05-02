@@ -56,10 +56,9 @@ class _OrderState extends State<Order> {
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.data != null) {
                         return Container(
-                          height: 539,
+                          height: 600,
 
                           // height: MediaQuery.of(context).size.height,
-
                           child: ListView.builder(
                               scrollDirection: Axis.vertical,
                               itemCount: snapshot.data.length,

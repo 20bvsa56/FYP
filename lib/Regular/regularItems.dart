@@ -102,25 +102,24 @@ class FoodItem {
   int categoryId;
   Null title;
   Null type;
-  String name;
+  String Name;
   int price;
   String description;
   String image;
-  int quantity;
+  int Quantity;
   int status;
   String tableNo;
   List cart;
-
 
   FoodItem({this.id,
       this.categoryId,
       this.title,
       this.type,
-      this.name,
+      this.Name,
       this.price,
       this.description,
       this.image,
-      this.quantity,
+      this.Quantity,
       this.status,
       this.tableNo,
       this.cart});
@@ -129,14 +128,14 @@ class FoodItem {
   factory FoodItem.fromJson(Map<String, dynamic> json) {
     return FoodItem(
         id: json['id'],
-        name: json['name'],
+        Name: json['name'],
         type: json['type'],
         categoryId: json['category_id'],
         price: json['price'],
         description: json['description'],
         image: json['image'],
         title: json['title'],
-        quantity: json['quantity'] = 1,
+        Quantity: json['quantity'] = 1,
         tableNo: json['tableNo'],
         status: json['status'] = 0,
         cart: json['cart']
@@ -167,9 +166,9 @@ class FoodItem {
 
 Map<String,dynamic> toJson(){
     return {
-      "name": this.name,
-      "image": this.image,
-      "quantity": this.quantity
+      "Name": this.Name,
+      // "Image": this.image,
+      "Quantity": this.Quantity
     };
   }
 
@@ -183,7 +182,7 @@ Map<String,dynamic> toJson(){
 
   Map toMap() {
     var map = new Map<String, dynamic>();
-    map["name"] = name;
+    map["name"] = Name;
     map["type"] = type;
     map["category_id"] = categoryId;
     map["price"] = price;
@@ -191,7 +190,7 @@ Map<String,dynamic> toJson(){
     map["image"]=image;
     map["id"]=id;
     map["title"]=title;
-    map["quantity"]=quantity;
+    map["quantity"]=Quantity;
     map["tableNo"]=tableNo;
     map["status"]=status;
     map["cart"]=cart;
@@ -199,10 +198,10 @@ Map<String,dynamic> toJson(){
   }
 
     void incrementQuantity() {
-    this.quantity = this.quantity + 1;
+    this.Quantity = this.Quantity + 1;
   }
 
   void decrementQuantity() {
-    this.quantity = this.quantity - 1;
+    this.Quantity = this.Quantity - 1;
   }
 }
