@@ -13,6 +13,7 @@ class Order extends StatefulWidget {
 }
 
 class _OrderState extends State<Order> {
+  var refreshkey = GlobalKey<RefreshIndicatorState>();
   List<FoodItem> orders = [];
 
   Future<List<FoodItem>> orderList() async {
@@ -24,6 +25,16 @@ class _OrderState extends State<Order> {
       orders.add(order);
     }
     return orders;
+  }
+
+  Future<Null> refreshPage() async {
+    refreshkey.currentState?.show(
+        atTop:
+            true); // change atTop to false to show progress indicator at bottom
+    await Future.delayed(Duration(seconds: 2)); //wait here for 2 second
+    setState(() {
+      orderList();
+    });
   }
 
   @override
@@ -59,16 +70,19 @@ class _OrderState extends State<Order> {
                           height: 600,
 
                           // height: MediaQuery.of(context).size.height,
-                          child: ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                FoodItem orderItem = snapshot.data[index];
+                          child: RefreshIndicator(
+                            onRefresh: refreshPage,
+                            child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  FoodItem orderItem = snapshot.data[index];
 
-                                return OrderDetails(
-                                  orderItem: orderItem,
-                                );
-                              }),
+                                  return OrderDetails(
+                                    orderItem: orderItem,
+                                  );
+                                }),
+                          ),
                         );
                       } else {
                         return Center(

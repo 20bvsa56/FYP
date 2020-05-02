@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:menu_app/Regular/regularItems.dart';
 import 'package:http/http.dart' as http;
 
-
 class OrderDetails extends StatefulWidget {
   final FoodItem orderItem;
 
@@ -18,9 +17,7 @@ class _OrderDetailsState extends State<OrderDetails> {
   // List<FoodItem> orders = [];
 
   Future updateStatus(int id) async {
-    var data = await http.put("http://192.168.254.2:8000/api/status/$id");
-
-    return data;
+    await http.put("http://192.168.254.2:8000/api/status/$id");
   }
 
   @override
@@ -28,6 +25,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     var _onPressed;
     if (_enabled) {
       _onPressed = () {
+        updateStatus(widget.orderItem.id);
         final snackBar = SnackBar(
           content: Text('Order Delivered Successfully.'),
           duration: Duration(milliseconds: 550),
@@ -88,9 +86,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             elevation: 20,
             child: const Text('Deliver',
                 style: TextStyle(fontSize: 18, fontFamily: 'Lobster-Regular')),
-            onPressed: () {
-              updateStatus(widget.orderItem.id);
-            },
+            onPressed: _onPressed,
           ),
           SwitchListTile(
               value: _enabled,
