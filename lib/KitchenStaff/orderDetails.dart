@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menu_app/Regular/regularItems.dart';
+import 'package:http/http.dart' as http;
+
 
 class OrderDetails extends StatefulWidget {
   final FoodItem orderItem;
@@ -11,7 +13,15 @@ class OrderDetails extends StatefulWidget {
 }
 
 class _OrderDetailsState extends State<OrderDetails> {
-   bool _enabled = false;
+  bool _enabled = false;
+
+  // List<FoodItem> orders = [];
+
+  Future updateStatus(int id) async {
+    var data = await http.put("http://192.168.254.2:8000/api/status/$id");
+
+    return data;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +69,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: ListTile(
-              isThreeLine: false,
+              // isThreeLine: false,
               title: Text(
                 widget.orderItem.cart.toString(),
                 style: TextStyle(
@@ -69,16 +79,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   color: Colors.brown,
                 ),
               ),
-              // subtitle: Text(
-              //   '1',
-              //   style: TextStyle(
-              //     fontFamily: 'Rancho-Regular',
-              //     // fontStyle: FontStyle.italic,
-              //     fontSize: 20.0,
-              //     color: Colors.brown,
-              //   ),
-              // ),
-              trailing: Image.asset('images/pancake.jpg'),
+              // trailing: Image.asset('images/pancake.jpg'),
             ),
           ),
           SizedBox(height: 5),
@@ -87,13 +88,17 @@ class _OrderDetailsState extends State<OrderDetails> {
             elevation: 20,
             child: const Text('Deliver',
                 style: TextStyle(fontSize: 18, fontFamily: 'Lobster-Regular')),
-            onPressed: _onPressed,
+            onPressed: () {
+              updateStatus(widget.orderItem.id);
+            },
           ),
-          SwitchListTile(value: _enabled, onChanged: (bool value){
-            setState(() {
-              _enabled = value; 
-            });
-          })
+          SwitchListTile(
+              value: _enabled,
+              onChanged: (bool value) {
+                setState(() {
+                  _enabled = value;
+                });
+              })
         ]),
       ),
     );

@@ -360,7 +360,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
   
   // var json = jsonDecode('url');
   // List<FoodItem> players = FoodItems.fromJson(json).foodItems;
-   var foodItems= [FoodItem(Name: 'Chicken Spaghetti',Quantity: 1),FoodItem(Name: 'Onion Rings',Quantity: 1)];
+   var foodItems= [FoodItem(Name: 'Cheese Spaghetti',Quantity: 1),FoodItem(Name: 'Milk Coffee',Quantity: 1)];
 
    
     //List<FoodItem> foodItems = [];
