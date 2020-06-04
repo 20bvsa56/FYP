@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('tableNo');
             $table->Integer('status');
             $table->json('cart');
+            $table->Integer('totalAmount');
             $table->timestamps();
         });
     }

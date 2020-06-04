@@ -8,34 +8,6 @@ class MyAppBar extends AppBar {
             leading: leading,
             backgroundColor: Colors.black,
             centerTitle: true,
-            actions: <Widget>[
-              // InkWell(
-              //   onTap: () {
-              //     // if(length>0){
-              //     //   Navigator
-              //     // }
-                  
-              //   },
-              //   child: Container(
-              //     margin: EdgeInsets.only(right: 10),
-              //     child: Text('0',
-              //         style: TextStyle(
-              //           color: Colors.black,
-              //           fontSize: 20,
-              //         )),
-              //     padding: EdgeInsets.all(15),
-              //     decoration: BoxDecoration(
-              //       color: Colors.white,
-              //       borderRadius: BorderRadius.circular(50),
-              //     ),
-              //   ),
-              // ),
+            actions: <Widget>[    
             ]);
 }
-
-// new FloatingActionButton(
-//   child: Icon(Icons.shopping_cart,color: Colors.orange[600], size: 30,),
-//   backgroundColor: Colors.white,
-//   mini: true,
-//   onPressed: (){},
-// ),

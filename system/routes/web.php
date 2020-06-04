@@ -49,6 +49,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/bannerEdit/{banner}', 'BannerImageController@edit')->name('banEdit');
     Route::post('/bannerUpdate/{banner}', 'BannerImageController@update')->name('banUpdate');
 
+    Route::get('/payments', 'PaymentController@index')->name('paymentIndex');
+
 });
 
 

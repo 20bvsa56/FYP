@@ -24,8 +24,8 @@
         <div class="pull-left">
             <form action="/itemSort" method="get" style="margin-left: 380px;">
                 <div class="input-group">
-                    <select class="form-control" id="" name="category" >
-                        <option value="0" selected="selected">Sort By Category</option>
+                    <select class="form-control" id="sort" name="sort" >
+                        <option value="id" selected="selected">Sort By Category</option>
                         @foreach ($catList as $name => $id)
                             <option value="{{$id}}">{{$name}}</option>
                         @endforeach

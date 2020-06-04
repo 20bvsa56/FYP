@@ -11,8 +11,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Http\Resources\Item as ItemResource;
 use App\Http\Resources\Category as CategoryResource;
 use App\Http\Resources\Order as OrderResource;
-use App\Http\Resources\Payment as PaymentResource;
-//use Illuminate\Http\Resources\Json\Resource;
+
 
 
 
@@ -46,6 +45,6 @@ class AppServiceProvider extends ServiceProvider
         CategoryResource::withoutWrapping();
         ItemResource::withoutWrapping();
         OrderResource::withoutWrapping();
-        PaymentResource::withoutWrapping();
+
     }
 }

@@ -18,7 +18,7 @@ class ItemsDetails extends StatelessWidget {
         child: Stack(children: <Widget>[
           Container(
             width: 170.0,
-            height: 180.0,
+            height: 210.0,
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
               color: Colors.brown[200],
@@ -60,25 +60,6 @@ class ItemsDetails extends StatelessWidget {
                                 fontSize: 16.0)),
                       ],
                     )),
-                    // SizedBox(height: 10),
-                    // InkWell(
-                    //   onTap: () {
-                    //     Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => MenuCategory()));
-                    //   },
-                    //   child: Text(
-                    //     'View',
-                    //     style: TextStyle(
-                    //       color: Colors.pinkAccent,
-                    //       fontSize: 15,
-                    //       fontFamily: 'Lobster-Regular',
-                    //       fontStyle: FontStyle.italic,
-                    //       decoration: TextDecoration.underline,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

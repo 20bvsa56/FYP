@@ -12,7 +12,7 @@ class Order extends Model
     ];//takes an array and turns into json string while saving in database.
     protected $table = 'orders';
     protected $fillable=[
-        'id','tableNo','cart','status'
+        'id','tableNo','totalAmount','cart','status'
     ];
 
     public function items(){

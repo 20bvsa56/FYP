@@ -60,9 +60,7 @@ class _LoginState extends State<Login> {
 }
 
 class SnackBarPage extends StatefulWidget {
-  // const SnackBarPage({Key key}) : super(key: key);
 
-  // Boolean variable for CircularProgressIndicator.
   static final url = 'http://192.168.254.2:8000/api/login/';
 
   @override
@@ -71,11 +69,7 @@ class SnackBarPage extends StatefulWidget {
 
 class _SnackBarPageState extends State<SnackBarPage> {
   bool visible = false;
-
-  get statusCode => null;
-
   Future<Model> userLogin(String url, {Map body}) async {
-    // Showing CircularProgressIndicator using state.
     setState(() {
       visible = true;
     });
@@ -87,7 +81,6 @@ class _SnackBarPageState extends State<SnackBarPage> {
         setState(() {
           visible = false;
         });
-        // throw new Exception("Error while fetching data");
       } 
 
       return Model.fromJson(json.decode(response.body));
@@ -175,8 +168,6 @@ class _SnackBarPageState extends State<SnackBarPage> {
                                     child: RaisedButton(
                                       color: Colors.brown[500],
                                       onPressed: () async {
-                                        // _validateInputs();
-                                   
                                         Model newModel = new Model(
                                             name: nameController.text,
                                             password: passwordController.text);
@@ -190,20 +181,18 @@ class _SnackBarPageState extends State<SnackBarPage> {
                                             MaterialPageRoute(
                                                 builder: (context) => StaffHome(
                                                     username:
-                                                        nameController.text)));
-                                      
+                                                        nameController.text)));                                      
+                                        final snackBar = SnackBar(
+                                            content: Text(
+                                                'Invalid login credential.'));
 
-//                                         final snackBar = SnackBar(
-//                                             content: Text(
-//                                                 'Invalid login credential.'));
+// Find the Scaffold in the widget tree and use it to show a SnackBar.
+                                        Scaffold.of(context)
+                                            .showSnackBar(snackBar);
 
-// // Find the Scaffold in the widget tree and use it to show a SnackBar.
-//                                         Scaffold.of(context)
-//                                             .showSnackBar(snackBar);
-
-//                                         setState(() {
-//                                           visible = false;
-//                                         });
+                                        setState(() {
+                                          visible = false;
+                                        });
                                       },
                                       child: Text('Login',
                                           style: TextStyle(

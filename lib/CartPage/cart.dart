@@ -1,3 +1,4 @@
+
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -238,14 +239,8 @@ class _CustomQuantityState extends State<CustomQuantity> {
             child: FlatButton(
               padding: EdgeInsets.all(0),
               onPressed: () {
-                // setState(() {
-
-                //   print(widget.foodItem.quantity);
-                //   print(widget.foodItem.quantity * widget.foodItem.price);
-                // });
                 widget.foodItems[widget.index].Quantity++;
                 widget.updateList(widget.foodItems);
-                //    return widget.cart.foodItems[widget.index].quantity;
               },
               child: Text(
                 "+",
@@ -345,80 +340,102 @@ class Table extends StatelessWidget {
   }
 }
 
-
 class PlaceOrder extends StatefulWidget {
-  final FoodItem foodItem;
+  // static final url = 'http://192.168.254.2:8000/api/order/';
 
-  static final url = 'http://192.168.254.2:8000/api/order/';
-  const PlaceOrder({Key key, this.foodItem}) : super(key: key);
+  PlaceOrder({Key key}) : super(key: key);
 
   @override
   _PlaceOrderState createState() => _PlaceOrderState();
 }
 
 class _PlaceOrderState extends State<PlaceOrder> {
-  
-  // var json = jsonDecode('url');
-  // List<FoodItem> players = FoodItems.fromJson(json).foodItems;
-   var foodItems= [FoodItem(Name: 'Cheese Spaghetti',Quantity: 1),FoodItem(Name: 'Milk Coffee',Quantity: 1)];
-
-   
-    //List<FoodItem> foodItems = [];
-
-  //List<FoodItem> foodItems = FoodItem.encondeToJson();
-  var tableController = TextEditingController(text: 'Table-1');
-  
-
+  // var amount= BottomBar(foodItems, updateList);
+  var foodItems = [
+    FoodItem(Name: 'Lemon Mojito', Quantity: 1),
+    FoodItem(Name: 'Cheesy Chicken Spaghetti', Quantity: 1)
+  ];
+  var tableController = TextEditingController(text: 'Table-8');
   bool visible = false;
 
-  // Future<FoodItem> requestOrder(String url, {Map body}) async {
-  //   // Showing CircularProgressIndicator using state.
-  //   setState(() {
-  //     visible = true;
-  //   });
+  Future requestOrder() async {
+    // Function updateList;
+    // List<FoodItem> foodItems;
+    // BottomBar amount = new BottomBar(foodItems, updateList);
 
-  //   return http.post(url, headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: body ).then((http.Response response) {
-  //     print(foodItems);
-  //     final int statusCode = response.statusCode;
+    List<FoodItem> cart(List<FoodItem> foodItems) {
+      foodItems=[];
+      for (int i = 0; i < foodItems.length; i++) {
+        foodItems = [
+          FoodItem(Name: foodItems[i].Name, Quantity: foodItems[i].Quantity)
+        ];
+      }
+      return FoodItem.encondeToJson(foodItems);
+    }
 
-  //     if (statusCode == 201) {
-  //       setState(() {
-  //         visible = false;
-  //       });
-  //       // throw new Exception("Error while fetching data");
-  //     }
-
-  //     return FoodItem.fromJson(json.decode(response.body));
-  //   });
+    final response = await http.post(
+      'http://192.168.254.2:8000/api/order/',
+      headers: {
+        'Content-Type': 'application/json',
+      }, 
+      body: jsonEncode({
+        'tableNo': tableController.text,
+        'status': 0,
+        'cart': foodItems,
+        'totalAmount': 420
+      }),
+    );
+    //print(amount.returnTotalAmount.toString());
+    // print(cart);
+    // print('length = ' + foodItems.length.toString());
+    print('statuscode = ' + response.statusCode.toString());
+    // return foodItems;
+  }
+  // static cart(List<FoodItem> foodItems) {
+  //   for (int i = 0; i < foodItems.length; i++) {
+  //     foodItems = [
+  //       FoodItem(Name: foodItems[i].Name, Quantity: foodItems[i].Quantity)
+  //     ];
+  //   }
+  //   return foodItems;
   // }
 
-  Future<List<FoodItem>> requestOrder() async{
-        final response = await http.post('http://192.168.254.2:8000/api/order/',
-        headers: {'Content-Type':'application/json',},
-        body: jsonEncode({
-           'tableNo':tableController.text,
-           'status': 0,
-           'cart': foodItems,
-    }),
-    );
-    print(foodItems);
-    print(foodItems.length);
-    print('statuscode = ' + response.statusCode.toString());
-    return foodItems;
-  }
+  // // store() async {
+  // //   String url = 'http://192.168.254.2:8000/api/order/';
+  // //   Map map = {
+  // //     'data': {
+  // //       'tableNo': tableController.text,
+  // //       'status': 0,
+  // //       'cart': cart,
+  // //     },
+  // //   };
+  // //   print(map);
+  // //   print(await apiRequest(url, map));
+  // // }
 
-// Future<List<FoodItem>> requestOrder() async{
-//   var data = await http.post('http://192.168.254.2:8000/api/order/',headers: {'Content-Type':'application/json; charset=UTF-8'});
-//   var jsonData = jsonDecode(data.body);
-//   List<FoodItem> foodItems = FoodItems.fromJson(jsonData).foodItems;
-//   FoodItem newFoodItem = FoodItem(tableNo: tableController.text, status: 0, cart: foodItems );
-//   foodItems.add(newFoodItem);
-//   String encode = jsonEncode(foodItems);
+  // String url = 'http://192.168.254.2:8000/api/order/';
+  // Map jsonMap = {
+  //   'tableNo': tableController.text,
+  //   'status': 0,
+  //   'cart': cart,
+  // };
 
-//   print(encode);
-//   return foodItems;
+  // Future<String> apiRequest(String url, Map jsonMap) async {
+  //   HttpClient httpClient = new HttpClient();
+  //   HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+  //   request.headers.set('content-type', 'application/json');
+  //   request.add(utf8.encode(json.encode(jsonMap)));
+  //   HttpClientResponse response = await request.close();
+  //   print(response.statusCode);
+  //   // todo - you should check the response.statusCode
+  //   String reply = await response.transform(utf8.decoder).join();
+  //   httpClient.close();
+  //   return reply;
+  // }
+  // var json= cart;
 
-// }
+  // OrderRequest orders = new OrderRequest(tableNo: 'tableController');
+  // var json = jsonEncode(orders.toJson());
 
   Future<void> confirmation() async {
     return showDialog<void>(
@@ -440,36 +457,6 @@ class _PlaceOrderState extends State<PlaceOrder> {
                 child: Container(child: CircularProgressIndicator())),
             FlatButton(
               onPressed: requestOrder,
-//               onPressed: () async {
-//                 // _validateInputs();
-
-//                 FoodItem newFoodItem = new FoodItem(
-//                     tableNo: tableController.text, 
-//                     status: 0, 
-//                     cart: ['Pancake',1]
-//                     );
-//                 FoodItem p = await requestOrder(PlaceOrder.url,
-//                     body: newFoodItem.toMap() );
-//                 print(p.cart);
-//                 // Navigate to Profile Screen & Sending name to Next Screen.
-
-//                 final snackBar =
-//                     SnackBar(content: Text('Order Placed Successfully.'));
-
-// // Find the Scaffold in the widget tree and use it to show a SnackBar.
-//                 Scaffold.of(context).showSnackBar(snackBar);
-
-//                 setState(() {
-//                   visible = false;
-//                 });
-//               },
-              // onPressed: () async {
-              //   FoodItem items = new FoodItem(
-              //     tableNo: tableController.text,
-              //   );
-              //   FoodItem p = await requestOrder(PlaceOrder.url,
-              //       body: items.toMap());
-              // },
               child: Text('Yes',
                   style: TextStyle(
                       color: Colors.black,

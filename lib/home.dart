@@ -8,9 +8,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // var tables = ['Table No.','Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6'];
-  // var currentTableSelected = 'Table No.';
-  // String dropdownValue = 'Table No.';
+
   bool _isLoading = false;
   var tableController = TextEditingController(text: 'Table-1');
 

@@ -49,8 +49,6 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                 ),
                 body: Column(
                   children: <Widget>[
-                    // ImageCarousel(),
-
                     BannerImage(),
                     maintitle(),
                     FutureBuilder(
@@ -59,7 +57,6 @@ class _SpecialCategoryState extends State<SpecialCategory> {
                         if (snapshot.hasData) {
                           return Container(
                             height: 309,
-                            // width: MediaQuery.of(context).size.width,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: snapshot.data.length,

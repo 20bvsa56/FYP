@@ -22,7 +22,9 @@ class Order extends JsonResource
             'id'=>$this->id,
             'tableNo'=>$this->tableNo,
             'cart'=>$this->cart,
-            'status'=>$this->status
+            'status'=>$this->status,
+            'totalAmount'=>$this->totalAmount
         ];
     }
 }
+

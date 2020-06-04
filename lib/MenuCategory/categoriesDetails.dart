@@ -19,8 +19,8 @@ class CategoriesDetails extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Stack(children: <Widget>[
           Container(
-            width: 150.0,
-            height: 150.0,
+            width: 160.0,
+            height: 160.0,
             decoration: new BoxDecoration(
               borderRadius: BorderRadius.circular(30.0),
               color: Colors.brown[200],

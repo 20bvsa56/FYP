@@ -34,6 +34,7 @@ class OrderController extends BaseController
         $order->tableNo = $request->input('tableNo');
         $order->cart = $request->input('cart');
         $order->status = $request->input('status');
+        $order->totalAmount = $request->input('totalAmount');
         if ($order->save()) {
             return new OrderResource($order);
         }
@@ -58,4 +59,3 @@ class OrderController extends BaseController
         }
     }
 }
-

@@ -83,30 +83,26 @@
                                 <div class="account-dropdown js-dropdown">
 
                                     <div class="account-dropdown__body">
-
                                         <div class="account-dropdown__footer">
+
+                                            <a class="zmdi zmdi-money" href="{{ route('paymentIndex') }}">
+
+                                                {{ __(' Payment') }}
+                                            </a>
 
                                             <a class="zmdi zmdi-power" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
+                                                {{ __('  Logout') }}
                                             </a>
 
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                 @csrf
                                             </form>
 
-{{--                                            <a class="zmdi zmdi-account" href="{{ route('register') }}"--}}
-{{--                                               onclick="event.preventDefault();--}}
-{{--                                                     document.getElementById('register-form').submit();">--}}
 
 
-{{--                                                {{ __('Register') }}--}}
-{{--                                            </a>--}}
 
-{{--                                            <form id="logout-form" action="{{ route('register') }}" method="POST" style="display: none;">--}}
-{{--                                                @csrf--}}
-{{--                                            </form>--}}
 
                                         </div>
 

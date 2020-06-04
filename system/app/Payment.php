@@ -9,6 +9,6 @@ class Payment extends Model
     protected $primaryKey='id';
     protected $table = 'payments';
     protected $fillable=[
-        'order_id','tableNo','totalAmount'
+        'order_id','totalAmount'
     ];
 }

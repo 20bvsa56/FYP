@@ -7,7 +7,6 @@ class Items {
   int price;
   String description;
   String image;
-  
 
   Items(
       {this.id,
@@ -31,18 +30,5 @@ class Items {
     description = json['description'];
     image = json['image'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['category_id'] = this.categoryId;
-    data['title'] = this.title;
-    data['type'] = this.type;
-    data['name'] = this.name;
-    data['price'] = this.price;
-    data['description'] = this.description;
-    data['image'] = this.image;
-    return data;
-  } 
 
 }

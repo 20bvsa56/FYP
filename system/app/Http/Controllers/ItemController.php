@@ -27,54 +27,16 @@ class ItemController extends Controller
         return view('Items.create')->with('catList', $catList);
     }
 
-    public function sort(){
-        $categories= Category::get();
-        $category = Category::findOrFail(Input::get('id'));
-        $items = Item::with('category')->where('category_id', '=' , $category->id)->Paginate(5);
-        //$items = DB::table('items')->where('items.name', 'like', '%'. $search . '%')->Paginate(5);
+    public  function sort(Request $request){
+        $sort = $request->get('sort');
+        $items = Item::with('category')->where('category_id', 'like', '%'.$sort.'%')->Paginate(5);
         $catList = DB::table('categories')->pluck('id', 'name');
-        return view('Items.index',compact('categories'))->with($items)->with('catList', $catList);
-
+        return view('Items.index',['items' => $items])->with('catList', $catList);
     }
-
-
-//    public function sort()
-//    {
-//      //  $categories = Category::get();
-//        $category = Category::findOrFail(Input::get('id'));
-//        $items = Item::with('category')->where('items.category_id', '=' ,  $category->id )->get()->Paginate(5);
-//        $catList = DB::table('categories')->pluck('id', 'name');
-//        return View('Items.index',compact('items'))->with('catList', $catList);
-//    }
-
-//    public function sort(){
-//        if($this->request->input('category')){
-//
-//            $category_type=$this->request->input('category');
-//            $items = DB::table('items')
-//                    ->selectRaw('*')
-//                    ->join('categories','items.category_id', '=' , 'categories.id')
-//                    ->get()->toArray();
-//
-//        }
-//    }
-
-//    public function sort(){
-//            $category_type=$this->input('category');
-//            $items = DB::table('items')
-//                    ->selectRaw('*')
-//                    ->join('categories','items.category_id', '=' , 'categories.id')
-//                    ->where('items.category_id', (int)$this->request->input('category'))
-//                    ->get()->toArray();
-//
-//        return view('Items.index',['items'=> $items, 'category'=>$category_type ]);
-//    }
-
 
     public  function search(Request $request){
         $search = $request->get('search');
         $items = Item::with('category')->where('name', 'like', '%'.$search.'%')->Paginate(5);
-       //$items = DB::table('items')->where('items.name', 'like', '%'. $search . '%')->Paginate(5);
         $catList = DB::table('categories')->pluck('id', 'name');
         return view('Items.index',['items' => $items])->with('catList', $catList);
     }
@@ -86,7 +48,7 @@ class ItemController extends Controller
             'type' => 'required',
             'name' => 'required',
             'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048'
         ]);
 //        dd($request);
 //        Item::create($request->all());
